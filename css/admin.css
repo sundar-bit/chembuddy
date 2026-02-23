@@ -1,0 +1,262 @@
+/* ChemBuddy - Admin Dashboard Styles */
+
+.admin-nav {
+    background: var(--primary-dark);
+    color: var(--white);
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.admin-nav .nav-logo {
+    color: var(--white);
+    margin-right: 1.5rem;
+}
+
+.admin-nav-links {
+    display: flex;
+    gap: 0.25rem;
+    flex: 1;
+}
+
+.admin-nav-link {
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: all var(--transition);
+    background: none;
+    border: none;
+    font-family: inherit;
+}
+.admin-nav-link:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+.admin-nav-link.active { background: rgba(255,255,255,0.2); color: var(--white); font-weight: 600; }
+
+.admin-logout {
+    margin-left: auto;
+    padding: 0.4rem 0.75rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius);
+    color: rgba(255,255,255,0.8);
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+.admin-logout:hover { background: rgba(255,255,255,0.2); }
+
+.admin-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+}
+
+/* Summary Cards */
+.admin-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.admin-stat-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+}
+.admin-stat-card .stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.admin-stat-card .stat-value { font-size: 2rem; font-weight: 700; color: var(--primary); }
+.admin-stat-card .stat-label { font-size: 0.8rem; color: var(--text-light); }
+
+/* Data Tables */
+.admin-table-container {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.admin-table-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.admin-table-header h2 { font-size: 1.1rem; }
+
+.admin-table-scroll { overflow-x: auto; }
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.admin-table th {
+    background: var(--bg);
+    padding: 0.65rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.admin-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tr:hover td { background: var(--hover); }
+.admin-table tr.expandable { cursor: pointer; }
+
+/* Expandable student detail */
+.student-detail-row td {
+    padding: 0;
+    background: var(--bg);
+}
+.student-detail-content {
+    padding: 1rem 1.25rem;
+}
+.student-detail-content h4 { margin-bottom: 0.75rem; }
+
+.student-quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.student-quiz-cell {
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    font-size: 0.75rem;
+}
+.student-quiz-cell.taken { background: var(--success-light); color: var(--success); font-weight: 600; }
+.student-quiz-cell.not-taken { background: var(--bg-dark); color: var(--text-muted); }
+
+/* Quiz Analytics */
+.quiz-analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.quiz-analytics-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+}
+.quiz-analytics-card h4 { font-size: 0.9rem; margin-bottom: 0.75rem; }
+
+.quiz-stats-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.quiz-stats-row:last-child { border-bottom: none; }
+.quiz-stats-row .label { color: var(--text-light); }
+.quiz-stats-row .value { font-weight: 600; }
+
+/* Most Missed Questions */
+.missed-q-item {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+}
+.missed-q-item:last-child { border-bottom: none; }
+.missed-q-text { margin-bottom: 0.25rem; }
+.missed-q-pct { color: var(--danger); font-weight: 600; font-size: 0.8rem; }
+
+/* Engagement Chart */
+.chart-container {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+.chart-container h2 { margin-bottom: 1rem; font-size: 1.1rem; }
+
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 200px;
+    padding: 0 0.5rem;
+}
+
+.bar-chart-bar {
+    flex: 1;
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    border-radius: 4px 4px 0 0;
+    min-width: 20px;
+    position: relative;
+    transition: height 0.3s ease;
+}
+
+.bar-chart-bar:hover { opacity: 0.8; }
+
+.bar-chart-bar .bar-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text);
+    color: var(--white);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    margin-bottom: 4px;
+}
+.bar-chart-bar:hover .bar-tooltip { display: block; }
+
+.bar-chart-labels {
+    display: flex;
+    gap: 4px;
+    padding: 0.5rem 0.5rem 0;
+}
+.bar-chart-labels span {
+    flex: 1;
+    text-align: center;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    min-width: 20px;
+}
+
+/* Export */
+.export-section {
+    text-align: center;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+.export-section p { color: var(--text-light); margin-bottom: 1rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-nav-links { display: none; }
+    .admin-summary { grid-template-columns: repeat(2, 1fr); }
+    .admin-table { min-width: 600px; }
+    .quiz-analytics-grid { grid-template-columns: 1fr; }
+}

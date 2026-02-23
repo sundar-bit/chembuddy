@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemBuddy - Learn</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚗️</text></svg>">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <link rel="stylesheet" href="css/leaderboard.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="top-nav-inner">
+            <a href="#/home" class="nav-logo">
+                <div class="nav-logo-icon">⚗️</div>
+                ChemBuddy
+            </a>
+
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">☰</button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#/home" class="nav-link active">
+                    <span class="nav-link-icon">🏠</span> Home
+                </a>
+                <a href="#/learn" class="nav-link">
+                    <span class="nav-link-icon">📚</span> Learn
+                </a>
+                <a href="#/browse" class="nav-link">
+                    <span class="nav-link-icon">🔍</span> Browse
+                </a>
+                <a href="#/quizzes" class="nav-link">
+                    <span class="nav-link-icon">❓</span> Quizzes
+                </a>
+                <a href="#/leaderboard" class="nav-link">
+                    <span class="nav-link-icon">🏆</span> Leaderboard
+                </a>
+                <a href="#/profile" class="nav-link">
+                    <span class="nav-link-icon">👤</span> Profile
+                </a>
+            </div>
+
+            <div class="nav-user">
+                <span class="nav-user-name" id="nav-user-name"></span>
+                <button class="nav-logout" id="nav-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content (populated by router) -->
+    <main class="app-content" id="app-content">
+        <div class="cb-loading">
+            <div class="cb-spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+
+    <!-- Config & Utilities -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/router.js"></script>
+
+    <!-- Data -->
+    <script src="data/categories.js"></script>
+    <script src="data/equipment-db.js"></script>
+    <script src="data/learning-path.js"></script>
+    <script src="data/questions.js?v=2"></script>
+
+    <!-- Modules -->
+    <script src="js/equipment.js"></script>
+    <script src="js/voice.js"></script>
+    <script src="js/learn.js"></script>
+    <script src="js/quiz-engine.js"></script>
+    <script src="js/leaderboard.js"></script>
+    <script src="js/profile.js"></script>
+
+    <!-- App Init -->
+    <script>
+    (function () {
+        'use strict';
+
+        initFirebase();
+
+        // State
+        var currentUser = null;
+        var userProfile = null;
+        var userProgress = null;
+
+        // Auth guard
+        auth.onAuthStateChanged(function (user) {
+            if (!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+            if (user.email === ADMIN_EMAIL) {
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            currentUser = user;
+            document.getElementById('nav-user-name').textContent = user.email.split('@')[0];
+
+            // Update last active
+            db.ref('users/' + user.uid + '/lastActiveAt').set(Date.now());
+
+            // Track daily active
+            var today = Utils.todayStr();
+            db.ref('analytics/dailyActive/' + today + '/' + user.uid).set(true);
+
+            // Load user profile and progress
+            loadUserData(user.uid);
+        });
+
+        function startApp() {
+            if (window.ChemBuddy.initialized) return;
+            window.ChemBuddy.initialized = true;
+            window.ChemBuddy.progress = window.ChemBuddy.progress || {};
+            window.ChemBuddy.profile = window.ChemBuddy.profile || {};
+            initRoutes();
+            Router.init();
+        }
+
+        function loadUserData(uid) {
+            window.ChemBuddy = window.ChemBuddy || {};
+            window.ChemBuddy.user = currentUser;
+            window.ChemBuddy.progress = {};
+            window.ChemBuddy.profile = {};
+
+            // Timeout fallback — start app even if DB reads fail
+            var fallbackTimer = setTimeout(function () {
+                console.warn('Firebase DB read timed out, starting app with defaults');
+                startApp();
+            }, 4000);
+
+            // Load profile
+            db.ref('users/' + uid).on('value', function (snap) {
+                userProfile = snap.val() || {};
+                document.getElementById('nav-user-name').textContent = userProfile.name || currentUser.email.split('@')[0];
+                window.ChemBuddy.profile = userProfile;
+            }, function (err) {
+                console.error('Profile read error:', err.message);
+            });
+
+            // Load progress
+            db.ref('progress/' + uid).on('value', function (snap) {
+                userProgress = snap.val() || {};
+                window.ChemBuddy.progress = userProgress;
+
+                clearTimeout(fallbackTimer);
+                // Initialize router after first data load
+                startApp();
+            }, function (err) {
+                console.error('Progress read error:', err.message);
+                clearTimeout(fallbackTimer);
+                startApp();
+            });
+        }
+
+        function initRoutes() {
+            Router.register('/home', renderHome);
+            Router.register('/learn', Learn.renderOverview);
+            Router.register('/learn/:dayId', Learn.renderDay);
+            Router.register('/browse', Equipment.renderBrowse);
+            Router.register('/browse/:equipId', Equipment.renderBrowseEquip);
+            Router.register('/quizzes', QuizEngine.renderQuizList);
+            Router.register('/quiz/:quizId', QuizEngine.renderQuiz);
+            Router.register('/leaderboard', Leaderboard.render);
+            Router.register('/profile', Profile.render);
+        }
+
+        // Home page render
+        function renderHome(container) {
+            var uid = currentUser.uid;
+            var profile = window.ChemBuddy.profile || {};
+            var progress = window.ChemBuddy.progress || {};
+            var name = profile.name || 'Student';
+
+            // Determine current day in pilot
+            var todayInfo = Learn.getTodayInfo(progress);
+            var totalPoints = calculateTotalPoints(progress);
+            var studiedCount = Object.keys(progress.studied || {}).length;
+            var quizzesDone = Object.keys(progress.dailyQuizzes || {}).length + Object.keys(progress.weeklyQuizzes || {}).length;
+            var streak = getStudyStreak(progress);
+
+            var html = '<div class="home-welcome">';
+            html += '<h1>Welcome back, ' + Utils.sanitize(name) + '!</h1>';
+            html += '<p>Continue your chemical engineering equipment journey</p>';
+            html += '</div>';
+
+            html += '<div class="home-grid">';
+            html += '<div class="home-main">';
+
+            // Today's task card
+            if (todayInfo) {
+                html += '<div class="today-card">';
+                html += '<h3>📅 ' + todayInfo.weekTitle + ' — Day ' + todayInfo.day + '</h3>';
+                html += '<h2>' + Utils.sanitize(todayInfo.title) + '</h2>';
+                html += '<p class="today-card-meta">' + todayInfo.equipmentCount + ' equipment to study</p>';
+                html += '<div class="flex gap-1">';
+                html += '<a href="#/learn/' + todayInfo.dayId + '" class="btn">Continue Learning →</a>';
+                if (todayInfo.quizAvailable) {
+                    html += '<a href="#/quiz/' + todayInfo.quizId + '" class="btn">Take Quiz</a>';
+                }
+                html += '</div></div>';
+            } else {
+                html += '<div class="today-card">';
+                html += '<h3>🎉 Great Progress!</h3>';
+                html += '<h2>Keep exploring equipment</h2>';
+                html += '<a href="#/learn" class="btn">View Learning Path →</a>';
+                html += '</div>';
+            }
+
+            // Stats
+            html += '<div class="stat-grid">';
+            html += '<div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-value">' + totalPoints + '</div><div class="stat-label">Points</div></div>';
+            html += '<div class="stat-card"><div class="stat-icon">📖</div><div class="stat-value">' + studiedCount + '</div><div class="stat-label">Equipment Studied</div></div>';
+            html += '<div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value">' + quizzesDone + '</div><div class="stat-label">Quizzes Done</div></div>';
+            html += '<div class="stat-card"><div class="stat-icon">🔥</div><div class="stat-value">' + streak + '</div><div class="stat-label">Day Streak</div></div>';
+            html += '</div>';
+
+            html += '</div>'; // home-main
+
+            // Sidebar
+            html += '<div class="home-side">';
+
+            // Motivation messages
+            var messages = getMotivationMessages(progress, streak, totalPoints);
+            messages.forEach(function (msg) {
+                html += '<div class="motivation-card"><p>' + msg + '</p></div>';
+            });
+
+            // Quick links
+            html += '<div class="card"><div class="card-body">';
+            html += '<h3 class="mb-2">Quick Links</h3>';
+            html += '<div class="flex flex-col gap-1">';
+            html += '<a href="#/browse" class="btn btn-outline btn-block">Browse All 219 Equipment</a>';
+            html += '<a href="#/leaderboard" class="btn btn-outline btn-block">View Leaderboard</a>';
+            html += '</div></div></div>';
+
+            html += '</div>'; // home-side
+            html += '</div>'; // home-grid
+
+            container.innerHTML = html;
+        }
+
+        function calculateTotalPoints(progress) {
+            var total = 0;
+            var studied = progress.studied || {};
+            total += Object.keys(studied).length * 5;
+            var daily = progress.dailyQuizzes || {};
+            for (var k in daily) { total += (daily[k].points || 0); }
+            var weekly = progress.weeklyQuizzes || {};
+            for (var k in weekly) { total += (weekly[k].points || 0); }
+            return total;
+        }
+
+        function getStudyStreak(progress) {
+            var dates = new Set();
+            var studied = progress.studied || {};
+            for (var k in studied) {
+                if (studied[k].completedAt) dates.add(new Date(studied[k].completedAt).toISOString().slice(0, 10));
+            }
+            var daily = progress.dailyQuizzes || {};
+            for (var k in daily) {
+                if (daily[k].completedAt) dates.add(new Date(daily[k].completedAt).toISOString().slice(0, 10));
+            }
+            var weekly = progress.weeklyQuizzes || {};
+            for (var k in weekly) {
+                if (weekly[k].completedAt) dates.add(new Date(weekly[k].completedAt).toISOString().slice(0, 10));
+            }
+            return Utils.calculateStreak(Array.from(dates));
+        }
+
+        function getMotivationMessages(progress, streak, points) {
+            var msgs = [];
+            if (streak >= 3) msgs.push('<span class="motivation-icon">🔥</span> You\'re on a ' + streak + '-day streak! Keep it up!');
+            if (streak === 0) msgs.push('<span class="motivation-icon">💪</span> Start your streak today — study or take a quiz!');
+
+            var quizzesDone = Object.keys(progress.dailyQuizzes || {}).length;
+            if (quizzesDone === 0) msgs.push('<span class="motivation-icon">📝</span> Take your first quiz after studying the equipment!');
+
+            var todayInfo = Learn.getTodayInfo(progress);
+            if (todayInfo && todayInfo.quizAvailable) {
+                msgs.push('<span class="motivation-icon">🎯</span> Today\'s quiz is ready — are you?');
+            }
+
+            if (msgs.length === 0) msgs.push('<span class="motivation-icon">🌟</span> Great progress! Keep learning every day.');
+            return msgs;
+        }
+
+        // Expose for other modules
+        window.ChemBuddy = window.ChemBuddy || {};
+        window.ChemBuddy.calculateTotalPoints = calculateTotalPoints;
+        window.ChemBuddy.getStudyStreak = getStudyStreak;
+
+        // Logout
+        document.getElementById('nav-logout').addEventListener('click', function () {
+            auth.signOut().then(function () {
+                window.location.href = 'index.html';
+            });
+        });
+
+        // Hamburger menu
+        document.getElementById('nav-hamburger').addEventListener('click', function () {
+            document.getElementById('nav-links').classList.toggle('open');
+        });
+
+        // Close mobile menu on nav click
+        document.querySelectorAll('.nav-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                document.getElementById('nav-links').classList.remove('open');
+            });
+        });
+    })();
+    </script>
+</body>
+</html>

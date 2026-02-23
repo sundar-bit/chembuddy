@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemBuddy - Admin Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚗️</text></svg>">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Admin Nav -->
+    <nav class="admin-nav">
+        <a href="admin.html" class="nav-logo">
+            <div class="nav-logo-icon">⚗️</div>
+            ChemBuddy Admin
+        </a>
+        <div class="admin-nav-links" id="admin-tabs">
+            <button class="admin-nav-link active" data-tab="overview">Overview</button>
+            <button class="admin-nav-link" data-tab="students">Students</button>
+            <button class="admin-nav-link" data-tab="quizzes">Quizzes</button>
+            <button class="admin-nav-link" data-tab="export">Export</button>
+        </div>
+        <button class="admin-logout" id="admin-logout">Logout</button>
+    </nav>
+
+    <main class="admin-content" id="admin-content">
+        <div class="cb-loading"><div class="cb-spinner"></div><p>Loading dashboard...</p></div>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="data/learning-path.js"></script>
+    <script src="data/questions.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

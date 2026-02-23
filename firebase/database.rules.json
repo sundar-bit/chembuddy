@@ -1,0 +1,41 @@
+{
+    "rules": {
+        "users": {
+            "$uid": {
+                ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('email').val() === 'sundararaman.chintamani@gmail.com')",
+                ".write": "auth != null && auth.uid === $uid"
+            }
+        },
+        "progress": {
+            "$uid": {
+                ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('email').val() === 'sundararaman.chintamani@gmail.com')",
+                ".write": "auth != null && auth.uid === $uid"
+            }
+        },
+        "leaderboard": {
+            ".read": "auth != null",
+            "weekly": {
+                "$week": {
+                    "$uid": {
+                        ".write": "auth != null && auth.uid === $uid"
+                    }
+                }
+            },
+            "cumulative": {
+                "$uid": {
+                    ".write": "auth != null && auth.uid === $uid"
+                }
+            }
+        },
+        "analytics": {
+            ".read": "auth != null && root.child('users').child(auth.uid).child('email').val() === 'sundararaman.chintamani@gmail.com'",
+            "dailyActive": {
+                "$date": {
+                    "$uid": {
+                        ".write": "auth != null && auth.uid === $uid"
+                    }
+                }
+            }
+        }
+    }
+}

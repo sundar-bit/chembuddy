@@ -1,0 +1,148 @@
+/* ChemBuddy - Auth Page Styles */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--accent) 100%);
+    padding: 1rem;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--white);
+}
+
+.auth-logo h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.auth-logo p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-top: 0.25rem;
+}
+
+.auth-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+}
+
+/* Tab Switcher */
+.auth-tabs {
+    display: flex;
+    border-bottom: 2px solid var(--bg-dark);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.85rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+}
+
+.auth-tab.active {
+    color: var(--primary);
+}
+
+.auth-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary);
+}
+
+.auth-tab:hover:not(.active) {
+    color: var(--text);
+    background: var(--bg);
+}
+
+/* Form */
+.auth-form {
+    padding: 1.5rem;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.auth-form .form-input,
+.auth-form .form-select {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+}
+
+.auth-submit {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.auth-error {
+    background: var(--danger-light);
+    color: var(--danger);
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.auth-error.show {
+    display: block;
+}
+
+/* Footer */
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.8rem;
+}
+
+.auth-footer a {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+/* Pilot badge */
+.pilot-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: var(--white);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .auth-logo h1 { font-size: 1.6rem; }
+    .auth-form { padding: 1.25rem; }
+}
