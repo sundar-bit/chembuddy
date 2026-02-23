@@ -232,32 +232,34 @@ var Equipment = (function () {
         // Description
         html += '<div class="equip-section"><h3>Description</h3><p>' + Utils.sanitize(equip.description) + '</p></div>';
 
-        // Principles
+        // Parts & Components (merged)
+        if (equip.parts || (equip.components && equip.components.length)) {
+            html += '<div class="equip-section"><h3>Parts &amp; Components</h3>';
+            if (equip.parts) {
+                html += '<p>' + Utils.sanitize(equip.parts) + '</p>';
+            }
+            if (equip.components && equip.components.length) {
+                html += '<ul class="equip-list">';
+                equip.components.forEach(function (c) {
+                    html += '<li>' + Utils.sanitize(c) + '</li>';
+                });
+                html += '</ul>';
+            }
+            html += '</div>';
+        }
+
+        // Operating Principles
         if (equip.principles) {
             html += '<div class="equip-section"><h3>Operating Principles</h3><p>' + Utils.sanitize(equip.principles) + '</p></div>';
         }
 
-        // Parts
-        if (equip.parts) {
-            html += '<div class="equip-section"><h3>Parts of the Equipment</h3><p>' + Utils.sanitize(equip.parts) + '</p></div>';
-        }
-
-        // Specs
+        // Key Specifications
         if (equip.specs && equip.specs.length) {
             html += '<div class="equip-section"><h3>Key Specifications</h3><div class="equip-specs">';
             equip.specs.forEach(function (s) {
                 html += '<div class="spec-card"><div class="spec-title">' + Utils.sanitize(s.t) + '</div><div class="spec-value">' + Utils.sanitize(s.v) + '</div></div>';
             });
             html += '</div></div>';
-        }
-
-        // Components
-        if (equip.components && equip.components.length) {
-            html += '<div class="equip-section"><h3>Major Components</h3><ul class="equip-list">';
-            equip.components.forEach(function (c) {
-                html += '<li>' + Utils.sanitize(c) + '</li>';
-            });
-            html += '</ul></div>';
         }
 
         // Troubleshooting
@@ -270,7 +272,7 @@ var Equipment = (function () {
             html += '</tbody></table></div>';
         }
 
-        // Observations
+        // Field Observations
         if (equip.observations && equip.observations.length) {
             html += '<div class="equip-section"><h3>Field Observations</h3><ul class="equip-list">';
             equip.observations.forEach(function (o) {
@@ -318,14 +320,25 @@ var Equipment = (function () {
         html += getImageHTML(id);
         html += '<p>' + Utils.sanitize(equip.description) + '</p>';
 
+        // Parts & Components (merged)
+        if (equip.parts || (equip.components && equip.components.length)) {
+            html += '<h4 class="mt-2 mb-1">Parts &amp; Components</h4>';
+            if (equip.parts) {
+                html += '<p>' + Utils.sanitize(equip.parts) + '</p>';
+            }
+            if (equip.components && equip.components.length) {
+                html += '<ul class="equip-list">';
+                equip.components.forEach(function (c) { html += '<li>' + Utils.sanitize(c) + '</li>'; });
+                html += '</ul>';
+            }
+        }
+
+        // Operating Principles
         if (equip.principles) {
             html += '<h4 class="mt-2 mb-1">Operating Principles</h4><p>' + Utils.sanitize(equip.principles) + '</p>';
         }
 
-        if (equip.parts) {
-            html += '<h4 class="mt-2 mb-1">Parts of the Equipment</h4><p>' + Utils.sanitize(equip.parts) + '</p>';
-        }
-
+        // Key Specifications
         if (equip.specs && equip.specs.length) {
             html += '<h4 class="mt-2 mb-1">Key Specifications</h4><div class="equip-specs">';
             equip.specs.forEach(function (s) {
@@ -334,12 +347,7 @@ var Equipment = (function () {
             html += '</div>';
         }
 
-        if (equip.components && equip.components.length) {
-            html += '<h4 class="mt-2 mb-1">Major Components</h4><ul class="equip-list">';
-            equip.components.forEach(function (c) { html += '<li>' + Utils.sanitize(c) + '</li>'; });
-            html += '</ul>';
-        }
-
+        // Troubleshooting
         if (equip.troubles && equip.troubles.length) {
             html += '<h4 class="mt-2 mb-1">Troubleshooting</h4>';
             html += '<table class="equip-table"><thead><tr><th>Problem</th><th>Causes</th><th>Action</th></tr></thead><tbody>';
@@ -349,6 +357,7 @@ var Equipment = (function () {
             html += '</tbody></table>';
         }
 
+        // Safety
         if (equip.safety && equip.safety.length) {
             html += '<div class="equip-safety mt-2"><h4>⚠️ Safety</h4><ul class="equip-list">';
             equip.safety.forEach(function (s) { html += '<li>' + Utils.sanitize(s) + '</li>'; });

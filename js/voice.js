@@ -22,12 +22,17 @@ var Voice = (function () {
         segs.push({ label: 'Name', text: equip.name + '.' });
         segs.push({ label: 'Description', text: equip.description });
 
-        if (equip.principles) {
-            segs.push({ label: 'Operating Principles', text: equip.principles });
+        if (equip.parts || (equip.components && equip.components.length)) {
+            var partsText = '';
+            if (equip.parts) partsText += equip.parts + '. ';
+            if (equip.components && equip.components.length) {
+                partsText += 'The main components are: ' + equip.components.join(', ') + '.';
+            }
+            segs.push({ label: 'Parts & Components', text: partsText });
         }
 
-        if (equip.parts) {
-            segs.push({ label: 'Parts of the Equipment', text: equip.parts });
+        if (equip.principles) {
+            segs.push({ label: 'Operating Principles', text: equip.principles });
         }
 
         if (equip.specs && equip.specs.length) {
@@ -35,11 +40,6 @@ var Voice = (function () {
                 return s.t + ': ' + s.v;
             }).join('. ');
             segs.push({ label: 'Key Specifications', text: specText + '.' });
-        }
-
-        if (equip.components && equip.components.length) {
-            var compText = 'The major components are: ' + equip.components.join(', ') + '.';
-            segs.push({ label: 'Major Components', text: compText });
         }
 
         if (equip.troubles && equip.troubles.length) {
