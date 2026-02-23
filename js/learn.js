@@ -73,13 +73,13 @@ var Learn = (function () {
 
             html += '<div class="week-card-body">';
 
-            var prevDayComplete = true;
+            var prevDayStudied = true;
             week.days.forEach(function (day, idx) {
                 var dayId = 'W' + week.id + 'D' + day.day;
                 var allStudied = day.equipmentIds.every(function (id) { return studied[id]; });
                 var quizDone = dailyQuizzes[dayId];
                 var isComplete = allStudied && quizDone;
-                var isAvailable = prevDayComplete || idx === 0;
+                var isAvailable = prevDayStudied || idx === 0;
 
                 var statusClass = isComplete ? 'completed' : (isAvailable ? 'available' : 'locked');
                 var statusText = isComplete ? '✓ Done' : (isAvailable ? 'Start →' : '🔒 Locked');
@@ -91,7 +91,7 @@ var Learn = (function () {
                 html += '<div class="day-status ' + statusClass + '">' + statusText + '</div>';
                 html += '</div>';
 
-                prevDayComplete = isComplete;
+                prevDayStudied = allStudied;
             });
 
             // Weekly quiz card
