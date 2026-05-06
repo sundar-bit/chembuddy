@@ -12,7 +12,7 @@
 
     // Auth guard
     auth.onAuthStateChanged(function (user) {
-        if (!user || user.email !== ADMIN_EMAIL) {
+        if (!user || !ADMIN_EMAILS.includes(user.email)) {
             window.location.href = 'index.html';
             return;
         }

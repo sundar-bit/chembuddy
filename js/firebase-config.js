@@ -11,8 +11,13 @@ const firebaseConfig = {
     measurementId: "G-4G1CQ3JVY9"
 };
 
-// Admin email
-const ADMIN_EMAIL = 'sundararaman.chintamani@gmail.com';
+// Admin emails
+const ADMIN_EMAILS = [
+    'sundararaman.chintamani@gmail.com',
+    'richa@somaiya.edu',
+    'pradnya.jadhav1@somaiya.edu',
+    'chitra.b@somaiya.edu'
+];
 
 // Initialize Firebase
 let app, auth, db;
@@ -32,7 +37,7 @@ function getCurrentUid() {
 
 // Helper: check if current user is admin
 function isAdmin() {
-    return auth && auth.currentUser && auth.currentUser.email === ADMIN_EMAIL;
+    return auth && auth.currentUser && ADMIN_EMAILS.includes(auth.currentUser.email);
 }
 
 // Helper: get database ref

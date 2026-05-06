@@ -99,7 +99,7 @@
                 window.location.href = 'index.html';
                 return;
             }
-            if (user.email === ADMIN_EMAIL) {
+            if (ADMIN_EMAILS.includes(user.email)) {
                 window.location.href = 'admin.html';
                 return;
             }

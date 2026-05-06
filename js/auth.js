@@ -17,7 +17,7 @@
     auth.onAuthStateChanged(function (user) {
         if (user) {
             // Check if admin
-            if (user.email === ADMIN_EMAIL) {
+            if (ADMIN_EMAILS.includes(user.email)) {
                 window.location.href = 'admin.html';
             } else {
                 window.location.href = 'app.html';
