@@ -45,6 +45,28 @@
         });
     });
 
+    // Forgot password
+    document.getElementById('forgot-password').addEventListener('click', function (e) {
+        e.preventDefault();
+        var email = document.getElementById('login-email').value.trim();
+        if (!email) {
+            loginError.textContent = 'Enter your email above, then click Forgot password.';
+            loginError.classList.add('show');
+            return;
+        }
+        auth.sendPasswordResetEmail(email)
+            .then(function () {
+                loginError.textContent = 'Password reset link sent to ' + email + '. Check your inbox.';
+                loginError.classList.add('show');
+                loginError.style.color = '#27ae60';
+            })
+            .catch(function (error) {
+                loginError.textContent = friendlyError(error.code);
+                loginError.classList.add('show');
+                loginError.style.color = '';
+            });
+    });
+
     // Login
     loginForm.addEventListener('submit', function (e) {
         e.preventDefault();

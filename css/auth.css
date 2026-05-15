@@ -93,6 +93,19 @@
     font-size: 0.95rem;
 }
 
+.forgot-link {
+    display: block;
+    text-align: center;
+    margin-top: 0.75rem;
+    color: var(--primary);
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
 .auth-submit {
     width: 100%;
     padding: 0.75rem;
