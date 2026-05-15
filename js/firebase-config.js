@@ -14,6 +14,7 @@ const firebaseConfig = {
 // Admin emails
 const ADMIN_EMAILS = [
     'sundararaman.chintamani@gmail.com',
+    'sundar@sundarspeaks.com',
     'richa@somaiya.edu',
     'pradnya.jadhav1@somaiya.edu',
     'chitra.b@somaiya.edu'
