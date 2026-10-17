@@ -1,60 +1,24 @@
+// ChemBuddy - Question Bank
+//
+// One quiz per equipment: 10 questions, drawn only from that equipment's
+// questions (matched on equipmentId). A quiz goes live once 10 exist.
+//
+// GOLDEN RULE for every question: it must be answerable from that
+// equipment's own content in the app alone. Practical only — overview,
+// parts, working, operation, maintenance, safety. No theory or formulas,
+// no spec-number trivia, no unexplained jargon; simple wording; 4 options.
+// The explanation quotes the content where the answer is found.
+// If a good question needs a fact the content lacks, add it to the content first.
+//
+// The older W1/W2 questions below predate this rule; review each one
+// against it before its equipment's quiz goes live.
+
 const questionBank = [
     // ============================================================
     // WEEK 1 — PUMPS (40 Questions)
     // ============================================================
 
     // ---- W1D1: Centrifugal Pumps, Multistage Pumps, Vertical Pumps (5 Qs) ----
-    {
-        id: "W1D1Q1",
-        week: 1,
-        day: 1,
-        category: "Pumps",
-        subcategory: "Centrifugal Pumps",
-        question: "What is the main function of the volute casing in a centrifugal pump?",
-        options: [
-            "The volute casing is a spiral-shaped housing that converts the velocity energy of the fluid into pressure energy.",
-            "The volute casing holds the bearings in place and provides structural support to the pump.",
-            "The volute casing supplies cooling water to the mechanical seal to prevent overheating.",
-            "The volute casing acts as a filter to remove debris from the fluid before it enters the impeller."
-        ],
-        correct: 0,
-        explanation: "The centrifugal pump description states that the volute casing is a 'spiral housing converting velocity to pressure.' The operating principles confirm that 'the volute or diffuser casing converts velocity energy to pressure energy.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W1D1Q2",
-        week: 1,
-        day: 1,
-        category: "Pumps",
-        subcategory: "Centrifugal Pumps",
-        question: "What is the typical efficiency range of a centrifugal pump when it operates at its Best Efficiency Point (BEP)?",
-        options: [
-            "A centrifugal pump typically achieves an efficiency of 30 to 50 percent at its BEP.",
-            "A centrifugal pump typically achieves an efficiency of 65 to 85 percent at its BEP.",
-            "A centrifugal pump typically achieves an efficiency of 90 to 99 percent at its BEP.",
-            "A centrifugal pump typically achieves an efficiency of 45 to 60 percent at its BEP."
-        ],
-        correct: 1,
-        explanation: "The centrifugal pump specifications in the app clearly state that the efficiency is '65-85% at BEP.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W1D1Q3",
-        week: 1,
-        day: 1,
-        category: "Pumps",
-        subcategory: "Centrifugal Pumps",
-        question: "According to the safety guidelines, what is one thing you should never do when operating a centrifugal pump?",
-        options: [
-            "You should never operate a centrifugal pump at its maximum rated speed.",
-            "You should never operate a centrifugal pump against a closed discharge valve, which is called deadheading.",
-            "You should never use a centrifugal pump to handle low-viscosity liquids like water.",
-            "You should never operate a centrifugal pump above 1450 RPM under any circumstances."
-        ],
-        correct: 1,
-        explanation: "The centrifugal pump safety section clearly warns: 'Never operate against closed discharge (deadhead).' This can cause the pump to overheat and fail.",
-        difficulty: "easy"
-    },
     {
         id: "W1D1Q4",
         week: 1,
@@ -439,57 +403,6 @@ const questionBank = [
     },
 
     // ---- W1 Weekly Pool: Cross-cutting Pump Topics (15 Qs) ----
-    {
-        id: "W1WQ1",
-        week: 1,
-        day: null,
-        category: "Pumps",
-        subcategory: "Centrifugal Pumps",
-        question: "What are the main causes of excessive vibration in a centrifugal pump?",
-        options: [
-            "Excessive vibration is caused only by low discharge pressure in the system.",
-            "Excessive vibration is caused by misalignment, cavitation, impeller imbalance, or bearing wear.",
-            "Excessive vibration is caused only by operating the pump at a high flow rate.",
-            "Excessive vibration is caused by using an oversized impeller in the pump casing."
-        ],
-        correct: 1,
-        explanation: "The centrifugal pump troubleshooting guide lists the causes of excessive vibration as 'misalignment, cavitation, impeller imbalance, bearing wear.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W1WQ2",
-        week: 1,
-        day: null,
-        category: "Pumps",
-        subcategory: "Centrifugal Pumps",
-        question: "What is the flow capacity range of centrifugal pumps?",
-        options: [
-            "Centrifugal pumps have a flow range of 0.001 to 50 cubic meters per hour.",
-            "Centrifugal pumps have a flow range of 5 to 50,000 cubic meters per hour.",
-            "Centrifugal pumps have a flow range of 0.1 to 500 cubic meters per hour.",
-            "Centrifugal pumps have a flow range of up to 5000 cubic meters per hour."
-        ],
-        correct: 1,
-        explanation: "The centrifugal pump specifications state that the flow range is '5-50,000 m3/h.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W1WQ3",
-        week: 1,
-        day: null,
-        category: "Pumps",
-        subcategory: "Centrifugal Pumps",
-        question: "What is the maximum acceptable bearing housing temperature for a centrifugal pump?",
-        options: [
-            "The bearing housing temperature should stay below 60 degrees Celsius.",
-            "The bearing housing temperature should stay below 70 degrees Celsius.",
-            "The bearing housing temperature should stay below 82 degrees Celsius.",
-            "The bearing housing temperature should stay below 100 degrees Celsius."
-        ],
-        correct: 2,
-        explanation: "The centrifugal pump observation guidelines state: 'Check bearing housing temperature below 82C.'",
-        difficulty: "medium"
-    },
     {
         id: "W1WQ4",
         week: 1,
@@ -1388,6 +1301,168 @@ const questionBank = [
         ],
         correct: 2,
         explanation: "The shell and tube heat exchanger specifications state that the temperature is 'Up to 500C.' This is much higher than plate exchangers at 180C or graphite exchangers at 200C.",
+        difficulty: "easy"
+    },
+
+    // ---- Centrifugal Pumps — practical set, approved 2026-10-17 (10 Qs) ----
+    {
+        id: "CP-Q01",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "What does the volute (casing) of a centrifugal pump do?",
+        options: [
+            "It collects the fluid leaving the impeller and converts its speed into pressure.",
+            "It holds the bearings in place.",
+            "It supplies cooling water to the mechanical seal.",
+            "It filters debris out of the fluid before it enters the impeller."
+        ],
+        correct: 0,
+        explanation: "Parts: 'The casing, or volute, is the spiral housing that collects the fluid leaving the impeller and gradually converts its velocity into pressure.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CP-Q02",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "What must you never do when running a centrifugal pump?",
+        options: [
+            "Run it with the suction valve fully open.",
+            "Run it against a closed discharge valve (deadheading).",
+            "Run it with the coupling guard in place.",
+            "Run it with water or other thin liquids."
+        ],
+        correct: 1,
+        explanation: "Safety: 'The centrifugal pump must never be operated against a closed discharge valve (deadheading)' — the fluid heats up to boiling and the seal or casing can fail.",
+        difficulty: "easy"
+    },
+    {
+        id: "CP-Q03",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "A centrifugal pump is vibrating badly. What are the likely causes?",
+        options: [
+            "Too much insulation on the casing.",
+            "A coupling guard that is painted the wrong colour.",
+            "Misalignment, cavitation, an unbalanced impeller, or worn bearings.",
+            "A suction valve that is fully open."
+        ],
+        correct: 2,
+        explanation: "Troubleshooting: excessive vibration — 'Misalignment, cavitation, impeller imbalance, bearing wear.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CP-Q04",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "During a plant round, the bearing housing temperature of a centrifugal pump should be below what?",
+        options: [
+            "Below 40 °C",
+            "Below 60 °C",
+            "Below 120 °C",
+            "Below 82 °C"
+        ],
+        correct: 3,
+        explanation: "Observations: 'Check bearing housing temperature below 82C.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CP-Q05",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "Which part keeps a tight gap between the impeller and the casing so that fluid does not leak back inside the pump?",
+        options: [
+            "The wear rings",
+            "The mechanical seal",
+            "The coupling",
+            "The baseplate"
+        ],
+        correct: 0,
+        explanation: "Parts: 'Wear rings sit between the impeller and the casing to maintain a tight clearance and limit internal recirculation.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CP-Q06",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "What does the mechanical seal do?",
+        options: [
+            "It joins the pump shaft to the motor shaft.",
+            "It stops the pumped fluid from leaking out where the shaft passes through the casing.",
+            "It supports the weight of the shaft.",
+            "It turns the impeller."
+        ],
+        correct: 1,
+        explanation: "Parts: 'The mechanical seal closes the point where the shaft passes through the casing and prevents the pumped fluid from leaking out.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CP-Q07",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "Which part connects the pump shaft to the motor shaft?",
+        options: [
+            "The volute",
+            "The wear ring",
+            "The coupling",
+            "The suction nozzle"
+        ],
+        correct: 2,
+        explanation: "Parts: 'The coupling joins the pump shaft to the motor shaft while allowing for minor misalignment.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CP-Q08",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "A centrifugal pump is running but gives little or no flow. What should you check?",
+        options: [
+            "Only the paint condition of the casing.",
+            "Only the motor nameplate.",
+            "Only the baseplate bolts.",
+            "Direction of rotation, air in the pump (vent and prime), a closed valve, and a worn impeller."
+        ],
+        correct: 3,
+        explanation: "Troubleshooting: no or low discharge — causes 'Wrong rotation, air-bound, closed valve, worn impeller'; action 'Check rotation, vent and prime, open valve, inspect impeller.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CP-Q09",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "Before maintenance work starts on a centrifugal pump, what must be done?",
+        options: [
+            "Lockout/tagout (LOTO) on the motor, the suction and discharge valves, and any auxiliary systems.",
+            "Only switch off the motor from the control room.",
+            "Only close the discharge valve.",
+            "Nothing, if the pump has stopped running."
+        ],
+        correct: 0,
+        explanation: "Safety: 'Complete lockout/tagout (LOTO) procedures must be performed on the motor, all valves in the suction and discharge piping, and any auxiliary systems before performing any maintenance.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CP-Q10",
+        equipmentId: "centrifugal-pump",
+        category: "Pumps",
+        subcategory: "Centrifugal Pumps",
+        question: "During a plant round, a rumbling sound from a centrifugal pump is a sign of what?",
+        options: [
+            "Normal running",
+            "Cavitation",
+            "Too much lubrication",
+            "A closed coupling guard"
+        ],
+        correct: 1,
+        explanation: "Observations: 'Listen for cavitation rumbling sounds.'",
         difficulty: "easy"
     }
 ];
