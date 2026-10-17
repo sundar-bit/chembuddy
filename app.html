@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChemBuddy - Learn</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚗️</text></svg>">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/quiz.css">
-    <link rel="stylesheet" href="css/leaderboard.css">
+    <link rel="stylesheet" href="css/common.css?v=7">
+    <link rel="stylesheet" href="css/app.css?v=7">
+    <link rel="stylesheet" href="css/quiz.css?v=7">
+    <link rel="stylesheet" href="css/leaderboard.css?v=7">
 </head>
 <body>
     <!-- Top Navigation -->
@@ -63,23 +63,23 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
 
     <!-- Config & Utilities -->
-    <script src="js/firebase-config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/router.js"></script>
+    <script src="js/firebase-config.js?v=7"></script>
+    <script src="js/utils.js?v=7"></script>
+    <script src="js/router.js?v=7"></script>
 
     <!-- Data -->
-    <script src="data/categories.js"></script>
-    <script src="data/equipment-db.js"></script>
-    <script src="data/learning-path.js"></script>
-    <script src="data/questions.js?v=2"></script>
+    <script src="data/categories.js?v=7"></script>
+    <script src="data/equipment-db.js?v=7"></script>
+    <script src="data/learning-path.js?v=7"></script>
+    <script src="data/questions.js?v=7"></script>
 
     <!-- Modules -->
-    <script src="js/equipment.js"></script>
-    <script src="js/voice.js"></script>
-    <script src="js/learn.js"></script>
-    <script src="js/quiz-engine.js"></script>
-    <script src="js/leaderboard.js"></script>
-    <script src="js/profile.js"></script>
+    <script src="js/equipment.js?v=7"></script>
+    <script src="js/voice.js?v=7"></script>
+    <script src="js/learn.js?v=7"></script>
+    <script src="js/quiz-engine.js?v=7"></script>
+    <script src="js/leaderboard.js?v=7"></script>
+    <script src="js/profile.js?v=7"></script>
 
     <!-- App Init -->
     <script>
@@ -144,6 +144,11 @@
                 userProfile = snap.val() || {};
                 document.getElementById('nav-user-name').textContent = userProfile.name || currentUser.email.split('@')[0];
                 window.ChemBuddy.profile = userProfile;
+                if (userProfile.name) {
+                    syncLeaderboardName(uid, userProfile.name);
+                } else {
+                    askForName(uid);
+                }
             }, function (err) {
                 console.error('Profile read error:', err.message);
             });
@@ -163,10 +168,58 @@
             });
         }
 
+        // Keep the name on this student's leaderboard row in step with their
+        // profile. Repairs rows written as "Student" before the name was saved.
+        function syncLeaderboardName(uid, name) {
+            var ref = db.ref('leaderboard/cumulative/' + uid);
+            ref.once('value').then(function (snap) {
+                var entry = snap.val();
+                if (entry && entry.name !== name) {
+                    ref.child('name').set(name);
+                }
+            });
+        }
+
+        // Accounts registered before the profile-save fix have no name.
+        // Ask once; saving it updates the profile listener above, which then
+        // repairs the leaderboard rows.
+        var namePromptShown = false;
+        function askForName(uid) {
+            if (namePromptShown) return;
+            namePromptShown = true;
+
+            var overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000;padding:1rem';
+            overlay.innerHTML =
+                '<form style="background:#fff;border-radius:12px;padding:1.5rem;max-width:360px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2)">' +
+                '<h3 style="margin:0 0 0.5rem">What is your name?</h3>' +
+                '<p style="margin:0 0 1rem;color:#666;font-size:0.9rem">Your name will appear on the leaderboard.</p>' +
+                '<input type="text" required maxlength="60" placeholder="Full name" style="width:100%;padding:0.7rem;border:1px solid #ccc;border-radius:8px;font-size:1rem;box-sizing:border-box">' +
+                '<button type="submit" class="btn btn-primary" style="width:100%;margin-top:1rem">Save</button>' +
+                '</form>';
+            document.body.appendChild(overlay);
+
+            var form = overlay.querySelector('form');
+            var input = overlay.querySelector('input');
+            input.focus();
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var name = input.value.trim();
+                if (!name) return;
+                form.querySelector('button').disabled = true;
+                db.ref('users/' + uid).update({ name: name, email: currentUser.email })
+                    .then(function () { overlay.remove(); })
+                    .catch(function () {
+                        form.querySelector('button').disabled = false;
+                        Utils.toast('Could not save your name. Please try again.', 'error');
+                    });
+            });
+        }
+
         function initRoutes() {
             Router.register('/home', renderHome);
             Router.register('/learn', Learn.renderOverview);
-            Router.register('/learn/:dayId', Learn.renderDay);
+            Router.register('/learn/:equipId', Learn.renderLesson);
             Router.register('/browse', Equipment.renderBrowse);
             Router.register('/browse/:equipId', Equipment.renderBrowseEquip);
             Router.register('/quizzes', QuizEngine.renderQuizList);
@@ -182,11 +235,11 @@
             var progress = window.ChemBuddy.progress || {};
             var name = profile.name || 'Student';
 
-            // Determine current day in pilot
+            // Next equipment on the learning path
             var todayInfo = Learn.getTodayInfo(progress);
             var totalPoints = calculateTotalPoints(progress);
             var studiedCount = Object.keys(progress.studied || {}).length;
-            var quizzesDone = Object.keys(progress.dailyQuizzes || {}).length + Object.keys(progress.weeklyQuizzes || {}).length;
+            var quizzesDone = Object.keys(progress.quizzes || {}).length;
             var streak = getStudyStreak(progress);
 
             var html = '<div class="home-welcome">';
@@ -200,13 +253,13 @@
             // Today's task card
             if (todayInfo) {
                 html += '<div class="today-card">';
-                html += '<h3>📅 ' + todayInfo.weekTitle + ' — Day ' + todayInfo.day + '</h3>';
+                html += '<h3>📘 ' + Utils.sanitize(todayInfo.moduleTitle) + '</h3>';
                 html += '<h2>' + Utils.sanitize(todayInfo.title) + '</h2>';
-                html += '<p class="today-card-meta">' + todayInfo.equipmentCount + ' equipment to study</p>';
+                html += '<p class="today-card-meta">Equipment ' + todayInfo.position + ' in this module</p>';
                 html += '<div class="flex gap-1">';
-                html += '<a href="#/learn/' + todayInfo.dayId + '" class="btn">Continue Learning →</a>';
+                html += '<a href="#/learn/' + todayInfo.equipId + '" class="btn">Continue Learning →</a>';
                 if (todayInfo.quizAvailable) {
-                    html += '<a href="#/quiz/' + todayInfo.quizId + '" class="btn">Take Quiz</a>';
+                    html += '<a href="#/quiz/' + todayInfo.equipId + '" class="btn">Take Quiz</a>';
                 }
                 html += '</div></div>';
             } else {
@@ -240,7 +293,7 @@
             html += '<div class="card"><div class="card-body">';
             html += '<h3 class="mb-2">Quick Links</h3>';
             html += '<div class="flex flex-col gap-1">';
-            html += '<a href="#/browse" class="btn btn-outline btn-block">Browse All 219 Equipment</a>';
+            html += '<a href="#/browse" class="btn btn-outline btn-block">Browse All ' + Object.keys(equipmentDB).length + ' Equipment</a>';
             html += '<a href="#/leaderboard" class="btn btn-outline btn-block">View Leaderboard</a>';
             html += '</div></div></div>';
 
@@ -254,10 +307,8 @@
             var total = 0;
             var studied = progress.studied || {};
             total += Object.keys(studied).length * 5;
-            var daily = progress.dailyQuizzes || {};
-            for (var k in daily) { total += (daily[k].points || 0); }
-            var weekly = progress.weeklyQuizzes || {};
-            for (var k in weekly) { total += (weekly[k].points || 0); }
+            var quizzes = progress.quizzes || {};
+            for (var k in quizzes) { total += (quizzes[k].points || 0); }
             return total;
         }
 
@@ -267,13 +318,9 @@
             for (var k in studied) {
                 if (studied[k].completedAt) dates.add(new Date(studied[k].completedAt).toISOString().slice(0, 10));
             }
-            var daily = progress.dailyQuizzes || {};
-            for (var k in daily) {
-                if (daily[k].completedAt) dates.add(new Date(daily[k].completedAt).toISOString().slice(0, 10));
-            }
-            var weekly = progress.weeklyQuizzes || {};
-            for (var k in weekly) {
-                if (weekly[k].completedAt) dates.add(new Date(weekly[k].completedAt).toISOString().slice(0, 10));
+            var quizzes = progress.quizzes || {};
+            for (var k in quizzes) {
+                if (quizzes[k].completedAt) dates.add(new Date(quizzes[k].completedAt).toISOString().slice(0, 10));
             }
             return Utils.calculateStreak(Array.from(dates));
         }
@@ -283,12 +330,12 @@
             if (streak >= 3) msgs.push('<span class="motivation-icon">🔥</span> You\'re on a ' + streak + '-day streak! Keep it up!');
             if (streak === 0) msgs.push('<span class="motivation-icon">💪</span> Start your streak today — study or take a quiz!');
 
-            var quizzesDone = Object.keys(progress.dailyQuizzes || {}).length;
+            var quizzesDone = Object.keys(progress.quizzes || {}).length;
             if (quizzesDone === 0) msgs.push('<span class="motivation-icon">📝</span> Take your first quiz after studying the equipment!');
 
             var todayInfo = Learn.getTodayInfo(progress);
             if (todayInfo && todayInfo.quizAvailable) {
-                msgs.push('<span class="motivation-icon">🎯</span> Today\'s quiz is ready — are you?');
+                msgs.push('<span class="motivation-icon">🎯</span> The ' + Utils.sanitize(todayInfo.title) + ' quiz is ready — are you?');
             }
 
             if (msgs.length === 0) msgs.push('<span class="motivation-icon">🌟</span> Great progress! Keep learning every day.');

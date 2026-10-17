@@ -1392,4 +1392,37 @@ const questionBank = [
     }
 ];
 
+// Each quiz covers exactly one equipment, so every question needs an
+// equipmentId. New questions should set it directly; the questions above
+// predate that and are tagged from their subcategory here.
+(function tagQuestionsWithEquipment(bank) {
+    var bySubcategory = {
+        'Centrifugal Pumps': 'centrifugal-pump',
+        'Multistage Pumps': 'multistage-pump',
+        'Vertical Pumps': 'vertical-pump',
+        'Gear Pumps': 'gear-pump',
+        'Screw Pumps': 'screw-pump',
+        'Reciprocating Pumps': 'reciprocating-pump',
+        'Diaphragm Pumps': 'diaphragm-pump',
+        'Peristaltic Pumps': 'peristaltic-pump',
+        'Axial Flow Pumps': 'axial-pump',
+        'Turbine Pumps': 'turbine-pump',
+        'Regenerative Pumps': 'regenerative-pump',
+        'Canned Motor Pumps': 'canned-pump',
+        'Shell & Tube HX': 'shell-tube',
+        'U-Tube HX': 'u-tube',
+        'Floating Head HX': 'floating-head',
+        'Plate HX': 'plate-hx',
+        'Spiral HX': 'spiral-hx',
+        'Air-Cooled HX': 'air-cooled',
+        'Double Pipe HX': 'double-pipe',
+        'Scraped Surface HX': 'scraped-surface',
+        'Plate-Fin HX': 'plate-fin',
+        'Graphite HX': 'graphite-hx'
+    };
+    bank.forEach(function (q) {
+        if (!q.equipmentId) q.equipmentId = bySubcategory[q.subcategory] || null;
+    });
+})(questionBank);
+
 // Exported as global variable for use with <script> tags

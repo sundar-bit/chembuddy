@@ -13,15 +13,25 @@
     const loginError = document.getElementById('login-error');
     const registerError = document.getElementById('register-error');
 
+    // Set while a new account's profile is being saved. Firebase signs the user
+    // in as soon as the account is created, which fires onAuthStateChanged —
+    // redirecting then aborts the profile write, leaving the student with no
+    // name (shown as "Student" on the leaderboard). Registration redirects
+    // itself once the profile is saved.
+    var registering = false;
+
+    function redirectFor(user) {
+        if (ADMIN_EMAILS.includes(user.email)) {
+            window.location.href = 'admin.html';
+        } else {
+            window.location.href = 'app.html';
+        }
+    }
+
     // Check if already logged in
     auth.onAuthStateChanged(function (user) {
-        if (user) {
-            // Check if admin
-            if (ADMIN_EMAILS.includes(user.email)) {
-                window.location.href = 'admin.html';
-            } else {
-                window.location.href = 'app.html';
-            }
+        if (user && !registering) {
+            redirectFor(user);
         }
     });
 
@@ -113,12 +123,14 @@
 
         btn.disabled = true;
         btn.textContent = 'Creating account...';
+        registering = true;
 
+        var newUser = null;
         auth.createUserWithEmailAndPassword(email, password)
             .then(function (result) {
-                var uid = result.user.uid;
+                newUser = result.user;
                 // Save user profile
-                return db.ref('users/' + uid).set({
+                return db.ref('users/' + newUser.uid).set({
                     name: name,
                     email: email,
                     college: college || '',
@@ -129,9 +141,13 @@
                 });
             })
             .then(function () {
-                // Redirect handled by onAuthStateChanged
+                // Profile saved — now it is safe to leave this page
+                redirectFor(newUser);
             })
             .catch(function (error) {
+                registering = false;
+                // Account created but profile not saved: the app will ask for the name
+                if (newUser) { redirectFor(newUser); return; }
                 registerError.textContent = friendlyError(error.code);
                 registerError.classList.add('show');
                 btn.disabled = false;

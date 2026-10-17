@@ -7,12 +7,11 @@ var Profile = (function () {
         var profile = window.ChemBuddy.profile || {};
         var progress = window.ChemBuddy.progress || {};
         var studied = progress.studied || {};
-        var dailyQuizzes = progress.dailyQuizzes || {};
-        var weeklyQuizzes = progress.weeklyQuizzes || {};
+        var quizzes = progress.quizzes || {};
 
         var totalPoints = window.ChemBuddy.calculateTotalPoints(progress);
         var studiedCount = Object.keys(studied).length;
-        var quizzesDone = Object.keys(dailyQuizzes).length + Object.keys(weeklyQuizzes).length;
+        var quizzesDone = Object.keys(quizzes).length;
         var streak = window.ChemBuddy.getStudyStreak(progress);
 
         var html = '';
@@ -33,54 +32,34 @@ var Profile = (function () {
         html += '<div class="profile-stat"><div class="profile-stat-value">' + streak + '</div><div class="profile-stat-label">Streak</div></div>';
         html += '</div></div>';
 
-        // Week-by-week breakdown
-        learningPath.weeks.forEach(function (week) {
+        // Module-by-module breakdown
+        learningPath.modules.forEach(function (mod) {
             html += '<div class="profile-section">';
-            html += '<h2>Week ' + week.id + ': ' + Utils.sanitize(week.title) + '</h2>';
+            html += '<h2>Module ' + mod.id + ': ' + Utils.sanitize(mod.title) + '</h2>';
 
             // Equipment progress
-            var weekStudied = 0;
-            var weekTotal = 0;
-            week.days.forEach(function (day) {
-                weekTotal += day.equipmentIds.length;
-                day.equipmentIds.forEach(function (id) {
-                    if (studied[id]) weekStudied++;
-                });
-            });
+            var modTotal = mod.equipment.length;
+            var modStudied = mod.equipment.filter(function (eq) { return studied[eq.id]; }).length;
 
-            var pct = weekTotal > 0 ? Math.round((weekStudied / weekTotal) * 100) : 0;
+            var pct = modTotal > 0 ? Math.round((modStudied / modTotal) * 100) : 0;
             html += '<div class="flex items-center gap-2 mb-2">';
-            html += '<span class="text-muted" style="font-size:0.85rem">' + weekStudied + '/' + weekTotal + ' equipment</span>';
+            html += '<span class="text-muted" style="font-size:0.85rem">' + modStudied + '/' + modTotal + ' equipment</span>';
             html += '<div class="progress" style="flex:1"><div class="progress-bar" style="width:' + pct + '%"></div></div>';
             html += '<span style="font-size:0.85rem;font-weight:600">' + pct + '%</span>';
             html += '</div>';
 
-            // Daily quiz scores
-            html += '<h4 class="mb-1">Daily Quizzes</h4>';
+            // Quiz scores, one per equipment
             html += '<div class="quiz-score-grid mb-2">';
-            week.days.forEach(function (day) {
-                var dayId = 'W' + week.id + 'D' + day.day;
-                var quiz = dailyQuizzes[dayId];
+            mod.equipment.forEach(function (eq) {
+                var quiz = quizzes[eq.id];
                 if (quiz) {
                     html += '<div class="quiz-score-cell taken">' + quiz.score + '/' + quiz.maxScore;
-                    html += '<span class="score-label">Day ' + day.day + ' (' + quiz.points + 'pts)</span></div>';
+                    html += '<span class="score-label">' + Utils.sanitize(eq.name) + ' (' + quiz.points + 'pts)</span></div>';
                 } else {
-                    html += '<div class="quiz-score-cell not-taken">—<span class="score-label">Day ' + day.day + '</span></div>';
+                    html += '<div class="quiz-score-cell not-taken">—<span class="score-label">' + Utils.sanitize(eq.name) + '</span></div>';
                 }
             });
             html += '</div>';
-
-            // Weekly quiz
-            var weeklyId = 'W' + week.id;
-            var wQuiz = weeklyQuizzes[weeklyId];
-            if (wQuiz) {
-                html += '<div class="flex items-center justify-between p-2 mb-1" style="background:var(--success-light);border-radius:var(--radius)">';
-                html += '<span><strong>Weekly Quiz:</strong> ' + wQuiz.score + '/' + wQuiz.maxScore + '</span>';
-                html += '<span class="badge badge-success">' + wQuiz.points + ' pts</span></div>';
-            } else {
-                html += '<div class="flex items-center justify-between p-2 mb-1" style="background:var(--bg-dark);border-radius:var(--radius)">';
-                html += '<span class="text-muted"><strong>Weekly Quiz:</strong> Not attempted</span></div>';
-            }
 
             html += '</div>';
         });

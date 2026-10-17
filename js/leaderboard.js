@@ -8,27 +8,14 @@ var Leaderboard = (function () {
     function render(container) {
         var html = '<div class="lb-header">';
         html += '<h1>Leaderboard</h1>';
-        html += '<div class="lb-toggle">';
-        html += '<button class="lb-toggle-btn active" data-view="cumulative">All Time</button>';
-        html += '<button class="lb-toggle-btn" data-view="weekly">This Week</button>';
-        html += '</div></div>';
+        html += '</div>';
 
         html += '<div id="lb-podium" class="lb-podium"></div>';
         html += '<div id="lb-table" class="lb-table"></div>';
 
         container.innerHTML = html;
 
-        // Toggle buttons
-        container.querySelectorAll('.lb-toggle-btn').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                container.querySelectorAll('.lb-toggle-btn').forEach(function (b) { b.classList.remove('active'); });
-                this.classList.add('active');
-                loadLeaderboard(this.dataset.view);
-            });
-        });
-
-        // Load default view
-        loadLeaderboard('cumulative');
+        loadLeaderboard();
 
         // Return cleanup
         return function () {
@@ -37,25 +24,12 @@ var Leaderboard = (function () {
         };
     }
 
-    function loadLeaderboard(view) {
+    function loadLeaderboard() {
         // Clean up old listeners
         listeners.forEach(function (unsub) { unsub(); });
         listeners = [];
 
-        var refPath;
-        if (view === 'weekly') {
-            var currentWeek = 1; // Simplified for pilot
-            var progress = window.ChemBuddy.progress || {};
-            var dailyQuizzes = progress.dailyQuizzes || {};
-            for (var k in dailyQuizzes) {
-                if (k.startsWith('W2')) { currentWeek = 2; break; }
-            }
-            refPath = 'leaderboard/weekly/' + currentWeek;
-        } else {
-            refPath = 'leaderboard/cumulative';
-        }
-
-        var ref = db.ref(refPath);
+        var ref = db.ref('leaderboard/cumulative');
         var onValue = ref.on('value', function (snap) {
             var data = snap.val() || {};
             var entries = [];
@@ -65,10 +39,10 @@ var Leaderboard = (function () {
                 entries.push({
                     uid: uid,
                     name: entry.name || 'Student',
-                    points: view === 'weekly' ? (entry.points || 0) : (entry.totalPoints || 0),
-                    quizzes: view === 'weekly' ? (entry.quizzesCompleted || 0) : (entry.totalQuizzes || 0),
-                    equipment: view === 'weekly' ? (entry.equipmentStudied || 0) : (entry.totalEquipment || 0),
-                    streak: entry.streak || entry.bestStreak || 0
+                    points: entry.totalPoints || 0,
+                    quizzes: entry.totalQuizzes || 0,
+                    equipment: entry.totalEquipment || 0,
+                    streak: entry.bestStreak || 0
                 });
             }
 

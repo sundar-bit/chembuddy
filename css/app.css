@@ -210,6 +210,17 @@
     flex: 1;
 }
 
+.browse-level {
+    padding: 0.6rem 0.8rem;
+    background: var(--bg-dark);
+    color: var(--primary-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--border);
+}
+
 .browse-cat { border-bottom: 1px solid var(--border); }
 .browse-cat-head {
     display: flex;
@@ -365,6 +376,26 @@
     opacity: 1;
 }
 
+/* Sectioned educational images (full, uncropped, responsive) */
+.equip-edu-image {
+    margin: 2rem auto;
+    padding-top: 0.5rem;
+    text-align: center;
+}
+.equip-edu-image img {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+@media (max-width: 640px) {
+    .equip-edu-image { margin: 1.5rem auto; }
+    .equip-edu-image img { max-width: 100%; }
+}
+
 .equip-section { margin-bottom: 1.5rem; }
 .equip-section h3 {
     color: var(--primary);
@@ -386,8 +417,16 @@
 .spec-card .spec-title { font-size: 0.75rem; color: var(--text-light); }
 .spec-card .spec-value { font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
 
-.equip-list { padding-left: 1.25rem; }
+/* Indent every list a tab's width from the body text, so bullets and numbered
+   components sit clearly inside their section rather than flush with the prose. */
+.equip-list { padding-left: 1.25rem; margin-left: 1.5rem; }
 .equip-list li { margin-bottom: 0.4rem; font-size: 0.9rem; line-height: 1.5; }
+
+/* Components already carry their own numbering (1., 2., 3. ...) matching the
+   cutaway legend, so drop the bullet marker. Hanging indent keeps wrapped
+   lines aligned under the text instead of under the number. */
+.equip-list-numbered { list-style: none; padding-left: 0; }
+.equip-list-numbered li { padding-left: 1.75rem; text-indent: -1.75rem; }
 
 .equip-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
 .equip-table th {

@@ -73,13 +73,13 @@
         var totalQuizzes = 0;
         for (var uid in allProgress) {
             var p = allProgress[uid];
-            var daily = p.dailyQuizzes || {};
-            for (var k in daily) {
-                totalScores += daily[k].score || 0;
+            var quizzes = p.quizzes || {};
+            for (var k in quizzes) {
+                totalScores += quizzes[k].score || 0;
                 totalQuizzes++;
             }
         }
-        var avgScore = totalQuizzes > 0 ? (totalScores / totalQuizzes).toFixed(1) : '-';
+        var avgScore = totalQuizzes > 0 ? (totalScores / totalQuizzes).toFixed(1) + '/' + learningPath.quizLength : '-';
 
         var totalStudied = 0;
         for (var uid in allProgress) {
@@ -169,7 +169,7 @@
         html += '<span class="badge badge-primary">' + Object.keys(allUsers).length + ' registered</span></div>';
         html += '<div class="admin-table-scroll">';
         html += '<table class="admin-table"><thead><tr>';
-        html += '<th>Name</th><th>College</th><th>Branch</th><th>Equipment</th><th>Daily Avg</th><th>Weekly</th><th>Points</th><th>Last Active</th>';
+        html += '<th>Name</th><th>Email</th><th>College</th><th>Branch</th><th>Equipment</th><th>Quizzes</th><th>Avg Score</th><th>Points</th><th>Last Active</th>';
         html += '</tr></thead><tbody>';
 
         var users = [];
@@ -183,38 +183,30 @@
         users.forEach(function (u) {
             var p = u.progress;
             var studiedCount = Object.keys(p.studied || {}).length;
-            var daily = p.dailyQuizzes || {};
-            var weekly = p.weeklyQuizzes || {};
+            var quizzes = p.quizzes || {};
 
-            var dailyScores = [];
-            for (var k in daily) { dailyScores.push(daily[k].score + '/' + daily[k].maxScore); }
-            var dailyAvg = dailyScores.length > 0 ? (dailyScores.reduce(function (s, x) { return s + parseInt(x); }, 0) / dailyScores.length).toFixed(1) : '-';
-
-            // Actually compute average from score values
-            var totalDailyScore = 0;
-            var dailyCount = 0;
-            for (var k in daily) { totalDailyScore += daily[k].score; dailyCount++; }
-            dailyAvg = dailyCount > 0 ? (totalDailyScore / dailyCount).toFixed(1) + '/5' : '-';
-
-            var weeklyStr = '';
-            for (var k in weekly) { weeklyStr += k + ': ' + weekly[k].score + '/' + weekly[k].maxScore + ' '; }
+            var totalScore = 0;
+            var quizCount = 0;
+            for (var k in quizzes) { totalScore += quizzes[k].score; quizCount++; }
+            var avgScore = quizCount > 0 ? (totalScore / quizCount).toFixed(1) + '/' + learningPath.quizLength : '-';
 
             var points = calcPoints(p);
 
             html += '<tr class="expandable" data-uid="' + u.uid + '">';
             html += '<td><strong>' + Utils.sanitize(u.data.name || '-') + '</strong></td>';
+            html += '<td>' + Utils.sanitize(u.data.email || '-') + '</td>';
             html += '<td>' + Utils.sanitize(u.data.college || '-') + '</td>';
             html += '<td>' + Utils.sanitize(u.data.branch || '-') + '</td>';
             html += '<td>' + studiedCount + '</td>';
-            html += '<td>' + dailyAvg + '</td>';
-            html += '<td>' + (weeklyStr || '-') + '</td>';
+            html += '<td>' + quizCount + '</td>';
+            html += '<td>' + avgScore + '</td>';
             html += '<td><strong>' + points + '</strong></td>';
             html += '<td>' + Utils.formatDate(u.data.lastActiveAt) + '</td>';
             html += '</tr>';
 
             // Expandable detail row
             html += '<tr class="student-detail-row hidden" id="detail-' + u.uid + '">';
-            html += '<td colspan="8"><div class="student-detail-content">';
+            html += '<td colspan="9"><div class="student-detail-content">';
             html += renderStudentDetail(u);
             html += '</div></td></tr>';
         });
@@ -234,29 +226,18 @@
     function renderStudentDetail(u) {
         var p = u.progress;
         var studied = p.studied || {};
-        var daily = p.dailyQuizzes || {};
-        var weekly = p.weeklyQuizzes || {};
+        var quizzes = p.quizzes || {};
 
         var html = '<h4>Quiz Scores</h4>';
         html += '<div class="student-quiz-grid">';
 
-        learningPath.weeks.forEach(function (week) {
-            week.days.forEach(function (day) {
-                var dayId = 'W' + week.id + 'D' + day.day;
-                var quiz = daily[dayId];
-                if (quiz) {
-                    html += '<div class="student-quiz-cell taken">' + dayId + '<br>' + quiz.score + '/' + quiz.maxScore + '</div>';
-                } else {
-                    html += '<div class="student-quiz-cell not-taken">' + dayId + '<br>—</div>';
-                }
-            });
-
-            var weeklyId = 'W' + week.id;
-            var wQuiz = weekly[weeklyId];
-            if (wQuiz) {
-                html += '<div class="student-quiz-cell taken">' + weeklyId + '<br>' + wQuiz.score + '/' + wQuiz.maxScore + '</div>';
+        learningPath.allEquipment().forEach(function (eq) {
+            var quiz = quizzes[eq.id];
+            var label = Utils.sanitize(eq.name);
+            if (quiz) {
+                html += '<div class="student-quiz-cell taken">' + label + '<br>' + quiz.score + '/' + quiz.maxScore + '</div>';
             } else {
-                html += '<div class="student-quiz-cell not-taken">' + weeklyId + '<br>—</div>';
+                html += '<div class="student-quiz-cell not-taken">' + label + '<br>—</div>';
             }
         });
         html += '</div>';
@@ -274,29 +255,19 @@
         var html = '<h1 class="mb-3">Quiz Analytics</h1>';
         html += '<div class="quiz-analytics-grid">';
 
-        // Iterate through all quizzes
-        var quizIds = [];
-        learningPath.weeks.forEach(function (week) {
-            week.days.forEach(function (day) {
-                quizIds.push({ id: 'W' + week.id + 'D' + day.day, type: 'Daily', label: 'W' + week.id + ' Day ' + day.day });
-            });
-            quizIds.push({ id: 'W' + week.id, type: 'Weekly', label: 'Week ' + week.id + ' Weekly' });
-        });
-
-        quizIds.forEach(function (quiz) {
+        // One quiz per Level 1 equipment
+        learningPath.allEquipment().forEach(function (quiz) {
             var scores = [];
-            var isWeekly = quiz.type === 'Weekly';
 
             for (var uid in allProgress) {
-                var p = allProgress[uid];
-                var source = isWeekly ? (p.weeklyQuizzes || {}) : (p.dailyQuizzes || {});
-                if (source[quiz.id]) {
-                    scores.push(source[quiz.id]);
+                var quizzes = allProgress[uid].quizzes || {};
+                if (quizzes[quiz.id]) {
+                    scores.push(quizzes[quiz.id]);
                 }
             }
 
             html += '<div class="quiz-analytics-card">';
-            html += '<h4>' + quiz.label + ' <span class="badge badge-primary">' + quiz.type + '</span></h4>';
+            html += '<h4>' + Utils.sanitize(quiz.name) + ' <span class="badge badge-primary">Module ' + quiz.moduleId + '</span></h4>';
 
             if (scores.length === 0) {
                 html += '<p class="text-muted">No attempts yet</p>';
@@ -364,17 +335,11 @@
     function exportCSV() {
         var headers = ['Name', 'Email', 'College', 'Branch', 'Equipment Studied', 'Total Points'];
 
-        // Add quiz columns
+        // Add one quiz column per Level 1 equipment
         var quizCols = [];
-        learningPath.weeks.forEach(function (week) {
-            week.days.forEach(function (day) {
-                var id = 'W' + week.id + 'D' + day.day;
-                quizCols.push(id);
-                headers.push(id + ' Score');
-            });
-            var weeklyId = 'W' + week.id;
-            quizCols.push(weeklyId);
-            headers.push(weeklyId + ' Weekly Score');
+        learningPath.allEquipment().forEach(function (eq) {
+            quizCols.push(eq.id);
+            headers.push('"' + eq.name.replace(/"/g, '""') + ' Quiz"');
         });
 
         headers.push('Last Active');
@@ -384,8 +349,7 @@
         for (var uid in allUsers) {
             var u = allUsers[uid];
             var p = allProgress[uid] || {};
-            var daily = p.dailyQuizzes || {};
-            var weekly = p.weeklyQuizzes || {};
+            var quizzes = p.quizzes || {};
             var points = calcPoints(p);
 
             var row = [
@@ -398,7 +362,7 @@
             ];
 
             quizCols.forEach(function (qId) {
-                var quiz = qId.length === 2 ? weekly[qId] : daily[qId];
+                var quiz = quizzes[qId];
                 row.push(quiz ? quiz.score + '/' + quiz.maxScore : '-');
             });
 
@@ -423,10 +387,8 @@
     function calcPoints(progress) {
         var total = 0;
         total += Object.keys(progress.studied || {}).length * 5;
-        var daily = progress.dailyQuizzes || {};
-        for (var k in daily) { total += (daily[k].points || 0); }
-        var weekly = progress.weeklyQuizzes || {};
-        for (var k in weekly) { total += (weekly[k].points || 0); }
+        var quizzes = progress.quizzes || {};
+        for (var k in quizzes) { total += (quizzes[k].points || 0); }
         return total;
     }
 })();

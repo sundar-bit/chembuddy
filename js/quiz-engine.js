@@ -6,61 +6,53 @@ var QuizEngine = (function () {
     var currentQuiz = null;
     var timerInterval = null;
 
+    var POINTS_PER_CORRECT = 10;
+
+    // One quiz per equipment; the quiz id is the equipment id.
+    function equipmentName(equipId) {
+        var found = learningPath.findEquipment(equipId);
+        return found ? found.module.equipment[found.index].name : equipId;
+    }
+
+    // Number of questions in the bank for this equipment.
+    function questionCount(equipId) {
+        if (typeof questionBank === 'undefined') return 0;
+        return questionBank.filter(function (q) { return q.equipmentId === equipId; }).length;
+    }
+
+    // A quiz goes live only once its equipment has a full set of questions.
+    function isQuizReady(equipId) {
+        return questionCount(equipId) >= learningPath.quizLength;
+    }
+
     function renderQuizList(container) {
         var progress = window.ChemBuddy.progress || {};
         var studied = progress.studied || {};
-        var dailyQuizzes = progress.dailyQuizzes || {};
-        var weeklyQuizzes = progress.weeklyQuizzes || {};
+        var quizzes = progress.quizzes || {};
 
         var html = '<h1 class="mb-1">My Quizzes</h1>';
-        html += '<p class="text-muted mb-3">Daily and weekly quizzes to test your knowledge</p>';
+        html += '<p class="text-muted mb-3">One quiz per equipment — ' + learningPath.quizLength + ' questions, single attempt</p>';
 
-        learningPath.weeks.forEach(function (week) {
-            html += '<div class="card mb-3"><div class="card-header">Week ' + week.id + ': ' + Utils.sanitize(week.title) + '</div>';
+        learningPath.modules.forEach(function (mod) {
+            html += '<div class="card mb-3"><div class="card-header">Module ' + mod.id + ': ' + Utils.sanitize(mod.title) + '</div>';
             html += '<div class="card-body">';
-
-            // Daily quizzes
             html += '<div class="quiz-score-grid mb-2">';
-            week.days.forEach(function (day) {
-                var dayId = 'W' + week.id + 'D' + day.day;
-                var quiz = dailyQuizzes[dayId];
-                var allStudied = day.equipmentIds.every(function (id) { return studied[id]; });
+            mod.equipment.forEach(function (eq) {
+                var quiz = quizzes[eq.id];
+                var label = '<span class="score-label">' + Utils.sanitize(eq.name) + '</span>';
 
                 if (quiz) {
-                    html += '<div class="quiz-score-cell taken">';
-                    html += quiz.score + '/' + quiz.maxScore;
-                    html += '<span class="score-label">Day ' + day.day + '</span></div>';
-                } else if (allStudied) {
-                    html += '<a href="#/quiz/' + dayId + '" class="quiz-score-cell" style="background:rgba(26,95,122,0.1);color:var(--primary);text-decoration:none;cursor:pointer">';
-                    html += 'Take';
-                    html += '<span class="score-label">Day ' + day.day + '</span></a>';
+                    html += '<div class="quiz-score-cell taken">' + quiz.score + '/' + quiz.maxScore + label + '</div>';
+                } else if (!isQuizReady(eq.id)) {
+                    html += '<div class="quiz-score-cell not-taken">Soon' + label + '</div>';
+                } else if (studied[eq.id]) {
+                    html += '<a href="#/quiz/' + eq.id + '" class="quiz-score-cell" style="background:rgba(26,95,122,0.1);color:var(--primary);text-decoration:none;cursor:pointer">';
+                    html += 'Take' + label + '</a>';
                 } else {
-                    html += '<div class="quiz-score-cell not-taken">';
-                    html += '—';
-                    html += '<span class="score-label">Day ' + day.day + '</span></div>';
+                    html += '<div class="quiz-score-cell not-taken">—' + label + '</div>';
                 }
             });
             html += '</div>';
-
-            // Weekly quiz
-            var weeklyId = 'W' + week.id;
-            var allDailyDone = week.days.every(function (d) { return dailyQuizzes['W' + week.id + 'D' + d.day]; });
-            var wQuiz = weeklyQuizzes[weeklyId];
-
-            if (wQuiz) {
-                html += '<div class="flex items-center justify-between p-2" style="background:var(--success-light);border-radius:var(--radius)">';
-                html += '<span><strong>Weekly Quiz:</strong> ' + wQuiz.score + '/' + wQuiz.maxScore + ' (' + wQuiz.points + ' pts)</span>';
-                html += '<span class="badge badge-success">✓ Done</span></div>';
-            } else if (allDailyDone) {
-                html += '<div class="flex items-center justify-between p-2" style="background:rgba(26,95,122,0.1);border-radius:var(--radius)">';
-                html += '<span><strong>Weekly Quiz:</strong> 15 questions • 2x points</span>';
-                html += '<a href="#/quiz/' + weeklyId + '" class="btn btn-primary btn-sm">Take Quiz</a></div>';
-            } else {
-                html += '<div class="flex items-center justify-between p-2" style="background:var(--bg-dark);border-radius:var(--radius)">';
-                html += '<span class="text-muted"><strong>Weekly Quiz:</strong> Complete all daily quizzes first</span>';
-                html += '<span class="badge">🔒</span></div>';
-            }
-
             html += '</div></div>';
         });
 
@@ -68,86 +60,52 @@ var QuizEngine = (function () {
     }
 
     function renderQuiz(container, params) {
-        var quizId = params.quizId; // e.g. "W1D3" or "W1"
-        var isWeekly = quizId.length === 2; // "W1" vs "W1D3"
+        var quizId = params.quizId; // equipment id, e.g. "centrifugal-pump"
 
         var progress = window.ChemBuddy.progress || {};
         var studied = progress.studied || {};
-        var dailyQuizzes = progress.dailyQuizzes || {};
-        var weeklyQuizzes = progress.weeklyQuizzes || {};
+        var quizzes = progress.quizzes || {};
 
-        // Check if already attempted
-        var existing = isWeekly ? weeklyQuizzes[quizId] : dailyQuizzes[quizId];
+        if (!learningPath.findEquipment(quizId)) {
+            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">❓</div><h3>Quiz Not Found</h3><a href="#/quizzes" class="btn btn-primary mt-2">All Quizzes</a></div>';
+            return;
+        }
+
+        // Check if already attempted — only the first attempt counts
+        var existing = quizzes[quizId];
         if (existing) {
-            showPreviousResults(container, quizId, existing, isWeekly);
+            showPreviousResults(container, quizId, existing);
             return;
         }
 
-        // Get questions
-        var questions = getQuestionsForQuiz(quizId, isWeekly);
-        if (!questions || questions.length === 0) {
-            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">❓</div><h3>No Questions Available</h3><p>Questions for this quiz haven\'t been loaded yet.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning</a></div>';
+        if (!isQuizReady(quizId)) {
+            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📝</div><h3>Quiz Being Prepared</h3><p>The quiz for ' + Utils.sanitize(equipmentName(quizId)) + ' will be available soon.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning</a></div>';
             return;
         }
 
-        // Check prerequisites
-        if (!isWeekly) {
-            var match = quizId.match(/W(\d+)D(\d+)/);
-            if (match) {
-                var weekNum = parseInt(match[1]);
-                var dayNum = parseInt(match[2]);
-                var week = learningPath.weeks.find(function (w) { return w.id === weekNum; });
-                var day = week ? week.days.find(function (d) { return d.day === dayNum; }) : null;
-                if (day) {
-                    var allStudied = day.equipmentIds.every(function (id) { return studied[id]; });
-                    if (!allStudied) {
-                        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📖</div><h3>Study First</h3><p>You need to study all equipment for this day before taking the quiz.</p><a href="#/learn/' + quizId + '" class="btn btn-primary mt-2">Go to Day</a></div>';
-                        return;
-                    }
-                }
-            }
-        } else {
-            // Weekly: check all daily quizzes done
-            var weekNum = parseInt(quizId.slice(1));
-            var week = learningPath.weeks.find(function (w) { return w.id === weekNum; });
-            if (week) {
-                var allDailyDone = week.days.every(function (d) { return dailyQuizzes['W' + weekNum + 'D' + d.day]; });
-                if (!allDailyDone) {
-                    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📝</div><h3>Complete Daily Quizzes First</h3><p>Finish all 5 daily quizzes for Week ' + weekNum + ' to unlock the weekly quiz.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning</a></div>';
-                    return;
-                }
-            }
+        // Check prerequisite: the equipment must be studied first
+        if (!studied[quizId]) {
+            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📖</div><h3>Study First</h3><p>Study ' + Utils.sanitize(equipmentName(quizId)) + ' before taking its quiz.</p><a href="#/learn/' + quizId + '" class="btn btn-primary mt-2">Go to Lesson</a></div>';
+            return;
         }
 
         // Show pre-quiz screen
-        showPreQuiz(container, quizId, questions, isWeekly);
+        showPreQuiz(container, quizId, getQuestionsForQuiz(quizId));
     }
 
-    function getQuestionsForQuiz(quizId, isWeekly) {
+    function getQuestionsForQuiz(equipId) {
         if (typeof questionBank === 'undefined') return [];
-
-        if (isWeekly) {
-            // Weekly: get all questions for this week with day === null
-            var weekNum = parseInt(quizId.slice(1));
-            var weeklyQs = questionBank.filter(function (q) { return q.week === weekNum && q.day === null; });
-            return Utils.shuffle(weeklyQs).slice(0, 15);
-        } else {
-            // Daily: get questions for specific day
-            var match = quizId.match(/W(\d+)D(\d+)/);
-            if (!match) return [];
-            var weekNum = parseInt(match[1]);
-            var dayNum = parseInt(match[2]);
-            return questionBank.filter(function (q) { return q.week === weekNum && q.day === dayNum; });
-        }
+        var pool = questionBank.filter(function (q) { return q.equipmentId === equipId; });
+        return Utils.shuffle(pool).slice(0, learningPath.quizLength);
     }
 
-    function showPreQuiz(container, quizId, questions, isWeekly) {
-        var pointsPerQ = isWeekly ? 20 : 10;
+    function showPreQuiz(container, quizId, questions) {
+        var pointsPerQ = POINTS_PER_CORRECT;
         var html = '<div class="quiz-body" style="min-height:calc(100vh - 120px)">';
         html += '<div class="quiz-pre">';
-        html += '<div class="quiz-pre-icon">' + (isWeekly ? '🏆' : '📝') + '</div>';
-        html += '<h2>' + (isWeekly ? 'Weekly Quiz' : 'Daily Quiz') + ': ' + quizId + '</h2>';
-        html += '<p>' + (isWeekly ? 'Test your knowledge across the entire week' : 'Test what you learned today') + '</p>';
+        html += '<div class="quiz-pre-icon">📝</div>';
+        html += '<h2>Quiz: ' + Utils.sanitize(equipmentName(quizId)) + '</h2>';
+        html += '<p>Test what you learned about this equipment</p>';
 
         html += '<div class="quiz-meta">';
         html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + questions.length + '</div><div class="quiz-meta-label">Questions</div></div>';
@@ -163,19 +121,18 @@ var QuizEngine = (function () {
         container.innerHTML = html;
 
         document.getElementById('start-quiz-btn').addEventListener('click', function () {
-            startQuiz(container, quizId, questions, isWeekly);
+            startQuiz(container, quizId, questions);
         });
     }
 
-    function startQuiz(container, quizId, questions, isWeekly) {
+    function startQuiz(container, quizId, questions) {
         var state = {
             quizId: quizId,
             questions: questions,
-            isWeekly: isWeekly,
             currentIndex: 0,
             answers: [],
             score: 0,
-            pointsPerCorrect: isWeekly ? 20 : 10,
+            pointsPerCorrect: POINTS_PER_CORRECT,
             timePerQuestion: 30,
             startTime: Date.now()
         };
@@ -197,7 +154,7 @@ var QuizEngine = (function () {
         // Header
         html += '<div class="quiz-header">';
         html += '<div class="quiz-header-left">';
-        html += '<span class="quiz-title">' + state.quizId + '</span>';
+        html += '<span class="quiz-title">' + Utils.sanitize(equipmentName(state.quizId)) + '</span>';
         html += '<span class="quiz-counter">' + (state.currentIndex + 1) + ' of ' + state.questions.length + '</span>';
         html += '</div>';
         html += '<button class="quiz-exit-btn" id="quiz-exit">✕ Exit</button>';
@@ -374,9 +331,7 @@ var QuizEngine = (function () {
 
         // Save to Firebase
         var uid = window.ChemBuddy.user.uid;
-        var path = state.isWeekly
-            ? 'progress/' + uid + '/weeklyQuizzes/' + state.quizId
-            : 'progress/' + uid + '/dailyQuizzes/' + state.quizId;
+        var path = 'progress/' + uid + '/quizzes/' + state.quizId;
 
         var quizData = {
             score: state.score,
@@ -439,7 +394,7 @@ var QuizEngine = (function () {
         currentQuiz = null;
     }
 
-    function showPreviousResults(container, quizId, data, isWeekly) {
+    function showPreviousResults(container, quizId, data) {
         var pct = data.maxScore > 0 ? Math.round((data.score / data.maxScore) * 100) : 0;
         var gradeClass = pct >= 80 ? 'great' : (pct >= 60 ? 'good' : (pct >= 40 ? 'needs-work' : 'poor'));
 
@@ -452,7 +407,7 @@ var QuizEngine = (function () {
         html += '</div>';
 
         html += '<h2>Quiz Already Completed</h2>';
-        html += '<p class="text-muted mb-2">' + (isWeekly ? 'Weekly' : 'Daily') + ' Quiz ' + quizId + '</p>';
+        html += '<p class="text-muted mb-2">Quiz: ' + Utils.sanitize(equipmentName(quizId)) + '</p>';
         html += '<div class="results-points">' + data.points + ' points earned • ' + Utils.formatDateTime(data.completedAt) + '</div>';
 
         html += '<div class="results-actions mt-3">';
@@ -466,6 +421,8 @@ var QuizEngine = (function () {
 
     return {
         renderQuizList: renderQuizList,
-        renderQuiz: renderQuiz
+        renderQuiz: renderQuiz,
+        isQuizReady: isQuizReady,
+        questionCount: questionCount
     };
 })();

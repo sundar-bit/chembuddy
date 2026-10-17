@@ -1,0 +1,11 @@
+# ─── PRIVATE — never push these ───────────────────────────
+# Your personal master guide (contains passwords). Stays on your PC only.
+CHEMBUDDY-GUIDE.local.md
+
+# ─── Junk / heavy files that shouldn't be in the repo ─────
+node_modules/
+test-results/
+*.zip
+Perrys-Chemical-Engineers-handbook*.pdf
+desktop.ini
+*.lnk

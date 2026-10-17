@@ -5,30 +5,35 @@ var Learn = (function () {
 
     var activeTimers = {};
 
+    // An equipment is complete once studied and its quiz taken. While its quiz
+    // is still being prepared, studying alone completes it.
+    function isEquipmentComplete(equipId, studied, quizzes) {
+        if (!studied[equipId]) return false;
+        return !!quizzes[equipId] || !QuizEngine.isQuizReady(equipId);
+    }
+
+    // Inside a module, equipment unlocks once the previous one is studied.
+    function isEquipmentAvailable(mod, index, studied) {
+        return index === 0 || !!studied[mod.equipment[index - 1].id];
+    }
+
+    // Next thing to do: the first incomplete equipment along the path.
     function getTodayInfo(progress) {
         var studied = progress.studied || {};
-        var dailyQuizzes = progress.dailyQuizzes || {};
+        var quizzes = progress.quizzes || {};
 
-        // Find first incomplete day
-        for (var w = 0; w < learningPath.weeks.length; w++) {
-            var week = learningPath.weeks[w];
-            for (var d = 0; d < week.days.length; d++) {
-                var day = week.days[d];
-                var dayId = 'W' + week.id + 'D' + day.day;
-                var allStudied = day.equipmentIds.every(function (id) { return studied[id]; });
-                var quizDone = dailyQuizzes[dayId];
-
-                if (!allStudied || !quizDone) {
+        for (var m = 0; m < learningPath.modules.length; m++) {
+            var mod = learningPath.modules[m];
+            for (var i = 0; i < mod.equipment.length; i++) {
+                var eq = mod.equipment[i];
+                if (!isEquipmentComplete(eq.id, studied, quizzes)) {
                     return {
-                        weekId: week.id,
-                        weekTitle: 'Week ' + week.id + ': ' + week.title,
-                        day: day.day,
-                        dayId: dayId,
-                        title: day.title,
-                        description: day.description,
-                        equipmentCount: day.equipmentIds.length,
-                        quizId: day.quizId,
-                        quizAvailable: allStudied && !quizDone
+                        moduleId: mod.id,
+                        moduleTitle: 'Module ' + mod.id + ': ' + mod.title,
+                        equipId: eq.id,
+                        title: eq.name,
+                        position: (i + 1) + ' of ' + mod.equipment.length,
+                        quizAvailable: !!studied[eq.id] && !quizzes[eq.id] && QuizEngine.isQuizReady(eq.id)
                     };
                 }
             }
@@ -39,32 +44,24 @@ var Learn = (function () {
     function renderOverview(container) {
         var progress = window.ChemBuddy.progress || {};
         var studied = progress.studied || {};
-        var dailyQuizzes = progress.dailyQuizzes || {};
-        var weeklyQuizzes = progress.weeklyQuizzes || {};
+        var quizzes = progress.quizzes || {};
 
         var html = '<div class="learn-header">';
         html += '<h1>Learning Path</h1>';
-        html += '<p>2-Week Pilot Program — Pumps & Heat Exchangers</p>';
+        html += '<p>' + Utils.sanitize(learningPath.title) + ' — ' + learningPath.modules.length + ' modules, self-paced</p>';
         html += '</div>';
 
         html += '<div class="weeks-grid">';
 
-        learningPath.weeks.forEach(function (week) {
-            var totalEquip = 0;
-            var studiedEquip = 0;
-            week.days.forEach(function (day) {
-                totalEquip += day.equipmentIds.length;
-                day.equipmentIds.forEach(function (id) {
-                    if (studied[id]) studiedEquip++;
-                });
-            });
-
+        learningPath.modules.forEach(function (mod) {
+            var totalEquip = mod.equipment.length;
+            var studiedEquip = mod.equipment.filter(function (eq) { return studied[eq.id]; }).length;
             var pct = totalEquip > 0 ? Math.round((studiedEquip / totalEquip) * 100) : 0;
 
             html += '<div class="week-card">';
             html += '<div class="week-card-header">';
-            html += '<h2>Week ' + week.id + ': ' + Utils.sanitize(week.title) + '</h2>';
-            html += '<p>' + Utils.sanitize(week.description) + '</p>';
+            html += '<h2>Module ' + mod.id + ': ' + Utils.sanitize(mod.title) + '</h2>';
+            html += '<p>' + Utils.sanitize(mod.description) + '</p>';
             html += '<div class="week-progress-info">';
             html += '<span>' + studiedEquip + '/' + totalEquip + '</span>';
             html += '<div class="progress"><div class="progress-bar" style="width:' + pct + '%"></div></div>';
@@ -73,50 +70,26 @@ var Learn = (function () {
 
             html += '<div class="week-card-body">';
 
-            var prevDayStudied = true;
-            week.days.forEach(function (day, idx) {
-                var dayId = 'W' + week.id + 'D' + day.day;
-                var allStudied = day.equipmentIds.every(function (id) { return studied[id]; });
-                var quizDone = dailyQuizzes[dayId];
-                var isComplete = allStudied && quizDone;
-                var isAvailable = prevDayStudied || idx === 0;
+            mod.equipment.forEach(function (eq, idx) {
+                var quizDone = quizzes[eq.id];
+                var isComplete = isEquipmentComplete(eq.id, studied, quizzes);
+                var isAvailable = isEquipmentAvailable(mod, idx, studied);
 
                 var statusClass = isComplete ? 'completed' : (isAvailable ? 'available' : 'locked');
                 var statusText = isComplete ? '✓ Done' : (isAvailable ? 'Start →' : '🔒 Locked');
 
-                html += '<div class="day-row" data-day="' + dayId + '" data-available="' + isAvailable + '">';
-                html += '<div class="day-number ' + statusClass + '">' + day.day + '</div>';
-                html += '<div class="day-info"><h4>' + Utils.sanitize(day.title) + '</h4>';
-                html += '<p>' + day.equipmentIds.length + ' equipment' + (quizDone ? ' • Quiz: ' + quizDone.score + '/' + quizDone.maxScore : '') + '</p></div>';
+                var meta;
+                if (quizDone) meta = 'Quiz: ' + quizDone.score + '/' + quizDone.maxScore;
+                else if (!QuizEngine.isQuizReady(eq.id)) meta = 'Quiz coming soon';
+                else meta = learningPath.quizLength + '-question quiz';
+
+                html += '<div class="day-row" data-equip="' + eq.id + '" data-available="' + isAvailable + '">';
+                html += '<div class="day-number ' + statusClass + '">' + (idx + 1) + '</div>';
+                html += '<div class="day-info"><h4>' + Utils.sanitize(eq.name) + '</h4>';
+                html += '<p>' + meta + '</p></div>';
                 html += '<div class="day-status ' + statusClass + '">' + statusText + '</div>';
                 html += '</div>';
-
-                prevDayStudied = allStudied;
             });
-
-            // Weekly quiz card
-            var weeklyId = 'W' + week.id;
-            var allDailyDone = week.days.every(function (day) {
-                return dailyQuizzes['W' + week.id + 'D' + day.day];
-            });
-            var weeklyDone = weeklyQuizzes[weeklyId];
-
-            if (allDailyDone) {
-                html += '<div class="weekly-quiz-card">';
-                html += '<div><h3>Weekly Quiz</h3>';
-                if (weeklyDone) {
-                    html += '<p>Score: ' + weeklyDone.score + '/' + weeklyDone.maxScore + ' (' + weeklyDone.points + ' pts)</p>';
-                } else {
-                    html += '<p>15 questions • 2x points</p>';
-                }
-                html += '</div>';
-                if (!weeklyDone) {
-                    html += '<a href="#/quiz/' + weeklyId + '" class="btn">Take Quiz</a>';
-                } else {
-                    html += '<span class="badge badge-success">✓ Done</span>';
-                }
-                html += '</div>';
-            }
 
             html += '</div></div>';
         });
@@ -124,46 +97,48 @@ var Learn = (function () {
         html += '</div>';
         container.innerHTML = html;
 
-        // Day row clicks
+        // Equipment row clicks
         container.querySelectorAll('.day-row').forEach(function (row) {
             row.addEventListener('click', function () {
                 if (this.dataset.available === 'true') {
-                    Router.navigate('/learn/' + this.dataset.day);
+                    Router.navigate('/learn/' + this.dataset.equip);
                 } else {
-                    Utils.toast('Complete previous days first', 'warning');
+                    Utils.toast('Study the previous equipment in this module first', 'warning');
                 }
             });
         });
     }
 
-    function renderDay(container, params) {
-        var dayId = params.dayId; // e.g. "W1D3"
-        var match = dayId.match(/W(\d+)D(\d+)/);
-        if (!match) { container.innerHTML = '<p>Invalid day.</p>'; return; }
-
-        var weekNum = parseInt(match[1]);
-        var dayNum = parseInt(match[2]);
-        var week = learningPath.weeks.find(function (w) { return w.id === weekNum; });
-        if (!week) { container.innerHTML = '<p>Week not found.</p>'; return; }
-        var day = week.days.find(function (d) { return d.day === dayNum; });
-        if (!day) { container.innerHTML = '<p>Day not found.</p>'; return; }
+    function renderLesson(container, params) {
+        var equipId = params.equipId; // e.g. "centrifugal-pump"
+        var found = learningPath.findEquipment(equipId);
+        if (!found || !equipmentDB[equipId]) {
+            container.innerHTML = '<p>Lesson not found. <a href="#/learn">Back to Learning Path</a></p>';
+            return;
+        }
+        var mod = found.module;
+        var lesson = mod.equipment[found.index];
 
         var progress = window.ChemBuddy.progress || {};
         var studied = progress.studied || {};
-        var dailyQuizzes = progress.dailyQuizzes || {};
+        var quizzes = progress.quizzes || {};
+
+        if (!isEquipmentAvailable(mod, found.index, studied)) {
+            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Locked</h3><p>Study ' + Utils.sanitize(mod.equipment[found.index - 1].name) + ' first.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning Path</a></div>';
+            return;
+        }
 
         var html = '';
         html += '<a href="#/learn" class="btn btn-outline btn-sm day-back-btn">← Back to Learning Path</a>';
 
         html += '<div class="day-detail-header">';
-        html += '<span class="badge badge-primary">Week ' + weekNum + ' — ' + Utils.sanitize(week.title) + '</span>';
-        html += '<h1>Day ' + dayNum + ': ' + Utils.sanitize(day.title) + '</h1>';
-        html += '<p>' + Utils.sanitize(day.description) + '</p>';
+        html += '<span class="badge badge-primary">Module ' + mod.id + ' — ' + Utils.sanitize(mod.title) + ' • ' + (found.index + 1) + ' of ' + mod.equipment.length + '</span>';
+        html += '<h1>' + Utils.sanitize(lesson.name) + '</h1>';
         html += '</div>';
 
-        // Equipment cards
+        // Equipment card
         html += '<div class="day-equipment-list">';
-        day.equipmentIds.forEach(function (equipId) {
+        [equipId].forEach(function (equipId) {
             var equip = equipmentDB[equipId];
             if (!equip) return;
 
@@ -172,7 +147,7 @@ var Learn = (function () {
             var statusText = isStudied ? 'Studied ✓' : 'Not started';
             var timeSpent = isStudied ? isStudied.timeSpent || 0 : 0;
 
-            html += '<div class="day-equip-card" data-equip="' + equipId + '">';
+            html += '<div class="day-equip-card expanded" data-equip="' + equipId + '">';
             html += '<div class="day-equip-header">';
             html += '<h3>' + Utils.sanitize(equip.name) + '</h3>';
             html += '<div class="day-equip-status">';
@@ -206,21 +181,22 @@ var Learn = (function () {
         html += '</div>';
 
         // Quiz section
-        var allStudied = day.equipmentIds.every(function (id) { return studied[id]; });
-        var quizDone = dailyQuizzes[dayId];
+        var quizDone = quizzes[equipId];
 
         html += '<div class="take-quiz-section">';
         if (quizDone) {
             html += '<h3>✅ Quiz Completed</h3>';
             html += '<p>Score: ' + quizDone.score + '/' + quizDone.maxScore + ' (' + quizDone.points + ' points)</p>';
-        } else if (allStudied) {
+        } else if (!QuizEngine.isQuizReady(equipId)) {
+            html += '<h3>📝 Quiz Coming Soon</h3>';
+            html += '<p>The quiz for this equipment is being prepared. You can continue to the next equipment.</p>';
+        } else if (studied[equipId]) {
             html += '<h3>Ready for the Quiz!</h3>';
-            html += '<p>You\'ve studied all equipment for today.</p>';
-            html += '<a href="#/quiz/' + day.quizId + '" class="btn btn-primary btn-lg">Take Today\'s Quiz →</a>';
+            html += '<p>' + learningPath.quizLength + ' questions on ' + Utils.sanitize(lesson.name) + ' — single attempt.</p>';
+            html += '<a href="#/quiz/' + equipId + '" class="btn btn-primary btn-lg">Take the Quiz →</a>';
         } else {
-            var studiedCount = day.equipmentIds.filter(function (id) { return studied[id]; }).length;
             html += '<h3>📖 Study First</h3>';
-            html += '<p>Read all equipment (min 3 min each) to unlock the quiz. ' + studiedCount + '/' + day.equipmentIds.length + ' done.</p>';
+            html += '<p>Read this equipment for at least 3 minutes, then mark it as studied to unlock the quiz.</p>';
         }
         html += '</div>';
 
@@ -261,10 +237,13 @@ var Learn = (function () {
             if (markBtn) {
                 markBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
-                    markAsStudied(equipId, dayId);
+                    markAsStudied(equipId);
                 });
             }
         });
+
+        // One equipment per lesson: it opens expanded, so start the reading timer now
+        if (!studied[equipId]) startStudyTimer(equipId);
 
         // Cleanup function
         return function () {
@@ -325,7 +304,7 @@ var Learn = (function () {
         }
     }
 
-    function markAsStudied(equipId, dayId) {
+    function markAsStudied(equipId) {
         var uid = window.ChemBuddy.user.uid;
         var timer = activeTimers[equipId];
         var timeSpent = timer ? timer.elapsed : 180;
@@ -355,16 +334,17 @@ var Learn = (function () {
     }
 
     function updateLeaderboardPoints(uid, addPoints) {
-        var profile = window.ChemBuddy.profile || {};
         var progress = window.ChemBuddy.progress || {};
 
         var totalPoints = window.ChemBuddy.calculateTotalPoints(progress) + addPoints;
         var studiedCount = Object.keys(progress.studied || {}).length;
-        var quizzesDone = Object.keys(progress.dailyQuizzes || {}).length + Object.keys(progress.weeklyQuizzes || {}).length;
+        var quizzesDone = Object.keys(progress.quizzes || {}).length;
         var streak = window.ChemBuddy.getStudyStreak(progress);
 
+        var name = displayName();
+
         var leaderboardData = {
-            name: profile.name || 'Student',
+            name: name,
             totalPoints: totalPoints,
             totalQuizzes: quizzesDone,
             totalEquipment: studiedCount,
@@ -373,33 +353,21 @@ var Learn = (function () {
         };
 
         db.ref('leaderboard/cumulative/' + uid).set(leaderboardData);
-
-        // Also update weekly
-        var currentWeek = getCurrentWeek();
-        db.ref('leaderboard/weekly/' + currentWeek + '/' + uid).set({
-            name: profile.name || 'Student',
-            points: totalPoints,
-            quizzesCompleted: quizzesDone,
-            equipmentStudied: studiedCount,
-            streak: streak,
-            updatedAt: Date.now()
-        });
     }
 
-    function getCurrentWeek() {
-        // Determine which week of the pilot we're in based on progress
-        var progress = window.ChemBuddy.progress || {};
-        var dailyQuizzes = progress.dailyQuizzes || {};
-        // Simple heuristic: if any W2 quiz done, we're in week 2
-        for (var k in dailyQuizzes) {
-            if (k.startsWith('W2')) return 2;
-        }
-        return 1;
+    // Name shown on the leaderboard. Falls back to the email's user part
+    // (never the generic "Student") if the profile has not loaded or has no name.
+    function displayName() {
+        var profile = window.ChemBuddy.profile || {};
+        if (profile.name) return profile.name;
+        var user = window.ChemBuddy.user;
+        if (user && user.email) return user.email.split('@')[0];
+        return 'Student';
     }
 
     return {
         renderOverview: renderOverview,
-        renderDay: renderDay,
+        renderLesson: renderLesson,
         getTodayInfo: getTodayInfo,
         updateLeaderboardPoints: updateLeaderboardPoints
     };
