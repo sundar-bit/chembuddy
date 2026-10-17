@@ -2,6 +2,10 @@
 # Your personal master guide (contains passwords). Stays on your PC only.
 CHEMBUDDY-GUIDE.local.md
 
+# Everything that is not the live app: client mails, drafts, incoming
+# images, reference books, backups, test setup. Never published.
+_work/
+
 # ─── Junk / heavy files that shouldn't be in the repo ─────
 node_modules/
 test-results/
