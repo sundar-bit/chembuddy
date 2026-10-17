@@ -143,40 +143,6 @@ const questionBank = [
 
     // ---- W1D3: Reciprocating, Diaphragm, Peristaltic (5 Qs) ----
     {
-        id: "W1D3Q1",
-        week: 1,
-        day: 3,
-        category: "Pumps",
-        subcategory: "Reciprocating Pumps",
-        question: "What is the maximum discharge pressure that reciprocating pumps can achieve?",
-        options: [
-            "Reciprocating pumps can achieve a maximum pressure of up to 10 bar.",
-            "Reciprocating pumps can achieve a maximum pressure of up to 100 bar.",
-            "Reciprocating pumps can achieve a maximum pressure of over 1000 bar, making them essential for high-pressure applications.",
-            "Reciprocating pumps can achieve a maximum pressure of up to 50 bar."
-        ],
-        correct: 2,
-        explanation: "The reciprocating pump specifications state that the pressure is 'Up to 1000+ bar,' making these pumps essential for very high-pressure services.",
-        difficulty: "easy"
-    },
-    {
-        id: "W1D3Q2",
-        week: 1,
-        day: 3,
-        category: "Pumps",
-        subcategory: "Reciprocating Pumps",
-        question: "What component is required on the discharge side of a reciprocating pump to smooth out the flow?",
-        options: [
-            "A volute casing is needed on the discharge to smooth out the flow.",
-            "Pulsation dampeners are required on the discharge to absorb pressure fluctuations and smooth the flow.",
-            "A diffuser is installed on the discharge to convert velocity into smooth pressure.",
-            "An expansion joint is placed on the discharge to absorb flow pulsations."
-        ],
-        correct: 1,
-        explanation: "The app lists 'Pulsation Dampeners - smooth flow' as a key component, and the specifications note that pulsation control requires 'Dampeners required.'",
-        difficulty: "easy"
-    },
-    {
         id: "W1D3Q3",
         week: 1,
         day: 3,
@@ -487,23 +453,6 @@ const questionBank = [
         correct: 1,
         explanation: "The screw pump troubleshooting guide lists the causes of stator wear as 'abrasive fluid, running dry, overpressure.'",
         difficulty: "medium"
-    },
-    {
-        id: "W1WQ9",
-        week: 1,
-        day: null,
-        category: "Pumps",
-        subcategory: "Reciprocating Pumps",
-        question: "What level of metering accuracy can reciprocating pumps achieve?",
-        options: [
-            "Reciprocating pumps can achieve a metering accuracy of plus or minus 10 percent.",
-            "Reciprocating pumps can achieve a metering accuracy of plus or minus 5 percent.",
-            "Reciprocating pumps can achieve a metering accuracy of plus or minus 1 percent.",
-            "Reciprocating pumps can achieve a metering accuracy of plus or minus 0.1 percent."
-        ],
-        correct: 2,
-        explanation: "The reciprocating pump specifications state that the accuracy is 'Plus/minus 1% metering.'",
-        difficulty: "easy"
     },
     {
         id: "W1WQ10",
@@ -1464,6 +1413,168 @@ const questionBank = [
         correct: 1,
         explanation: "Observations: 'Listen for cavitation rumbling sounds.'",
         difficulty: "easy"
+    },
+
+    // ---- Reciprocating Pumps — practical set, approved 2026-10-17 (10 Qs) ----
+    {
+        id: "RP-Q01",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "What moves the fluid in a reciprocating pump?",
+        options: [
+            "A rotating impeller",
+            "A plunger moving back and forth in a cylinder",
+            "A pair of meshing gears",
+            "A rotating screw"
+        ],
+        correct: 1,
+        explanation: "Description: 'a plunger moving back and forth in a cylinder pushes out a fixed amount of fluid on every stroke.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RP-Q02",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "Reciprocating pumps can produce very high pressures. Roughly how high?",
+        options: [
+            "Up to about 10 bar",
+            "Up to about 50 bar",
+            "Over 1000 bar",
+            "Up to about 100 bar"
+        ],
+        correct: 2,
+        explanation: "Specifications: 'Pressure: Up to 1000+ bar.' Safety also warns that pressures can exceed 1000 bar.",
+        difficulty: "easy"
+    },
+    {
+        id: "RP-Q03",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "The flow from a reciprocating pump comes in pulses. What is installed on the discharge line to smooth it out?",
+        options: [
+            "A pulsation dampener",
+            "A volute casing",
+            "Wear rings",
+            "A coupling guard"
+        ],
+        correct: 0,
+        explanation: "Parts: 'The pulsation dampener is a gas-charged vessel on the discharge line that absorbs pressure spikes and smooths out the pulsating flow.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RP-Q04",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "If the discharge pressure goes up, what happens to the flow from a reciprocating pump?",
+        options: [
+            "The flow stops.",
+            "The flow drops sharply.",
+            "The flow doubles.",
+            "The flow stays nearly the same."
+        ],
+        correct: 3,
+        explanation: "Description: reciprocating pumps 'deliver nearly constant flow regardless of discharge pressure.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RP-Q05",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "The flow of a reciprocating pump depends on which two things?",
+        options: [
+            "Stroke length and speed",
+            "Fluid colour and pipe length",
+            "Impeller size and casing shape",
+            "Dampener size and packing material"
+        ],
+        correct: 0,
+        explanation: "Working: 'Flow is proportional to stroke and speed.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RP-Q06",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "Which part changes the motor's rotation into the back-and-forth movement of the plunger?",
+        options: [
+            "The pulsation dampener",
+            "The crankshaft",
+            "The discharge valve",
+            "The packing"
+        ],
+        correct: 1,
+        explanation: "Parts: 'The crankshaft is a rotating shaft with offset journals that converts the rotary motion of the motor into the back-and-forth motion needed by the plunger.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RP-Q07",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "When does the inlet valve of a reciprocating pump open?",
+        options: [
+            "Only when the operator opens them by hand",
+            "During the discharge stroke, to let fluid out",
+            "During the suction stroke, to let fluid into the cylinder",
+            "Only when the pump is stopped"
+        ],
+        correct: 2,
+        explanation: "Parts: 'The inlet valve, below the cylinder, is a spring-loaded check valve that opens automatically to allow fluid into the cylinder during the suction stroke and closes during discharge.' Working, Stage 1: 'The inlet valve opens and fluid is drawn into the cylinder.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RP-Q08",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "Why must there be NO isolation valve between a reciprocating pump and its discharge relief valve?",
+        options: [
+            "It would make the pump run noisily.",
+            "It would increase the power bill.",
+            "It would block the relief valve from cooling down.",
+            "If the discharge gets blocked, the pump keeps building pressure until something breaks, so the relief valve must always be able to open."
+        ],
+        correct: 3,
+        explanation: "Safety: a relief valve must be fitted 'with no isolation valve between the pump and the relief device, as positive displacement pumps will continue to build pressure until something fails if the discharge becomes blocked or restricted.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RP-Q09",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "A reciprocating pump is knocking. What are the likely causes?",
+        options: [
+            "Gas in the fluid, loose parts, or worn bearings",
+            "Too much insulation on the cylinder",
+            "A new packing set",
+            "Discharge pressure that is too low"
+        ],
+        correct: 0,
+        explanation: "Troubleshooting: knocking — 'Gas in fluid, loose parts, worn bearings.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RP-Q10",
+        equipmentId: "reciprocating-pump",
+        category: "Pumps",
+        subcategory: "Reciprocating Pumps",
+        question: "Why must double block and bleed isolation be done before opening up a reciprocating pump for maintenance?",
+        options: [
+            "To keep the pump warm for restart",
+            "Because pressure can stay trapped in the cylinders, valves and piping and release violently when parts are opened",
+            "To refill the crankcase oil",
+            "To recharge the pulsation dampeners"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Proper double block and bleed isolation procedures must be followed before performing any maintenance ... residual trapped pressure in the cylinders, valves, and piping can cause violent fluid release when components are disassembled.'",
+        difficulty: "medium"
     }
 ];
 

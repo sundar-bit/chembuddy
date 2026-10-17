@@ -8,11 +8,10 @@ var Equipment = (function () {
 
     // Equipment images: id -> array of {src, caption}
     var equipImages = {
-        // Centrifugal, multistage, vertical, and axial pumps use the sectioned
+        // Centrifugal, reciprocating, multistage, vertical, and axial pumps use the sectioned
         // educational images (equipSectionImages), not this generic gallery.
         'turbine-pump': [{ src: 'images/equipment/pumps/turbine-pump/turbine-pump-diagram.png', caption: 'Cross-section diagram' }],
         'regenerative-pump': [{ src: 'images/equipment/pumps/regenerative-pump/regenerative-pump-diagram.png', caption: 'Performance curves' }],
-        'reciprocating-pump': [{ src: 'images/equipment/pumps/reciprocating-pump/reciprocating-pump-diagram.png', caption: 'Cross-section diagram' }],
         'diaphragm-pump': [{ src: 'images/equipment/pumps/diaphragm-pump/diaphragm-pump-diagram.png', caption: 'Cross-section diagram' }],
         'gear-pump': [{ src: 'images/equipment/pumps/gear-pump/gear-pump-diagram.png', caption: 'Cross-section diagram' }],
         'screw-pump': [{ src: 'images/equipment/pumps/screw-pump/screw-pump-diagram.png', caption: 'Cross-section diagram' }],
@@ -36,6 +35,20 @@ var Equipment = (function () {
             working: {
                 src: 'images/equipment/pumps/centrifugal-pump/centrifugal-pump-flow-path.png',
                 alt: 'Centrifugal pump working principle and fluid flow path'
+            }
+        },
+        'reciprocating-pump': {
+            overview: {
+                src: 'images/equipment/pumps/reciprocating-pump/reciprocating-pump-isometric.png',
+                alt: 'Isometric view of reciprocating plunger pump with electric motor'
+            },
+            components: {
+                src: 'images/equipment/pumps/reciprocating-pump/reciprocating-pump-cutaway.png',
+                alt: 'Cutaway view of reciprocating pump showing major components'
+            },
+            working: {
+                src: 'images/equipment/pumps/reciprocating-pump/reciprocating-pump-flow-path.png',
+                alt: 'Reciprocating pump working principle: suction stroke, discharge stroke, smoothing and protection'
             }
         },
         'multistage-pump': {
