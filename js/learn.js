@@ -181,24 +181,7 @@ var Learn = (function () {
         html += '</div>';
 
         // Quiz section
-        var quizDone = quizzes[equipId];
-
-        html += '<div class="take-quiz-section">';
-        if (quizDone) {
-            html += '<h3>✅ Quiz Completed</h3>';
-            html += '<p>Score: ' + quizDone.score + '/' + quizDone.maxScore + ' (' + quizDone.points + ' points)</p>';
-        } else if (!QuizEngine.isQuizReady(equipId)) {
-            html += '<h3>📝 Quiz Coming Soon</h3>';
-            html += '<p>The quiz for this equipment is being prepared. You can continue to the next equipment.</p>';
-        } else if (studied[equipId]) {
-            html += '<h3>Ready for the Quiz!</h3>';
-            html += '<p>' + learningPath.quizLength + ' questions on ' + Utils.sanitize(lesson.name) + ' — single attempt.</p>';
-            html += '<a href="#/quiz/' + equipId + '" class="btn btn-primary btn-lg">Take the Quiz →</a>';
-        } else {
-            html += '<h3>📖 Study First</h3>';
-            html += '<p>Read this equipment for at least 3 minutes, then mark it as studied to unlock the quiz.</p>';
-        }
-        html += '</div>';
+        html += '<div class="take-quiz-section">' + quizSectionHTML(equipId, lesson.name, studied, quizzes) + '</div>';
 
         container.innerHTML = html;
 
@@ -304,6 +287,47 @@ var Learn = (function () {
         }
     }
 
+    // Body of the quiz box at the bottom of a lesson.
+    function quizSectionHTML(equipId, lessonName, studied, quizzes) {
+        var quizDone = quizzes[equipId];
+        var html = '';
+        if (quizDone) {
+            html += '<h3>✅ Quiz Completed</h3>';
+            html += '<p>Score: ' + quizDone.score + '/' + quizDone.maxScore + ' (' + quizDone.points + ' points)</p>';
+        } else if (!QuizEngine.isQuizReady(equipId)) {
+            html += '<h3>📝 Quiz Coming Soon</h3>';
+            html += '<p>The quiz for this equipment is being prepared. You can continue to the next equipment.</p>';
+        } else if (studied[equipId]) {
+            html += '<h3>Ready for the Quiz!</h3>';
+            html += '<p>' + learningPath.quizLength + ' questions on ' + Utils.sanitize(lessonName) + ' — single attempt.</p>';
+            html += '<a href="#/quiz/' + equipId + '" class="btn btn-primary btn-lg">Take the Quiz →</a>';
+        } else {
+            html += '<h3>📖 Study First</h3>';
+            html += '<p>Read this equipment for at least 3 minutes, then mark it as studied to unlock the quiz.</p>';
+        }
+        return html;
+    }
+
+    // After "Mark as Studied": swap the timer bar for a quiz button right where
+    // the student clicked, and refresh the quiz box at the bottom.
+    function showQuizUnlocked(equipId) {
+        var progress = window.ChemBuddy.progress || {};
+        var studied = progress.studied || {};
+        var quizzes = progress.quizzes || {};
+        var bar = document.getElementById('timer-' + equipId);
+        if (bar) {
+            var barHtml = '<span class="badge badge-success">Studied ✓</span>';
+            if (!quizzes[equipId] && QuizEngine.isQuizReady(equipId)) {
+                barHtml += '<a href="#/quiz/' + equipId + '" class="btn btn-primary btn-sm">Take the Quiz →</a>';
+            }
+            bar.innerHTML = barHtml;
+        }
+        var status = document.querySelector('[data-equip="' + equipId + '"] .day-equip-status');
+        if (status) status.innerHTML = '<span class="badge badge-success">Studied ✓</span>';
+        var section = document.querySelector('.take-quiz-section');
+        if (section) section.innerHTML = quizSectionHTML(equipId, equipmentDB[equipId].name, studied, quizzes);
+    }
+
     function markAsStudied(equipId) {
         var uid = window.ChemBuddy.user.uid;
         var timer = activeTimers[equipId];
@@ -326,6 +350,7 @@ var Learn = (function () {
         db.ref('progress/' + uid + '/studied/' + equipId).set(studyData).then(function () {
             Utils.toast('Equipment marked as studied! +5 points', 'success');
             updateLeaderboardPoints(uid, 5);
+            showQuizUnlocked(equipId);
         }).catch(function (err) {
             // Revert local on failure
             delete window.ChemBuddy.progress.studied[equipId];

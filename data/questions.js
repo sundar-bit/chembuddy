@@ -1575,6 +1575,330 @@ const questionBank = [
         correct: 1,
         explanation: "Safety: 'Proper double block and bleed isolation procedures must be followed before performing any maintenance ... residual trapped pressure in the cylinders, valves, and piping can cause violent fluid release when components are disassembled.'",
         difficulty: "medium"
+    },
+
+    // ---- Centrifugal Compressors — practical set, approved 2026-10-28 (10 Qs) ----
+    {
+        id: "CC-Q01",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "How does a centrifugal compressor raise the pressure of a gas?",
+        options: [
+            "A piston squeezes the gas in a cylinder",
+            "Rotating impellers throw the gas outward, and stationary passages turn that speed into pressure",
+            "Two meshing screws trap and squeeze the gas",
+            "The gas is heated until its pressure rises"
+        ],
+        correct: 1,
+        explanation: "Description: 'rotating impellers throw the gas outward at high speed, and stationary passages then turn that speed into pressure.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CC-Q02",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "Why is the casing of this compressor horizontally split?",
+        options: [
+            "To make the compressor lighter",
+            "To let the gas expand between stages",
+            "So the upper half can be lifted off to reach the rotor",
+            "To separate the suction gas from the discharge gas"
+        ],
+        correct: 2,
+        explanation: "Description: 'a bolted flange runs along its full length at the shaft centreline, so the upper half can be lifted off to reach the rotor.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CC-Q03",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "Which part converts the gas velocity into pressure after each impeller?",
+        options: [
+            "The diffuser",
+            "The inlet guide vanes",
+            "The balance piston",
+            "The coupling"
+        ],
+        correct: 0,
+        explanation: "Parts (4): 'The diffuser is the stationary passage around each impeller that slows the gas down and converts its velocity into pressure.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CC-Q04",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "What does the return channel do?",
+        options: [
+            "Returns leaking gas back to the suction nozzle",
+            "Returns lube oil to the oil tank",
+            "Carries cooling water around the casing",
+            "Guides the gas from one stage back inward to the eye of the next impeller"
+        ],
+        correct: 3,
+        explanation: "Parts (5): 'The return channel guides the gas from one stage back inward to the eye of the next impeller.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CC-Q05",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "As the gas moves through the stages, which path does it follow?",
+        options: [
+            "Straight along the shaft without changing direction",
+            "Outward through each impeller and inward through each return channel",
+            "Inward through each impeller and outward through each return channel",
+            "Around the outside of the casing from suction to discharge"
+        ],
+        correct: 1,
+        explanation: "Working: 'the gas travels outward through each impeller and inward through each return channel, and the pressure rises step by step.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CC-Q06",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "Where is the balance piston located, and what does it do?",
+        options: [
+            "After the last impeller; it counteracts the axial thrust on the rotor",
+            "At the suction nozzle; it controls the gas flow",
+            "Inside the motor; it balances the motor speed",
+            "In the lube oil line; it keeps the oil pressure steady"
+        ],
+        correct: 0,
+        explanation: "Parts (9): 'The balance piston, located after the last impeller, counteracts the axial thrust that pushes the rotor towards the suction end.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CC-Q07",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "What stops process gas leaking out where the shaft leaves the casing?",
+        options: [
+            "The journal bearings",
+            "The coupling guard",
+            "The dry gas seals at both ends of the shaft",
+            "The inlet guide vanes"
+        ],
+        correct: 2,
+        explanation: "Parts (10): 'The shaft seals, dry gas seals at both ends of the shaft, stop process gas leaking out where the shaft leaves the casing.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CC-Q08",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "In this compressor, where is the thrust bearing, and what does it do?",
+        options: [
+            "At the drive end; it supports the rotor radially",
+            "Inside the casing between the impellers; it seals the gas",
+            "On the motor; it drives the shaft",
+            "At the non-drive end; it holds the rotor in position axially"
+        ],
+        correct: 3,
+        explanation: "Parts (12): 'the thrust bearing at the non-drive end holds the rotor in position axially.' The isometric view shows the journal and thrust bearing housing at the non-drive end.",
+        difficulty: "medium"
+    },
+    {
+        id: "CC-Q09",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "Compared with the suction gas, the discharge gas is:",
+        options: [
+            "At the same temperature",
+            "Noticeably hotter, because compressing a gas heats it",
+            "Colder, because the gas expands in the diffuser",
+            "Liquid, because the pressure is high"
+        ],
+        correct: 1,
+        explanation: "Working: 'Compressing a gas also heats it, so the discharge gas is noticeably hotter than the suction gas.' Safety also warns that the discharge casing and interstage piping operate at high temperatures.",
+        difficulty: "easy"
+    },
+    {
+        id: "CC-Q10",
+        equipmentId: "centrifugal-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Centrifugal Compressors",
+        question: "The compressor starts surging (low flow, high discharge pressure). What is the first action listed?",
+        options: [
+            "Open the recycle and check the anti-surge system",
+            "Close the suction valve fully",
+            "Increase the discharge pressure",
+            "Switch off the lube oil pumps"
+        ],
+        correct: 0,
+        explanation: "Troubleshooting — Surge: action 'Open recycle, check anti-surge system, clean internals'. Safety: 'The centrifugal compressor must never be allowed to operate in surge.'",
+        difficulty: "medium"
+    },
+
+    // ---- Reciprocating Compressors — practical set, approved 2026-10-28 (10 Qs) ----
+    {
+        id: "RC-Q01",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "How does a reciprocating compressor raise the pressure of a gas?",
+        options: [
+            "Rotating impellers throw the gas outward at high speed",
+            "Two meshing screws trap and squeeze the gas",
+            "A piston moving back and forth in a cylinder traps a fixed volume of gas and squeezes it",
+            "The gas is heated until its pressure rises"
+        ],
+        correct: 2,
+        explanation: "Description: 'a piston moving back and forth in a cylinder traps a fixed volume of gas and squeezes it to a higher pressure.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RC-Q02",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "On this compressor, where are the suction valves and the discharge valves located?",
+        options: [
+            "Suction valves on top of each cylinder, discharge valves at the bottom",
+            "Discharge valves on top of each cylinder, suction valves at the bottom",
+            "Both are on the crankcase",
+            "Both are inside the distance piece"
+        ],
+        correct: 0,
+        explanation: "Parts: 'The suction valves, on top of the cylinder, let low-pressure gas in, and the discharge valves, at the bottom, let the compressed gas out.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RC-Q03",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "What is the job of the crosshead?",
+        options: [
+            "It seals the gas inside the cylinder",
+            "It takes the side push from the connecting rod so the piston rod moves in a straight line",
+            "It smooths the pulsing gas flow",
+            "It connects the motor shaft to the crankshaft"
+        ],
+        correct: 1,
+        explanation: "Parts: 'The crosshead slides back and forth in its guide... It takes the side push from the connecting rod, so the piston rod moves in a perfectly straight line.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RC-Q04",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "Why is there a distance piece between the crankcase and the cylinder?",
+        options: [
+            "To cool the gas between strokes",
+            "To store extra lubricating oil",
+            "To hold the suction valves",
+            "To keep crankcase oil away from the cylinder and leaked process gas away from the crankcase"
+        ],
+        correct: 3,
+        explanation: "Parts: 'It keeps crankcase oil away from the cylinder and leaked process gas away from the crankcase.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RC-Q05",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "What does the rod packing do?",
+        options: [
+            "It stops the compressed gas leaking out along the piston rod",
+            "It holds the piston rings in place",
+            "It lubricates the crankshaft bearings",
+            "It opens the suction valve"
+        ],
+        correct: 0,
+        explanation: "Parts: 'The rod packing is a set of sealing rings around the piston rod where it enters the cylinder. It stops the compressed gas leaking out along the rod.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RC-Q06",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "What does 'double-acting' mean for this compressor cylinder?",
+        options: [
+            "The compressor has two motors",
+            "Each valve opens twice per stroke",
+            "Gas is compressed on both sides of the piston, so every stroke delivers gas",
+            "The gas passes through the cylinder twice"
+        ],
+        correct: 2,
+        explanation: "Working: 'Because gas is compressed on both sides of the piston, the cylinder is double-acting and every stroke delivers gas.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RC-Q07",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "What makes the suction and discharge valves open and close?",
+        options: [
+            "A cam on the crankshaft",
+            "Pressure difference across the valve",
+            "An electric solenoid",
+            "The operator, using a hand wheel"
+        ],
+        correct: 1,
+        explanation: "Working: 'The valves are automatic: they open and close by pressure difference, not by a cam.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RC-Q08",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "Why are pulsation dampeners fitted on the suction and discharge sides?",
+        options: [
+            "To filter dust out of the gas",
+            "To cool the compressed gas",
+            "To remove liquid from the gas",
+            "Because gas from a piston comes out in pulses, and the dampeners smooth the flow"
+        ],
+        correct: 3,
+        explanation: "Working: 'Gas from a piston comes out in pulses, so the pulsation dampeners on the suction and discharge sides smooth the flow.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RC-Q09",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "The compressor starts knocking. Which of these is a likely cause?",
+        options: [
+            "Liquid in the cylinder",
+            "Suction gas that is too cold",
+            "The coupling guard is painted yellow",
+            "The discharge dampener is at skid level"
+        ],
+        correct: 0,
+        explanation: "Troubleshooting: Knocking — causes: 'Liquid in cylinder, loose parts, worn bearings'.",
+        difficulty: "medium"
+    },
+    {
+        id: "RC-Q10",
+        equipmentId: "reciprocating-compressor",
+        category: "Compressors & Blowers",
+        subcategory: "Reciprocating Compressors",
+        question: "Before removing a valve cap or cylinder cover, what must be done first?",
+        options: [
+            "Run the compressor at low speed",
+            "Loosen the bolts slowly while the compressor is running",
+            "Fully depressurise the cylinder and confirm zero pressure with a calibrated gauge",
+            "Open the discharge valve only"
+        ],
+        correct: 2,
+        explanation: "Safety: covers and valve caps 'must never be removed or loosened without first fully depressurizing the cylinder and confirming zero pressure with a calibrated gauge'.",
+        difficulty: "easy"
     }
 ];
 
