@@ -46,7 +46,6 @@ const learningPath = {
             description: 'Transferring heat between process streams, water and air.',
             equipment: [
                 { id: 'shell-tube', name: 'Shell and Tube Heat Exchangers' },
-                { id: 'plate-hx', name: 'Plate Heat Exchangers' },
                 { id: 'air-cooled', name: 'Air Cooled Heat Exchangers' }
             ]
         },
