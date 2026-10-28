@@ -79,6 +79,20 @@ var Equipment = (function () {
                 alt: 'Reciprocating compressor double-acting compression cycle: suction and discharge at both cylinder ends'
             }
         },
+        'shell-tube': {
+            overview: {
+                src: 'images/equipment/heat-exchangers/shell-tube/shell-tube-isometric.png',
+                alt: 'Isometric view of horizontal shell and tube heat exchanger with two tube passes'
+            },
+            components: {
+                src: 'images/equipment/heat-exchangers/shell-tube/shell-tube-cutaway.png',
+                alt: 'Cutaway view of shell and tube heat exchanger showing major components'
+            },
+            working: {
+                src: 'images/equipment/heat-exchangers/shell-tube/shell-tube-flow-path.png',
+                alt: 'Shell and tube heat exchanger flow path: cooling water through two tube passes, hot fluid zig-zagging across the tubes'
+            }
+        },
         'multistage-pump': {
             overview: {
                 src: 'images/equipment-level2/pumps/multistage-pump/multistage-pump-isometric.png',

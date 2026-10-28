@@ -563,40 +563,6 @@ const questionBank = [
 
     // ---- W2D1: Shell & Tube, U-Tube, Floating Head (5 Qs) ----
     {
-        id: "W2D1Q1",
-        week: 2,
-        day: 1,
-        category: "Heat Exchangers",
-        subcategory: "Shell & Tube HX",
-        question: "What is the role of baffles in a shell and tube heat exchanger?",
-        options: [
-            "Baffles are used to filter out debris and particles from the shell-side fluid.",
-            "Baffles direct the shell-side flow perpendicular to the tubes, which improves heat transfer and also provides physical support to the tubes.",
-            "Baffles are used to reduce the pressure inside the shell to safe operating levels.",
-            "Baffles are coatings applied to the tubes to prevent corrosion on the shell side."
-        ],
-        correct: 1,
-        explanation: "The operating principles state that 'baffles direct shell-side flow perpendicular to tubes for improved heat transfer.' The components description adds that they 'direct shell flow, support tubes.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W2D1Q2",
-        week: 2,
-        day: 1,
-        category: "Heat Exchangers",
-        subcategory: "Shell & Tube HX",
-        question: "What is the maximum operating pressure for a shell and tube heat exchanger?",
-        options: [
-            "A shell and tube heat exchanger can handle pressures up to 25 bar.",
-            "A shell and tube heat exchanger can handle pressures up to 100 bar.",
-            "A shell and tube heat exchanger can handle pressures up to 300 bar.",
-            "A shell and tube heat exchanger can handle pressures up to 10 bar."
-        ],
-        correct: 2,
-        explanation: "The shell and tube heat exchanger specifications state that the pressure is 'Up to 300 bar.'",
-        difficulty: "easy"
-    },
-    {
         id: "W2D1Q3",
         week: 2,
         day: 1,
@@ -998,57 +964,6 @@ const questionBank = [
 
     // ---- W2 Weekly Pool: Cross-cutting HX Topics (15 Qs) ----
     {
-        id: "W2WQ1",
-        week: 2,
-        day: null,
-        category: "Heat Exchangers",
-        subcategory: "Shell & Tube HX",
-        question: "What are the TEMA designation types listed for shell and tube heat exchangers in the app?",
-        options: [
-            "The TEMA types are ABC, DEF, and GHI.",
-            "The TEMA types are AES, BEM, AEU, and CFU.",
-            "The TEMA types are Type 1, Type 2, and Type 3.",
-            "The TEMA types are Class A, Class B, and Class C."
-        ],
-        correct: 1,
-        explanation: "The shell and tube heat exchanger specifications list the TEMA types as 'AES, BEM, AEU, CFU.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W2WQ2",
-        week: 2,
-        day: null,
-        category: "Heat Exchangers",
-        subcategory: "Shell & Tube HX",
-        question: "What are the main causes of tube leaks in a shell and tube heat exchanger?",
-        options: [
-            "Tube leaks are caused only by operating at a low flow rate.",
-            "Tube leaks are caused by corrosion, vibration-induced fatigue, erosion from the flowing fluid, or thermal stress from temperature differences.",
-            "Tube leaks are caused by operating the exchanger at very high efficiency.",
-            "Tube leaks are caused by using oversized baffles in the shell."
-        ],
-        correct: 1,
-        explanation: "The troubleshooting guide lists the causes of tube leaks as 'corrosion, vibration, erosion, thermal stress.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W2WQ3",
-        week: 2,
-        day: null,
-        category: "Heat Exchangers",
-        subcategory: "Shell & Tube HX",
-        question: "What is the maximum heat transfer area available in shell and tube heat exchangers?",
-        options: [
-            "Shell and tube heat exchangers are available with heat transfer areas up to 100 square meters.",
-            "Shell and tube heat exchangers are available with heat transfer areas up to 1000 square meters.",
-            "Shell and tube heat exchangers are available with heat transfer areas ranging from 1 to over 10,000 square meters.",
-            "Shell and tube heat exchangers are available with heat transfer areas up to 500 square meters."
-        ],
-        correct: 2,
-        explanation: "The shell and tube heat exchanger specifications state that the area is '1-10,000+ m2,' making them the most versatile and widely used type.",
-        difficulty: "easy"
-    },
-    {
         id: "W2WQ4",
         week: 2,
         day: null,
@@ -1233,23 +1148,6 @@ const questionBank = [
         ],
         correct: 1,
         explanation: "The app describes graphite heat exchangers as having 'corrosion resistance for handling acids, chlorides, and other aggressive chemicals.' The specifications list the applications as 'Strong acids, chlorides.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W2WQ15",
-        week: 2,
-        day: null,
-        category: "Heat Exchangers",
-        subcategory: "Shell & Tube HX",
-        question: "What is the maximum operating temperature for shell and tube heat exchangers?",
-        options: [
-            "Shell and tube heat exchangers can operate at temperatures up to 200 degrees Celsius.",
-            "Shell and tube heat exchangers can operate at temperatures up to 300 degrees Celsius.",
-            "Shell and tube heat exchangers can operate at temperatures up to 500 degrees Celsius.",
-            "Shell and tube heat exchangers can operate at temperatures up to 180 degrees Celsius."
-        ],
-        correct: 2,
-        explanation: "The shell and tube heat exchanger specifications state that the temperature is 'Up to 500C.' This is much higher than plate exchangers at 180C or graphite exchangers at 200C.",
         difficulty: "easy"
     },
 
@@ -1899,6 +1797,167 @@ const questionBank = [
         correct: 2,
         explanation: "Safety: covers and valve caps 'must never be removed or loosened without first fully depressurizing the cylinder and confirming zero pressure with a calibrated gauge'.",
         difficulty: "easy"
+    },
+    // ---- Shell and Tube Heat Exchangers — practical set, approved 2026-10-28 (10 Qs) ----
+    {
+        id: "ST-Q01",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "In a shell and tube heat exchanger, how do the two fluids exchange heat?",
+        options: [
+            "They are mixed together inside the shell",
+            "One flows inside the tubes and the other around the tubes; heat passes through the tube walls",
+            "Both flow inside the same tubes, one after the other",
+            "They are sprayed onto each other in the channel"
+        ],
+        correct: 1,
+        explanation: "Description: 'one fluid flows inside a bundle of tubes, and the other flows around the tubes inside a cylindrical shell.' Parts (7): 'heat passes through the tube walls.'",
+        difficulty: "easy"
+    },
+    {
+        id: "ST-Q02",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "Why is the channel cover bolted rather than welded?",
+        options: [
+            "So it can be removed to inspect and clean the tubes",
+            "So the cooling water can leak out safely",
+            "To let the shell expand when it gets hot",
+            "To make the exchanger lighter"
+        ],
+        correct: 0,
+        explanation: "Parts (1): 'The channel cover is bolted onto the front channel and can be removed to inspect and clean the tubes.'",
+        difficulty: "easy"
+    },
+    {
+        id: "ST-Q03",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "What does the pass partition plate in the front channel do?",
+        options: [
+            "It stops the hot fluid entering the channel",
+            "It holds the tube ends in place",
+            "It divides the channel so the fluid goes out through the lower tubes and returns through the upper tubes",
+            "It protects the tubes from the incoming jet"
+        ],
+        correct: 2,
+        explanation: "Parts (3): 'The pass partition plate divides the channel into a lower half and an upper half, so the fluid goes out through the lower tubes and returns through the upper tubes.'",
+        difficulty: "medium"
+    },
+    {
+        id: "ST-Q04",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "Where does the cooling water turn round to start its second pass?",
+        options: [
+            "In the front channel",
+            "At the shell-side outlet nozzle",
+            "Between two baffles",
+            "Inside the rear head (bonnet)"
+        ],
+        correct: 3,
+        explanation: "Working, Step 2: 'it turns round inside the rear bonnet and flows back through the upper tubes (the second pass).'",
+        difficulty: "easy"
+    },
+    {
+        id: "ST-Q05",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "Why are the baffles cut alternately at the top and at the bottom?",
+        options: [
+            "To make the shell-side fluid zig-zag across the tubes",
+            "To let air escape through the vent",
+            "To separate the cooling water from the hot fluid",
+            "To reduce the weight of the tube bundle"
+        ],
+        correct: 0,
+        explanation: "Working, Step 5: 'the baffles make the hot fluid go under one baffle and over the next, crossing the tubes again and again.' Parts (8): baffles 'make the shell-side fluid cross the tubes.'",
+        difficulty: "medium"
+    },
+    {
+        id: "ST-Q06",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "Besides directing the shell-side flow, what else do the baffles do?",
+        options: [
+            "Seal the channel cover",
+            "Support the tubes",
+            "Measure the flow",
+            "Heat the cooling water"
+        ],
+        correct: 1,
+        explanation: "Parts (8): the baffles 'make the shell-side fluid cross the tubes, and they also support the tubes.'",
+        difficulty: "easy"
+    },
+    {
+        id: "ST-Q07",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "What is the impingement plate, and where is it?",
+        options: [
+            "A plate in the channel that divides the passes",
+            "The thick plate that holds the tube ends",
+            "A plate directly below the shell-side inlet that protects the tubes from the incoming jet",
+            "A support plate under the saddles"
+        ],
+        correct: 2,
+        explanation: "Parts (12): 'the impingement plate directly below it [the shell-side inlet] protects the tubes from the incoming jet.'",
+        difficulty: "medium"
+    },
+    {
+        id: "ST-Q08",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "The cooling water and the hot fluid travel in opposite overall directions. What is this called?",
+        options: [
+            "Parallel flow",
+            "Cross flow",
+            "Recycle flow",
+            "Counter-current flow"
+        ],
+        correct: 3,
+        explanation: "Working: 'The two fluids travel in opposite overall directions, called counter-current flow, which transfers heat more effectively.'",
+        difficulty: "easy"
+    },
+    {
+        id: "ST-Q09",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "What are the vent and the drain on the shell used for?",
+        options: [
+            "The vent releases trapped air or gas; the drain empties the shell",
+            "The vent lets cooling water in; the drain lets hot fluid out",
+            "Both measure the shell pressure",
+            "The vent cools the shell; the drain cleans the tubes"
+        ],
+        correct: 0,
+        explanation: "Description: 'A vent on top of the shell releases trapped air or gas, and a drain at the bottom empties the shell.' Field observations also say 'Verify vent and drain operation.'",
+        difficulty: "easy"
+    },
+    {
+        id: "ST-Q10",
+        equipmentId: "shell-tube",
+        category: "Heat Exchangers",
+        subcategory: "Shell & Tube HX",
+        question: "The exchanger is not cooling as well as before. Which is a likely cause listed in troubleshooting?",
+        options: [
+            "The channel cover is painted",
+            "The saddle supports are too high",
+            "Fouling, air pockets, low flow or bypassing",
+            "The cooling water is too cold"
+        ],
+        correct: 2,
+        explanation: "Troubleshooting — Low heat transfer: causes 'Fouling, air pockets, low flow, bypassing'; action 'Clean tubes, vent air, check flows, seal bypasses'.",
+        difficulty: "medium"
     }
 ];
 
