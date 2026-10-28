@@ -8,6 +8,9 @@
     var allUsers = {};
     var allProgress = {};
     var allAnalytics = {};
+    var allowedEmails = {};
+    var inviteOnly = false;
+    var accessError = '';
     var currentTab = 'overview';
 
     // Auth guard
@@ -49,6 +52,17 @@
             allAnalytics = snap.val() || {};
             renderTab();
         });
+
+        db.ref('settings/inviteOnly').on('value', function (snap) {
+            inviteOnly = snap.val() === true;
+            renderTab();
+        }, function (err) { accessError = err.message; renderTab(); });
+
+        db.ref('allowedEmails').on('value', function (snap) {
+            allowedEmails = snap.val() || {};
+            accessError = '';
+            renderTab();
+        }, function (err) { accessError = err.message; renderTab(); });
     }
 
     function renderTab() {
@@ -57,6 +71,7 @@
             case 'overview': renderOverview(container); break;
             case 'students': renderStudents(container); break;
             case 'quizzes': renderQuizAnalytics(container); break;
+            case 'access': renderAccess(container); break;
             case 'export': renderExport(container); break;
         }
     }
@@ -87,6 +102,19 @@
         }
 
         var html = '';
+
+        var week = learningPath.currentWeek();
+        if (week) {
+            var thisWeek = week.week > 0 ? learningPath.allEquipment().filter(function (eq) {
+                var d = learningPath.releaseDate(eq.id);
+                return d && d.getTime() === learningPath.releaseWeeks()[week.week - 1].getTime();
+            }).map(function (eq) { return eq.name; }).join(', ') : '';
+            html += '<div class="card mb-3"><div class="card-body">';
+            html += week.week === 0
+                ? '<strong>Weekly release starts ' + Utils.formatDate(learningPath.releaseWeeks()[0]) + '</strong>'
+                : '<strong>Week ' + week.week + ' of ' + week.total + '</strong> — open this week: ' + Utils.sanitize(thisWeek);
+            html += '</div></div>';
+        }
 
         // Summary cards
         html += '<div class="admin-summary">';
@@ -318,70 +346,308 @@
         container.innerHTML = html;
     }
 
+    // === Student List Tab (invite-only sign-in) ===
+    function renderAccess(container) {
+        // Keep a half-typed list when the tab re-renders on live data
+        var pending = document.getElementById('invite-input');
+        var pendingText = pending ? pending.value : '';
+
+        var registered = {};
+        for (var uid in allUsers) {
+            if (allUsers[uid].email) registered[emailKey(allUsers[uid].email)] = allUsers[uid];
+        }
+        var keys = Object.keys(allowedEmails).sort();
+
+        var html = '<h1 class="mb-1">Student List</h1>';
+        html += '<p class="text-muted mb-3">Only emails on this list can register and use ChemBuddy once invite-only is switched on. Admins are always allowed.</p>';
+
+        if (accessError) {
+            html += '<div class="card mb-3" style="border-left:4px solid var(--danger)"><div class="card-body">';
+            html += '<strong>The database rules need updating before this list can be used.</strong><br>';
+            html += '<span class="text-muted">Publish the new rules from firebase/database.rules.json in the Firebase console, then reload this page. (' + Utils.sanitize(accessError) + ')</span>';
+            html += '</div></div>';
+        }
+
+        html += '<div class="card mb-3"><div class="card-body">';
+        html += '<h3>Invite-only sign-in: ' + (inviteOnly ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-warning">OFF — anyone can register</span>') + '</h3>';
+        if (inviteOnly) {
+            html += '<button class="btn btn-outline mt-2" id="invite-toggle">Switch OFF</button>';
+        } else {
+            html += '<p class="text-muted mt-1">Add the students\' emails below first, then switch it on.</p>';
+            html += '<button class="btn btn-primary mt-2" id="invite-toggle"' + (keys.length ? '' : ' disabled') + '>Switch ON</button>';
+        }
+        html += '</div></div>';
+
+        html += '<div class="card mb-3"><div class="card-body">';
+        html += '<h3>Add emails</h3>';
+        html += '<p class="text-muted">Paste one or many — separated by new lines, commas or spaces.</p>';
+        html += '<textarea id="invite-input" class="form-input" rows="5" style="width:100%;font-family:inherit" placeholder="student1@somaiya.edu&#10;student2@somaiya.edu">' + Utils.sanitize(pendingText) + '</textarea>';
+        html += '<button class="btn btn-primary mt-2" id="invite-add">Add to List</button>';
+        html += '</div></div>';
+
+        // Registered students who are not on the list would be locked out
+        var unlisted = [];
+        for (var k in registered) {
+            if (!allowedEmails[k] && !ADMIN_EMAILS.includes(registered[k].email)) unlisted.push(registered[k]);
+        }
+        if (unlisted.length) {
+            html += '<div class="card mb-3" style="border-left:4px solid var(--warning)"><div class="card-body">';
+            html += '<strong>' + unlisted.length + ' registered account' + (unlisted.length === 1 ? ' is' : 's are') + ' not on the list</strong> — ' + (inviteOnly ? 'they cannot use the app.' : 'they will be locked out when invite-only is switched on.') + '<br>';
+            html += '<span class="text-muted">' + unlisted.map(function (u) { return Utils.sanitize((u.name || '-') + ' <' + u.email + '>'); }).join(', ') + '</span>';
+            html += '</div></div>';
+        }
+
+        html += '<div class="admin-table-container">';
+        html += '<div class="admin-table-header"><h2>On the list</h2><span class="badge badge-primary">' + keys.length + ' email' + (keys.length === 1 ? '' : 's') + '</span></div>';
+        html += '<div class="admin-table-scroll"><table class="admin-table"><thead><tr><th>Email</th><th>Status</th><th></th></tr></thead><tbody>';
+        if (!keys.length) html += '<tr><td colspan="3" class="text-muted">No emails yet.</td></tr>';
+        keys.forEach(function (k) {
+            var entry = allowedEmails[k] || {};
+            var email = entry.email || k.replace(/,/g, '.');
+            var user = registered[k];
+            html += '<tr><td>' + Utils.sanitize(email) + '</td>';
+            html += '<td>' + (user ? '<span class="badge badge-success">Registered — ' + Utils.sanitize(user.name || '') + '</span>' : '<span class="text-muted">Not registered yet</span>') + '</td>';
+            html += '<td><button class="btn btn-outline btn-sm invite-remove" data-key="' + Utils.sanitize(k) + '">Remove</button></td></tr>';
+        });
+        html += '</tbody></table></div></div>';
+
+        container.innerHTML = html;
+
+        document.getElementById('invite-toggle').addEventListener('click', function () {
+            var turnOn = !inviteOnly;
+            if (turnOn && unlisted.length && !confirm(unlisted.length + ' registered account(s) are not on the list and will be locked out. Switch on anyway?')) return;
+            db.ref('settings/inviteOnly').set(turnOn)
+                .then(function () { Utils.toast('Invite-only switched ' + (turnOn ? 'ON' : 'OFF'), 'success'); })
+                .catch(function (err) { Utils.toast('Could not save: ' + err.message, 'error'); });
+        });
+
+        document.getElementById('invite-add').addEventListener('click', function () {
+            var input = document.getElementById('invite-input');
+            var parts = input.value.split(/[\s,;]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+            var updates = {}, bad = [];
+            parts.forEach(function (email) {
+                if (!/^[^\s@#$\[\]\/]+@[^\s@#$\[\]\/]+\.[^\s@#$\[\]\/]+$/.test(email)) { bad.push(email); return; }
+                updates[emailKey(email)] = { email: email.toLowerCase(), addedAt: Date.now() };
+            });
+            var count = Object.keys(updates).length;
+            if (!count) { Utils.toast(bad.length ? 'Not valid emails: ' + bad.join(', ') : 'Paste at least one email', 'warning'); return; }
+            db.ref('allowedEmails').update(updates).then(function () {
+                input.value = '';
+                Utils.toast('Added ' + count + ' email' + (count === 1 ? '' : 's') + (bad.length ? ' — skipped: ' + bad.join(', ') : ''), bad.length ? 'warning' : 'success');
+            }).catch(function (err) { Utils.toast('Could not save: ' + err.message, 'error'); });
+        });
+
+        container.querySelectorAll('.invite-remove').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var key = this.dataset.key;
+                if (!confirm('Remove ' + key.replace(/,/g, '.') + ' from the list?')) return;
+                db.ref('allowedEmails/' + key).remove();
+            });
+        });
+    }
+
     // === Export Tab ===
+    var XLSX_URL = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    var JSPDF_URL = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    var AUTOTABLE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js';
+    var REPORT_FOOTER = '© ChemBuddy by Suraja Technologies and Jignyashika Consulting';
+
     function renderExport(container) {
+        var count = studentRows().length;
         var html = '<div class="export-section">';
-        html += '<h2>Export Student Data</h2>';
-        html += '<p>Download all student data, quiz scores, and progress as a CSV file.</p>';
-        html += '<button class="btn btn-primary btn-lg" id="export-csv-btn">📥 Download CSV</button>';
-        html += '<p class="text-muted mt-2">' + Object.keys(allUsers).length + ' students • All quiz scores included</p>';
+        html += '<h2>Download Reports</h2>';
+        html += '<p>Every quiz score is the student\'s first attempt — practice attempts never change it.</p>';
+        html += '<button class="btn btn-primary btn-lg" id="export-xlsx-btn">📊 Excel Report</button> ';
+        html += '<button class="btn btn-primary btn-lg" id="export-pdf-btn">📄 PDF Report</button>';
+        html += '<p class="text-muted mt-2">' + count + ' students • Excel: summary, quiz scores, practice and quiz analytics sheets • PDF: class summary for sharing</p>';
         html += '</div>';
 
         container.innerHTML = html;
 
-        document.getElementById('export-csv-btn').addEventListener('click', exportCSV);
+        document.getElementById('export-xlsx-btn').addEventListener('click', function () { runExport(this, exportExcel); });
+        document.getElementById('export-pdf-btn').addEventListener('click', function () { runExport(this, exportPDF); });
     }
 
-    function exportCSV() {
-        var headers = ['Name', 'Email', 'College', 'Branch', 'Equipment Studied', 'Total Points'];
-
-        // Add one quiz column per Level 1 equipment
-        var quizCols = [];
-        learningPath.allEquipment().forEach(function (eq) {
-            quizCols.push(eq.id);
-            headers.push('"' + eq.name.replace(/"/g, '""') + ' Quiz"');
+    function runExport(btn, fn) {
+        var label = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Preparing…';
+        fn().catch(function (err) {
+            Utils.toast('Could not create the report: ' + err.message, 'error');
+        }).then(function () {
+            btn.disabled = false;
+            btn.textContent = label;
         });
+    }
 
-        headers.push('Last Active');
-
-        var rows = [headers.join(',')];
-
+    // One row per student (admins left out), ranked by points.
+    function studentRows() {
+        var rows = [];
         for (var uid in allUsers) {
             var u = allUsers[uid];
+            if (ADMIN_EMAILS.includes(u.email)) continue;
             var p = allProgress[uid] || {};
             var quizzes = p.quizzes || {};
-            var points = calcPoints(p);
+            var scores = Object.keys(quizzes).map(function (k) { return quizzes[k].score || 0; });
+            rows.push({
+                uid: uid,
+                name: u.name || '-',
+                email: u.email || '-',
+                college: u.college || '',
+                branch: u.branch || '',
+                studied: Object.keys(p.studied || {}).length,
+                quizzesTaken: scores.length,
+                avg: scores.length ? Math.round(scores.reduce(function (a, b) { return a + b; }, 0) / scores.length * 10) / 10 : null,
+                points: calcPoints(p),
+                certificate: p.certificate ? Utils.formatDate(p.certificate.issuedAt) : '',
+                lastActive: u.lastActiveAt ? Utils.formatDate(u.lastActiveAt) : '-',
+                quizzes: quizzes,
+                practice: p.practice || {}
+            });
+        }
+        rows.sort(function (a, b) { return b.points - a.points || a.name.localeCompare(b.name); });
+        rows.forEach(function (r, i) { r.rank = i + 1; });
+        return rows;
+    }
 
-            var row = [
-                '"' + (u.name || '').replace(/"/g, '""') + '"',
-                '"' + (u.email || '') + '"',
-                '"' + (u.college || '').replace(/"/g, '""') + '"',
-                '"' + (u.branch || '') + '"',
-                Object.keys(p.studied || {}).length,
-                points
-            ];
+    function quizStats() {
+        var rows = studentRows();
+        return learningPath.allEquipment().map(function (eq) {
+            var s = rows.filter(function (r) { return r.quizzes[eq.id]; }).map(function (r) { return r.quizzes[eq.id].score; });
+            return {
+                module: 'Module ' + eq.moduleId + ': ' + eq.moduleTitle,
+                name: eq.name,
+                attempts: s.length,
+                avg: s.length ? Math.round(s.reduce(function (a, b) { return a + b; }, 0) / s.length * 10) / 10 : null,
+                max: s.length ? Math.max.apply(null, s) : null,
+                min: s.length ? Math.min.apply(null, s) : null
+            };
+        });
+    }
 
-            quizCols.forEach(function (qId) {
-                var quiz = quizzes[qId];
-                row.push(quiz ? quiz.score + '/' + quiz.maxScore : '-');
+    function exportExcel() {
+        return Utils.loadScript(XLSX_URL).then(function () {
+            var rows = studentRows();
+            var equip = learningPath.allEquipment();
+            var wb = XLSX.utils.book_new();
+
+            var summary = [['Rank', 'Name', 'Email', 'College', 'Branch', 'Equipment Studied', 'Quizzes Taken', 'Average Score (/' + learningPath.quizLength + ')', 'Total Points', 'Certificate Issued', 'Last Active']];
+            rows.forEach(function (r) {
+                summary.push([r.rank, r.name, r.email, r.college, r.branch, r.studied, r.quizzesTaken, r.avg === null ? '' : r.avg, r.points, r.certificate, r.lastActive]);
+            });
+            addSheet(wb, 'Summary', summary);
+
+            var scores = [['Rank', 'Name', 'Email'].concat(equip.map(function (eq) { return eq.name; }))];
+            rows.forEach(function (r) {
+                scores.push([r.rank, r.name, r.email].concat(equip.map(function (eq) {
+                    var q = r.quizzes[eq.id];
+                    return q ? q.score : '';
+                })));
+            });
+            addSheet(wb, 'Quiz Scores', scores);
+
+            var practice = [['Name', 'Email', 'Equipment', 'Official Score', 'Practice Attempts', 'Best Practice Score', 'Last Practice']];
+            rows.forEach(function (r) {
+                equip.forEach(function (eq) {
+                    var pr = r.practice[eq.id];
+                    if (!pr) return;
+                    var q = r.quizzes[eq.id];
+                    practice.push([r.name, r.email, eq.name, q ? q.score : '', pr.attempts || 0, pr.best || 0, Utils.formatDate(pr.lastAt)]);
+                });
+            });
+            addSheet(wb, 'Practice', practice);
+
+            var stats = [['Module', 'Equipment', 'Students Attempted', 'Average', 'Highest', 'Lowest']];
+            quizStats().forEach(function (s) {
+                stats.push([s.module, s.name, s.attempts, s.avg === null ? '' : s.avg, s.max === null ? '' : s.max, s.min === null ? '' : s.min]);
+            });
+            addSheet(wb, 'Quiz Analytics', stats);
+
+            XLSX.writeFile(wb, 'chembuddy-report-' + localDateStr(new Date()) + '.xlsx');
+            Utils.toast('Excel report downloaded', 'success');
+        });
+    }
+
+    function addSheet(wb, name, aoa) {
+        var ws = XLSX.utils.aoa_to_sheet(aoa);
+        ws['!cols'] = aoa[0].map(function (h, c) {
+            var w = String(h).length;
+            aoa.forEach(function (row) { if (row[c] !== undefined) w = Math.max(w, String(row[c]).length); });
+            return { wch: Math.min(Math.max(w + 2, 8), 45) };
+        });
+        XLSX.utils.book_append_sheet(wb, ws, name);
+    }
+
+    function exportPDF() {
+        return Utils.loadScript(JSPDF_URL).then(function () {
+            return Utils.loadScript(AUTOTABLE_URL);
+        }).then(function () {
+            var rows = studentRows();
+            var doc = new window.jspdf.jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+            var navy = [11, 42, 91];
+
+            doc.setFillColor(navy[0], navy[1], navy[2]);
+            doc.rect(0, 0, 297, 24, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(18);
+            doc.text('ChemBuddy - Student Progress Report', 14, 15);
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            doc.text('Generated ' + Utils.formatDate(Date.now()), 283, 15, { align: 'right' });
+
+            doc.setTextColor(40, 40, 40);
+            doc.setFontSize(11);
+            var week = learningPath.currentWeek();
+            var line = learningPath.title.replace('—', '-') + ' | ' + learningPath.allEquipment().length + ' equipment in ' + learningPath.modules.length + ' modules';
+            if (week && week.week > 0) line += ' | Week ' + week.week + ' of ' + week.total;
+            doc.text(line, 14, 33);
+
+            var taken = rows.reduce(function (n, r) { return n + r.quizzesTaken; }, 0);
+            var withAvg = rows.filter(function (r) { return r.avg !== null; });
+            var classAvg = withAvg.length ? (withAvg.reduce(function (n, r) { return n + r.avg; }, 0) / withAvg.length).toFixed(1) : '-';
+            doc.text('Students: ' + rows.length + '    Quizzes taken: ' + taken + '    Class average: ' + classAvg + '/' + learningPath.quizLength + '    Certificates issued: ' + rows.filter(function (r) { return r.certificate; }).length, 14, 40);
+
+            doc.autoTable({
+                startY: 46,
+                head: [['Rank', 'Name', 'Email', 'Studied', 'Quizzes', 'Avg Score', 'Points', 'Certificate', 'Last Active']],
+                body: rows.map(function (r) {
+                    return [r.rank, r.name, r.email, r.studied, r.quizzesTaken, r.avg === null ? '-' : r.avg + '/' + learningPath.quizLength, r.points, r.certificate || '-', r.lastActive];
+                }),
+                headStyles: { fillColor: navy },
+                styles: { fontSize: 9 },
+                margin: { left: 14, right: 14 }
             });
 
-            row.push(u.lastActiveAt ? Utils.formatDate(u.lastActiveAt) : '-');
-            rows.push(row.join(','));
-        }
+            doc.addPage();
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.text('Quiz Results by Equipment (first attempts)', 14, 18);
+            doc.autoTable({
+                startY: 24,
+                head: [['Module', 'Equipment', 'Students Attempted', 'Average', 'Highest', 'Lowest']],
+                body: quizStats().map(function (s) {
+                    var f = function (v) { return v === null ? '-' : v + '/' + learningPath.quizLength; };
+                    return [s.module, s.name, s.attempts, f(s.avg), f(s.max), f(s.min)];
+                }),
+                headStyles: { fillColor: navy },
+                styles: { fontSize: 9 },
+                margin: { left: 14, right: 14 }
+            });
 
-        var csv = rows.join('\n');
-        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'chembuddy-report-' + Utils.todayStr() + '.csv';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+            var pages = doc.getNumberOfPages();
+            for (var i = 1; i <= pages; i++) {
+                doc.setPage(i);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8);
+                doc.setTextColor(120, 120, 120);
+                doc.text(REPORT_FOOTER, 14, 203);
+                doc.text('Page ' + i + ' of ' + pages, 283, 203, { align: 'right' });
+            }
 
-        Utils.toast('CSV downloaded!', 'success');
+            doc.save('chembuddy-report-' + localDateStr(new Date()) + '.pdf');
+            Utils.toast('PDF report downloaded', 'success');
+        });
     }
 
     function calcPoints(progress) {

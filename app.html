@@ -63,23 +63,24 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
 
     <!-- Config & Utilities -->
-    <script src="js/firebase-config.js?v=7"></script>
-    <script src="js/utils.js?v=7"></script>
+    <script src="js/firebase-config.js?v=8"></script>
+    <script src="js/utils.js?v=8"></script>
     <script src="js/router.js?v=7"></script>
 
     <!-- Data -->
     <script src="data/categories.js?v=7"></script>
     <script src="data/equipment-db.js?v=12"></script>
-    <script src="data/learning-path.js?v=9"></script>
+    <script src="data/learning-path.js?v=10"></script>
     <script src="data/questions.js?v=11"></script>
 
     <!-- Modules -->
     <script src="js/equipment.js?v=13"></script>
     <script src="js/voice.js?v=7"></script>
-    <script src="js/learn.js?v=8"></script>
-    <script src="js/quiz-engine.js?v=8"></script>
-    <script src="js/leaderboard.js?v=7"></script>
-    <script src="js/profile.js?v=7"></script>
+    <script src="js/learn.js?v=9"></script>
+    <script src="js/quiz-engine.js?v=9"></script>
+    <script src="js/leaderboard.js?v=8"></script>
+    <script src="js/certificate.js?v=1"></script>
+    <script src="js/profile.js?v=8"></script>
 
     <!-- App Init -->
     <script>
@@ -104,6 +105,16 @@
                 return;
             }
 
+            checkInvited(user).then(function (invited) {
+                if (!invited) {
+                    auth.signOut().then(function () { window.location.href = 'index.html#not-invited'; });
+                    return;
+                }
+                startSession(user);
+            });
+        });
+
+        function startSession(user) {
             currentUser = user;
             document.getElementById('nav-user-name').textContent = user.email.split('@')[0];
 
@@ -116,7 +127,7 @@
 
             // Load user profile and progress
             loadUserData(user.uid);
-        });
+        }
 
         function startApp() {
             if (window.ChemBuddy.initialized) return;
@@ -224,6 +235,7 @@
             Router.register('/browse/:equipId', Equipment.renderBrowseEquip);
             Router.register('/quizzes', QuizEngine.renderQuizList);
             Router.register('/quiz/:quizId', QuizEngine.renderQuiz);
+            Router.register('/quiz/:quizId/practice', QuizEngine.renderPractice);
             Router.register('/leaderboard', Leaderboard.render);
             Router.register('/profile', Profile.render);
         }
@@ -251,7 +263,14 @@
             html += '<div class="home-main">';
 
             // Today's task card
-            if (todayInfo) {
+            if (todayInfo && todayInfo.upcoming) {
+                html += '<div class="today-card">';
+                html += '<h3>✅ You are up to date</h3>';
+                html += '<h2>Next: ' + Utils.sanitize(todayInfo.title) + '</h2>';
+                html += '<p class="today-card-meta">Opens on ' + Utils.sanitize(todayInfo.opensOn) + ' — ' + Utils.sanitize(todayInfo.moduleTitle) + '</p>';
+                html += '<div class="flex gap-1"><a href="#/quizzes" class="btn">Practise a Quiz</a></div>';
+                html += '</div>';
+            } else if (todayInfo) {
                 html += '<div class="today-card">';
                 html += '<h3>📘 ' + Utils.sanitize(todayInfo.moduleTitle) + '</h3>';
                 html += '<h2>' + Utils.sanitize(todayInfo.title) + '</h2>';
@@ -262,6 +281,12 @@
                     html += '<a href="#/quiz/' + todayInfo.equipId + '" class="btn">Take Quiz</a>';
                 }
                 html += '</div></div>';
+            } else if (Certificate.isEligible(progress)) {
+                html += '<div class="today-card">';
+                html += '<h3>🎓 Level 1 Complete!</h3>';
+                html += '<h2>Your certificate is ready</h2>';
+                html += '<a href="#/profile" class="btn">Get Your Certificate →</a>';
+                html += '</div>';
             } else {
                 html += '<div class="today-card">';
                 html += '<h3>🎉 Great Progress!</h3>';

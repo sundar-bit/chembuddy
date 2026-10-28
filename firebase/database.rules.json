@@ -1,40 +1,46 @@
 {
     "rules": {
         "users": {
+            ".read": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
             "$uid": {
-                ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('email').val() === 'sundararaman.chintamani@gmail.com')",
-                ".write": "auth != null && auth.uid === $uid"
+                ".read": "auth != null && auth.uid === $uid",
+                ".write": "auth != null && auth.uid === $uid && (root.child('settings').child('inviteOnly').val() !== true || root.child('allowedEmails').child(auth.token.email.toLowerCase().replace('.', ',')).exists())"
             }
         },
         "progress": {
+            ".read": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
             "$uid": {
-                ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('email').val() === 'sundararaman.chintamani@gmail.com')",
-                ".write": "auth != null && auth.uid === $uid"
+                ".read": "auth != null && auth.uid === $uid",
+                ".write": "auth != null && auth.uid === $uid && (root.child('settings').child('inviteOnly').val() !== true || root.child('allowedEmails').child(auth.token.email.toLowerCase().replace('.', ',')).exists())"
             }
         },
         "leaderboard": {
             ".read": "auth != null",
-            "weekly": {
-                "$week": {
-                    "$uid": {
-                        ".write": "auth != null && auth.uid === $uid"
-                    }
-                }
-            },
             "cumulative": {
                 "$uid": {
-                    ".write": "auth != null && auth.uid === $uid"
+                    ".write": "auth != null && auth.uid === $uid && (root.child('settings').child('inviteOnly').val() !== true || root.child('allowedEmails').child(auth.token.email.toLowerCase().replace('.', ',')).exists())"
                 }
             }
         },
         "analytics": {
-            ".read": "auth != null && root.child('users').child(auth.uid).child('email').val() === 'sundararaman.chintamani@gmail.com'",
+            ".read": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
             "dailyActive": {
                 "$date": {
                     "$uid": {
-                        ".write": "auth != null && auth.uid === $uid"
+                        ".write": "auth != null && auth.uid === $uid && (root.child('settings').child('inviteOnly').val() !== true || root.child('allowedEmails').child(auth.token.email.toLowerCase().replace('.', ',')).exists())"
                     }
                 }
+            }
+        },
+        "settings": {
+            ".read": "auth != null",
+            ".write": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')"
+        },
+        "allowedEmails": {
+            ".read": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
+            ".write": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
+            "$key": {
+                ".read": "auth != null && $key === auth.token.email.toLowerCase().replace('.', ',')"
             }
         }
     }

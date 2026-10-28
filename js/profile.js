@@ -32,6 +32,23 @@ var Profile = (function () {
         html += '<div class="profile-stat"><div class="profile-stat-value">' + streak + '</div><div class="profile-stat-label">Streak</div></div>';
         html += '</div></div>';
 
+        // Level 1 certificate
+        var total = learningPath.allEquipment().length;
+        var done = Certificate.quizzesDone(progress);
+        html += '<div class="profile-section">';
+        html += '<h2>🎓 Level 1 Certificate</h2>';
+        if (Certificate.isEligible(progress)) {
+            html += '<p>Congratulations — you have completed every Level 1 quiz!</p>';
+            if (progress.certificate) html += '<p class="text-muted">Issued ' + Utils.formatDate(progress.certificate.issuedAt) + ' • ID ' + Utils.sanitize(progress.certificate.certId) + '</p>';
+            html += '<button class="btn btn-success mt-2" id="cert-download">Download Certificate</button>';
+        } else {
+            var cpct = Math.round(done / total * 100);
+            html += '<p class="text-muted">Complete all ' + total + ' Level 1 quizzes to earn your certificate.</p>';
+            html += '<div class="flex items-center gap-2"><span style="font-size:0.85rem">' + done + '/' + total + ' quizzes</span>';
+            html += '<div class="progress" style="flex:1"><div class="progress-bar" style="width:' + cpct + '%"></div></div></div>';
+        }
+        html += '</div>';
+
         // Module-by-module breakdown
         learningPath.modules.forEach(function (mod) {
             html += '<div class="profile-section">';
@@ -96,6 +113,22 @@ var Profile = (function () {
         html += '</div>';
 
         container.innerHTML = html;
+
+        var certBtn = document.getElementById('cert-download');
+        if (certBtn) {
+            certBtn.addEventListener('click', function () {
+                certBtn.disabled = true;
+                certBtn.textContent = 'Preparing…';
+                Certificate.download(window.ChemBuddy.user.uid, profile, progress).then(function () {
+                    Utils.toast('Certificate downloaded', 'success');
+                }).catch(function (err) {
+                    Utils.toast('Could not create the certificate: ' + err.message, 'error');
+                }).then(function () {
+                    certBtn.disabled = false;
+                    certBtn.textContent = 'Download Certificate';
+                });
+            });
+        }
 
         // Logout handler
         document.getElementById('profile-logout').addEventListener('click', function () {

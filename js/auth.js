@@ -28,6 +28,13 @@
         }
     }
 
+    // Sent back here by app.html when the email is not on the invite list
+    if (window.location.hash === '#not-invited') {
+        loginError.textContent = NOT_INVITED_MESSAGE;
+        loginError.classList.add('show');
+        history.replaceState(null, '', window.location.pathname);
+    }
+
     // Check if already logged in
     auth.onAuthStateChanged(function (user) {
         if (user && !registering) {
@@ -129,6 +136,17 @@
         auth.createUserWithEmailAndPassword(email, password)
             .then(function (result) {
                 newUser = result.user;
+                return checkInvited(newUser);
+            })
+            .then(function (invited) {
+                if (!invited) {
+                    // Remove the account just created so the email can be used once listed
+                    var u = newUser;
+                    newUser = null;
+                    return u.delete().catch(function () { return auth.signOut(); }).then(function () {
+                        throw { code: 'not-invited' };
+                    });
+                }
                 // Save user profile
                 return db.ref('users/' + newUser.uid).set({
                     name: name,
@@ -164,6 +182,7 @@
             case 'auth/wrong-password': return 'Incorrect password. Please try again.';
             case 'auth/invalid-credential': return 'Invalid email or password. Please try again.';
             case 'auth/too-many-requests': return 'Too many attempts. Please wait and try again.';
+            case 'not-invited': return NOT_INVITED_MESSAGE;
             default: return 'Something went wrong. Please try again.';
         }
     }

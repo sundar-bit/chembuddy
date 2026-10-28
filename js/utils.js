@@ -22,6 +22,21 @@ const Utils = {
         return `${m}:${s.toString().padStart(2, '0')}`;
     },
 
+    // Load a script once, on demand (report and certificate libraries)
+    loadScript(src) {
+        Utils._scripts = Utils._scripts || {};
+        if (!Utils._scripts[src]) {
+            Utils._scripts[src] = new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = src;
+                s.onload = resolve;
+                s.onerror = () => { delete Utils._scripts[src]; reject(new Error('Could not load ' + src)); };
+                document.head.appendChild(s);
+            });
+        }
+        return Utils._scripts[src];
+    },
+
     // Get today's date string YYYY-MM-DD
     todayStr() {
         return new Date().toISOString().slice(0, 10);

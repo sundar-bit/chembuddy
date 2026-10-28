@@ -12,33 +12,53 @@ var Learn = (function () {
         return !!quizzes[equipId] || !QuizEngine.isQuizReady(equipId);
     }
 
-    // Inside a module, equipment unlocks once the previous one is studied.
+    // With a weekly schedule, equipment opens on its release day. Without one,
+    // equipment inside a module unlocks once the previous one is studied.
     function isEquipmentAvailable(mod, index, studied) {
+        if (learningPath.hasSchedule()) return learningPath.isReleased(mod.equipment[index].id);
         return index === 0 || !!studied[mod.equipment[index - 1].id];
     }
 
-    // Next thing to do: the first incomplete equipment along the path.
+    // "Mon, 17 Nov"
+    function opensLabel(equipId) {
+        var date = learningPath.releaseDate(equipId);
+        return date ? date.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }) : '';
+    }
+
+    function lockedMessage(mod, index) {
+        if (learningPath.hasSchedule()) return 'Opens on ' + opensLabel(mod.equipment[index].id);
+        return 'Study ' + mod.equipment[index - 1].name + ' first';
+    }
+
+    // Next thing to do: the first incomplete equipment that is open. When all
+    // open equipment is done, the next one still to open (upcoming: true).
     function getTodayInfo(progress) {
         var studied = progress.studied || {};
         var quizzes = progress.quizzes || {};
+        var upcoming = null;
 
         for (var m = 0; m < learningPath.modules.length; m++) {
             var mod = learningPath.modules[m];
             for (var i = 0; i < mod.equipment.length; i++) {
                 var eq = mod.equipment[i];
-                if (!isEquipmentComplete(eq.id, studied, quizzes)) {
-                    return {
-                        moduleId: mod.id,
-                        moduleTitle: 'Module ' + mod.id + ': ' + mod.title,
-                        equipId: eq.id,
-                        title: eq.name,
-                        position: (i + 1) + ' of ' + mod.equipment.length,
-                        quizAvailable: !!studied[eq.id] && !quizzes[eq.id] && QuizEngine.isQuizReady(eq.id)
-                    };
+                if (isEquipmentComplete(eq.id, studied, quizzes)) continue;
+                var info = {
+                    moduleId: mod.id,
+                    moduleTitle: 'Module ' + mod.id + ': ' + mod.title,
+                    equipId: eq.id,
+                    title: eq.name,
+                    position: (i + 1) + ' of ' + mod.equipment.length,
+                    quizAvailable: !!studied[eq.id] && !quizzes[eq.id] && QuizEngine.isQuizReady(eq.id)
+                };
+                if (isEquipmentAvailable(mod, i, studied)) return info;
+                if (!upcoming && learningPath.hasSchedule()) {
+                    info.upcoming = true;
+                    info.opensOn = opensLabel(eq.id);
+                    upcoming = info;
                 }
             }
         }
-        return null; // All complete
+        return upcoming; // null = all complete
     }
 
     function renderOverview(container) {
@@ -48,7 +68,12 @@ var Learn = (function () {
 
         var html = '<div class="learn-header">';
         html += '<h1>Learning Path</h1>';
-        html += '<p>' + Utils.sanitize(learningPath.title) + ' — ' + learningPath.modules.length + ' modules, self-paced</p>';
+        var week = learningPath.currentWeek();
+        var pace;
+        if (!week) pace = 'self-paced';
+        else if (week.week === 0) pace = 'starts ' + opensLabel(learningPath.allEquipment()[0].id);
+        else pace = 'week ' + week.week + ' of ' + week.total;
+        html += '<p>' + Utils.sanitize(learningPath.title) + ' — ' + learningPath.modules.length + ' modules, ' + pace + '</p>';
         html += '</div>';
 
         html += '<div class="weeks-grid">';
@@ -76,14 +101,14 @@ var Learn = (function () {
                 var isAvailable = isEquipmentAvailable(mod, idx, studied);
 
                 var statusClass = isComplete ? 'completed' : (isAvailable ? 'available' : 'locked');
-                var statusText = isComplete ? '✓ Done' : (isAvailable ? 'Start →' : '🔒 Locked');
+                var statusText = isComplete ? '✓ Done' : (isAvailable ? 'Start →' : (learningPath.hasSchedule() ? '🔒 ' + opensLabel(eq.id) : '🔒 Locked'));
 
                 var meta;
                 if (quizDone) meta = 'Quiz: ' + quizDone.score + '/' + quizDone.maxScore;
                 else if (!QuizEngine.isQuizReady(eq.id)) meta = 'Quiz coming soon';
                 else meta = learningPath.quizLength + '-question quiz';
 
-                html += '<div class="day-row" data-equip="' + eq.id + '" data-available="' + isAvailable + '">';
+                html += '<div class="day-row" data-equip="' + eq.id + '" data-available="' + isAvailable + '" data-locked-msg="' + (isAvailable ? '' : Utils.sanitize(lockedMessage(mod, idx))) + '">';
                 html += '<div class="day-number ' + statusClass + '">' + (idx + 1) + '</div>';
                 html += '<div class="day-info"><h4>' + Utils.sanitize(eq.name) + '</h4>';
                 html += '<p>' + meta + '</p></div>';
@@ -103,7 +128,7 @@ var Learn = (function () {
                 if (this.dataset.available === 'true') {
                     Router.navigate('/learn/' + this.dataset.equip);
                 } else {
-                    Utils.toast('Study the previous equipment in this module first', 'warning');
+                    Utils.toast(this.dataset.lockedMsg, 'warning');
                 }
             });
         });
@@ -124,7 +149,7 @@ var Learn = (function () {
         var quizzes = progress.quizzes || {};
 
         if (!isEquipmentAvailable(mod, found.index, studied)) {
-            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Locked</h3><p>Study ' + Utils.sanitize(mod.equipment[found.index - 1].name) + ' first.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning Path</a></div>';
+            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Locked</h3><p>' + Utils.sanitize(lockedMessage(mod, found.index)) + '.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning Path</a></div>';
             return;
         }
 
@@ -294,12 +319,13 @@ var Learn = (function () {
         if (quizDone) {
             html += '<h3>✅ Quiz Completed</h3>';
             html += '<p>Score: ' + quizDone.score + '/' + quizDone.maxScore + ' (' + quizDone.points + ' points)</p>';
+            html += '<a href="#/quiz/' + equipId + '/practice" class="btn btn-outline">Practice Again</a>';
         } else if (!QuizEngine.isQuizReady(equipId)) {
             html += '<h3>📝 Quiz Coming Soon</h3>';
             html += '<p>The quiz for this equipment is being prepared. You can continue to the next equipment.</p>';
         } else if (studied[equipId]) {
             html += '<h3>Ready for the Quiz!</h3>';
-            html += '<p>' + learningPath.quizLength + ' questions on ' + Utils.sanitize(lessonName) + ' — single attempt.</p>';
+            html += '<p>' + learningPath.quizLength + ' questions on ' + Utils.sanitize(lessonName) + ' — your first attempt is the one that counts.</p>';
             html += '<a href="#/quiz/' + equipId + '" class="btn btn-primary btn-lg">Take the Quiz →</a>';
         } else {
             html += '<h3>📖 Study First</h3>';

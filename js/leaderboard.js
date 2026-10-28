@@ -5,9 +5,14 @@ var Leaderboard = (function () {
 
     var listeners = [];
 
+    // Only the top 10 are shown, so lower ranks are not discouraged. Everyone
+    // else sees their own points without a rank.
+    var TOP_N = 10;
+
     function render(container) {
         var html = '<div class="lb-header">';
         html += '<h1>Leaderboard</h1>';
+        html += '<p>Top ' + TOP_N + '</p>';
         html += '</div>';
 
         html += '<div id="lb-podium" class="lb-podium"></div>';
@@ -99,7 +104,7 @@ var Leaderboard = (function () {
         html += '<thead><tr><th>Rank</th><th>Name</th><th>Points</th><th>Quizzes</th><th>Equipment</th><th>Streak</th></tr></thead>';
         html += '<tbody>';
 
-        entries.forEach(function (e, idx) {
+        entries.slice(0, TOP_N).forEach(function (e, idx) {
             var rank = idx + 1;
             var rankClass = rank === 1 ? 'gold' : (rank === 2 ? 'silver' : (rank === 3 ? 'bronze' : ''));
             var isCurrentUser = e.uid === currentUid;
@@ -115,6 +120,17 @@ var Leaderboard = (function () {
         });
 
         html += '</tbody></table>';
+
+        var myIndex = -1;
+        entries.forEach(function (e, idx) { if (e.uid === currentUid) myIndex = idx; });
+        if (myIndex === -1 || myIndex >= TOP_N) {
+            var mine = myIndex === -1 ? 0 : entries[myIndex].points;
+            html += '<div class="card mt-2"><div class="card-body text-center">';
+            html += '<p><strong>Your points: ' + mine + '</strong></p>';
+            html += '<p class="text-muted">Study each week and take the quizzes to climb into the Top ' + TOP_N + '!</p>';
+            html += '</div></div>';
+        }
+
         table.innerHTML = html;
     }
 

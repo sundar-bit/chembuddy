@@ -34,7 +34,7 @@ var QuizEngine = (function () {
         var quizzes = progress.quizzes || {};
 
         var html = '<h1 class="mb-1">My Quizzes</h1>';
-        html += '<p class="text-muted mb-3">One quiz per equipment — ' + learningPath.quizLength + ' questions, single attempt</p>';
+        html += '<p class="text-muted mb-3">One quiz per equipment — ' + learningPath.quizLength + ' questions. Your first attempt counts; after that you can practise as often as you like.</p>';
 
         learningPath.modules.forEach(function (mod) {
             html += '<div class="card mb-3"><div class="card-header">Module ' + mod.id + ': ' + Utils.sanitize(mod.title) + '</div>';
@@ -45,7 +45,7 @@ var QuizEngine = (function () {
                 var label = '<span class="score-label">' + Utils.sanitize(eq.name) + '</span>';
 
                 if (quiz) {
-                    html += '<div class="quiz-score-cell taken">' + quiz.score + '/' + quiz.maxScore + label + '</div>';
+                    html += '<a href="#/quiz/' + eq.id + '" class="quiz-score-cell taken" style="text-decoration:none">' + quiz.score + '/' + quiz.maxScore + label + '</a>';
                 } else if (!isQuizReady(eq.id)) {
                     html += '<div class="quiz-score-cell not-taken">Soon' + label + '</div>';
                 } else if (studied[eq.id]) {
@@ -62,7 +62,13 @@ var QuizEngine = (function () {
         container.innerHTML = html;
     }
 
-    function renderQuiz(container, params) {
+    // Practice: retake a quiz already taken. Saved separately under
+    // progress/<uid>/practice/<equipId>; the first attempt stays the official score.
+    function renderPractice(container, params) {
+        return renderQuiz(container, params, true);
+    }
+
+    function renderQuiz(container, params, practice) {
         var quizId = params.quizId; // equipment id, e.g. "centrifugal-pump"
 
         var progress = window.ChemBuddy.progress || {};
@@ -76,8 +82,16 @@ var QuizEngine = (function () {
 
         // Check if already attempted — only the first attempt counts
         var existing = quizzes[quizId];
-        if (existing) {
+        if (existing && !practice) {
             showPreviousResults(container, quizId, existing);
+            return;
+        }
+        if (practice && !existing) {
+            Router.navigate('/quiz/' + quizId);
+            return;
+        }
+        if (practice) {
+            showPreQuiz(container, quizId, getQuestionsForQuiz(quizId), true);
             return;
         }
 
@@ -102,13 +116,13 @@ var QuizEngine = (function () {
         return Utils.shuffle(pool).slice(0, learningPath.quizLength);
     }
 
-    function showPreQuiz(container, quizId, questions) {
+    function showPreQuiz(container, quizId, questions, practice) {
         var pointsPerQ = POINTS_PER_CORRECT;
         var html = '<div class="quiz-body" style="min-height:calc(100vh - 120px)">';
         html += '<div class="quiz-pre">';
         html += '<div class="quiz-pre-icon">📝</div>';
-        html += '<h2>Quiz: ' + Utils.sanitize(equipmentName(quizId)) + '</h2>';
-        html += '<p>Test what you learned about this equipment</p>';
+        html += '<h2>' + (practice ? 'Practice' : 'Quiz') + ': ' + Utils.sanitize(equipmentName(quizId)) + '</h2>';
+        html += '<p>' + (practice ? 'Practise as often as you like' : 'Test what you learned about this equipment') + '</p>';
 
         html += '<div class="quiz-meta">';
         html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + questions.length + '</div><div class="quiz-meta-label">Questions</div></div>';
@@ -116,21 +130,27 @@ var QuizEngine = (function () {
         html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + pointsPerQ + '</div><div class="quiz-meta-label">Pts Each</div></div>';
         html += '</div>';
 
-        html += '<p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1.5rem">⚠️ Single attempt only — no retakes!</p>';
-        html += '<button class="btn btn-primary btn-lg" id="start-quiz-btn">Start Quiz →</button>';
+        if (practice) {
+            var official = window.ChemBuddy.progress.quizzes[quizId];
+            html += '<p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1.5rem">Practice only — no points, and your official score stays ' + official.score + '/' + official.maxScore + '.</p>';
+        } else {
+            html += '<p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1.5rem">⚠️ Only this first attempt counts for points and reports. You can practise again afterwards.</p>';
+        }
+        html += '<button class="btn btn-primary btn-lg" id="start-quiz-btn">' + (practice ? 'Start Practice →' : 'Start Quiz →') + '</button>';
         html += '<br><a href="#/learn" class="btn btn-outline mt-2">Cancel</a>';
         html += '</div></div>';
 
         container.innerHTML = html;
 
         document.getElementById('start-quiz-btn').addEventListener('click', function () {
-            startQuiz(container, quizId, questions);
+            startQuiz(container, quizId, questions, practice);
         });
     }
 
-    function startQuiz(container, quizId, questions) {
+    function startQuiz(container, quizId, questions, practice) {
         var state = {
             quizId: quizId,
+            practice: !!practice,
             questions: questions,
             currentIndex: 0,
             answers: [],
@@ -331,9 +351,15 @@ var QuizEngine = (function () {
 
         var points = state.score * state.pointsPerCorrect;
         var totalTime = state.answers.reduce(function (sum, a) { return sum + a.timeTaken; }, 0);
+        var uid = window.ChemBuddy.user.uid;
+
+        if (state.practice) {
+            savePractice(uid, state);
+            showResults(container, state, 0, totalTime);
+            return;
+        }
 
         // Save to Firebase
-        var uid = window.ChemBuddy.user.uid;
         var path = 'progress/' + uid + '/quizzes/' + state.quizId;
 
         var quizData = {
@@ -372,7 +398,12 @@ var QuizEngine = (function () {
         html += '</div>';
 
         html += '<div class="results-message">' + message + '</div>';
-        html += '<div class="results-points">+' + points + ' points earned</div>';
+        if (state.practice) {
+            var official = window.ChemBuddy.progress.quizzes[state.quizId];
+            html += '<div class="results-points">Practice — your official score stays ' + official.score + '/' + official.maxScore + '</div>';
+        } else {
+            html += '<div class="results-points">+' + points + ' points earned</div>';
+        }
 
         // Breakdown
         html += '<div class="results-breakdown">';
@@ -389,7 +420,7 @@ var QuizEngine = (function () {
         // Actions
         html += '<div class="results-actions">';
         html += '<a href="#/learn" class="btn btn-primary">Back to Learning</a>';
-        html += '<a href="#/leaderboard" class="btn btn-outline">Leaderboard</a>';
+        html += '<a href="#/quiz/' + state.quizId + '/practice" class="btn btn-outline">Practice Again</a>';
         html += '</div>';
 
         html += '</div></div>';
@@ -413,8 +444,13 @@ var QuizEngine = (function () {
         html += '<p class="text-muted mb-2">Quiz: ' + Utils.sanitize(equipmentName(quizId)) + '</p>';
         html += '<div class="results-points">' + data.points + ' points earned • ' + Utils.formatDateTime(data.completedAt) + '</div>';
 
+        var practice = (window.ChemBuddy.progress.practice || {})[quizId];
+        if (practice) {
+            html += '<p class="text-muted mt-2">Practice: ' + practice.attempts + ' attempt' + (practice.attempts === 1 ? '' : 's') + ', best ' + practice.best + '/' + data.maxScore + '</p>';
+        }
+
         html += '<div class="results-actions mt-3">';
-        html += '<a href="#/learn" class="btn btn-primary">Back to Learning</a>';
+        html += '<a href="#/quiz/' + quizId + '/practice" class="btn btn-primary">Practice Again</a>';
         html += '<a href="#/quizzes" class="btn btn-outline">All Quizzes</a>';
         html += '</div>';
 
@@ -422,9 +458,22 @@ var QuizEngine = (function () {
         container.innerHTML = html;
     }
 
+    function savePractice(uid, state) {
+        db.ref('progress/' + uid + '/practice/' + state.quizId).transaction(function (cur) {
+            cur = cur || {};
+            return {
+                attempts: (cur.attempts || 0) + 1,
+                best: Math.max(cur.best || 0, state.score),
+                lastScore: state.score,
+                lastAt: Date.now()
+            };
+        });
+    }
+
     return {
         renderQuizList: renderQuizList,
         renderQuiz: renderQuiz,
+        renderPractice: renderPractice,
         isQuizReady: isQuizReady,
         questionCount: questionCount
     };

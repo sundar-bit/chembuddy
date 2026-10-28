@@ -4,8 +4,10 @@
 // plants and refineries, 2–3 equipment per module (one a week for 24 weeks). Everything else in
 // equipmentDB is Level 2 (shown in Browse, not part of the path yet).
 //
-// Self-paced: every module is open from the start. Inside a module, the next
-// equipment unlocks once the previous one has been studied.
+// Weekly release (see `schedule` below): one equipment opens each Monday, in
+// path order, and stays open — a student who misses a week can catch up.
+// Until a start date is set, the path is self-paced: every module is open and,
+// inside a module, the next equipment unlocks once the previous one is studied.
 //
 // One quiz per equipment (10 questions, that equipment only — never mixed).
 // Quiz results are stored under the equipment id: progress/<uid>/quizzes/<equipId>
@@ -18,6 +20,18 @@ const learningPath = {
     title: 'Level 1 — Basic Equipment',
     description: 'Core equipment found in most chemical plants and refineries. Study at your own pace — one quiz per equipment.',
     quizLength: 10,
+
+    // Change the pace here — no other code changes needed.
+    //   startDate:  the first Monday, 'YYYY-MM-DD'; null = self-paced (no schedule)
+    //   perWeek:    how many equipment open each week (1, 2, 3 …)
+    //   pauseWeeks: Mondays of weeks when nothing new opens (exams, holidays),
+    //               e.g. ['2026-12-07', '2026-12-14']
+    schedule: {
+        startDate: null,
+        perWeek: 1,
+        pauseWeeks: []
+    },
+
     modules: [
         {
             id: 1,
@@ -148,3 +162,62 @@ learningPath.allEquipment = function () {
     });
     return out;
 };
+
+// --- Weekly release -------------------------------------------------------
+
+function parseLocalDate(ymd) {
+    var p = ymd.split('-');
+    return new Date(+p[0], +p[1] - 1, +p[2]);
+}
+
+function localDateStr(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
+learningPath.hasSchedule = function () {
+    return !!(this.schedule && this.schedule.startDate);
+};
+
+// Opening day of each release week, skipping pause weeks: [Date, Date, …]
+learningPath.releaseWeeks = function () {
+    var s = this.schedule;
+    var total = this.allEquipment().length;
+    var perWeek = Math.max(1, s.perWeek || 1);
+    var needed = Math.ceil(total / perWeek);
+    var pauses = s.pauseWeeks || [];
+    var weeks = [];
+    var d = parseLocalDate(s.startDate);
+    while (weeks.length < needed) {
+        if (pauses.indexOf(localDateStr(d)) === -1) weeks.push(new Date(d));
+        d.setDate(d.getDate() + 7);
+    }
+    return weeks;
+};
+
+// The day an equipment opens (local midnight), or null when there is no schedule.
+learningPath.releaseDate = function (equipId) {
+    if (!this.hasSchedule()) return null;
+    var all = this.allEquipment();
+    for (var i = 0; i < all.length; i++) {
+        if (all[i].id === equipId) {
+            return this.releaseWeeks()[Math.floor(i / Math.max(1, this.schedule.perWeek || 1))];
+        }
+    }
+    return null;
+};
+
+learningPath.isReleased = function (equipId, now) {
+    var date = this.releaseDate(equipId);
+    return !date || (now || new Date()) >= date;
+};
+
+// Current release week, 1-based (0 = not started yet), and the total.
+learningPath.currentWeek = function (now) {
+    if (!this.hasSchedule()) return null;
+    now = now || new Date();
+    var weeks = this.releaseWeeks();
+    var n = 0;
+    weeks.forEach(function (w) { if (now >= w) n++; });
+    return { week: n, total: weeks.length };
+};
+

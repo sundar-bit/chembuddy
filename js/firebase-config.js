@@ -45,3 +45,28 @@ function isAdmin() {
 function dbRef(path) {
     return db.ref(path);
 }
+
+// Invite-only sign-in. Admins paste the university's list of student emails
+// into allowedEmails (key = lower-case email with '.' as ','), then switch on
+// settings/inviteOnly. While it is off, anyone may register.
+function emailKey(email) {
+    return String(email || '').trim().toLowerCase().replace(/\./g, ',');
+}
+
+// Resolves true when this user may use the app. If the check itself cannot
+// run (e.g. database rules not yet updated), it lets the user in — the
+// database rules are what finally enforce the list.
+function checkInvited(user) {
+    if (ADMIN_EMAILS.includes(user.email)) return Promise.resolve(true);
+    return db.ref('settings/inviteOnly').once('value').then(function (snap) {
+        if (snap.val() !== true) return true;
+        return db.ref('allowedEmails/' + emailKey(user.email)).once('value').then(function (s) {
+            return s.exists();
+        });
+    }).catch(function (err) {
+        console.warn('Invite check unavailable:', err.message);
+        return true;
+    });
+}
+
+var NOT_INVITED_MESSAGE = 'This email is not on your university\'s ChemBuddy list. Please register with the email your college gave, or contact your coordinator.';
