@@ -7,6 +7,9 @@ var QuizEngine = (function () {
     var timerInterval = null;
 
     var POINTS_PER_CORRECT = 10;
+    // Time to read the question and all four options, then think. 30s proved
+    // too short even for the author (reading alone takes 20-25s).
+    var SECONDS_PER_QUESTION = 45;
 
     // One quiz per equipment; the quiz id is the equipment id.
     function equipmentName(equipId) {
@@ -109,7 +112,7 @@ var QuizEngine = (function () {
 
         html += '<div class="quiz-meta">';
         html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + questions.length + '</div><div class="quiz-meta-label">Questions</div></div>';
-        html += '<div class="quiz-meta-item"><div class="quiz-meta-value">30s</div><div class="quiz-meta-label">Per Question</div></div>';
+        html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + SECONDS_PER_QUESTION + 's</div><div class="quiz-meta-label">Per Question</div></div>';
         html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + pointsPerQ + '</div><div class="quiz-meta-label">Pts Each</div></div>';
         html += '</div>';
 
@@ -133,7 +136,7 @@ var QuizEngine = (function () {
             answers: [],
             score: 0,
             pointsPerCorrect: POINTS_PER_CORRECT,
-            timePerQuestion: 30,
+            timePerQuestion: SECONDS_PER_QUESTION,
             startTime: Date.now()
         };
 
