@@ -1,7 +1,7 @@
 // ChemBuddy - Learning Path (Somaiya University, Chemical Engineering)
 //
-// Level 1 — Basic Equipment: 12 modules of equipment found in most chemical
-// plants and refineries, 2–3 equipment per module. Everything else in
+// Level 1 — Basic Equipment: 10 modules, 24 equipment found in most chemical
+// plants and refineries, 2–3 equipment per module (one a week for 24 weeks). Everything else in
 // equipmentDB is Level 2 (shown in Browse, not part of the path yet).
 //
 // Self-paced: every module is open from the start. Inside a module, the next
@@ -94,50 +94,26 @@ const learningPath = {
         },
         {
             id: 8,
-            title: 'Fired Heaters & Boilers',
+            title: 'Fired Heaters',
             categoryId: 'fired-heaters',
-            description: 'Burning fuel to heat process fluids and raise steam.',
+            description: 'Burning fuel to heat process fluids.',
             equipment: [
                 { id: 'cabin-heater', name: 'Cabin/Box Heaters' },
-                { id: 'cylindrical-heater', name: 'Cylindrical Heaters' },
-                { id: 'boiler', name: 'Steam Boilers' }
+                { id: 'cylindrical-heater', name: 'Cylindrical Heaters' }
             ]
         },
         {
             id: 9,
-            title: 'Utilities',
-            categoryId: 'utilities',
-            description: 'The services every plant runs on — cooling water and compressed air.',
-            equipment: [
-                { id: 'cooling-tower', name: 'Cooling Towers' },
-                { id: 'air-compressor', name: 'Compressed Air Systems' },
-                { id: 'instrument-air', name: 'Instrument Air Systems' }
-            ]
-        },
-        {
-            id: 10,
-            title: 'Instrumentation',
-            categoryId: 'instrumentation',
-            description: 'Measuring flow, pressure and level — the eyes of the control room.',
-            equipment: [
-                { id: 'flow-meter', name: 'Flow Meters' },
-                { id: 'pressure-transmitter', name: 'Pressure Transmitters' },
-                { id: 'level-instrument', name: 'Level Instruments' }
-            ]
-        },
-        {
-            id: 11,
             title: 'Safety',
             categoryId: 'safety',
             description: 'Protecting people and plant from overpressure and runaway events.',
             equipment: [
                 { id: 'relief-valve', name: 'Pressure Relief Valves' },
-                { id: 'rupture-disc', name: 'Rupture Discs' },
-                { id: 'emergency-shutdown', name: 'Emergency Shutdown Systems' }
+                { id: 'rupture-disc', name: 'Rupture Discs' }
             ]
         },
         {
-            id: 12,
+            id: 10,
             title: 'Separation',
             categoryId: 'solid-liquid',
             description: 'Removing solids from gases and liquids.',
