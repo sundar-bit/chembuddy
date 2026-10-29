@@ -29,7 +29,8 @@ var Voice = (function () {
     }
 
     function textOf(el) {
-        return el.getAttribute('data-say-text') || el.textContent.replace(/🔊|⏹/g, '').trim();
+        var text = el.getAttribute('data-say-text') || el.textContent.replace(/🔊|⏹/g, '').trim();
+        return SpeechText.speechText(text);
     }
 
     function setButton(btn, playing) {

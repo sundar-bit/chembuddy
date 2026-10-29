@@ -1181,7 +1181,7 @@ const questionBank = [
             "Run it with water or other thin liquids."
         ],
         correct: 1,
-        explanation: "Safety: 'The centrifugal pump must never be operated against a closed discharge valve (deadheading)' — the fluid heats up to boiling and the seal or casing can fail.",
+        explanation: "Safety: 'Never operate the centrifugal pump against a closed discharge valve. This is called deadheading.' The fluid heats up to boiling and the seal or casing can fail.",
         difficulty: "easy"
     },
     {
@@ -1293,7 +1293,7 @@ const questionBank = [
             "Nothing, if the pump has stopped running."
         ],
         correct: 0,
-        explanation: "Safety: 'Complete lockout/tagout (LOTO) procedures must be performed on the motor, all valves in the suction and discharge piping, and any auxiliary systems before performing any maintenance.'",
+        explanation: "Safety: 'Complete lockout/tagout (LOTO) procedures must be performed before any maintenance on the pump. LOTO covers the motor, all valves in the suction and discharge piping, and any auxiliary systems.'",
         difficulty: "easy"
     },
     {
@@ -1327,7 +1327,7 @@ const questionBank = [
             "A rotating screw"
         ],
         correct: 1,
-        explanation: "Description: 'a plunger moving back and forth in a cylinder pushes out a fixed amount of fluid on every stroke.'",
+        explanation: "Overview: 'A plunger moving back and forth in a cylinder pushes out a fixed amount of fluid on every stroke.'",
         difficulty: "easy"
     },
     {
@@ -1407,7 +1407,7 @@ const questionBank = [
             "The packing"
         ],
         correct: 1,
-        explanation: "Parts (8): 'Crankshaft — a rotating shaft with offset journals that converts the rotary motion of the motor into the back-and-forth motion needed by the plunger.'",
+        explanation: "Parts (8): 'Crankshaft — a rotating shaft with offset journals. It converts the rotary motion of the motor into the back-and-forth motion needed by the plunger.'",
         difficulty: "easy"
     },
     {
@@ -1423,7 +1423,7 @@ const questionBank = [
             "Only when the pump is stopped"
         ],
         correct: 2,
-        explanation: "Parts (4): 'Inlet Valve — below the cylinder; a spring-loaded check valve that opens automatically to let fluid into the cylinder on the suction stroke and closes during discharge.' How It Works, Suction stroke: 'The inlet valve opens and fluid is drawn into the cylinder.'",
+        explanation: "Parts (4): 'It opens automatically to let fluid into the cylinder on the suction stroke. It closes during discharge.' How It Works, Step 1: 'The inlet valve opens and fluid is drawn into the cylinder.'",
         difficulty: "easy"
     },
     {
@@ -1439,7 +1439,7 @@ const questionBank = [
             "If the discharge gets blocked, the pump keeps building pressure until something breaks, so the relief valve must always be able to open."
         ],
         correct: 3,
-        explanation: "Safety: a relief valve must be fitted 'with no isolation valve between the pump and the relief device, as positive displacement pumps will continue to build pressure until something fails if the discharge becomes blocked or restricted.'",
+        explanation: "Safety: 'There must be no isolation valve between the pump and the relief device.' If the discharge is blocked, 'positive displacement pumps keep building pressure. They will continue until something fails.'",
         difficulty: "medium"
     },
     {
@@ -1471,7 +1471,7 @@ const questionBank = [
             "To recharge the pulsation dampeners"
         ],
         correct: 1,
-        explanation: "Safety: 'Proper double block and bleed isolation procedures must be followed before performing any maintenance ... residual trapped pressure in the cylinders, valves, and piping can cause violent fluid release when components are disassembled.'",
+        explanation: "Safety: 'Residual trapped pressure may remain in the cylinders, valves, and piping. It can cause violent fluid release when components are disassembled.'",
         difficulty: "medium"
     },
 
@@ -1489,7 +1489,7 @@ const questionBank = [
             "The gas is heated until its pressure rises"
         ],
         correct: 1,
-        explanation: "Description: 'rotating impellers throw the gas outward at high speed, and stationary passages then turn that speed into pressure.'",
+        explanation: "Overview: 'Rotating impellers throw the gas outward at high speed. Stationary passages then turn that speed into pressure.'",
         difficulty: "easy"
     },
     {
@@ -1505,7 +1505,7 @@ const questionBank = [
             "To separate the suction gas from the discharge gas"
         ],
         correct: 2,
-        explanation: "Overview: 'Horizontally Split Casing — a bolted flange runs along its full length at the shaft centreline, so the upper half can be lifted off to reach the rotor.'",
+        explanation: "Overview: 'Horizontally Split Casing — a bolted flange runs along its full length at the shaft centreline. So the upper half can be lifted off to reach the rotor.'",
         difficulty: "easy"
     },
     {
@@ -1553,7 +1553,7 @@ const questionBank = [
             "Around the outside of the casing from suction to discharge"
         ],
         correct: 1,
-        explanation: "Working: 'the gas travels outward through each impeller and inward through each return channel, and the pressure rises step by step.'",
+        explanation: "How It Works, Step 4: 'The gas travels outward through each impeller and inward through each return channel. The pressure rises step by step.'",
         difficulty: "medium"
     },
     {
@@ -1651,7 +1651,7 @@ const questionBank = [
             "The gas is heated until its pressure rises"
         ],
         correct: 2,
-        explanation: "Description: 'a piston moving back and forth in a cylinder traps a fixed volume of gas and squeezes it to a higher pressure.'",
+        explanation: "Overview: 'A piston moving back and forth in a cylinder traps a fixed volume of gas. It squeezes the gas to a higher pressure.'",
         difficulty: "easy"
     },
     {
@@ -1683,7 +1683,7 @@ const questionBank = [
             "It connects the motor shaft to the crankshaft"
         ],
         correct: 1,
-        explanation: "Parts (6): 'Crosshead — slides back and forth in its guide between the crankcase and the distance piece; it takes the side push from the connecting rod, so the piston rod moves in a perfectly straight line.'",
+        explanation: "Parts (6): 'It takes the side push from the connecting rod. So the piston rod moves in a perfectly straight line.'",
         difficulty: "medium"
     },
     {
@@ -1699,7 +1699,7 @@ const questionBank = [
             "To keep crankcase oil away from the cylinder and leaked process gas away from the crankcase"
         ],
         correct: 3,
-        explanation: "Parts (7): 'Distance Piece — the housing between the crankcase and the cylinder that the piston rod passes through; it keeps crankcase oil away from the cylinder and leaked process gas away from the crankcase.'",
+        explanation: "Parts (7): 'It keeps crankcase oil away from the cylinder. It keeps leaked process gas away from the crankcase.'",
         difficulty: "medium"
     },
     {
@@ -1715,7 +1715,7 @@ const questionBank = [
             "It opens the suction valve"
         ],
         correct: 0,
-        explanation: "Parts (9): 'Rod Packing — a set of sealing rings around the piston rod where it enters the cylinder; it stops the compressed gas leaking out along the rod.'",
+        explanation: "Parts (9): 'Rod Packing — a set of sealing rings around the piston rod where it enters the cylinder. It stops the compressed gas leaking out along the rod.'",
         difficulty: "easy"
     },
     {
@@ -1731,7 +1731,7 @@ const questionBank = [
             "The gas passes through the cylinder twice"
         ],
         correct: 2,
-        explanation: "Working: 'Because gas is compressed on both sides of the piston, the cylinder is double-acting and every stroke delivers gas.'",
+        explanation: "How It Works: 'Gas is compressed on both sides of the piston. So the cylinder is double-acting and every stroke delivers gas.'",
         difficulty: "medium"
     },
     {
@@ -1763,7 +1763,7 @@ const questionBank = [
             "Because gas from a piston comes out in pulses, and the dampeners smooth the flow"
         ],
         correct: 3,
-        explanation: "Working: 'Gas from a piston comes out in pulses, so the pulsation dampeners on the suction and discharge sides smooth the flow.'",
+        explanation: "How It Works: 'Gas from a piston comes out in pulses. The pulsation dampeners on the suction and discharge sides smooth the flow.'",
         difficulty: "easy"
     },
     {
@@ -1795,7 +1795,7 @@ const questionBank = [
             "Open the discharge valve only"
         ],
         correct: 2,
-        explanation: "Safety: covers and valve caps 'must never be removed or loosened without first fully depressurizing the cylinder and confirming zero pressure with a calibrated gauge'.",
+        explanation: "Safety: 'Never remove or loosen cylinder covers, valve caps, or any pressure-containing components without first fully depressurizing the cylinder. Confirm zero pressure with a calibrated gauge.'",
         difficulty: "easy"
     },
     // ---- Shell and Tube Heat Exchangers — practical set, approved 2026-10-28 (10 Qs) ----
@@ -1812,7 +1812,7 @@ const questionBank = [
             "They are sprayed onto each other in the channel"
         ],
         correct: 1,
-        explanation: "Description: 'one fluid flows inside a bundle of tubes, and the other flows around the tubes inside a cylindrical shell.' Parts (7): 'heat passes through the tube walls.'",
+        explanation: "Overview: 'One fluid flows inside a bundle of tubes. The other flows around the tubes inside a cylindrical shell.' Parts (7): 'heat passes through the tube walls.'",
         difficulty: "easy"
     },
     {
@@ -1844,7 +1844,7 @@ const questionBank = [
             "It protects the tubes from the incoming jet"
         ],
         correct: 2,
-        explanation: "Parts (3): 'Pass Partition Plate — divides the channel into a lower half and an upper half, so the fluid goes out through the lower tubes and returns through the upper tubes.'",
+        explanation: "Parts (3): 'Pass Partition Plate — divides the channel into a lower half and an upper half. So the fluid goes out through the lower tubes and returns through the upper tubes.'",
         difficulty: "medium"
     },
     {
@@ -1876,7 +1876,7 @@ const questionBank = [
             "To reduce the weight of the tube bundle"
         ],
         correct: 0,
-        explanation: "Working, Step 5: 'the baffles make the hot fluid go under one baffle and over the next, crossing the tubes again and again.' Parts (8): baffles 'make the shell-side fluid cross the tubes.'",
+        explanation: "How It Works, Step 5: 'the baffles make the hot fluid go under one baffle and over the next. It crosses the tubes again and again.' Parts (8): 'They make the shell-side fluid cross the tubes.'",
         difficulty: "medium"
     },
     {
@@ -1892,7 +1892,7 @@ const questionBank = [
             "Heat the cooling water"
         ],
         correct: 1,
-        explanation: "Parts (8): the baffles 'make the shell-side fluid cross the tubes, and they also support the tubes.'",
+        explanation: "Parts (8): 'They make the shell-side fluid cross the tubes. They also support the tubes.'",
         difficulty: "easy"
     },
     {
