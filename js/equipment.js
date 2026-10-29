@@ -511,6 +511,78 @@ var Equipment = (function () {
     }
 
     // Render equipment detail inline (for learn mode)
+    // --- Lesson rendering -------------------------------------------------
+    //
+    // Every lesson section has its own 🔊 Listen button, and every numbered
+    // part has a small one, so a student can replay just what they need. The
+    // narration reads exactly the text on screen: each speakable piece carries
+    // data-say (a sentence, a list item, a table row), and Voice highlights the
+    // piece being read. Spoken wording that differs from the screen goes in
+    // data-say-text.
+
+    // Wrap each sentence so it can be highlighted while it is read.
+    function sayText(text) {
+        var sentences = String(text).match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g) || [text];
+        return sentences.map(function (s) {
+            return '<span class="say" data-say>' + Utils.sanitize(s.trim()) + '</span>';
+        }).join(' ');
+    }
+
+    function sayPara(text) {
+        return text ? '<p>' + sayText(text) + '</p>' : '';
+    }
+
+    // "Baseplate — holds the pump…" → bold name, then purpose.
+    function partHTML(item) {
+        var m = String(item).match(/^\s*(\d+[.)]\s*)?(.+?)\s+[—-]\s+(.+)$/);
+        if (!m) return Utils.sanitize(item);
+        return (m[1] ? '<span class="part-num">' + Utils.sanitize(m[1].replace(/[.)]\s*$/, '')) + '</span>' : '') +
+            '<strong>' + Utils.sanitize(m[2]) + '</strong> — ' + Utils.sanitize(m[3]);
+    }
+
+    function spokenPart(item) {
+        return String(item).replace(/^\s*(\d+)[.)]\s*/, '$1. ').replace(/\s+—\s+/, ': ');
+    }
+
+    // A list of parts, each with its own replay button.
+    function partListHTML(items, ordered) {
+        if (!items || !items.length) return '';
+        var html = '<ul class="part-list' + (ordered ? ' part-list-numbered' : '') + '">';
+        items.forEach(function (item) {
+            html += '<li data-say data-say-text="' + Utils.sanitize(spokenPart(item)) + '">' +
+                '<button class="say-btn say-btn-sm" data-say-item title="Listen to this part" aria-label="Listen to this part">🔊</button>' +
+                '<span>' + partHTML(item) + '</span></li>';
+        });
+        return html + '</ul>';
+    }
+
+    function stepsHTML(steps) {
+        var html = '<ol class="step-list">';
+        steps.forEach(function (step, i) {
+            var m = String(step).match(/^(.+?)\s+—\s+(.+)$/);
+            var body = m ? '<strong>' + Utils.sanitize(m[1]) + '</strong> — ' + Utils.sanitize(m[2]) : Utils.sanitize(step);
+            var spoken = 'Step ' + (i + 1) + ', ' + (m ? m[1] + ': ' + m[2] : step);
+            html += '<li data-say data-say-text="' + Utils.sanitize(spoken) + '">' +
+                '<button class="say-btn say-btn-sm" data-say-item title="Listen to this step" aria-label="Listen to this step">🔊</button>' +
+                '<span><span class="part-num">' + (i + 1) + '</span>' + body + '</span></li>';
+        });
+        return html + '</ol>';
+    }
+
+    // One lesson section: heading + Listen button, then image beside its text.
+    function sectionHTML(key, title, imageSlot, id, body, extraClass) {
+        var image = imageSlot ? getSectionImage(id, imageSlot) : '';
+        var html = '<section class="lesson-section' + (extraClass ? ' ' + extraClass : '') + '" data-section="' + key + '">';
+        html += '<div class="lesson-section-head"><h4>' + title + '</h4>';
+        html += '<button class="say-btn" data-say-section>🔊 Listen</button></div>';
+        if (image) {
+            html += '<div class="edu-split">' + image + '<div class="edu-text">' + body + '</div></div>';
+        } else {
+            html += body;
+        }
+        return html + '</section>';
+    }
+
     function renderEquipmentDetail(id) {
         var equip = equipmentDB[id];
         if (!equip) return '<p>Equipment not found.</p>';
@@ -518,54 +590,79 @@ var Equipment = (function () {
         var html = '';
         html += getImageHTML(id);
 
-        // Description — isometric image first, then the text that walks its labels
-        html += getSectionImage(id, 'overview');
-        html += '<p>' + Utils.sanitize(equip.description) + '</p>';
-
-        // Parts & Components (merged) — cutaway image first, then the numbered legend
-        if (equip.parts || (equip.components && equip.components.length)) {
-            html += '<h4 class="mt-2 mb-1">Parts &amp; Components</h4>';
-            html += getSectionImage(id, 'components');
-            if (equip.parts) {
-                html += '<p>' + Utils.sanitize(equip.parts) + '</p>';
-            }
-            html += componentsListHTML(equip.components);
+        // What this lesson covers (written for each equipment)
+        if (equip.intro) {
+            html += sectionHTML('intro', '🎯 In This Lesson', null, id, sayPara(equip.intro), 'lesson-box');
         }
 
-        // Operating Principles — flow-path image first, then the stage-by-stage text
+        // Overview — isometric image beside the outside parts and what each does
+        html += sectionHTML('overview', 'Overview', 'overview', id,
+            sayPara(equip.description) + partListHTML(equip.labels, false));
+
+        // Parts & Components — cutaway image beside the numbered legend
+        if (equip.parts || (equip.components && equip.components.length)) {
+            html += sectionHTML('parts', 'Parts &amp; Components', 'components', id,
+                sayPara(equip.parts) + partListHTML(equip.components, true) + sayPara(equip.partsNote));
+        }
+
+        // How it works — flow-path image beside the step-by-step text
         if (equip.principles) {
-            html += '<h4 class="mt-2 mb-1">Operating Principles</h4>';
-            html += getSectionImage(id, 'working');
-            html += '<p>' + Utils.sanitize(equip.principles) + '</p>';
+            html += sectionHTML('working', 'How It Works', 'working', id,
+                sayPara(equip.principles) + (equip.steps ? stepsHTML(equip.steps) : '') + sayPara(equip.principlesNote));
         }
 
         // Key Specifications
         if (equip.specs && equip.specs.length) {
-            html += '<h4 class="mt-2 mb-1">Key Specifications</h4><div class="equip-specs">';
+            var specs = '<div class="equip-specs">';
             equip.specs.forEach(function (s) {
-                html += '<div class="spec-card"><div class="spec-title">' + Utils.sanitize(s.t) + '</div><div class="spec-value">' + Utils.sanitize(s.v) + '</div></div>';
+                specs += '<div class="spec-card" data-say data-say-text="' + Utils.sanitize(s.t + ': ' + s.v) + '"><div class="spec-title">' + Utils.sanitize(s.t) + '</div><div class="spec-value">' + Utils.sanitize(s.v) + '</div></div>';
             });
-            html += '</div>';
+            html += sectionHTML('specs', 'Key Specifications', null, id, specs + '</div>');
         }
 
         // Troubleshooting
         if (equip.troubles && equip.troubles.length) {
-            html += '<h4 class="mt-2 mb-1">Troubleshooting</h4>';
-            html += '<table class="equip-table"><thead><tr><th>Problem</th><th>Causes</th><th>Action</th></tr></thead><tbody>';
+            var table = '<table class="equip-table"><thead><tr><th>Problem</th><th>Causes</th><th>Action</th></tr></thead><tbody>';
             equip.troubles.forEach(function (t) {
-                html += '<tr><td>' + Utils.sanitize(t.p) + '</td><td>' + Utils.sanitize(t.c) + '</td><td>' + Utils.sanitize(t.a) + '</td></tr>';
+                var spoken = 'Problem: ' + t.p + '. Causes: ' + t.c + '. Action: ' + t.a + '.';
+                table += '<tr data-say data-say-text="' + Utils.sanitize(spoken) + '"><td>' + Utils.sanitize(t.p) + '</td><td>' + Utils.sanitize(t.c) + '</td><td>' + Utils.sanitize(t.a) + '</td></tr>';
             });
-            html += '</tbody></table>';
+            html += sectionHTML('troubles', 'Troubleshooting', null, id, table + '</tbody></table>');
         }
 
         // Safety
         if (equip.safety && equip.safety.length) {
-            html += '<div class="equip-safety mt-2"><h4>⚠️ Safety</h4><ul class="equip-list">';
-            equip.safety.forEach(function (s) { html += '<li>' + Utils.sanitize(s) + '</li>'; });
-            html += '</ul></div>';
+            var safety = '<ul class="equip-list">';
+            equip.safety.forEach(function (s) { safety += '<li>' + sayText(s) + '</li>'; });
+            html += sectionHTML('safety', '⚠️ Safety', null, id, safety + '</ul>', 'equip-safety');
+        }
+
+        // What the student has now covered (written for each equipment)
+        if (equip.recap && equip.recap.length) {
+            var recap = '<p><span class="say" data-say>You are now familiar with:</span></p><ul class="recap-list">';
+            equip.recap.forEach(function (r) { recap += '<li data-say>' + Utils.sanitize(r) + '</li>'; });
+            html += sectionHTML('recap', '✅ What You Have Covered', null, id, recap + '</ul>', 'lesson-box');
         }
 
         return html;
+    }
+
+    // Tap an image to see it full screen (labels are small on a phone).
+    // The app re-renders lessons inside the same container, so attach once.
+    function attachLessonListeners(container) {
+        if (container.dataset.lessonListeners) return;
+        container.dataset.lessonListeners = '1';
+        container.addEventListener('click', function (e) {
+            var img = e.target.closest('.equip-edu-image img');
+            if (!img) return;
+            e.stopPropagation();
+            var box = document.createElement('div');
+            box.className = 'img-lightbox';
+            box.innerHTML = '<img src="' + img.getAttribute('src') + '" alt="' + Utils.sanitize(img.alt) + '"><button class="img-lightbox-close" aria-label="Close">✕</button>';
+            box.addEventListener('click', function () { box.remove(); });
+            document.body.appendChild(box);
+        });
+        Voice.attach(container);
     }
 
     return {
@@ -573,6 +670,7 @@ var Equipment = (function () {
         renderBrowseEquip: renderBrowseEquip,
         showEquipment: showEquipment,
         renderEquipmentDetail: renderEquipmentDetail,
+        attachLessonListeners: attachLessonListeners,
         attachGalleryListeners: attachGalleryListeners
     };
 })();

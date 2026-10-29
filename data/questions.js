@@ -1165,7 +1165,7 @@ const questionBank = [
             "It filters debris out of the fluid before it enters the impeller."
         ],
         correct: 0,
-        explanation: "Parts: 'The casing, or volute, is the spiral housing that collects the fluid leaving the impeller and gradually converts its velocity into pressure.'",
+        explanation: "Parts (1): 'Casing / Volute — the spiral housing that collects the fluid leaving the impeller and gradually converts its velocity into pressure.'",
         difficulty: "easy"
     },
     {
@@ -1229,7 +1229,7 @@ const questionBank = [
             "The baseplate"
         ],
         correct: 0,
-        explanation: "Parts: 'Wear rings sit between the impeller and the casing to maintain a tight clearance and limit internal recirculation.'",
+        explanation: "Parts (3): 'Wear Ring — sits between the impeller and the casing to keep a tight clearance and limit internal recirculation.'",
         difficulty: "easy"
     },
     {
@@ -1245,7 +1245,7 @@ const questionBank = [
             "It turns the impeller."
         ],
         correct: 1,
-        explanation: "Parts: 'The mechanical seal closes the point where the shaft passes through the casing and prevents the pumped fluid from leaking out.'",
+        explanation: "Parts (5): 'Mechanical Seal — closes the point where the shaft passes through the casing and prevents the pumped fluid from leaking out.'",
         difficulty: "easy"
     },
     {
@@ -1261,7 +1261,7 @@ const questionBank = [
             "The suction nozzle"
         ],
         correct: 2,
-        explanation: "Parts: 'The coupling joins the pump shaft to the motor shaft while allowing for minor misalignment.'",
+        explanation: "Parts (8): 'Coupling — joins the pump shaft to the motor shaft while allowing for minor misalignment.'",
         difficulty: "easy"
     },
     {
@@ -1359,7 +1359,7 @@ const questionBank = [
             "A coupling guard"
         ],
         correct: 0,
-        explanation: "Parts: 'The pulsation dampener is a gas-charged vessel on the discharge line that absorbs pressure spikes and smooths out the pulsating flow.'",
+        explanation: "Parts (9): 'Pulsation Dampener — a gas-charged vessel on the discharge line that absorbs pressure spikes and smooths out the pulsating flow.'",
         difficulty: "easy"
     },
     {
@@ -1407,7 +1407,7 @@ const questionBank = [
             "The packing"
         ],
         correct: 1,
-        explanation: "Parts: 'The crankshaft is a rotating shaft with offset journals that converts the rotary motion of the motor into the back-and-forth motion needed by the plunger.'",
+        explanation: "Parts (8): 'Crankshaft — a rotating shaft with offset journals that converts the rotary motion of the motor into the back-and-forth motion needed by the plunger.'",
         difficulty: "easy"
     },
     {
@@ -1423,7 +1423,7 @@ const questionBank = [
             "Only when the pump is stopped"
         ],
         correct: 2,
-        explanation: "Parts: 'The inlet valve, below the cylinder, is a spring-loaded check valve that opens automatically to allow fluid into the cylinder during the suction stroke and closes during discharge.' Working, Stage 1: 'The inlet valve opens and fluid is drawn into the cylinder.'",
+        explanation: "Parts (4): 'Inlet Valve — below the cylinder; a spring-loaded check valve that opens automatically to let fluid into the cylinder on the suction stroke and closes during discharge.' How It Works, Suction stroke: 'The inlet valve opens and fluid is drawn into the cylinder.'",
         difficulty: "easy"
     },
     {
@@ -1505,7 +1505,7 @@ const questionBank = [
             "To separate the suction gas from the discharge gas"
         ],
         correct: 2,
-        explanation: "Description: 'a bolted flange runs along its full length at the shaft centreline, so the upper half can be lifted off to reach the rotor.'",
+        explanation: "Overview: 'Horizontally Split Casing — a bolted flange runs along its full length at the shaft centreline, so the upper half can be lifted off to reach the rotor.'",
         difficulty: "easy"
     },
     {
@@ -1521,7 +1521,7 @@ const questionBank = [
             "The coupling"
         ],
         correct: 0,
-        explanation: "Parts (4): 'The diffuser is the stationary passage around each impeller that slows the gas down and converts its velocity into pressure.'",
+        explanation: "Parts (4): 'Diffuser — the stationary passage around each impeller that slows the gas down and converts its velocity into pressure.'",
         difficulty: "easy"
     },
     {
@@ -1537,7 +1537,7 @@ const questionBank = [
             "Guides the gas from one stage back inward to the eye of the next impeller"
         ],
         correct: 3,
-        explanation: "Parts (5): 'The return channel guides the gas from one stage back inward to the eye of the next impeller.'",
+        explanation: "Parts (5): 'Return Channel — guides the gas from one stage back inward to the eye of the next impeller.'",
         difficulty: "medium"
     },
     {
@@ -1569,7 +1569,7 @@ const questionBank = [
             "In the lube oil line; it keeps the oil pressure steady"
         ],
         correct: 0,
-        explanation: "Parts (9): 'The balance piston, located after the last impeller, counteracts the axial thrust that pushes the rotor towards the suction end.'",
+        explanation: "Parts (9): 'Balance Piston — located after the last impeller; counteracts the axial thrust that pushes the rotor towards the suction end.'",
         difficulty: "medium"
     },
     {
@@ -1585,7 +1585,7 @@ const questionBank = [
             "The inlet guide vanes"
         ],
         correct: 2,
-        explanation: "Parts (10): 'The shaft seals, dry gas seals at both ends of the shaft, stop process gas leaking out where the shaft leaves the casing.'",
+        explanation: "Parts (10): 'Shaft Seals (Dry Gas Seals) — at both ends of the shaft; stop process gas leaking out where the shaft leaves the casing.'",
         difficulty: "easy"
     },
     {
@@ -1601,7 +1601,7 @@ const questionBank = [
             "At the non-drive end; it holds the rotor in position axially"
         ],
         correct: 3,
-        explanation: "Parts (12): 'the thrust bearing at the non-drive end holds the rotor in position axially.' The isometric view shows the journal and thrust bearing housing at the non-drive end.",
+        explanation: "Parts (12): 'Thrust Bearing — at the non-drive end; holds the rotor in position axially.' Overview: 'Journal & Thrust Bearing Housing — at the non-drive end; carries the shaft.'",
         difficulty: "medium"
     },
     {
@@ -1667,7 +1667,7 @@ const questionBank = [
             "Both are inside the distance piece"
         ],
         correct: 0,
-        explanation: "Parts: 'The suction valves, on top of the cylinder, let low-pressure gas in, and the discharge valves, at the bottom, let the compressed gas out.'",
+        explanation: "Parts (12, 13): 'Suction Valves — on top of the cylinder; let low-pressure gas in' and 'Discharge Valves — at the bottom of the cylinder; let the compressed gas out.'",
         difficulty: "easy"
     },
     {
@@ -1683,7 +1683,7 @@ const questionBank = [
             "It connects the motor shaft to the crankshaft"
         ],
         correct: 1,
-        explanation: "Parts: 'The crosshead slides back and forth in its guide... It takes the side push from the connecting rod, so the piston rod moves in a perfectly straight line.'",
+        explanation: "Parts (6): 'Crosshead — slides back and forth in its guide between the crankcase and the distance piece; it takes the side push from the connecting rod, so the piston rod moves in a perfectly straight line.'",
         difficulty: "medium"
     },
     {
@@ -1699,7 +1699,7 @@ const questionBank = [
             "To keep crankcase oil away from the cylinder and leaked process gas away from the crankcase"
         ],
         correct: 3,
-        explanation: "Parts: 'It keeps crankcase oil away from the cylinder and leaked process gas away from the crankcase.'",
+        explanation: "Parts (7): 'Distance Piece — the housing between the crankcase and the cylinder that the piston rod passes through; it keeps crankcase oil away from the cylinder and leaked process gas away from the crankcase.'",
         difficulty: "medium"
     },
     {
@@ -1715,7 +1715,7 @@ const questionBank = [
             "It opens the suction valve"
         ],
         correct: 0,
-        explanation: "Parts: 'The rod packing is a set of sealing rings around the piston rod where it enters the cylinder. It stops the compressed gas leaking out along the rod.'",
+        explanation: "Parts (9): 'Rod Packing — a set of sealing rings around the piston rod where it enters the cylinder; it stops the compressed gas leaking out along the rod.'",
         difficulty: "easy"
     },
     {
@@ -1828,7 +1828,7 @@ const questionBank = [
             "To make the exchanger lighter"
         ],
         correct: 0,
-        explanation: "Parts (1): 'The channel cover is bolted onto the front channel and can be removed to inspect and clean the tubes.'",
+        explanation: "Parts (1): 'Channel Cover — bolted onto the front channel; can be removed to inspect and clean the tubes.'",
         difficulty: "easy"
     },
     {
@@ -1844,7 +1844,7 @@ const questionBank = [
             "It protects the tubes from the incoming jet"
         ],
         correct: 2,
-        explanation: "Parts (3): 'The pass partition plate divides the channel into a lower half and an upper half, so the fluid goes out through the lower tubes and returns through the upper tubes.'",
+        explanation: "Parts (3): 'Pass Partition Plate — divides the channel into a lower half and an upper half, so the fluid goes out through the lower tubes and returns through the upper tubes.'",
         difficulty: "medium"
     },
     {
@@ -1908,7 +1908,7 @@ const questionBank = [
             "A support plate under the saddles"
         ],
         correct: 2,
-        explanation: "Parts (12): 'the impingement plate directly below it [the shell-side inlet] protects the tubes from the incoming jet.'",
+        explanation: "Parts (12): 'Impingement Plate — directly below the shell-side inlet; protects the tubes from the incoming jet.'",
         difficulty: "medium"
     },
     {
@@ -1940,7 +1940,7 @@ const questionBank = [
             "The vent cools the shell; the drain cleans the tubes"
         ],
         correct: 0,
-        explanation: "Description: 'A vent on top of the shell releases trapped air or gas, and a drain at the bottom empties the shell.' Field observations also say 'Verify vent and drain operation.'",
+        explanation: "Overview: 'Vent — on top of the shell; releases trapped air or gas' and 'Drain — at the bottom of the shell; empties the shell.' Field observations also say 'Verify vent and drain operation.'",
         difficulty: "easy"
     },
     {

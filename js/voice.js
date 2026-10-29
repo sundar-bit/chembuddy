@@ -1,257 +1,142 @@
-// ChemBuddy - Voice-Over Module (Web Speech API)
+// ChemBuddy - Lesson Narration (Web Speech API)
+//
+// Narration is per section and per item, never one long stream. A section's
+// 🔊 Listen button reads every [data-say] piece inside that section, in order;
+// a small 🔊 on a list item reads just that item. The piece being read is
+// highlighted and kept in view, so the student always knows where the voice
+// is. Pressing the playing button again stops it; pressing another starts
+// that one instead. Buttons can be replayed any number of times.
 
 var Voice = (function () {
     'use strict';
 
     var synth = window.speechSynthesis;
-    var currentUtterance = null;
-    var segments = [];
-    var currentSegment = 0;
-    var isPlaying = false;
-    var isPaused = false;
-    var activeEquipId = null;
-    var onSegmentChange = null;
+    var queue = [];
+    var index = 0;
+    var activeBtn = null;
+    var activeSection = null;
+    var run = 0; // bumped on every stop, so callbacks from a cancelled run are ignored
 
-    // Build speech segments from equipment data
-    function buildSegments(equipId) {
-        var equip = equipmentDB[equipId];
-        if (!equip) return [];
-
-        var segs = [];
-
-        segs.push({ label: 'Name', text: equip.name + '.' });
-        segs.push({ label: 'Description', text: equip.description });
-
-        if (equip.parts || (equip.components && equip.components.length)) {
-            var partsText = '';
-            if (equip.parts) partsText += equip.parts + '. ';
-            if (equip.components && equip.components.length) {
-                partsText += 'The main components are: ' + equip.components.join(', ') + '.';
-            }
-            segs.push({ label: 'Parts & Components', text: partsText });
-        }
-
-        if (equip.principles) {
-            segs.push({ label: 'Operating Principles', text: equip.principles });
-        }
-
-        if (equip.specs && equip.specs.length) {
-            var specText = equip.specs.map(function (s) {
-                return s.t + ': ' + s.v;
-            }).join('. ');
-            segs.push({ label: 'Key Specifications', text: specText + '.' });
-        }
-
-        if (equip.troubles && equip.troubles.length) {
-            var troubleText = equip.troubles.map(function (t) {
-                return 'Problem: ' + t.p + '. Cause: ' + t.c + '. Action: ' + t.a;
-            }).join('. ');
-            segs.push({ label: 'Troubleshooting', text: troubleText + '.' });
-        }
-
-        if (equip.safety && equip.safety.length) {
-            var safetyText = 'Safety considerations: ' + equip.safety.join('. ') + '.';
-            segs.push({ label: 'Safety', text: safetyText });
-        }
-
-        return segs;
-    }
-
-    function play(equipId, segCallback) {
-        // If resuming same equipment from pause
-        if (isPaused && activeEquipId === equipId) {
-            synth.resume();
-            isPaused = false;
-            isPlaying = true;
-            updateUI(equipId);
-            return;
-        }
-
-        // Stop any current playback
-        stop();
-
-        activeEquipId = equipId;
-        onSegmentChange = segCallback || null;
-        segments = buildSegments(equipId);
-        currentSegment = 0;
-        isPlaying = true;
-        isPaused = false;
-
-        speakNext();
-    }
-
-    function speakNext() {
-        if (currentSegment >= segments.length) {
-            // Done
-            isPlaying = false;
-            isPaused = false;
-            currentSegment = 0;
-            updateUI(activeEquipId);
-            if (onSegmentChange) onSegmentChange(-1, null);
-            return;
-        }
-
-        var seg = segments[currentSegment];
-        if (onSegmentChange) onSegmentChange(currentSegment, seg.label);
-
-        currentUtterance = new SpeechSynthesisUtterance(seg.text);
-        currentUtterance.rate = 0.95;
-        currentUtterance.pitch = 1.0;
-
-        // Try to pick a good English voice
+    function pickVoice() {
         var voices = synth.getVoices();
-        var preferred = voices.find(function (v) {
+        return voices.find(function (v) {
             return v.lang.startsWith('en') && v.name.toLowerCase().includes('google');
         }) || voices.find(function (v) {
             return v.lang.startsWith('en-') && !v.localService;
         }) || voices.find(function (v) {
             return v.lang.startsWith('en');
         });
-        if (preferred) currentUtterance.voice = preferred;
-
-        currentUtterance.onend = function () {
-            currentSegment++;
-            if (isPlaying && !isPaused) {
-                speakNext();
-            }
-        };
-
-        currentUtterance.onerror = function (e) {
-            if (e.error !== 'canceled' && e.error !== 'interrupted') {
-                console.warn('Voice error:', e.error);
-            }
-            // Try next segment on error
-            if (isPlaying && !isPaused) {
-                currentSegment++;
-                speakNext();
-            }
-        };
-
-        synth.speak(currentUtterance);
-        updateUI(activeEquipId);
     }
 
-    function pause() {
-        if (isPlaying && !isPaused) {
-            synth.pause();
-            isPaused = true;
-            isPlaying = true;
-            updateUI(activeEquipId);
+    function textOf(el) {
+        return el.getAttribute('data-say-text') || el.textContent.replace(/🔊|⏹/g, '').trim();
+    }
+
+    function setButton(btn, playing) {
+        if (!btn) return;
+        btn.classList.toggle('playing', playing);
+        if (btn.hasAttribute('data-say-section')) {
+            btn.textContent = playing ? '⏹ Stop' : '🔊 Listen';
+        } else {
+            btn.textContent = playing ? '⏹' : '🔊';
+        }
+    }
+
+    function clearHighlight() {
+        document.querySelectorAll('.speaking').forEach(function (el) { el.classList.remove('speaking'); });
+    }
+
+    function keepInView(el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < 70 || r.bottom > window.innerHeight - 20) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 
     function stop() {
-        synth.cancel();
-        isPlaying = false;
-        isPaused = false;
-        currentSegment = 0;
-        segments = [];
-        if (activeEquipId) updateUI(activeEquipId);
-        if (onSegmentChange) onSegmentChange(-1, null);
-        activeEquipId = null;
-        currentUtterance = null;
-        onSegmentChange = null;
+        run++;
+        if (synth) synth.cancel();
+        clearHighlight();
+        setButton(activeBtn, false);
+        if (activeSection) activeSection.classList.remove('lesson-section-active');
+        activeBtn = null;
+        activeSection = null;
+        queue = [];
+        index = 0;
     }
 
-    function skipNext() {
-        if (!isPlaying) return;
-        synth.cancel();
-        currentSegment++;
-        speakNext();
-    }
-
-    function skipPrev() {
-        if (!isPlaying) return;
-        synth.cancel();
-        currentSegment = Math.max(0, currentSegment - 1);
-        speakNext();
-    }
-
-    function updateUI(equipId) {
-        var bar = document.getElementById('voice-bar-' + equipId);
-        if (!bar) return;
-
-        var playBtn = bar.querySelector('.voice-play');
-        var pauseBtn = bar.querySelector('.voice-pause');
-        var stopBtn = bar.querySelector('.voice-stop');
-        var statusEl = bar.querySelector('.voice-status');
-
-        if (activeEquipId !== equipId) {
-            // Not active — show play button
-            if (playBtn) playBtn.style.display = '';
-            if (pauseBtn) pauseBtn.style.display = 'none';
-            if (stopBtn) stopBtn.disabled = true;
-            if (statusEl) statusEl.textContent = 'Click play to listen';
+    function speak(elements, btn) {
+        stop();
+        if (!synth) {
+            Utils.toast('Audio is not supported in this browser', 'warning');
             return;
         }
-
-        if (isPlaying && !isPaused) {
-            if (playBtn) playBtn.style.display = 'none';
-            if (pauseBtn) pauseBtn.style.display = '';
-            if (stopBtn) stopBtn.disabled = false;
-            if (statusEl && segments[currentSegment]) {
-                statusEl.textContent = 'Playing: ' + segments[currentSegment].label +
-                    ' (' + (currentSegment + 1) + '/' + segments.length + ')';
-            }
-        } else if (isPaused) {
-            if (playBtn) playBtn.style.display = '';
-            if (pauseBtn) pauseBtn.style.display = 'none';
-            if (stopBtn) stopBtn.disabled = false;
-            if (statusEl) statusEl.textContent = 'Paused';
-        } else {
-            if (playBtn) playBtn.style.display = '';
-            if (pauseBtn) pauseBtn.style.display = 'none';
-            if (stopBtn) stopBtn.disabled = true;
-            if (statusEl) statusEl.textContent = 'Click play to listen';
-        }
+        if (!elements.length) return;
+        queue = elements;
+        index = 0;
+        activeBtn = btn;
+        activeSection = btn.closest('.lesson-section');
+        setButton(btn, true);
+        if (activeSection) activeSection.classList.add('lesson-section-active');
+        var myRun = run;
+        // A short pause after cancel() — some browsers drop speech queued immediately after it
+        setTimeout(function () { next(myRun); }, 60);
     }
 
-    // Render voice control bar HTML for an equipment card
-    function renderBar(equipId) {
-        return '<div class="voice-bar" id="voice-bar-' + equipId + '">' +
-            '<button class="voice-btn voice-prev" title="Previous section">⏮</button>' +
-            '<button class="voice-btn voice-play" title="Play">▶</button>' +
-            '<button class="voice-btn voice-pause" title="Pause" style="display:none">⏸</button>' +
-            '<button class="voice-btn voice-stop" title="Stop" disabled>⏹</button>' +
-            '<button class="voice-btn voice-next" title="Next section">⏭</button>' +
-            '<span class="voice-status">Click play to listen</span>' +
-            '</div>';
-    }
-
-    // Attach event listeners to a voice bar
-    function attachListeners(equipId) {
-        var bar = document.getElementById('voice-bar-' + equipId);
-        if (!bar) return;
-
-        bar.querySelector('.voice-play').addEventListener('click', function (e) {
-            e.stopPropagation();
-            play(equipId, function (idx, label) {
-                updateUI(equipId);
-            });
-        });
-        bar.querySelector('.voice-pause').addEventListener('click', function (e) {
-            e.stopPropagation();
-            pause();
-        });
-        bar.querySelector('.voice-stop').addEventListener('click', function (e) {
-            e.stopPropagation();
+    function next(myRun) {
+        if (myRun !== run) return;
+        clearHighlight();
+        if (index >= queue.length) {
             stop();
-        });
-        bar.querySelector('.voice-prev').addEventListener('click', function (e) {
+            return;
+        }
+        var el = queue[index];
+        el.classList.add('speaking');
+        keepInView(el);
+
+        var u = new SpeechSynthesisUtterance(textOf(el));
+        u.rate = 0.95;
+        u.pitch = 1.0;
+        var voice = pickVoice();
+        if (voice) u.voice = voice;
+        u.onend = function () {
+            if (myRun !== run) return;
+            index++;
+            next(myRun);
+        };
+        u.onerror = function (e) {
+            if (myRun !== run) return;
+            if (e.error !== 'canceled' && e.error !== 'interrupted') console.warn('Voice error:', e.error);
+            index++;
+            next(myRun);
+        };
+        synth.speak(u);
+    }
+
+    // One delegated listener per lesson container.
+    function attach(container) {
+        container.addEventListener('click', function (e) {
+            var btn = e.target.closest('[data-say-section], [data-say-item]');
+            if (!btn || !container.contains(btn)) return;
+            e.preventDefault();
             e.stopPropagation();
-            if (activeEquipId === equipId && isPlaying) skipPrev();
-        });
-        bar.querySelector('.voice-next').addEventListener('click', function (e) {
-            e.stopPropagation();
-            if (activeEquipId === equipId && isPlaying) skipNext();
+            if (btn === activeBtn) {
+                stop();
+                return;
+            }
+            if (btn.hasAttribute('data-say-section')) {
+                speak(Array.prototype.slice.call(btn.closest('.lesson-section').querySelectorAll('[data-say]')), btn);
+            } else {
+                speak([btn.closest('[data-say]')], btn);
+            }
         });
     }
+
+    // Leaving the page must not leave the voice talking.
+    window.addEventListener('hashchange', stop);
 
     return {
-        play: play,
-        pause: pause,
-        stop: stop,
-        renderBar: renderBar,
-        attachListeners: attachListeners
+        attach: attach,
+        stop: stop
     };
 })();

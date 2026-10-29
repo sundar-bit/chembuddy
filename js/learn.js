@@ -187,9 +187,6 @@ var Learn = (function () {
             // Collapsible content
             html += '<div class="day-equip-content">';
 
-            // Voice-over bar
-            html += Voice.renderBar(equipId);
-
             // Study timer (only if not yet studied)
             if (!isStudied) {
                 html += '<div class="study-timer-bar" id="timer-' + equipId + '">';
@@ -212,14 +209,13 @@ var Learn = (function () {
 
         // Attach gallery thumbnail listeners for equipment images
         Equipment.attachGalleryListeners(container);
+        // Section and part Listen buttons, tap-to-enlarge images
+        Equipment.attachLessonListeners(container);
 
         // Setup card expand/collapse, timers, and voice
         container.querySelectorAll('.day-equip-card').forEach(function (card) {
             var equipId = card.dataset.equip;
             var header = card.querySelector('.day-equip-header');
-
-            // Attach voice controls
-            Voice.attachListeners(equipId);
 
             header.addEventListener('click', function () {
                 var wasExpanded = card.classList.contains('expanded');

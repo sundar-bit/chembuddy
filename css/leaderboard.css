@@ -100,7 +100,7 @@
     background: var(--white);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
-    overflow: hidden;
+    overflow: clip; /* not hidden: lets lesson images stay in view (sticky) */
     transition: box-shadow var(--transition);
 }
 .day-equip-card:hover { box-shadow: var(--shadow-lg); }
