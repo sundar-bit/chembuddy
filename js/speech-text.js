@@ -84,6 +84,8 @@ var SpeechText = (function () {
         t = t.replace(/(^|[\s(:])[-−–](?=\d)/g, '$1minus ');
         // Ranges: "10-100", "4 – 20" → "10 to 100" — but not standard numbers like "ISO 8573-1"
         t = t.replace(/(?<!(?:ISO|API|IEC|EN|NFPA|ANSI|ASME|BS|IS|DIN|TEMA|Z)\s?\d*)(\d)\s?[-–]\s?(?=\d)/g, '$1 to ');
+        // Ratios: "25:1" → "25 to 1"
+        t = t.replace(/(\d)\s?:\s?(?=\d)/g, '$1 to ');
         // "2-10x" → "2 to 10 times"
         t = t.replace(/(\d)\s?x(?![A-Za-z0-9])/g, '$1 times');
 

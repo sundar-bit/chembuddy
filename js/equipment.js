@@ -93,6 +93,20 @@ var Equipment = (function () {
                 alt: 'Shell and tube heat exchanger flow path: cooling water through two tube passes, hot fluid zig-zagging across the tubes'
             }
         },
+        'air-cooled': {
+            overview: {
+                src: 'images/equipment/heat-exchangers/air-cooled/air-cooled-isometric.png',
+                alt: 'Isometric view of forced-draft air cooled heat exchanger with fan below the finned tube bundle'
+            },
+            components: {
+                src: 'images/equipment/heat-exchangers/air-cooled/air-cooled-cutaway.png',
+                alt: 'Cutaway view of air cooled heat exchanger showing major components'
+            },
+            working: {
+                src: 'images/equipment/heat-exchangers/air-cooled/air-cooled-flow-path.png',
+                alt: 'Air cooled heat exchanger flow path: process fluid through two tube passes, cooling air rising across the finned tubes'
+            }
+        },
         'multistage-pump': {
             overview: {
                 src: 'images/equipment-level2/pumps/multistage-pump/multistage-pump-isometric.png',

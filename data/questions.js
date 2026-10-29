@@ -703,57 +703,6 @@ const questionBank = [
 
     // ---- W2D3: Air-Cooled & Double Pipe HX (5 Qs) ----
     {
-        id: "W2D3Q1",
-        week: 2,
-        day: 3,
-        category: "Heat Exchangers",
-        subcategory: "Air-Cooled HX",
-        question: "Why are the tubes in air-cooled heat exchangers fitted with fins?",
-        options: [
-            "The fins are added to reduce the overall weight of the tube bundle.",
-            "The extended fin surface compensates for the naturally poor heat transfer capability of air as a cooling medium.",
-            "The fins are added to increase the pressure on the tube side of the exchanger.",
-            "The fins are added primarily to prevent corrosion on the outer tube surface."
-        ],
-        correct: 1,
-        explanation: "The app states that 'the extended fin surface compensates for air's poor heat transfer.' The area ratio between fins and tubes is '15-25:1.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W2D3Q2",
-        week: 2,
-        day: 3,
-        category: "Heat Exchangers",
-        subcategory: "Air-Cooled HX",
-        question: "What are the two draft configurations used in air-cooled heat exchangers?",
-        options: [
-            "The two configurations are natural draft and mechanical draft.",
-            "The two configurations are forced draft, where the fans are located below the tube bundle, and induced draft, where the fans are located above the tube bundle.",
-            "The two configurations are single-pass and double-pass airflow.",
-            "The two configurations are horizontal draft and vertical draft."
-        ],
-        correct: 1,
-        explanation: "The app describes the two configurations as 'forced draft (fans below) or induced draft (fans above).'",
-        difficulty: "easy"
-    },
-    {
-        id: "W2D3Q3",
-        week: 2,
-        day: 3,
-        category: "Heat Exchangers",
-        subcategory: "Air-Cooled HX",
-        question: "What temperature approach can an air-cooled heat exchanger achieve relative to the ambient air?",
-        options: [
-            "An air-cooled heat exchanger can approach within 1 degree Celsius of the ambient temperature.",
-            "An air-cooled heat exchanger can approach within 5 degrees Celsius of the ambient temperature.",
-            "An air-cooled heat exchanger can approach within 10 to 15 degrees Celsius of the dry bulb temperature.",
-            "An air-cooled heat exchanger requires at least a 20 to 25 degree Celsius approach to the ambient temperature."
-        ],
-        correct: 2,
-        explanation: "The air-cooled heat exchanger specifications state that the approach is '10-15C to dry bulb.'",
-        difficulty: "easy"
-    },
-    {
         id: "W2D3Q4",
         week: 2,
         day: 3,
@@ -995,40 +944,6 @@ const questionBank = [
         ],
         correct: 1,
         explanation: "The plate heat exchanger troubleshooting lists the causes of gasket failure as 'age, chemical attack, overtightening.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W2WQ6",
-        week: 2,
-        day: null,
-        category: "Heat Exchangers",
-        subcategory: "Air-Cooled HX",
-        question: "How many fins per inch are typically used on the tubes of an air-cooled heat exchanger?",
-        options: [
-            "Air-cooled heat exchangers typically have 2 to 4 fins per inch on their tubes.",
-            "Air-cooled heat exchangers typically have 8 to 12 fins per inch on their tubes.",
-            "Air-cooled heat exchangers typically have 20 to 30 fins per inch on their tubes.",
-            "Air-cooled heat exchangers typically have 1 to 2 fins per inch on their tubes."
-        ],
-        correct: 1,
-        explanation: "The air-cooled heat exchanger specifications state that the fin density is '8-12 fins per inch.'",
-        difficulty: "easy"
-    },
-    {
-        id: "W2WQ7",
-        week: 2,
-        day: null,
-        category: "Heat Exchangers",
-        subcategory: "Air-Cooled HX",
-        question: "What are the main causes of a hot process outlet temperature in an air-cooled heat exchanger?",
-        options: [
-            "A hot process outlet is caused only by fouling on the tube side of the exchanger.",
-            "A hot process outlet is caused by insufficient airflow across the fins, fouled or dirty fins, or failure of the cooling fans.",
-            "A hot process outlet is caused only by the ambient temperature being too high.",
-            "A hot process outlet is caused by using an oversized tube bundle in the unit."
-        ],
-        correct: 1,
-        explanation: "The air-cooled heat exchanger troubleshooting lists the causes of a hot process outlet as 'low air flow, fouled fins, fan failure.'",
         difficulty: "easy"
     },
     {
@@ -1957,6 +1872,167 @@ const questionBank = [
         ],
         correct: 2,
         explanation: "Troubleshooting — Low heat transfer: causes 'Fouling, air pockets, low flow, bypassing'; action 'Clean tubes, vent air, check flows, seal bypasses'.",
+        difficulty: "medium"
+    },
+    // ---- Air Cooled Heat Exchangers — practical set, approved 2026-10-29 (10 Qs) ----
+    {
+        id: "AC-Q01",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "What does an air cooled heat exchanger use to cool the hot process fluid?",
+        options: [
+            "Cooling water from a cooling tower",
+            "Ambient air, so no cooling water is needed",
+            "Steam passed through the tubes",
+            "A refrigerant in the shell"
+        ],
+        correct: 1,
+        explanation: "Overview: 'The air cooled heat exchanger cools a hot process fluid using ambient air instead of cooling water.' How It Works: 'No cooling water is needed.'",
+        difficulty: "easy"
+    },
+    {
+        id: "AC-Q02",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "In the forced draft unit shown, where is the fan and what does it do?",
+        options: [
+            "Above the bundle, pulling air through",
+            "Inside the header, stirring the fluid",
+            "Beside the motor, cooling the motor only",
+            "Below the tube bundle, pushing air up"
+        ],
+        correct: 3,
+        explanation: "Overview: 'The one shown is forced draft: the fan sits below the tube bundle and pushes air up.'",
+        difficulty: "easy"
+    },
+    {
+        id: "AC-Q03",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "Why do the tubes have thin fins on the outside?",
+        options: [
+            "Air carries heat poorly, so the fins add a large outside surface",
+            "To make the tubes stronger against pressure",
+            "To stop the tubes vibrating",
+            "To keep rain off the tubes"
+        ],
+        correct: 0,
+        explanation: "How It Works: 'Air carries heat poorly, so the fins add a large outside surface.' Parts (7): 'Thin aluminium fins wound on the steel tube give a large surface for the air.'",
+        difficulty: "easy"
+    },
+    {
+        id: "AC-Q04",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "What does the pass partition plate inside the inlet/outlet header do?",
+        options: [
+            "It holds the tube ends in place",
+            "It protects the fan from hot fluid",
+            "It sends the fluid out through the upper tubes and back through the lower tubes",
+            "It spreads the air evenly under the bundle"
+        ],
+        correct: 2,
+        explanation: "Parts (4): 'Pass Partition Plate — a horizontal plate across the header. Fluid goes out through the upper tubes and returns through the lower tubes.'",
+        difficulty: "medium"
+    },
+    {
+        id: "AC-Q05",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "Where does the process fluid enter and leave the exchanger?",
+        options: [
+            "Enters at the return header, leaves at the inlet header",
+            "Enters at the top of the left header, leaves at the bottom of the same header",
+            "Enters through the fan ring, leaves through the plenum",
+            "Enters and leaves through the header plugs"
+        ],
+        correct: 1,
+        explanation: "Parts (1) and (2): 'hot process fluid enters at the top of the header' and 'cooled process fluid leaves at the bottom of the header.'",
+        difficulty: "easy"
+    },
+    {
+        id: "AC-Q06",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "Why are there round plugs on the face of the header, one opposite each tube?",
+        options: [
+            "They are drains for rainwater",
+            "They balance the pressure between passes",
+            "They are bolts holding the fins on",
+            "They are removed to inspect and clean each tube"
+        ],
+        correct: 3,
+        explanation: "Parts (5): 'Header Plugs — one opposite each tube. They are removed to inspect and clean each tube.'",
+        difficulty: "easy"
+    },
+    {
+        id: "AC-Q07",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "What is the job of the plenum chamber between the fan and the tube bundle?",
+        options: [
+            "It guides the air from the fan evenly across the bundle",
+            "It stores spare process fluid",
+            "It holds the motor and belts",
+            "It collects the cooled fluid"
+        ],
+        correct: 0,
+        explanation: "Parts (10): 'Plenum Chamber — guides the air from the fan evenly across the bundle.'",
+        difficulty: "easy"
+    },
+    {
+        id: "AC-Q08",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "The cooling air crosses the tubes at right angles. What is this called?",
+        options: [
+            "Counter-current flow",
+            "Parallel flow",
+            "Cross flow",
+            "Recycle flow"
+        ],
+        correct: 2,
+        explanation: "How It Works: 'The air crosses the tubes at right angles. This is called cross flow.'",
+        difficulty: "easy"
+    },
+    {
+        id: "AC-Q09",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "The process outlet is hotter than normal. Which is a likely cause listed in troubleshooting?",
+        options: [
+            "Too much cooling water",
+            "The header plugs are painted",
+            "The support structure is too tall",
+            "Low air flow, fouled fins or fan failure"
+        ],
+        correct: 3,
+        explanation: "Troubleshooting — Hot process outlet: causes 'Low air flow, fouled fins, fan failure'; action 'Check fans, clean fins, verify fan operation'.",
+        difficulty: "medium"
+    },
+    {
+        id: "AC-Q10",
+        equipmentId: "air-cooled",
+        category: "Heat Exchangers",
+        subcategory: "Air-Cooled HX",
+        question: "The fan motor has been switched off and locked out. Why must the fan still be secured before anyone works near it?",
+        options: [
+            "Wind can keep the fan rotating after power is removed",
+            "The motor restarts by itself every hour",
+            "The fins are sharp only when the fan is stopped",
+            "The plenum fills with process fluid"
+        ],
+        correct: 0,
+        explanation: "Safety: 'The fans must be confirmed stopped and secured against wind-driven rotation.' Also: 'Wind effects can keep them rotating for extended periods after power is removed.'",
         difficulty: "medium"
     }
 ];
