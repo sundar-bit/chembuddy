@@ -2356,6 +2356,167 @@ const questionBank = [
         correct: 2,
         explanation: "Safety: 'If the bonnet or stem seal fails, components can be violently ejected.' Also: 'So personnel should never position themselves in line with the stem.'",
         difficulty: "medium"
+    },
+    // ---- Cabin/Box Heaters — practical set, approved 2026-11-03 (10 Qs) ----
+    {
+        id: "CH-Q01",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "In which order does the process fluid travel through a cabin heater?",
+        options: [
+            "Radiant tubes, crossover pipe, convection tubes, outlet",
+            "Convection tubes, crossover pipe, radiant tubes, outlet",
+            "Stack, convection tubes, burners, outlet",
+            "Burners, radiant tubes, stack, outlet"
+        ],
+        correct: 1,
+        explanation: "How It Works: 'Cold Feed In — the feed enters the top of the convection section.' 'Crossover — the feed passes down to the radiant tubes.' 'Hot Product Out — the product leaves the heater at the required temperature.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CH-Q02",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "In which section does the process fluid pick up most of its heat?",
+        options: [
+            "The stack",
+            "The convection section",
+            "The radiant section",
+            "The crossover pipe"
+        ],
+        correct: 2,
+        explanation: "How It Works: 'Most heat is picked up in the radiant section.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CH-Q03",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "What is the purpose of the convection section?",
+        options: [
+            "It recovers heat from the rising flue gas to preheat the feed",
+            "It burns the extra fuel",
+            "It stores the hot product",
+            "It supplies air to the burners"
+        ],
+        correct: 0,
+        explanation: "Parts (3): 'Convection Section — recovers heat from the rising flue gas.' Parts (4): 'Convection Tubes — finned tubes that preheat the cold feed.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CH-Q04",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "You see a flame touching a radiant tube. Why is this a problem?",
+        options: [
+            "It makes the stack too tall",
+            "It stops the fuel gas flowing",
+            "It cools the process fluid",
+            "It can overheat the tube"
+        ],
+        correct: 3,
+        explanation: "How It Works: 'A flame touching a tube is called flame impingement, and it can overheat the tube.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CH-Q05",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "What does the refractory lining do?",
+        options: [
+            "It supplies fuel to the burners",
+            "It holds the heat in and protects the casing",
+            "It carries the process fluid",
+            "It adjusts the draft"
+        ],
+        correct: 1,
+        explanation: "Parts (9): 'Refractory Lining — holds the heat in and protects the casing.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CH-Q06",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "Which part adjusts the draft through the heater?",
+        options: [
+            "The stack damper",
+            "The peep door",
+            "The crossover pipe",
+            "The tube supports"
+        ],
+        correct: 0,
+        explanation: "Parts (2): 'Stack Damper — adjusts the draft through the heater.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CH-Q07",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "How would an operator check the flames and tubes while the heater is running?",
+        options: [
+            "Through the access door",
+            "From the top of the stack",
+            "Through the peep door",
+            "By opening the fuel gas line"
+        ],
+        correct: 2,
+        explanation: "Parts (15): 'Peep Door — lets operators check the flames and tubes.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CH-Q08",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "Hot spots appear on the tubes. Which causes are listed in troubleshooting?",
+        options: [
+            "A tall stack and a closed peep door",
+            "Too much refractory and cold feed",
+            "Loose support columns",
+            "Flame impingement, coking or low flow"
+        ],
+        correct: 3,
+        explanation: "Troubleshooting — Hot spots on tubes: causes 'Flame impingement, coking, low flow'; action 'Adjust burners, decoke, increase flow'.",
+        difficulty: "medium"
+    },
+    {
+        id: "CH-Q09",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "What is required before anyone enters the firebox for inspection or repair?",
+        options: [
+            "A formal permit, because it is a confined space entry",
+            "Only a torch and gloves",
+            "Nothing, once the burners are off",
+            "Opening the stack damper fully"
+        ],
+        correct: 0,
+        explanation: "Safety: 'Entry into the firebox for inspection, refractory repair, or tube work is a confined space entry.' Also: 'Entry requires a formal permit.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CH-Q10",
+        equipmentId: "cabin-heater",
+        category: "Fired Heaters",
+        subcategory: "Cabin Heaters",
+        question: "Why is continuous gas monitoring with audible alarms needed near a fired heater?",
+        options: [
+            "To measure the feed flow",
+            "CO is odorless and H2S causes olfactory fatigue, so you cannot rely on smell",
+            "To check the height of the flames",
+            "To control the stack damper"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Continuous gas monitoring with audible alarms must be maintained.' Also: 'CO is odorless, and H2S causes olfactory fatigue.'",
+        difficulty: "medium"
     }
 ];
 

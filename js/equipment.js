@@ -135,6 +135,20 @@ var Equipment = (function () {
                 alt: 'Globe valve in three positions: fully closed, throttling and fully open'
             }
         },
+        'cabin-heater': {
+            overview: {
+                src: 'images/equipment/fired-heaters/cabin-heater/cabin-heater-isometric.png',
+                alt: 'Isometric view of floor-fired cabin heater with firebox, convection section and stack'
+            },
+            components: {
+                src: 'images/equipment/fired-heaters/cabin-heater/cabin-heater-cutaway.png',
+                alt: 'Cutaway view of cabin heater showing major components'
+            },
+            working: {
+                src: 'images/equipment/fired-heaters/cabin-heater/cabin-heater-flow-path.png',
+                alt: 'Cabin heater flow path: process fluid moving down through the tubes, flue gas moving up and out of the stack'
+            }
+        },
         'multistage-pump': {
             overview: {
                 src: 'images/equipment-level2/pumps/multistage-pump/multistage-pump-isometric.png',
