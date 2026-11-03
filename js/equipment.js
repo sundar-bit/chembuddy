@@ -107,6 +107,20 @@ var Equipment = (function () {
                 alt: 'Air cooled heat exchanger flow path: process fluid through two tube passes, cooling air rising across the finned tubes'
             }
         },
+        'gate-valve': {
+            overview: {
+                src: 'images/equipment/valves/gate-valve/gate-valve-isometric.png',
+                alt: 'Isometric view of flanged rising-stem gate valve, fully open'
+            },
+            components: {
+                src: 'images/equipment/valves/gate-valve/gate-valve-cutaway.png',
+                alt: 'Cutaway view of gate valve showing major components'
+            },
+            working: {
+                src: 'images/equipment/valves/gate-valve/gate-valve-flow-path.png',
+                alt: 'Gate valve in three positions: fully closed, partly open and fully open'
+            }
+        },
         'multistage-pump': {
             overview: {
                 src: 'images/equipment-level2/pumps/multistage-pump/multistage-pump-isometric.png',

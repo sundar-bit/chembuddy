@@ -2034,6 +2034,167 @@ const questionBank = [
         correct: 0,
         explanation: "Safety: 'The fans must be confirmed stopped and secured against wind-driven rotation.' Also: 'Wind effects can keep them rotating for extended periods after power is removed.'",
         difficulty: "medium"
+    },
+    // ---- Gate Valves — practical set, approved 2026-11-03 (10 Qs) ----
+    {
+        id: "GV-Q01",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "What is a gate valve mainly used for in a process plant?",
+        options: [
+            "Controlling flow at any opening",
+            "Isolation, fully open or fully closed",
+            "Measuring the flow rate",
+            "Stopping reverse flow automatically"
+        ],
+        correct: 1,
+        explanation: "How It Works: 'A gate valve is for isolation, not for controlling flow.' Overview: 'It is used fully open or fully closed, never for throttling.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GV-Q02",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "Why is the pressure drop so low when a gate valve is fully open?",
+        options: [
+            "The stem pushes the fluid along",
+            "The bonnet releases the pressure",
+            "The gate is clear of the bore, so flow goes straight through",
+            "The seat rings widen when the valve opens"
+        ],
+        correct: 2,
+        explanation: "Overview: 'When open, the gate is clear of the bore, so pressure drop is very low.' How It Works, Opening: 'the gate rises clear of the bore, and flow goes straight through.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GV-Q03",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "On a rising-stem gate valve, you see a tall length of stem above the handwheel. What does this tell you?",
+        options: [
+            "The valve is open",
+            "The valve is closed",
+            "The packing is worn",
+            "The gate is stuck"
+        ],
+        correct: 0,
+        explanation: "How It Works, Read the Stem: 'a tall stem means open. A short stem means closed.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GV-Q04",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "Why should a gate valve not be left partly open to throttle the flow?",
+        options: [
+            "The handwheel locks in that position",
+            "The stem will start to turn",
+            "The bonnet gasket will freeze",
+            "A narrow fast flow under the gate wears the gate and seats"
+        ],
+        correct: 3,
+        explanation: "How It Works: 'In a partly open valve, a narrow fast flow squeezes under the gate. This fast flow wears the gate and seats.'",
+        difficulty: "medium"
+    },
+    {
+        id: "GV-Q05",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "Which way do you turn the handwheel to close the valve?",
+        options: [
+            "Clockwise",
+            "Anti-clockwise",
+            "Either way",
+            "Push it down without turning"
+        ],
+        correct: 0,
+        explanation: "How It Works: 'Turn the handwheel clockwise to close and anti-clockwise to open.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GV-Q06",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "You see fluid leaking out around the stem. What is the likely cause and action?",
+        options: [
+            "Damaged seat rings: lap the seats",
+            "Worn packing: tighten or replace the packing",
+            "Loose flanges: replace the handwheel",
+            "Scale in the body: exercise the valve"
+        ],
+        correct: 1,
+        explanation: "Troubleshooting — Stem leakage: cause 'Worn packing'; action 'Tighten or replace packing'. Parts (6): 'seals around the stem so fluid cannot leak out.'",
+        difficulty: "medium"
+    },
+    {
+        id: "GV-Q07",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "What does the backseat do?",
+        options: [
+            "It supports the handwheel",
+            "It stops the gate going too far down",
+            "It closes the stem hole when the valve is fully open",
+            "It seals the joint between bonnet and body"
+        ],
+        correct: 2,
+        explanation: "Parts (7): 'Backseat — closes the stem hole when the valve is fully open.'",
+        difficulty: "medium"
+    },
+    {
+        id: "GV-Q08",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "When the handwheel is turned on this valve, what does the stem do?",
+        options: [
+            "It turns with the handwheel but stays at the same height",
+            "It bends slightly to move the gate",
+            "It stays still and only the gate moves",
+            "It moves up or down without turning"
+        ],
+        correct: 3,
+        explanation: "How It Works, Stem Moves: 'the stem nut drives the threaded stem up or down. The stem does not turn.'",
+        difficulty: "medium"
+    },
+    {
+        id: "GV-Q09",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "How does the valve achieve a tight shut-off when closed?",
+        options: [
+            "The gate wedges between the seat rings",
+            "The packing expands into the bore",
+            "The bonnet gasket blocks the flow",
+            "The stem nut presses on the flanges"
+        ],
+        correct: 0,
+        explanation: "How It Works, Closing: 'the gate wedges between the seat rings for a tight shut-off.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GV-Q10",
+        equipmentId: "gate-valve",
+        category: "Piping & Valves",
+        subcategory: "Gate Valves",
+        question: "Before removing a gate valve bonnet, why must the line be fully depressurized and drained?",
+        options: [
+            "So the handwheel turns more easily",
+            "Residual pressure can suddenly release hazardous fluid when bolts are loosened",
+            "So the stem can be read correctly",
+            "Because the gasket only seals when dry"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Fully depressurize, drain, and isolate the line before removing a gate valve bonnet.' Also: 'It can cause sudden release of hazardous fluids when bolts are loosened.'",
+        difficulty: "medium"
     }
 ];
 
