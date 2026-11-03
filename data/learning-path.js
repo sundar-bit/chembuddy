@@ -1,7 +1,7 @@
 // ChemBuddy - Learning Path (Somaiya University, Chemical Engineering)
 //
-// Level 1 — Basic Equipment: 10 modules, 24 equipment found in most chemical
-// plants and refineries, 2–3 equipment per module (one a week for 24 weeks). Everything else in
+// Level 1 — Basic Equipment: 10 modules, 23 equipment found in most chemical
+// plants and refineries, 2–3 equipment per module (one a week for 23 weeks). Everything else in
 // equipmentDB is Level 2 (shown in Browse, not part of the path yet).
 //
 // Weekly release (see `schedule` below): one equipment opens each Monday, in
@@ -67,11 +67,10 @@ const learningPath = {
             id: 4,
             title: 'Valves',
             categoryId: 'piping',
-            description: 'Isolating, throttling and automatically controlling flow.',
+            description: 'Isolating and throttling flow.',
             equipment: [
                 { id: 'gate-valve', name: 'Gate Valves' },
-                { id: 'globe-valve', name: 'Globe Valves' },
-                { id: 'control-valve', name: 'Control Valves' }
+                { id: 'globe-valve', name: 'Globe Valves' }
             ]
         },
         {
