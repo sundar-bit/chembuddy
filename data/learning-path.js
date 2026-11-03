@@ -35,36 +35,6 @@ const learningPath = {
     modules: [
         {
             id: 1,
-            title: 'Pumps',
-            categoryId: 'pumps',
-            description: 'Moving liquids — the centrifugal workhorse and the positive-displacement reciprocating pump.',
-            equipment: [
-                { id: 'centrifugal-pump', name: 'Centrifugal Pumps' },
-                { id: 'reciprocating-pump', name: 'Reciprocating Pumps' }
-            ]
-        },
-        {
-            id: 2,
-            title: 'Compressors & Blowers',
-            categoryId: 'compressors',
-            description: 'Raising gas pressure — dynamic and positive-displacement compression.',
-            equipment: [
-                { id: 'centrifugal-compressor', name: 'Centrifugal Compressors' },
-                { id: 'reciprocating-compressor', name: 'Reciprocating Compressors' }
-            ]
-        },
-        {
-            id: 3,
-            title: 'Heat Exchangers',
-            categoryId: 'heat-exchangers',
-            description: 'Transferring heat between process streams, water and air.',
-            equipment: [
-                { id: 'shell-tube', name: 'Shell and Tube Heat Exchangers' },
-                { id: 'air-cooled', name: 'Air Cooled Heat Exchangers' }
-            ]
-        },
-        {
-            id: 4,
             title: 'Valves',
             categoryId: 'piping',
             description: 'Isolating and throttling flow.',
@@ -74,13 +44,43 @@ const learningPath = {
             ]
         },
         {
-            id: 5,
-            title: 'Columns',
-            categoryId: 'columns',
-            description: 'Separating mixtures by vapour–liquid contact on trays and packing.',
+            id: 2,
+            title: 'Pumps',
+            categoryId: 'pumps',
+            description: 'Moving liquids — the centrifugal workhorse and the positive-displacement reciprocating pump.',
             equipment: [
-                { id: 'distillation', name: 'Distillation Columns' },
-                { id: 'packed-column', name: 'Packed Columns' }
+                { id: 'centrifugal-pump', name: 'Centrifugal Pumps' },
+                { id: 'reciprocating-pump', name: 'Reciprocating Pumps' }
+            ]
+        },
+        {
+            id: 3,
+            title: 'Compressors',
+            categoryId: 'compressors',
+            description: 'Raising gas pressure — dynamic and positive-displacement compression.',
+            equipment: [
+                { id: 'centrifugal-compressor', name: 'Centrifugal Compressors' },
+                { id: 'reciprocating-compressor', name: 'Reciprocating Compressors' }
+            ]
+        },
+        {
+            id: 4,
+            title: 'Heat Exchangers',
+            categoryId: 'heat-exchangers',
+            description: 'Transferring heat between process streams, water and air.',
+            equipment: [
+                { id: 'shell-tube', name: 'Shell and Tube Heat Exchangers' },
+                { id: 'air-cooled', name: 'Air Cooled Heat Exchangers' }
+            ]
+        },
+        {
+            id: 5,
+            title: 'Fired Heaters',
+            categoryId: 'fired-heaters',
+            description: 'Burning fuel to heat process fluids.',
+            equipment: [
+                { id: 'cabin-heater', name: 'Cabin/Box Heaters' },
+                { id: 'cylindrical-heater', name: 'Cylindrical Heaters' }
             ]
         },
         {
@@ -96,6 +96,27 @@ const learningPath = {
         },
         {
             id: 7,
+            title: 'Columns',
+            categoryId: 'columns',
+            description: 'Separating mixtures by vapour–liquid contact on trays and packing.',
+            equipment: [
+                { id: 'distillation', name: 'Distillation Columns' },
+                { id: 'packed-column', name: 'Packed Columns' }
+            ]
+        },
+        {
+            id: 8,
+            title: 'Separation',
+            categoryId: 'solid-liquid',
+            description: 'Removing solids from gases and liquids.',
+            equipment: [
+                { id: 'cyclone-separator', name: 'Cyclone Separators' },
+                { id: 'filter-press', name: 'Filter Presses' },
+                { id: 'centrifuge-decanter', name: 'Decanter Centrifuges' }
+            ]
+        },
+        {
+            id: 9,
             title: 'Storage Tanks',
             categoryId: 'storage',
             description: 'Holding liquids and gases safely — atmospheric, floating roof and pressurised.',
@@ -106,34 +127,13 @@ const learningPath = {
             ]
         },
         {
-            id: 8,
-            title: 'Fired Heaters',
-            categoryId: 'fired-heaters',
-            description: 'Burning fuel to heat process fluids.',
-            equipment: [
-                { id: 'cabin-heater', name: 'Cabin/Box Heaters' },
-                { id: 'cylindrical-heater', name: 'Cylindrical Heaters' }
-            ]
-        },
-        {
-            id: 9,
+            id: 10,
             title: 'Safety',
             categoryId: 'safety',
             description: 'Protecting people and plant from overpressure and runaway events.',
             equipment: [
                 { id: 'relief-valve', name: 'Pressure Relief Valves' },
                 { id: 'rupture-disc', name: 'Rupture Discs' }
-            ]
-        },
-        {
-            id: 10,
-            title: 'Separation',
-            categoryId: 'solid-liquid',
-            description: 'Removing solids from gases and liquids.',
-            equipment: [
-                { id: 'cyclone-separator', name: 'Cyclone Separators' },
-                { id: 'filter-press', name: 'Filter Presses' },
-                { id: 'centrifuge-decanter', name: 'Decanter Centrifuges' }
             ]
         }
     ]
