@@ -2195,6 +2195,167 @@ const questionBank = [
         correct: 1,
         explanation: "Safety: 'Fully depressurize, drain, and isolate the line before removing a gate valve bonnet.' Also: 'It can cause sudden release of hazardous fluids when bolts are loosened.'",
         difficulty: "medium"
+    },
+    // ---- Globe Valves — practical set, approved 2026-11-03 (10 Qs) ----
+    {
+        id: "GL-Q01",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "You need a manual valve to throttle and control the flow. Why is a globe valve suitable?",
+        options: [
+            "Its gate lifts fully clear of the bore",
+            "It has no pressure drop at all",
+            "A small lift gives a small flow and a bigger lift gives more flow",
+            "It opens automatically when pressure rises"
+        ],
+        correct: 2,
+        explanation: "How It Works, Throttling: 'a small lift gives a small flow. A bigger lift gives more flow.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GL-Q02",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "Why is the pressure drop of a globe valve higher than that of a gate valve?",
+        options: [
+            "The fluid changes direction inside the body",
+            "The handwheel is larger",
+            "The packing squeezes the flow",
+            "The flanges are smaller"
+        ],
+        correct: 0,
+        explanation: "Overview: 'The fluid changes direction inside the body, so pressure drop is higher than a gate valve.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GL-Q03",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "What path does the fluid take through the valve?",
+        options: [
+            "Straight through the bore without turning",
+            "Over the disc, then down through the bonnet",
+            "Around the stem and out through the gland",
+            "Under the seat, up through it and out"
+        ],
+        correct: 3,
+        explanation: "How It Works, Flow Path: 'the fluid goes under the seat, up through it and out.'",
+        difficulty: "medium"
+    },
+    {
+        id: "GL-Q04",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "You are installing a globe valve in a line. How do you decide which way round it goes?",
+        options: [
+            "Any way round is fine",
+            "The handwheel must face the operator",
+            "The body arrow must point in the flow direction",
+            "The larger flange goes on the outlet"
+        ],
+        correct: 2,
+        explanation: "How It Works: 'Install it with the body arrow pointing in the flow direction.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GL-Q05",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "What does the internal wall inside the body do?",
+        options: [
+            "It forces the fluid to pass up through the seat",
+            "It holds the bonnet in place",
+            "It stops the stem from turning",
+            "It keeps the packing tight"
+        ],
+        correct: 0,
+        explanation: "Parts (13): 'Internal Wall — a Z-shaped wall inside the body. It forces the fluid to pass up through the seat.'",
+        difficulty: "medium"
+    },
+    {
+        id: "GL-Q06",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "How does the disc move?",
+        options: [
+            "It swings aside like a door",
+            "It moves straight up and down above the seat",
+            "It rotates a quarter turn",
+            "It slides across the bore from side to side"
+        ],
+        correct: 1,
+        explanation: "Overview: 'A disc moves straight up and down above a round seat.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GL-Q07",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "How does the valve give a tight shut-off?",
+        options: [
+            "The stem presses on the gasket",
+            "The internal wall closes the outlet",
+            "The packing expands into the seat",
+            "The disc presses on the seat ring"
+        ],
+        correct: 3,
+        explanation: "How It Works, Closing: 'the disc presses on the seat ring for a tight shut-off.'",
+        difficulty: "easy"
+    },
+    {
+        id: "GL-Q08",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "A globe valve in throttling service no longer shuts off tightly. Which cause is listed in troubleshooting?",
+        options: [
+            "A loose handwheel",
+            "Seat erosion from throttling wear or cavitation",
+            "Too much paint on the body",
+            "A tall stem above the handwheel"
+        ],
+        correct: 1,
+        explanation: "Troubleshooting — Seat erosion: cause 'Throttling wear, cavitation'; action 'Replace trim, reduce pressure drop'.",
+        difficulty: "medium"
+    },
+    {
+        id: "GL-Q09",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "You notice a stem packing leak on a globe valve in flammable service. What should you do?",
+        options: [
+            "Report it and have it repaired promptly, because it can create a fire hazard",
+            "Ignore it until the next shutdown",
+            "Open the valve fully to stop the leak",
+            "Wrap it in a cloth to catch the fluid"
+        ],
+        correct: 0,
+        explanation: "Safety: 'Packing leaks on globe valves in flammable service can create a fire hazard.' Also: 'So any stem packing leak must be reported and repaired promptly.'",
+        difficulty: "medium"
+    },
+    {
+        id: "GL-Q10",
+        equipmentId: "globe-valve",
+        category: "Piping & Valves",
+        subcategory: "Globe Valves",
+        question: "Where should you never stand when working on a pressurized globe valve?",
+        options: [
+            "Beside the inlet flange",
+            "At the outlet side of the valve",
+            "In line with the stem",
+            "Beside the outlet flange"
+        ],
+        correct: 2,
+        explanation: "Safety: 'If the bonnet or stem seal fails, components can be violently ejected.' Also: 'So personnel should never position themselves in line with the stem.'",
+        difficulty: "medium"
     }
 ];
 

@@ -121,6 +121,20 @@ var Equipment = (function () {
                 alt: 'Gate valve in three positions: fully closed, partly open and fully open'
             }
         },
+        'globe-valve': {
+            overview: {
+                src: 'images/equipment/valves/globe-valve/globe-valve-isometric.png',
+                alt: 'Isometric view of flanged rising-stem globe valve with flow arrow cast on the body'
+            },
+            components: {
+                src: 'images/equipment/valves/globe-valve/globe-valve-cutaway.png',
+                alt: 'Cutaway view of globe valve showing major components and the Z-shaped internal wall'
+            },
+            working: {
+                src: 'images/equipment/valves/globe-valve/globe-valve-flow-path.png',
+                alt: 'Globe valve in three positions: fully closed, throttling and fully open'
+            }
+        },
         'multistage-pump': {
             overview: {
                 src: 'images/equipment-level2/pumps/multistage-pump/multistage-pump-isometric.png',
