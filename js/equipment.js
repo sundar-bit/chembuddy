@@ -149,6 +149,20 @@ var Equipment = (function () {
                 alt: 'Cabin heater flow path: process fluid moving down through the tubes, flue gas moving up and out of the stack'
             }
         },
+        'cylindrical-heater': {
+            overview: {
+                src: 'images/equipment/fired-heaters/cylindrical-heater/cylindrical-heater-isometric.png',
+                alt: 'Isometric view of vertical floor-fired cylindrical heater with convection section and stack'
+            },
+            components: {
+                src: 'images/equipment/fired-heaters/cylindrical-heater/cylindrical-heater-cutaway.png',
+                alt: 'Cutaway view of cylindrical heater showing major components and vertical radiant tubes'
+            },
+            working: {
+                src: 'images/equipment/fired-heaters/cylindrical-heater/cylindrical-heater-flow-path.png',
+                alt: 'Cylindrical heater flow path: process fluid down and up the vertical tubes, flue gas rising to the stack'
+            }
+        },
         'multistage-pump': {
             overview: {
                 src: 'images/equipment-level2/pumps/multistage-pump/multistage-pump-isometric.png',

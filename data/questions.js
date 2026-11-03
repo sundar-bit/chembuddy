@@ -2517,6 +2517,167 @@ const questionBank = [
         correct: 1,
         explanation: "Safety: 'Continuous gas monitoring with audible alarms must be maintained.' Also: 'CO is odorless, and H2S causes olfactory fatigue.'",
         difficulty: "medium"
+    },
+    // ---- Cylindrical Heaters — practical set, approved 2026-11-03 (10 Qs) ----
+    {
+        id: "CY-Q01",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "Why would a plant choose a cylindrical heater over a cabin heater?",
+        options: [
+            "It needs no burners",
+            "It takes less ground space",
+            "It has no stack",
+            "It does not need a firebox"
+        ],
+        correct: 1,
+        explanation: "Overview: 'It takes less ground space than a cabin heater. This makes it ideal for offshore platforms and plants where space is limited.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CY-Q02",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "How are the radiant tubes arranged in a cylindrical heater?",
+        options: [
+            "Horizontally along the sloping roof",
+            "In one coil inside the stack",
+            "Vertically in a ring around the flames",
+            "Under the firebox floor"
+        ],
+        correct: 2,
+        explanation: "How It Works: 'The radiant tubes stand vertically in a ring around the flames.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CY-Q03",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "Where are the burners, and which way do they fire?",
+        options: [
+            "On the floor, firing upward",
+            "On the roof, firing downward",
+            "In the stack, firing outward",
+            "In the convection section, firing sideways"
+        ],
+        correct: 0,
+        explanation: "Overview: 'The burners fire upward from the floor.' Key Specifications — Burners: 'Floor-fired upward'.",
+        difficulty: "easy"
+    },
+    {
+        id: "CY-Q04",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "The cold feed enters at the top of the heater. Which part does it pass through first?",
+        options: [
+            "The radiant tubes",
+            "The burners",
+            "The crossover pipe",
+            "The convection tubes"
+        ],
+        correct: 3,
+        explanation: "How It Works, Cold Feed In: 'the feed enters the top of the convection section.' Parts (5): 'cold feed enters the convection tubes.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CY-Q05",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "How does the process fluid flow through the radiant tubes?",
+        options: [
+            "Down and up the vertical tubes",
+            "Only upward, through all the tubes together",
+            "Around the outside of the tubes",
+            "Straight across the firebox floor"
+        ],
+        correct: 0,
+        explanation: "How It Works, Radiant Heating: 'the fluid flows down and up the vertical tubes, heated by the flames and hot walls.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CY-Q06",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "Which part supplies fuel gas to the circle of burners?",
+        options: [
+            "The crossover pipe",
+            "The air register",
+            "The fuel gas ring",
+            "The stack damper"
+        ],
+        correct: 2,
+        explanation: "Parts (13): 'Fuel Gas Ring — supplies fuel gas to the burners.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CY-Q07",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "Why does this heater need tube supports?",
+        options: [
+            "To carry the fuel gas",
+            "To hold the tall hot tubes in position",
+            "To adjust the draft",
+            "To seal the peep door"
+        ],
+        correct: 1,
+        explanation: "Parts (10): 'Tube Supports — hold the tall hot tubes in position.' Field observations also say 'Watch for tube sagging'.",
+        difficulty: "easy"
+    },
+    {
+        id: "CY-Q08",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "The stack temperature is higher than normal. What is the likely cause and action?",
+        options: [
+            "Low feed pressure: close the peep door",
+            "Worn support columns: replace them",
+            "A small flame: open the access door",
+            "Fouled convection or excess air: clean the convection section and reduce air"
+        ],
+        correct: 3,
+        explanation: "Troubleshooting — High stack temperature: causes 'Fouled convection, excess air'; action 'Clean convection, reduce air'.",
+        difficulty: "medium"
+    },
+    {
+        id: "CY-Q09",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "Why must the firebox be purged before the burners are lit?",
+        options: [
+            "Failure to purge can cause a catastrophic firebox explosion",
+            "To cool the refractory lining",
+            "To clean the peep doors",
+            "To warm up the feed"
+        ],
+        correct: 0,
+        explanation: "Safety: 'Failure to properly purge the firebox before ignition can cause a catastrophic firebox explosion.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CY-Q10",
+        equipmentId: "cylindrical-heater",
+        category: "Fired Heaters",
+        subcategory: "Cylindrical Heaters",
+        question: "You need to work on the convection section of this tall heater. Which two hazards must you protect against together?",
+        options: [
+            "Noise and vibration",
+            "Burns and falls",
+            "Flooding and corrosion",
+            "Dust and glare"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Work at these heights combines burn hazards with fall hazards.' Also: 'Appropriate heat-resistant PPE and fall protection must be used simultaneously.'",
+        difficulty: "medium"
     }
 ];
 
