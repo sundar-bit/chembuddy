@@ -7,16 +7,7 @@ var Equipment = (function () {
     var studyTimers = {};
 
     // Equipment images: id -> array of {src, caption}
-    var equipImages = {
-        // Centrifugal, reciprocating, multistage, vertical, and axial pumps use the sectioned
-        // educational images (equipSectionImages), not this generic gallery.
-        'turbine-pump': [{ src: 'images/equipment-level2/pumps/turbine-pump/turbine-pump-diagram.png', caption: 'Cross-section diagram' }],
-        'regenerative-pump': [{ src: 'images/equipment-level2/pumps/regenerative-pump/regenerative-pump-diagram.png', caption: 'Performance curves' }],
-        'diaphragm-pump': [{ src: 'images/equipment-level2/pumps/diaphragm-pump/diaphragm-pump-diagram.png', caption: 'Cross-section diagram' }],
-        'gear-pump': [{ src: 'images/equipment-level2/pumps/gear-pump/gear-pump-diagram.png', caption: 'Cross-section diagram' }],
-        'screw-pump': [{ src: 'images/equipment-level2/pumps/screw-pump/screw-pump-diagram.png', caption: 'Cross-section diagram' }],
-        'canned-pump': [{ src: 'images/equipment-level2/pumps/canned-pump/canned-pump-diagram.png', caption: 'Cross-section diagram' }]
-    };
+    var equipImages = {};
 
     // Sectioned educational images: id -> { overview, components, working }.
     // When an equipment has an entry here, these purpose-built diagrams are
@@ -161,48 +152,6 @@ var Equipment = (function () {
             working: {
                 src: 'images/equipment/fired-heaters/cylindrical-heater/cylindrical-heater-flow-path.png',
                 alt: 'Cylindrical heater flow path: process fluid down and up the vertical tubes, flue gas rising to the stack'
-            }
-        },
-        'multistage-pump': {
-            overview: {
-                src: 'images/equipment-level2/pumps/multistage-pump/multistage-pump-isometric.png',
-                alt: 'Isometric view of multistage centrifugal pump with electric motor'
-            },
-            components: {
-                src: 'images/equipment-level2/pumps/multistage-pump/multistage-pump-cutaway.png',
-                alt: 'Cutaway view of multistage pump showing major components'
-            },
-            working: {
-                src: 'images/equipment-level2/pumps/multistage-pump/multistage-pump-flow-path.png',
-                alt: 'Multistage pump working principle and stage-by-stage fluid flow path'
-            }
-        },
-        'vertical-pump': {
-            overview: {
-                src: 'images/equipment-level2/pumps/vertical-pump/vertical-pump-isometric.png',
-                alt: 'Isometric view of vertical centrifugal pump with electric motor'
-            },
-            components: {
-                src: 'images/equipment-level2/pumps/vertical-pump/vertical-pump-cutaway.png',
-                alt: 'Cutaway view of vertical pump showing major components'
-            },
-            working: {
-                src: 'images/equipment-level2/pumps/vertical-pump/vertical-pump-flow-path.png',
-                alt: 'Vertical pump working principle and stage-by-stage fluid flow path'
-            }
-        },
-        'axial-pump': {
-            overview: {
-                src: 'images/equipment-level2/pumps/axial-pump/axial-pump-isometric.png',
-                alt: 'Isometric view of axial flow pump with electric motor'
-            },
-            components: {
-                src: 'images/equipment-level2/pumps/axial-pump/axial-pump-cutaway.png',
-                alt: 'Cutaway view of axial flow pump showing major components'
-            },
-            working: {
-                src: 'images/equipment-level2/pumps/axial-pump/axial-pump-flow-path.png',
-                alt: 'Axial flow pump working principle and stage-by-stage fluid flow path'
             }
         }
     };
