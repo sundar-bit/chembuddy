@@ -583,8 +583,8 @@ var Equipment = (function () {
     // Render equipment detail inline (for learn mode)
     // --- Lesson rendering -------------------------------------------------
     //
-    // Every lesson section has its own 🔊 Listen button, and every numbered
-    // part has a small one, so a student can replay just what they need. The
+    // Every lesson section has its own Play/Pause and speed buttons, and every
+    // numbered part has a small 🔊, so a student can replay just what they need. The
     // narration reads exactly the text on screen: each speakable piece carries
     // data-say (a sentence, a list item, a table row), and Voice highlights the
     // piece being read. Spoken wording that differs from the screen goes in
@@ -639,12 +639,12 @@ var Equipment = (function () {
         return html + '</ol>';
     }
 
-    // One lesson section: heading + Listen button, then image beside its text.
+    // One lesson section: heading + narration controls, then image beside its text.
     function sectionHTML(key, title, imageSlot, id, body, extraClass) {
         var image = imageSlot ? getSectionImage(id, imageSlot) : '';
         var html = '<section class="lesson-section' + (extraClass ? ' ' + extraClass : '') + '" data-section="' + key + '">';
         html += '<div class="lesson-section-head"><h4>' + title + '</h4>';
-        html += '<button class="say-btn" data-say-section>🔊 Listen</button></div>';
+        html += Voice.controlsHTML() + '</div>';
         if (image) {
             html += '<div class="edu-split">' + image + '<div class="edu-text">' + body + '</div></div>';
         } else {

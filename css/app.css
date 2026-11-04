@@ -558,6 +558,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap; /* on a phone the controls take their own row */
     gap: 0.75rem;
     margin-bottom: 0.75rem;
 }
@@ -583,12 +584,45 @@
     white-space: nowrap;
     line-height: 1.2;
 }
-.say-btn:hover, .say-btn.playing { background: var(--primary); color: var(--white); }
+.say-btn.playing { background: var(--primary); color: var(--white); }
 .say-btn-sm {
     padding: 0.15rem 0.45rem;
     font-size: 0.8rem;
     font-weight: normal;
     margin-top: 0.1rem;
+}
+.say-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+.say-controls .say-btn {
+    min-height: 36px;
+    min-width: 6.25rem; /* same width for Play and Pause, so the row does not jump */
+}
+.say-speeds {
+    display: inline-flex;
+    border: 1px solid var(--primary);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.say-speed {
+    min-height: 36px;
+    min-width: 44px;
+    padding: 0 0.6rem;
+    border: none;
+    background: var(--white);
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.say-speed + .say-speed { border-left: 1px solid var(--primary); }
+.say-speed.active { background: var(--primary); color: var(--white); }
+/* Hover only with a mouse: on a touch screen it sticks after a tap */
+@media (hover: hover) {
+    .say-btn:hover, .say-speed:hover { background: var(--primary); color: var(--white); }
 }
 
 /* The sentence or item being read */
