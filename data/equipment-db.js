@@ -1948,13 +1948,73 @@ const equipmentDB = {
     'butterfly-valve': {
         name: 'Butterfly Valves',
         category: 'Piping & Valves',
-        description: 'Quarter-turn valves with rotating disc for flow control and isolation. Compact, lightweight, economical. Common in large pipe sizes and utility services.',
-        principles: 'Disc rotates on shaft across flow path. 90° turn from fully open to closed. Disc always in flow stream creating some pressure drop. Lined or high-performance designs.',
-        specs: [{t:'Operation',v:'Quarter turn'},{t:'Size Range',v:'50mm to 5m+'},{t:'Weight',v:'Light for size'},{t:'Pressure Drop',v:'Moderate'}],
-        components: ['Body - wafer or lugged','Disc - closure element','Shaft - disc rotation','Seat - body or disc mounted','Packing - shaft seal','Operator - lever or actuator','Position Indicator - open/closed','Lining - if resilient seat'],
-        troubles: [{p:'Seat wear',c:'Frequent cycling, debris',a:'Replace seat, filter flow'},{p:'Disc damage',c:'Cavitation, impact',a:'Replace disc, reduce velocity'},{p:'Shaft leak',c:'Packing wear',a:'Replace packing'},{p:'Stiff operation',c:'Corrosion, misalignment',a:'Free shaft, realign'}],
-        observations: ['Check disc position','Verify seat condition','Monitor shaft seals','Test operation','Inspect lining'],
-        safety: ['Butterfly valves can move from fully open to fully closed with a single quarter-turn. Rapid closure in a flowing system can generate dangerous water hammer and pressure transients. These may rupture piping. Operating procedures should require gradual closure. Use gear operators or actuators to limit closing speed on critical lines.','The disc of a butterfly valve stays in the flow path even when fully open. This creates turbulence and potential erosion. At high velocities, the forces on the disc can cause unexpected movement or damage. Proper sizing and actuator selection must allow for the maximum dynamic torque.','The lever or gear operator handle creates pinch and crush points that can trap fingers during manual operation. Keep hands on the designated grip areas. Never wrap fingers around the operator housing. Use caution when operating valves with high torque requirements.','Operate butterfly valves strictly within their rated pressure and temperature limits. Exceeding the design limits can cause catastrophic failure of the disc, shaft, or body. This can violently release the pressurized contents. The actual pressure rating decreases at elevated temperatures, as the valve pressure-temperature chart shows.','Butterfly valves in flammable service should be specified with fire-safe designs. These maintain their seal after exposure to fire. The resilient seat material must be compatible with the service fluid. Seat failure in a fire can cause an uncontrolled release of flammable material that feeds the fire.'],
+        intro: 'In this lesson you will get to know the butterfly valve. You will see it from outside, then look inside at its 14 main parts. Next you will see the valve closed, throttling and fully open, and learn how it works in 6 steps. You will finish with common problems and how to work safely.',
+        description: 'The butterfly valve is a quarter-turn valve used for isolation and flow control. A round disc turns on a shaft inside the bore. It is compact and light for its size. It is common in large pipe sizes and utility services. The one shown is a lug type with a lever. The isometric overview shows what you see from outside.',
+        labels: [
+            'Lever Handle — turned by hand to open or close the valve.',
+            'Notched Plate — holds the lever at the chosen position.',
+            'Valve Shaft — carries the turn from the lever to the disc.',
+            'Mounting Plate — carries the lever and notched plate.',
+            'Valve Neck — joins the mounting plate to the body.',
+            'Valve Body — the ring that holds the pressure.',
+            'Lug Bolt Hole — the threaded hole for each bolt that fixes the valve in the line.',
+            'Valve Disc — the round metal plate that turns in the bore.',
+            'Rubber Seat — the black lining the disc presses on to shut off the flow.',
+            'Flow In / Flow Out — flow passes through the bore, on both sides of the disc.'
+        ],
+        principles: 'The working diagram shows the valve from above in three positions: fully closed, partly open and fully open. Turn the lever clockwise to close and anti-clockwise to open.',
+        steps: [
+            'Turn the Lever — swing the lever over the notched plate.',
+            'Shaft Turns — the lever turns the shaft through the neck.',
+            'Disc Turns — the shaft turns the disc inside the bore.',
+            'Closing — the disc edge presses on the rubber seat for a tight shut-off.',
+            'Throttling — a small opening gives a small flow. A bigger opening gives more flow.',
+            'Flow Path — fluid passes on both sides of the disc. The disc stays in the flow, even when fully open.'
+        ],
+        principlesNote: 'A quarter turn takes the valve from open to closed. Lever in line with the pipe means open. Lever across the pipe means closed. The disc stays in the flow, so pressure drop is higher than in a gate valve.',
+        recap: [
+            'What a butterfly valve is, and where it is used',
+            'The outside: lever, notched plate, shaft, mounting plate, neck, body, lug bolt holes, disc and seat',
+            'The 14 main parts inside, from the shaft seal and bushings to the disc pin and rubber seat',
+            'The 3 positions and 6 steps, and how to read the valve position from the lever',
+            'Why its pressure drop is higher than in a gate valve',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Operation', v: 'Quarter turn' },
+            { t: 'Service', v: 'Isolation and flow control' },
+            { t: 'Weight', v: 'Light for its size' },
+            { t: 'Pressure Drop', v: 'Higher than gate' }
+        ],
+        components: [
+            '1. Lever Handle — turned by hand to open or close the valve.',
+            '2. Notched Plate — holds the lever at the chosen position.',
+            '3. Valve Shaft — carries the turn from the lever to the disc.',
+            '4. Mounting Plate — carries the lever and notched plate.',
+            '5. Valve Neck — joins the mounting plate to the body.',
+            '6. Shaft Seal — stops fluid leaking out along the shaft.',
+            '7. Upper Bushing — guides the shaft inside the neck.',
+            '8. Valve Disc — turns in the bore to adjust or stop the flow.',
+            '9. Disc Pin — fixes the disc to the shaft.',
+            '10. Rubber Seat — the disc presses on this for a tight shut-off.',
+            '11. Lower Bushing — supports the bottom of the shaft.',
+            '12. Valve Body — the ring that holds the pressure.',
+            '13. Threaded Lug — takes the bolts that fix the valve in the line.',
+            '14. Lug Bolt Hole — the threaded hole for each bolt.'
+        ],
+        troubles: [
+            { p: 'Valve leaks when closed', c: 'Seat wear from frequent cycling or debris', a: 'Replace seat, filter the flow' },
+            { p: 'Disc damage', c: 'Cavitation, impact', a: 'Replace disc, reduce velocity' },
+            { p: 'Leak at the shaft', c: 'Shaft seal wear', a: 'Replace shaft seal' },
+            { p: 'Stiff lever', c: 'Corrosion, misalignment', a: 'Free the shaft, realign' }
+        ],
+        observations: [
+            'Check that the lever position is correct',
+            'Check the shaft for leaks',
+            'Check the rubber seat condition',
+            'Check that the lever moves freely'
+        ],
+        safety: ['Butterfly valves can move from fully open to fully closed with a single quarter-turn. Rapid closure in a flowing system can generate dangerous water hammer and pressure transients. These may rupture piping. Operating procedures should require gradual closure. Use gear operators or actuators to limit closing speed on critical lines.','The disc of a butterfly valve stays in the flow path even when fully open. This creates turbulence and potential erosion. At high velocities, the forces on the disc can cause unexpected movement or damage. Proper sizing and actuator selection must allow for the maximum dynamic torque.','The lever or gear operator handle creates pinch and crush points that can trap fingers during manual operation. Keep hands on the designated grip areas. Never wrap fingers around the operator housing. Use caution when operating valves with high torque requirements.','Operate butterfly valves strictly within their rated pressure and temperature limits. Exceeding the design limits can cause catastrophic failure of the disc, shaft, or body. This can violently release the pressurized contents. The actual pressure rating decreases at elevated temperatures, as the valve pressure-temperature chart shows.','Butterfly valves in flammable service should be specified with fire-safe designs. These maintain their seal after exposure to fire. The resilient seat material must be compatible with the service fluid. Seat failure in a fire can cause an uncontrolled release of flammable material that feeds the fire.']
     },
     'check-valve': {
         name: 'Check Valves',

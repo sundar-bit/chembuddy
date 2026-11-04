@@ -2357,6 +2357,167 @@ const questionBank = [
         explanation: "Safety: 'If the bonnet or stem seal fails, components can be violently ejected.' Also: 'So personnel should never position themselves in line with the stem.'",
         difficulty: "medium"
     },
+    // ---- Butterfly Valves — practical set, approved 2026-11-04 (10 Qs) ----
+    {
+        id: "BV-Q01",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "On the plant you see a butterfly valve with its lever in line with the pipe. What is the valve position?",
+        options: [
+            "Fully closed",
+            "Fully open",
+            "Partly open",
+            "The lever does not show the position"
+        ],
+        correct: 1,
+        explanation: "How It Works: 'Lever in line with the pipe means open.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BV-Q02",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "A butterfly valve lever lies across the pipe. What does this tell you?",
+        options: [
+            "The valve is fully open",
+            "The valve is partly open",
+            "The shaft seal has failed",
+            "The valve is closed"
+        ],
+        correct: 3,
+        explanation: "How It Works: 'Lever across the pipe means closed.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BV-Q03",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "How far must you move the lever to take a butterfly valve from fully open to fully closed?",
+        options: [
+            "A quarter turn",
+            "One full turn",
+            "Several full turns",
+            "Half a turn"
+        ],
+        correct: 0,
+        explanation: "How It Works: 'A quarter turn takes the valve from open to closed.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BV-Q04",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "You want a little more flow through a partly open butterfly valve. What should you do?",
+        options: [
+            "Tighten the lug bolts",
+            "Close the valve fully, then reopen it quickly",
+            "Give the valve a bigger opening",
+            "Replace the rubber seat"
+        ],
+        correct: 2,
+        explanation: "How It Works, Throttling: 'a small opening gives a small flow. A bigger opening gives more flow.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BV-Q05",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "You set the lever at a chosen position. Which part holds it there?",
+        options: [
+            "The disc pin",
+            "The notched plate",
+            "The lower bushing",
+            "The rubber seat"
+        ],
+        correct: 1,
+        explanation: "Parts: 'Notched Plate — holds the lever at the chosen position.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BV-Q06",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "Fluid is leaking out at the shaft of a butterfly valve. What is the fix?",
+        options: [
+            "Replace the disc pin",
+            "Replace the lever handle",
+            "Tighten the lug bolts",
+            "Replace the shaft seal"
+        ],
+        correct: 3,
+        explanation: "Troubleshooting: 'Leak at the shaft' is caused by shaft seal wear. Action: 'Replace shaft seal.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BV-Q07",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "A closed butterfly valve still lets fluid pass, and the line carries debris. What should you do?",
+        options: [
+            "Replace the seat and filter the flow",
+            "Replace the notched plate",
+            "Open the valve faster",
+            "Replace the mounting plate"
+        ],
+        correct: 0,
+        explanation: "Troubleshooting: 'Valve leaks when closed' comes from seat wear from frequent cycling or debris. Action: 'Replace seat, filter the flow.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BV-Q08",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "Why should a butterfly valve in a flowing line be closed gradually?",
+        options: [
+            "To keep the lever clean",
+            "To let the notched plate cool",
+            "Rapid closure can cause water hammer that may rupture piping",
+            "Because the valve cannot be fully closed"
+        ],
+        correct: 2,
+        explanation: "Safety: 'Rapid closure in a flowing system can generate dangerous water hammer and pressure transients. These may rupture piping.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BV-Q09",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "Why is the pressure drop of a fully open butterfly valve higher than that of a gate valve?",
+        options: [
+            "The fluid must go up through a seat",
+            "The disc stays in the flow, even when fully open",
+            "The lever blocks the pipe",
+            "The rubber seat closes the bore"
+        ],
+        correct: 1,
+        explanation: "How It Works: 'The disc stays in the flow, so pressure drop is higher than in a gate valve.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BV-Q10",
+        equipmentId: "butterfly-valve",
+        category: "Piping & Valves",
+        subcategory: "Butterfly Valves",
+        question: "You are operating a butterfly valve by hand. How do you protect your fingers?",
+        options: [
+            "Wrap your fingers around the operator housing",
+            "Hold the lever close to the notched plate",
+            "Hold the shaft while turning",
+            "Keep your hands on the designated grip areas"
+        ],
+        correct: 3,
+        explanation: "Safety: 'Keep hands on the designated grip areas. Never wrap fingers around the operator housing.'",
+        difficulty: "easy"
+    },
     // ---- Cabin/Box Heaters — practical set, approved 2026-11-03 (10 Qs) ----
     {
         id: "CH-Q01",

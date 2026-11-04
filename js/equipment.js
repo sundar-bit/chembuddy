@@ -126,6 +126,20 @@ var Equipment = (function () {
                 alt: 'Globe valve in three positions: fully closed, throttling and fully open'
             }
         },
+        'butterfly-valve': {
+            overview: {
+                src: 'images/equipment/valves/butterfly-valve/butterfly-valve-isometric.png',
+                alt: 'Isometric view of lug-type butterfly valve with lever handle and partly open disc'
+            },
+            components: {
+                src: 'images/equipment/valves/butterfly-valve/butterfly-valve-cutaway.png',
+                alt: 'Cutaway view of butterfly valve showing major components'
+            },
+            working: {
+                src: 'images/equipment/valves/butterfly-valve/butterfly-valve-flow-path.png',
+                alt: 'Butterfly valve seen from above in three positions: fully closed, throttling and fully open'
+            }
+        },
         'cabin-heater': {
             overview: {
                 src: 'images/equipment/fired-heaters/cabin-heater/cabin-heater-isometric.png',
