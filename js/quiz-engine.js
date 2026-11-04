@@ -9,7 +9,7 @@ var QuizEngine = (function () {
     var POINTS_PER_CORRECT = 10;
     // Time to read the question and all four options, then think. 30s proved
     // too short even for the author (reading alone takes 20-25s).
-    var SECONDS_PER_QUESTION = 45;
+    var SECONDS_PER_QUESTION = 60; // official attempt only; practice has no time limit
 
     // One quiz per equipment; the quiz id is the equipment id.
     function equipmentName(equipId) {
@@ -126,7 +126,7 @@ var QuizEngine = (function () {
 
         html += '<div class="quiz-meta">';
         html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + questions.length + '</div><div class="quiz-meta-label">Questions</div></div>';
-        html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + SECONDS_PER_QUESTION + 's</div><div class="quiz-meta-label">Per Question</div></div>';
+        html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + (practice ? 'No' : SECONDS_PER_QUESTION + 's') + '</div><div class="quiz-meta-label">' + (practice ? 'Time Limit' : 'Per Question') + '</div></div>';
         html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + pointsPerQ + '</div><div class="quiz-meta-label">Pts Each</div></div>';
         html += '</div>';
 
@@ -199,13 +199,15 @@ var QuizEngine = (function () {
         html += '<div class="quiz-body">';
         html += '<div class="quiz-question-card">';
 
-        // Timer
-        html += '<div class="quiz-timer">';
-        html += '<div class="timer-ring">';
-        html += '<svg viewBox="0 0 64 64"><circle class="timer-ring-bg" cx="32" cy="32" r="30"/>';
-        html += '<circle class="timer-ring-fill" id="timer-fill" cx="32" cy="32" r="30"/></svg>';
-        html += '<div class="timer-number" id="timer-number">' + state.timePerQuestion + '</div>';
-        html += '</div></div>';
+        // Timer (official attempt only)
+        if (!state.practice) {
+            html += '<div class="quiz-timer">';
+            html += '<div class="timer-ring">';
+            html += '<svg viewBox="0 0 64 64"><circle class="timer-ring-bg" cx="32" cy="32" r="30"/>';
+            html += '<circle class="timer-ring-fill" id="timer-fill" cx="32" cy="32" r="30"/></svg>';
+            html += '<div class="timer-number" id="timer-number">' + state.timePerQuestion + '</div>';
+            html += '</div></div>';
+        }
 
         // Question text
         html += '<div class="quiz-question-text">' + Utils.sanitize(q.question) + '</div>';
@@ -230,8 +232,10 @@ var QuizEngine = (function () {
 
         container.innerHTML = html;
 
-        // Start timer
-        startQuestionTimer(state);
+        // How long this answer took is recorded in both modes; only the official attempt is timed
+        state.questionStart = Date.now();
+        if (timerInterval) clearInterval(timerInterval);
+        if (!state.practice) startQuestionTimer(state);
 
         // Option click handlers
         container.querySelectorAll('.quiz-option').forEach(function (btn) {
@@ -263,9 +267,16 @@ var QuizEngine = (function () {
         var circumference = 2 * Math.PI * 30; // r=30
 
         timerInterval = setInterval(function () {
-            remaining--;
             var fill = document.getElementById('timer-fill');
             var num = document.getElementById('timer-number');
+
+            // The student left the quiz: nothing more to time
+            if (!num) {
+                clearInterval(timerInterval);
+                return;
+            }
+
+            remaining--;
 
             if (num) {
                 num.textContent = remaining;
@@ -277,9 +288,8 @@ var QuizEngine = (function () {
             if (fill) {
                 var offset = circumference * (1 - remaining / total);
                 fill.style.strokeDashoffset = offset;
-                fill.className = 'timer-ring-fill';
-                if (remaining <= 5) fill.className += ' danger';
-                else if (remaining <= 10) fill.className += ' warning';
+                // An SVG element's className cannot be assigned
+                fill.setAttribute('class', 'timer-ring-fill' + (remaining <= 5 ? ' danger' : (remaining <= 10 ? ' warning' : '')));
             }
 
             if (remaining <= 0) {
@@ -292,11 +302,14 @@ var QuizEngine = (function () {
     }
 
     function selectAnswer(container, state, selectedIdx) {
+        // One answer per question: later taps must not score again
+        if (state.answers.length > state.currentIndex) return;
+
         if (timerInterval) clearInterval(timerInterval);
 
         var q = state.questions[state.currentIndex];
         var isCorrect = selectedIdx === q.correct;
-        var timeUsed = state.timePerQuestion - parseInt(document.getElementById('timer-number').textContent || '0');
+        var timeUsed = Math.round((Date.now() - state.questionStart) / 1000);
 
         state.answers.push({
             questionId: q.id,
