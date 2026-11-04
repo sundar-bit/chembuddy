@@ -156,6 +156,22 @@ var Equipment = (function () {
         }
     };
 
+    // The one rule for what students may open: 3 approved images, the lesson
+    // format, and a full quiz. Browse, Learn and Home all use it, so a finished
+    // lesson appears everywhere by itself. The content of unfinished equipment
+    // stays in equipmentDB, out of sight.
+    function isLessonComplete(id) {
+        var equip = equipmentDB[id];
+        var images = equipSectionImages[id];
+        if (!equip || !images || !images.overview || !images.components || !images.working) return false;
+        if (!equip.intro || !equip.steps || !equip.steps.length || !equip.recap || !equip.recap.length) return false;
+        return questionBank.filter(function (q) { return q.equipmentId === id; }).length >= learningPath.quizLength;
+    }
+
+    function completedLessonCount() {
+        return Object.keys(equipmentDB).filter(isLessonComplete).length;
+    }
+
     function getSectionImage(id, slot) {
         var set = equipSectionImages[id];
         if (!set || !set[slot]) return '';
@@ -236,9 +252,9 @@ var Equipment = (function () {
         html += '<div class="browse-sidebar">';
         html += '<div class="browse-sidebar-header">';
         var sections = getBrowseSections();
-        var totalEquip = Object.keys(equipmentDB).length;
+        var readyCount = completedLessonCount();
 
-        html += '<input type="text" class="browse-search" id="browse-search" placeholder="Search ' + totalEquip + ' equipment...">';
+        html += '<input type="text" class="browse-search" id="browse-search" placeholder="Search ' + readyCount + ' equipment...">';
         html += '</div>';
         html += '<ul class="browse-nav" id="browse-nav"></ul>';
         html += '</div>';
@@ -247,12 +263,10 @@ var Equipment = (function () {
         html += '<div class="browse-detail" id="browse-detail">';
         html += '<div class="equip-welcome">';
         html += '<h2>Select Equipment</h2>';
-        html += '<p>Choose from ' + totalEquip + ' equipment types across ' + categories.length + ' categories</p>';
+        html += '<p>Choose from ' + readyCount + ' completed lessons. More are added as they are finished.</p>';
         html += '<div class="stat-grid mt-3">';
 
-        var level1Count = learningPath.allEquipment().length;
-        html += '<div class="stat-card"><div class="stat-value">' + level1Count + '</div><div class="stat-label">Level 1 Equipment</div></div>';
-        html += '<div class="stat-card"><div class="stat-value">' + totalEquip + '</div><div class="stat-label">Equipment Types</div></div>';
+        html += '<div class="stat-card"><div class="stat-value">' + readyCount + '</div><div class="stat-label">Lessons Ready</div></div>';
 
         var studiedCount = Object.keys((window.ChemBuddy.progress || {}).studied || {}).length;
         html += '<div class="stat-card"><div class="stat-value">' + studiedCount + '</div><div class="stat-label">Studied</div></div>';
@@ -266,8 +280,9 @@ var Equipment = (function () {
     }
 
     // Browse menu groups, built from equipmentDB so the menu always matches
-    // the content. Level 1 = the learning-path modules; Level 2 = every other
-    // equipment, grouped by its category.
+    // the content. Only completed lessons are listed. Level 1 = the
+    // learning-path modules; Level 2 = every other equipment, by category.
+    // A module or level with nothing completed yet does not appear.
     // Returns [{ level, heading, groups: [{ id, name, icon, desc, items: [{id, name}] }] }]
     function getBrowseSections() {
         var catByName = {};
@@ -287,16 +302,16 @@ var Equipment = (function () {
                 desc: 'Module ' + mod.id,
                 items: mod.equipment.filter(function (eq) {
                     level1Ids[eq.id] = true;
-                    return !!equipmentDB[eq.id];
+                    return isLessonComplete(eq.id);
                 }).map(function (eq) {
                     return { id: eq.id, name: equipmentDB[eq.id].name };
                 })
             };
-        });
+        }).filter(function (group) { return group.items.length > 0; });
 
         var level2ByCat = {};
         Object.keys(equipmentDB).forEach(function (id) {
-            if (level1Ids[id]) return;
+            if (level1Ids[id] || !isLessonComplete(id)) return;
             var catName = equipmentDB[id].category;
             (level2ByCat[catName] = level2ByCat[catName] || []).push({ id: id, name: equipmentDB[id].name });
         });
@@ -315,7 +330,7 @@ var Equipment = (function () {
         return [
             { level: 1, heading: learningPath.title, groups: level1Groups },
             { level: 2, heading: 'Level 2 — More Equipment', groups: level2Groups }
-        ];
+        ].filter(function (section) { return section.groups.length > 0; });
     }
 
     function renderBrowseEquip(container, params) {
@@ -429,6 +444,12 @@ var Equipment = (function () {
         currentEquipId = id;
         var detail = document.getElementById('browse-detail');
         if (!detail) return;
+
+        // Reached by an old link or a saved page: unfinished content stays hidden
+        if (!isLessonComplete(id)) {
+            detail.innerHTML = '<div class="equip-welcome"><h2>Coming Soon</h2><p>The lesson on ' + Utils.sanitize(equip.name) + ' is being prepared.</p></div>';
+            return;
+        }
 
         var studied = ((window.ChemBuddy.progress || {}).studied || {})[id];
 
@@ -685,6 +706,8 @@ var Equipment = (function () {
     }
 
     return {
+        isLessonComplete: isLessonComplete,
+        completedLessonCount: completedLessonCount,
         renderBrowse: renderBrowse,
         renderBrowseEquip: renderBrowseEquip,
         showEquipment: showEquipment,

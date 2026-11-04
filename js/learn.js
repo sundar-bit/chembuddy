@@ -12,11 +12,22 @@ var Learn = (function () {
         return !!quizzes[equipId] || !QuizEngine.isQuizReady(equipId);
     }
 
-    // With a weekly schedule, equipment opens on its release day. Without one,
-    // equipment inside a module unlocks once the previous one is studied.
+    // The nearest completed lesson before this one in its module, or null.
+    function previousLesson(mod, index) {
+        for (var i = index - 1; i >= 0; i--) {
+            if (Equipment.isLessonComplete(mod.equipment[i].id)) return mod.equipment[i];
+        }
+        return null;
+    }
+
+    // An unfinished lesson never opens. Otherwise, with a weekly schedule,
+    // equipment opens on its release day. Without one, equipment inside a module
+    // unlocks once the previous completed lesson is studied.
     function isEquipmentAvailable(mod, index, studied) {
+        if (!Equipment.isLessonComplete(mod.equipment[index].id)) return false;
         if (learningPath.hasSchedule()) return learningPath.isReleased(mod.equipment[index].id);
-        return index === 0 || !!studied[mod.equipment[index - 1].id];
+        var previous = previousLesson(mod, index);
+        return !previous || !!studied[previous.id];
     }
 
     // "Mon, 17 Nov"
@@ -26,8 +37,9 @@ var Learn = (function () {
     }
 
     function lockedMessage(mod, index) {
+        if (!Equipment.isLessonComplete(mod.equipment[index].id)) return 'This lesson is coming soon';
         if (learningPath.hasSchedule()) return 'Opens on ' + opensLabel(mod.equipment[index].id);
-        return 'Study ' + mod.equipment[index - 1].name + ' first';
+        return 'Study ' + previousLesson(mod, index).name + ' first';
     }
 
     // Next thing to do: the first incomplete equipment that is open. When all
@@ -41,6 +53,7 @@ var Learn = (function () {
             var mod = learningPath.modules[m];
             for (var i = 0; i < mod.equipment.length; i++) {
                 var eq = mod.equipment[i];
+                if (!Equipment.isLessonComplete(eq.id)) continue;
                 if (isEquipmentComplete(eq.id, studied, quizzes)) continue;
                 var info = {
                     moduleId: mod.id,
@@ -99,12 +112,14 @@ var Learn = (function () {
                 var quizDone = quizzes[eq.id];
                 var isComplete = isEquipmentComplete(eq.id, studied, quizzes);
                 var isAvailable = isEquipmentAvailable(mod, idx, studied);
+                var lessonReady = Equipment.isLessonComplete(eq.id);
 
-                var statusClass = isComplete ? 'completed' : (isAvailable ? 'available' : 'locked');
-                var statusText = isComplete ? '✓ Done' : (isAvailable ? 'Start →' : (learningPath.hasSchedule() ? '🔒 ' + opensLabel(eq.id) : '🔒 Locked'));
+                var statusClass = !lessonReady ? 'locked' : (isComplete ? 'completed' : (isAvailable ? 'available' : 'locked'));
+                var statusText = !lessonReady ? 'Coming soon' : (isComplete ? '✓ Done' : (isAvailable ? 'Start →' : (learningPath.hasSchedule() ? '🔒 ' + opensLabel(eq.id) : '🔒 Locked')));
 
                 var meta;
                 if (quizDone) meta = 'Quiz: ' + quizDone.score + '/' + quizDone.maxScore;
+                else if (!lessonReady) meta = 'Lesson being prepared';
                 else if (!QuizEngine.isQuizReady(eq.id)) meta = 'Quiz coming soon';
                 else meta = learningPath.quizLength + '-question quiz';
 
@@ -149,7 +164,8 @@ var Learn = (function () {
         var quizzes = progress.quizzes || {};
 
         if (!isEquipmentAvailable(mod, found.index, studied)) {
-            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Locked</h3><p>' + Utils.sanitize(lockedMessage(mod, found.index)) + '.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning Path</a></div>';
+            var heading = Equipment.isLessonComplete(equipId) ? 'Locked' : 'Coming Soon';
+            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔒</div><h3>' + heading + '</h3><p>' + Utils.sanitize(lockedMessage(mod, found.index)) + '.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning Path</a></div>';
             return;
         }
 

@@ -6,7 +6,7 @@
     <title>ChemBuddy - Learn</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚗️</text></svg>">
     <link rel="stylesheet" href="css/common.css?v=7">
-    <link rel="stylesheet" href="css/app.css?v=9">
+    <link rel="stylesheet" href="css/app.css?v=10">
     <link rel="stylesheet" href="css/quiz.css?v=7">
     <link rel="stylesheet" href="css/leaderboard.css?v=8">
 </head>
@@ -74,10 +74,10 @@
     <script src="data/questions.js?v=18"></script>
 
     <!-- Modules -->
-    <script src="js/equipment.js?v=21"></script>
+    <script src="js/equipment.js?v=22"></script>
     <script src="js/speech-text.js?v=2"></script>
     <script src="js/voice.js?v=10"></script>
-    <script src="js/learn.js?v=10"></script>
+    <script src="js/learn.js?v=11"></script>
     <script src="js/quiz-engine.js?v=10"></script>
     <script src="js/leaderboard.js?v=8"></script>
     <script src="js/certificate.js?v=1"></script>
@@ -291,7 +291,7 @@
             } else {
                 html += '<div class="today-card">';
                 html += '<h3>🎉 Great Progress!</h3>';
-                html += '<h2>Keep exploring equipment</h2>';
+                html += '<h2>You have finished every lesson ready so far. More are coming soon.</h2>';
                 html += '<a href="#/learn" class="btn">View Learning Path →</a>';
                 html += '</div>';
             }
@@ -319,7 +319,7 @@
             html += '<div class="card"><div class="card-body">';
             html += '<h3 class="mb-2">Quick Links</h3>';
             html += '<div class="flex flex-col gap-1">';
-            html += '<a href="#/browse" class="btn btn-outline btn-block">Browse All ' + Object.keys(equipmentDB).length + ' Equipment</a>';
+            html += '<a href="#/browse" class="btn btn-outline btn-block">Browse ' + Equipment.completedLessonCount() + ' Equipment</a>';
             html += '<a href="#/leaderboard" class="btn btn-outline btn-block">View Leaderboard</a>';
             html += '</div></div></div>';
 
