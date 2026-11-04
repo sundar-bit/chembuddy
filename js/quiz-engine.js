@@ -10,6 +10,7 @@ var QuizEngine = (function () {
     // Time to read the question and all four options, then think. 30s proved
     // too short even for the author (reading alone takes 20-25s).
     var SECONDS_PER_QUESTION = 60; // official attempt only; practice has no time limit
+    var MAX_RETAKES = 3; // per equipment, after the official attempt; a retake counts once finished
 
     // One quiz per equipment; the quiz id is the equipment id.
     function equipmentName(equipId) {
@@ -28,13 +29,18 @@ var QuizEngine = (function () {
         return questionCount(equipId) >= learningPath.quizLength;
     }
 
+    function retakesLeft(equipId) {
+        var practice = (window.ChemBuddy.progress.practice || {})[equipId];
+        return Math.max(0, MAX_RETAKES - (practice ? practice.attempts || 0 : 0));
+    }
+
     function renderQuizList(container) {
         var progress = window.ChemBuddy.progress || {};
         var studied = progress.studied || {};
         var quizzes = progress.quizzes || {};
 
         var html = '<h1 class="mb-1">My Quizzes</h1>';
-        html += '<p class="text-muted mb-3">One quiz per equipment — ' + learningPath.quizLength + ' questions. Your first attempt counts; after that you can practise as often as you like.</p>';
+        html += '<p class="text-muted mb-3">One quiz per equipment — ' + learningPath.quizLength + ' questions. Your first attempt counts; after that you can retake each quiz up to ' + MAX_RETAKES + ' times for practice.</p>';
 
         learningPath.modules.forEach(function (mod) {
             html += '<div class="card mb-3"><div class="card-header">Module ' + mod.id + ': ' + Utils.sanitize(mod.title) + '</div>';
@@ -91,6 +97,10 @@ var QuizEngine = (function () {
             return;
         }
         if (practice) {
+            if (retakesLeft(quizId) === 0) {
+                showPreviousResults(container, quizId, existing);
+                return;
+            }
             showPreQuiz(container, quizId, getQuestionsForQuiz(quizId), true);
             return;
         }
@@ -122,7 +132,7 @@ var QuizEngine = (function () {
         html += '<div class="quiz-pre">';
         html += '<div class="quiz-pre-icon">📝</div>';
         html += '<h2>' + (practice ? 'Practice' : 'Quiz') + ': ' + Utils.sanitize(equipmentName(quizId)) + '</h2>';
-        html += '<p>' + (practice ? 'Practise as often as you like' : 'Test what you learned about this equipment') + '</p>';
+        html += '<p>' + (practice ? 'Retake ' + (MAX_RETAKES - retakesLeft(quizId) + 1) + ' of ' + MAX_RETAKES : 'Test what you learned about this equipment') + '</p>';
 
         html += '<div class="quiz-meta">';
         html += '<div class="quiz-meta-item"><div class="quiz-meta-value">' + questions.length + '</div><div class="quiz-meta-label">Questions</div></div>';
@@ -134,7 +144,7 @@ var QuizEngine = (function () {
             var official = window.ChemBuddy.progress.quizzes[quizId];
             html += '<p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1.5rem">Practice only — no points, and your official score stays ' + official.score + '/' + official.maxScore + '.</p>';
         } else {
-            html += '<p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1.5rem">⚠️ Only this first attempt counts for points and reports. You can practise again afterwards.</p>';
+            html += '<p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1.5rem">⚠️ Only this first attempt counts for points and reports. You can retake it up to ' + MAX_RETAKES + ' times for practice afterwards.</p>';
         }
         html += '<button class="btn btn-primary btn-lg" id="start-quiz-btn">' + (practice ? 'Start Practice →' : 'Start Quiz →') + '</button>';
         html += '<br><a href="#/learn" class="btn btn-outline mt-2">Cancel</a>';
@@ -433,12 +443,27 @@ var QuizEngine = (function () {
         // Actions
         html += '<div class="results-actions">';
         html += '<a href="#/learn" class="btn btn-primary">Back to Learning</a>';
-        html += '<a href="#/quiz/' + state.quizId + '/practice" class="btn btn-outline">Practice Again</a>';
+        var left = retakesLeft(state.quizId);
+        if (left > 0 && state.practice) {
+            // Already on the practice page, so a link to it would do nothing
+            html += '<button class="btn btn-outline" id="practice-again">Practice Again (' + left + ' left)</button>';
+        } else if (left > 0) {
+            html += '<a href="#/quiz/' + state.quizId + '/practice" class="btn btn-outline">Practice Again (' + left + ' left)</a>';
+        }
         html += '</div>';
+        if (left === 0) html += '<p class="text-muted mt-2">You have used all ' + MAX_RETAKES + ' retakes for this quiz.</p>';
 
         html += '</div></div>';
         container.innerHTML = html;
         currentQuiz = null;
+
+        var again = document.getElementById('practice-again');
+        if (again) {
+            again.addEventListener('click', function () {
+                renderPractice(container, { quizId: state.quizId });
+                window.scrollTo(0, 0);
+            });
+        }
     }
 
     function showPreviousResults(container, quizId, data) {
@@ -459,11 +484,13 @@ var QuizEngine = (function () {
 
         var practice = (window.ChemBuddy.progress.practice || {})[quizId];
         if (practice) {
-            html += '<p class="text-muted mt-2">Practice: ' + practice.attempts + ' attempt' + (practice.attempts === 1 ? '' : 's') + ', best ' + practice.best + '/' + data.maxScore + '</p>';
+            html += '<p class="text-muted mt-2">Retakes: ' + Math.min(practice.attempts, MAX_RETAKES) + ' of ' + MAX_RETAKES + ' used, best ' + practice.best + '/' + data.maxScore + '</p>';
         }
 
         html += '<div class="results-actions mt-3">';
-        html += '<a href="#/quiz/' + quizId + '/practice" class="btn btn-primary">Practice Again</a>';
+        if (retakesLeft(quizId) > 0) {
+            html += '<a href="#/quiz/' + quizId + '/practice" class="btn btn-primary">Practice Again (' + retakesLeft(quizId) + ' left)</a>';
+        }
         html += '<a href="#/quizzes" class="btn btn-outline">All Quizzes</a>';
         html += '</div>';
 
@@ -472,6 +499,17 @@ var QuizEngine = (function () {
     }
 
     function savePractice(uid, state) {
+        // Count it here too, so the retakes shown next are right before the save returns
+        var progress = window.ChemBuddy.progress;
+        progress.practice = progress.practice || {};
+        var local = progress.practice[state.quizId] || {};
+        progress.practice[state.quizId] = {
+            attempts: (local.attempts || 0) + 1,
+            best: Math.max(local.best || 0, state.score),
+            lastScore: state.score,
+            lastAt: Date.now()
+        };
+
         db.ref('progress/' + uid + '/practice/' + state.quizId).transaction(function (cur) {
             cur = cur || {};
             return {
@@ -488,6 +526,7 @@ var QuizEngine = (function () {
         renderQuiz: renderQuiz,
         renderPractice: renderPractice,
         isQuizReady: isQuizReady,
-        questionCount: questionCount
+        questionCount: questionCount,
+        retakesLeft: retakesLeft
     };
 })();

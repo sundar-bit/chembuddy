@@ -331,7 +331,8 @@ var Learn = (function () {
         if (quizDone) {
             html += '<h3>✅ Quiz Completed</h3>';
             html += '<p>Score: ' + quizDone.score + '/' + quizDone.maxScore + ' (' + quizDone.points + ' points)</p>';
-            html += '<a href="#/quiz/' + equipId + '/practice" class="btn btn-outline">Practice Again</a>';
+            var left = QuizEngine.retakesLeft(equipId);
+            if (left > 0) html += '<a href="#/quiz/' + equipId + '/practice" class="btn btn-outline">Practice Again (' + left + ' left)</a>';
         } else if (!QuizEngine.isQuizReady(equipId)) {
             html += '<h3>📝 Quiz Coming Soon</h3>';
             html += '<p>The quiz for this equipment is being prepared. You can continue to the next equipment.</p>';
