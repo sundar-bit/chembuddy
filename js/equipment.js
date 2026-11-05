@@ -154,6 +154,20 @@ var Equipment = (function () {
                 alt: 'Batch cycle in four stages: charge, heat and react, cool, and discharge'
             }
         },
+        'cstr': {
+            overview: {
+                src: 'images/equipment/reactors/cstr/cstr-isometric.png',
+                alt: 'Isometric view of a CSTR with motor, gearbox, feed nozzle, side product outlet and level indicator'
+            },
+            components: {
+                src: 'images/equipment/reactors/cstr/cstr-cutaway.png',
+                alt: 'Cutaway view of a CSTR showing agitator, baffles, vessel wall, jacket space and overflow outlet'
+            },
+            working: {
+                src: 'images/equipment/reactors/cstr/cstr-flow-path.png',
+                alt: 'One CSTR at steady state, with feed entering, agitator mixing, jacket holding temperature and product overflowing'
+            }
+        },
         'cabin-heater': {
             overview: {
                 src: 'images/equipment/fired-heaters/cabin-heater/cabin-heater-isometric.png',

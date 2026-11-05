@@ -3001,6 +3001,168 @@ const questionBank = [
         correct: 3,
         explanation: "Safety: 'Complete lockout/tagout is required before any internal work.'",
         difficulty: "medium"
+    },
+
+    // ---- CSTR — practical set, approved 2026-11-05 (10 Qs) ----
+    {
+        id: "CS-Q01",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "A trainee has only seen batch reactors. When does product leave a CSTR?",
+        options: [
+            "Only when the reaction is complete",
+            "Only when the drain valve is opened",
+            "Continuously, while feed keeps flowing in",
+            "Only after the agitator has been stopped for the day"
+        ],
+        correct: 2,
+        explanation: "How It Works: 'Feed in and product out never stop.' 'Product leaves continuously through the outlet.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CS-Q02",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "The level indicator shows a steady level during normal running. What keeps it steady?",
+        options: [
+            "Flow in matches flow out",
+            "The drain valve is kept slightly open",
+            "The agitator runs at a fixed speed",
+            "The jacket fluid holds the level"
+        ],
+        correct: 0,
+        explanation: "How It Works, Hold Level: 'Flow in matches flow out, so the level stays steady.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CS-Q03",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "You take a sample at the product outlet. What does it tell you about the liquid in the vessel?",
+        options: [
+            "The vessel liquid has less product",
+            "The vessel liquid is still pure feed",
+            "It tells you nothing about the vessel contents",
+            "The vessel liquid is the same as the sample"
+        ],
+        correct: 3,
+        explanation: "How It Works: 'The product is the same as the liquid inside.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CS-Q04",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "The liquid is swirling round as one mass instead of mixing. Which part is there to stop this?",
+        options: [
+            "Mechanical seal",
+            "Baffle",
+            "Vent nozzle",
+            "Jacket"
+        ],
+        correct: 1,
+        explanation: "Parts: 'Baffle — stops the liquid swirling round as one mass.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CS-Q05",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "Tests show dead zones, and some feed is going straight to the outlet. What should you do?",
+        options: [
+            "Clean the jacket and raise the feed rate",
+            "Open the drain valve",
+            "Improve the agitator and add baffles",
+            "Close the vent nozzle"
+        ],
+        correct: 2,
+        explanation: "Troubleshooting, Poor mixing: 'Dead zones, feed going straight to the outlet.' Fix: 'Improve the agitator, add baffles.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CS-Q06",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "The temperature keeps drifting. The feed is steady, but the jacket is fouled. What should you do?",
+        options: [
+            "Clean the jacket",
+            "Raise the liquid level",
+            "Open the manway",
+            "Add more baffles"
+        ],
+        correct: 0,
+        explanation: "Troubleshooting, Temperature upset: 'Feed changes, fouled jacket.' Fix: 'Steady the feed, clean the jacket.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CS-Q07",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "The product is not fully reacted, because the liquid spends too little time in the vessel. What can you do?",
+        options: [
+            "Open the jacket outlet",
+            "Stop the agitator",
+            "Lower the level",
+            "Lower the feed rate"
+        ],
+        correct: 3,
+        explanation: "Troubleshooting, Product not fully reacted: 'Too little time in the vessel.' Fix: 'Lower the feed rate, add volume or more vessels.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CS-Q08",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "The product outlet line is blocked while feed keeps flowing. What is the danger?",
+        options: [
+            "The jacket fluid runs out and the temperature falls",
+            "The agitator speeds up",
+            "The reactor overfills and chemicals can spill",
+            "The level indicator stops working"
+        ],
+        correct: 2,
+        explanation: "Safety: 'Blockages or control failures can cause the reactor to overfill.' This leads to 'hazardous chemical spills'.",
+        difficulty: "medium"
+    },
+    {
+        id: "CS-Q09",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "The temperature in the vessel is climbing fast. Which systems must be ready to act?",
+        options: [
+            "Emergency cooling and automatic feed cutoff",
+            "The manway and the drain valve",
+            "The level indicator and the manual drain valve",
+            "The gearbox and the support legs"
+        ],
+        correct: 0,
+        explanation: "Safety: 'Reliable temperature control, emergency cooling, and automatic feed cutoff systems must be operational.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CS-Q10",
+        equipmentId: "cstr",
+        category: "Reactors",
+        subcategory: "CSTR (Continuous Stirred Tank Reactor)",
+        question: "You are asked to do maintenance work on the agitator. What must be done first?",
+        options: [
+            "Remove the guards so the shaft is easy to reach",
+            "Slow the agitator down",
+            "Follow full lockout/tagout procedures",
+            "Lower the liquid level only"
+        ],
+        correct: 2,
+        explanation: "Safety: 'Follow full lockout/tagout procedures for any maintenance work.'",
+        difficulty: "easy"
     }
 ];
 

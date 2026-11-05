@@ -1100,13 +1100,77 @@ const equipmentDB = {
     'cstr': {
         name: 'CSTR (Continuous Stirred Tank Reactor)',
         category: 'Reactors',
-        description: 'Continuous reactors with perfect mixing where outlet composition equals the uniform internal composition. Steady-state operation for constant product quality in large-scale chemical production.',
-        principles: 'Continuous feed and discharge with intense agitation creates uniform composition throughout. The outlet stream has the same composition as the reactor contents. Steady-state operation at constant conditions.',
-        specs: [{t:'Operation',v:'Continuous'},{t:'Mixing',v:'Perfect (assumed)'},{t:'Composition',v:'Uniform = outlet'},{t:'Conversion',v:'Lower than PFR per volume'}],
-        components: ['Vessel - continuous reactor','Agitator - intense mixing','Jacket/Coils - heat transfer','Feed Nozzles - continuous entry','Overflow/Outlet - product exit','Baffles - prevent vortexing','Level Control - maintains volume','Temperature Control - reaction heat'],
-        troubles: [{p:'Poor mixing',c:'Dead zones, short-circuiting',a:'Improve agitator, add baffles'},{p:'Temperature upset',c:'Feed variation, fouled jacket',a:'Control feed, clean jacket'},{p:'Low conversion',c:'Short residence, back-mixing',a:'Increase volume, stages'},{p:'Fouling',c:'Polymerization, deposits',a:'Inhibitors, cleaning protocol'}],
-        observations: ['Monitor outlet composition','Check temperature stability','Verify residence time','Watch level control','Track agitator power'],
-        safety: ['Continuous operation means hazardous chemicals are always flowing through the system. This requires constant vigilance and properly maintained containment. Keep spill response equipment readily available. Any leak or seal failure causes immediate chemical exposure, without the inherent batch-end stoppage.','Exothermic runaway reactions in a CSTR can rapidly overheat the entire well-mixed vessel contents. This leads to rapid pressure rise and potential vessel failure. Reliable temperature control, emergency cooling, and automatic feed cutoff systems must be operational. They must also be regularly tested.','Properly maintain and monitor the continuous liquid overflow discharge system. Blockages or control failures can cause the reactor to overfill. This leads to hazardous chemical spills from vent lines, pressure relief devices, or vessel connections.','The high-speed agitator operates continuously and presents persistent entanglement hazards. These hazards are at the shaft, coupling, and impeller. All guards and interlocks must remain in place during operation. Follow full lockout/tagout procedures for any maintenance work.','Size pressure relief systems for the maximum possible heat generation rate from a runaway reaction scenario. Do not size them just for normal operating conditions. An undersized relief device will fail to protect the vessel during the most dangerous credible event.'],
+        intro: 'In this lesson you will get to know the CSTR, a reactor that runs continuously. You will see it from outside, then look inside at its 14 main parts. Next you will follow the flow through the reactor, in 6 steps. You will finish with common problems and how to work safely.',
+        description: 'CSTR stands for Continuous Stirred Tank Reactor. It is a stirred vessel where feed flows in and product flows out all the time. It suits large-scale production at constant quality. The one shown is a steel vessel with an agitator, a jacket and an overflow outlet. The isometric overview shows what you see from outside.',
+        labels: [
+            'Electric Motor — provides the power to turn the agitator.',
+            'Gearbox — reduces the motor speed for the agitator.',
+            'Mechanical Seal — stops leaks where the shaft enters the vessel.',
+            'Manway — the large bolted cover that gives access for inspection and cleaning.',
+            'Feed Nozzle — lets the feed flow into the vessel.',
+            'Vent Nozzle — connects the vapour space to the vent system.',
+            'Product Outlet — the side nozzle where product overflows from the vessel.',
+            'Level Indicator — shows the liquid level in the vessel.',
+            'Jacket — the blue outer shell. It carries fluid that controls the temperature.',
+            'Jacket Inlet — lets the fluid into the jacket.',
+            'Jacket Outlet — lets the fluid leave the jacket.',
+            'Support Leg — one of the four legs that carry the reactor.',
+            'Drain Valve — empties the vessel. It stays closed in normal running.'
+        ],
+        principles: 'The working diagram shows one reactor with everything happening at the same time. Feed enters, the agitator mixes, and product overflows.',
+        steps: [
+            'Feed — reactants flow in continuously through the feed nozzle.',
+            'Mix — the agitator and baffles blend the feed into the contents.',
+            'React — the reaction runs all the time throughout the vessel.',
+            'Control — fluid in the jacket holds the temperature steady.',
+            'Overflow — product leaves continuously through the outlet.',
+            'Hold Level — flow in matches flow out, so the level stays steady.'
+        ],
+        principlesNote: 'Feed in and product out never stop. The product is the same as the liquid inside. Flow, level and temperature all stay steady. The jacket fluid never touches the liquid inside.',
+        recap: [
+            'What a CSTR is, and where it is used',
+            'The outside: motor, gearbox, seal, manway, nozzles, level indicator, jacket, legs and drain valve',
+            'The 14 main parts, including the agitator shaft, impeller, baffles and jacket space inside',
+            'The 6 steps of continuous flow, from feed to overflow',
+            'Why the product is the same as the liquid inside',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Operation', v: 'Continuous, flow in and flow out' },
+            { t: 'Mixing', v: 'Even throughout the vessel' },
+            { t: 'Product', v: 'Same as the liquid inside' },
+            { t: 'Running State', v: 'Steady flow, level and temperature' }
+        ],
+        components: [
+            '1. Electric Motor — provides the power to turn the agitator.',
+            '2. Gearbox — reduces the motor speed for the agitator.',
+            '3. Mechanical Seal — stops leaks where the shaft enters the vessel.',
+            '4. Feed Nozzle — lets the feed flow into the vessel.',
+            '5. Agitator Shaft — carries the turn from the gearbox to the impeller.',
+            '6. Baffle — stops the liquid swirling round as one mass.',
+            '7. Impeller — mixes the feed into the liquid and keeps it moving.',
+            '8. Vessel Wall — holds the liquid and keeps it apart from the jacket fluid.',
+            '9. Jacket Space — the gap between the two walls, where the jacket fluid flows.',
+            '10. Product Outlet — takes product out at the liquid surface.',
+            '11. Level Indicator — shows the liquid level in the vessel.',
+            '12. Jacket Inlet — lets the fluid into the jacket.',
+            '13. Jacket Outlet — lets the fluid leave the jacket.',
+            '14. Drain Valve — empties the vessel. It stays closed in normal running.'
+        ],
+        troubles: [
+            { p: 'Poor mixing', c: 'Dead zones, feed going straight to the outlet', a: 'Improve the agitator, add baffles' },
+            { p: 'Temperature upset', c: 'Feed changes, fouled jacket', a: 'Steady the feed, clean the jacket' },
+            { p: 'Product not fully reacted', c: 'Too little time in the vessel', a: 'Lower the feed rate, add volume or more vessels' },
+            { p: 'Fouling', c: 'Polymer and deposits on the surfaces', a: 'Use inhibitors, follow the cleaning routine' }
+        ],
+        observations: [
+            'Check the product quality at the outlet',
+            'Check that the temperature is steady',
+            'Watch the level indicator',
+            'Check that the feed flow is steady',
+            'Check that the agitator is running normally'
+        ],
+        safety: ['Continuous operation means hazardous chemicals are always flowing through the system. This requires constant vigilance and properly maintained containment. Keep spill response equipment readily available. Any leak or seal failure causes immediate chemical exposure, without the inherent batch-end stoppage.','Exothermic runaway reactions in a CSTR can rapidly overheat the entire well-mixed vessel contents. This leads to rapid pressure rise and potential vessel failure. Reliable temperature control, emergency cooling, and automatic feed cutoff systems must be operational. They must also be regularly tested.','Properly maintain and monitor the continuous liquid overflow discharge system. Blockages or control failures can cause the reactor to overfill. This leads to hazardous chemical spills from vent lines, pressure relief devices, or vessel connections.','The high-speed agitator operates continuously and presents persistent entanglement hazards. These hazards are at the shaft, coupling, and impeller. All guards and interlocks must remain in place during operation. Follow full lockout/tagout procedures for any maintenance work.','Size pressure relief systems for the maximum possible heat generation rate from a runaway reaction scenario. Do not size them just for normal operating conditions. An undersized relief device will fail to protect the vessel during the most dangerous credible event.']
     },
     'pfr': {
         name: 'Plug Flow Reactors',
