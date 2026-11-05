@@ -2839,6 +2839,168 @@ const questionBank = [
         correct: 1,
         explanation: "Safety: 'Work at these heights combines burn hazards with fall hazards.' Also: 'Appropriate heat-resistant PPE and fall protection must be used simultaneously.'",
         difficulty: "medium"
+    },
+
+    // ---- Batch Reactors — practical set, approved 2026-11-05 (10 Qs) ----
+    {
+        id: "BR-Q01",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "The reactants are loaded and the reaction has started. When should the bottom outlet valve be opened?",
+        options: [
+            "As soon as charging is finished and mixing has started",
+            "At the discharge stage, when the batch is ready",
+            "While the batch is being heated",
+            "Whenever the agitator is running"
+        ],
+        correct: 1,
+        explanation: "How It Works: 'The bottom outlet valve stays closed until the last stage.' 'Nothing leaves until the batch is ready.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BR-Q02",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "You need to bring a batch up to temperature. How is this done?",
+        options: [
+            "Mix the heating fluid into the batch",
+            "Open the vent nozzle",
+            "Run the agitator with the jacket empty",
+            "Pass heating fluid through the jacket"
+        ],
+        correct: 3,
+        explanation: "How It Works, Heat: 'heating fluid in the jacket brings the batch to temperature.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BR-Q03",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "A colleague worries that the jacket fluid will mix with the product. What is the correct answer?",
+        options: [
+            "The jacket fluid never touches the batch",
+            "It mixes only while the jacket is heating the batch",
+            "It mixes only while the jacket is cooling the batch",
+            "It mixes unless the agitator is stopped"
+        ],
+        correct: 0,
+        explanation: "How It Works: 'The jacket fluid never touches the batch.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BR-Q04",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "You have finished one product and the next batch is a different product. What must you do first?",
+        options: [
+            "Replace the gearbox oil",
+            "Empty the jacket and leave it empty",
+            "Clean the vessel",
+            "Remove the baffles"
+        ],
+        correct: 2,
+        explanation: "How It Works: 'Clean the vessel between different products.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BR-Q05",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "Which part stops the batch from swirling round as one mass?",
+        options: [
+            "The manway",
+            "The baffle",
+            "The temperature probe",
+            "The feed nozzle"
+        ],
+        correct: 1,
+        explanation: "Parts: 'Baffle — stops the batch swirling round as one mass.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BR-Q06",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "You see a leak where the agitator shaft enters the vessel. Which part should you check?",
+        options: [
+            "The jacket outlet",
+            "The support leg",
+            "The temperature probe",
+            "The mechanical seal"
+        ],
+        correct: 3,
+        explanation: "Parts: 'Mechanical Seal — stops leaks where the shaft enters the vessel.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BR-Q07",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "Batch temperature is hard to control, and the jacket is known to be fouled. What should you do?",
+        options: [
+            "Improve cooling and clean the jacket",
+            "Open the bottom outlet valve and empty the batch",
+            "Stop reading the temperature probe",
+            "Remove the manway"
+        ],
+        correct: 0,
+        explanation: "Troubleshooting: 'Temperature hard to control' can come from a fouled jacket. Action: 'Improve cooling, clean the jacket.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BR-Q08",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "Batches of the same recipe keep turning out different, and charging and timing vary. What is the fix?",
+        options: [
+            "Change the support legs",
+            "Replace the pressure gauge on the top head",
+            "Automate and improve procedures",
+            "Keep the jacket empty"
+        ],
+        correct: 2,
+        explanation: "Troubleshooting: 'Batches turn out different' comes from inconsistent charging or timing. Action: 'Automate, improve procedures.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BR-Q09",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "A relief device on the reactor is causing a disturbance during operation. May you isolate it?",
+        options: [
+            "Yes, as long as the agitator keeps running normally",
+            "No, never block or isolate it during operation",
+            "Yes, if the batch is being cooled",
+            "Yes, for short periods"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Never block or isolate them during operation.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BR-Q10",
+        equipmentId: "batch-reactor",
+        category: "Reactors",
+        subcategory: "Batch Reactors",
+        question: "Work must be done inside the vessel. What is required before anyone goes in?",
+        options: [
+            "Run the agitator slowly",
+            "Fill the jacket with cooling fluid",
+            "Open the bottom outlet valve only",
+            "Complete lockout/tagout"
+        ],
+        correct: 3,
+        explanation: "Safety: 'Complete lockout/tagout is required before any internal work.'",
+        difficulty: "medium"
     }
 ];
 

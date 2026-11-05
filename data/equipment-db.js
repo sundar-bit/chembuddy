@@ -1023,13 +1023,79 @@ const equipmentDB = {
     'batch-reactor': {
         name: 'Batch Reactors',
         category: 'Reactors',
-        description: 'Versatile reactors where all reactants are charged, reaction proceeds, and products are discharged as a batch. Maximum flexibility for varied products and recipes in specialty chemicals and pharmaceuticals.',
-        principles: 'Reactants are loaded, conditions adjusted (temperature, pressure), and reaction proceeds until complete. Agitation ensures uniformity. Variable residence time allows reaction optimization. Cleaning between batches prevents cross-contamination.',
-        specs: [{t:'Operation',v:'Batch cycles'},{t:'Flexibility',v:'Maximum'},{t:'Residence',v:'Variable'},{t:'Cleaning',v:'Between batches'}],
-        components: ['Vessel - reaction container','Agitator - mixing system','Jacket/Coils - heating/cooling','Baffles - improve mixing','Feed Nozzles - reactant addition','Vent/Relief - pressure protection','Bottom Outlet - product discharge','Instrumentation - T, P, level'],
-        troubles: [{p:'Temperature control',c:'Exothermic runaway, jacket fouling',a:'Improve cooling, clean jacket'},{p:'Mixing issues',c:'Wrong impeller, dead zones',a:'Optimize agitator, add baffles'},{p:'Batch variation',c:'Inconsistent charging, timing',a:'Automate, improve procedures'},{p:'Cleaning difficulty',c:'Residue, complex geometry',a:'Optimize CIP, simplify design'}],
-        observations: ['Monitor temperature profile','Check agitator operation','Track reaction progress','Verify additions complete','Watch pressure behavior'],
-        safety: ['Exothermic runaway reactions in batch reactors can rapidly push temperature and pressure beyond safe limits. This can lead to vessel rupture, explosion, or toxic release. Reaction monitoring, emergency cooling systems, and automatic shutdown interlocks must be fully operational at all times.','Pressure relief devices include safety valves and rupture discs. They must be properly sized and regularly tested. Never block or isolate them during operation. They are the last line of defense against catastrophic vessel overpressure during reaction upsets or cooling failures.','Wear appropriate chemical-resistant PPE when charging reactants, sampling, or discharging products. This includes gloves, splash-proof goggles, and face shields. Direct contact with reactive chemicals can cause severe chemical burns. It can also cause toxic absorption through skin or allergic sensitization.','The rotating agitator shaft and impeller present a serious entanglement hazard. Interlock all access points to the vessel interior with the agitator drive. Then the agitator cannot start while the vessel is open. Complete lockout/tagout is required before any internal work.','Reactor vessel surfaces, jackets, and associated piping may be extremely hot during exothermic reactions. They may be extremely cold during cryogenic processes. All personnel must wear appropriate thermal protective equipment. They must know which surfaces are at hazardous temperatures to prevent burn or frostbite injuries.'],
+        intro: 'In this lesson you will get to know the batch reactor. You will see it from outside, then look inside at its 16 main parts. Next you will follow one batch through charging, heating and reacting, cooling and discharging, in 6 steps. You will finish with common problems and how to work safely.',
+        description: 'The batch reactor is a stirred vessel where a fixed amount of material reacts. The whole batch is loaded, reacted, then emptied. It suits varied products and recipes, such as specialty chemicals and pharmaceuticals. The one shown is a steel vessel with an agitator and a heating and cooling jacket. The isometric overview shows what you see from outside.',
+        labels: [
+            'Electric Motor — provides the power to turn the agitator.',
+            'Gearbox — reduces the motor speed for the agitator.',
+            'Mechanical Seal — stops leaks where the shaft enters the vessel.',
+            'Manway — the large bolted cover that gives access for inspection and cleaning.',
+            'Feed Nozzle — lets the reactants into the vessel.',
+            'Vent Nozzle — connects the vapour space to the vent system.',
+            'Pressure Gauge — shows the pressure inside the vessel.',
+            'Top Head — the steel dome that closes the top of the vessel.',
+            'Jacket — the blue outer shell. It carries heating or cooling fluid around the vessel.',
+            'Jacket Outlet — lets the fluid leave the jacket.',
+            'Jacket Inlet — lets heating or cooling fluid into the jacket.',
+            'Support Leg — one of the four legs that carry the reactor.',
+            'Bottom Outlet Valve — empties the product from the vessel.'
+        ],
+        principles: 'The working diagram follows one batch through four stages: charge, heat and react, cool, and discharge. The bottom outlet valve stays closed until the last stage.',
+        steps: [
+            'Charge — reactants are loaded through the feed nozzle.',
+            'Mix — the agitator keeps the batch moving and even.',
+            'Heat — heating fluid in the jacket brings the batch to temperature.',
+            'React — the batch is held until the reaction is complete.',
+            'Cool — cooling fluid in the jacket lowers the batch temperature.',
+            'Discharge — the bottom valve is opened and the product is emptied.'
+        ],
+        principlesNote: 'Nothing leaves until the batch is ready. The jacket fluid never touches the batch. Heating or cooling is controlled through the jacket. Clean the vessel between different products.',
+        recap: [
+            'What a batch reactor is, and where it is used',
+            'The outside: motor, gearbox, seal, manway, nozzles, gauge, top head, jacket, legs and bottom valve',
+            'The 16 main parts, including the agitator shaft, impeller, baffles and temperature probe inside',
+            'The 4 stages and 6 steps of one batch, from charging to discharging',
+            'How the jacket heats and cools the batch without touching it',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Operation', v: 'One batch at a time' },
+            { t: 'Flexibility', v: 'Suits varied products and recipes' },
+            { t: 'Batch Time', v: 'Varies with the recipe' },
+            { t: 'Cleaning', v: 'Between different products' }
+        ],
+        components: [
+            '1. Electric Motor — provides the power to turn the agitator.',
+            '2. Gearbox — reduces the motor speed for the agitator.',
+            '3. Mechanical Seal — stops leaks where the shaft enters the vessel.',
+            '4. Agitator Shaft — carries the turn from the gearbox to the impeller.',
+            '5. Impeller — mixes the batch and keeps it moving.',
+            '6. Baffle — stops the batch swirling round as one mass.',
+            '7. Reactor Vessel — holds the batch while it reacts.',
+            '8. Jacket — carries heating or cooling fluid around the vessel.',
+            '9. Jacket Inlet — lets heating or cooling fluid into the jacket.',
+            '10. Jacket Outlet — lets the fluid leave the jacket.',
+            '11. Feed Nozzle — lets the reactants into the vessel.',
+            '12. Vent Nozzle — connects the vapour space to the vent system.',
+            '13. Manway — gives access for inspection and cleaning.',
+            '14. Temperature Probe — measures the batch temperature.',
+            '15. Pressure Gauge — shows the pressure inside the vessel.',
+            '16. Bottom Outlet Valve — empties the product from the vessel.'
+        ],
+        troubles: [
+            { p: 'Temperature hard to control', c: 'Runaway heat from the reaction, fouled jacket', a: 'Improve cooling, clean the jacket' },
+            { p: 'Poor mixing', c: 'Wrong impeller, dead zones', a: 'Check the agitator, add baffles' },
+            { p: 'Batches turn out different', c: 'Inconsistent charging or timing', a: 'Automate, improve procedures' },
+            { p: 'Vessel hard to clean', c: 'Residue left on the walls', a: 'Improve the cleaning routine' }
+        ],
+        observations: [
+            'Monitor the batch temperature',
+            'Check that the agitator is running',
+            'Watch the pressure gauge',
+            'Confirm all additions are complete',
+            'Check that the bottom valve is closed before charging'
+        ],
+        safety: ['Exothermic runaway reactions in batch reactors can rapidly push temperature and pressure beyond safe limits. This can lead to vessel rupture, explosion, or toxic release. Reaction monitoring, emergency cooling systems, and automatic shutdown interlocks must be fully operational at all times.','Pressure relief devices include safety valves and rupture discs. They must be properly sized and regularly tested. Never block or isolate them during operation. They are the last line of defense against catastrophic vessel overpressure during reaction upsets or cooling failures.','Wear appropriate chemical-resistant PPE when charging reactants, sampling, or discharging products. This includes gloves, splash-proof goggles, and face shields. Direct contact with reactive chemicals can cause severe chemical burns. It can also cause toxic absorption through skin or allergic sensitization.','The rotating agitator shaft and impeller present a serious entanglement hazard. Interlock all access points to the vessel interior with the agitator drive. Then the agitator cannot start while the vessel is open. Complete lockout/tagout is required before any internal work.','Reactor vessel surfaces, jackets, and associated piping may be extremely hot during exothermic reactions. They may be extremely cold during cryogenic processes. All personnel must wear appropriate thermal protective equipment. They must know which surfaces are at hazardous temperatures to prevent burn or frostbite injuries.']
     },
     'cstr': {
         name: 'CSTR (Continuous Stirred Tank Reactor)',

@@ -140,6 +140,20 @@ var Equipment = (function () {
                 alt: 'Butterfly valve seen from above in three positions: fully closed, throttling and fully open'
             }
         },
+        'batch-reactor': {
+            overview: {
+                src: 'images/equipment/reactors/batch-reactor/batch-reactor-isometric.png',
+                alt: 'Isometric view of stirred, jacketed batch reactor with motor, gearbox and top nozzles'
+            },
+            components: {
+                src: 'images/equipment/reactors/batch-reactor/batch-reactor-cutaway.png',
+                alt: 'Cutaway view of batch reactor showing agitator, baffles, vessel wall and jacket space'
+            },
+            working: {
+                src: 'images/equipment/reactors/batch-reactor/batch-reactor-flow-path.png',
+                alt: 'Batch cycle in four stages: charge, heat and react, cool, and discharge'
+            }
+        },
         'cabin-heater': {
             overview: {
                 src: 'images/equipment/fired-heaters/cabin-heater/cabin-heater-isometric.png',
