@@ -3163,6 +3163,168 @@ const questionBank = [
         correct: 2,
         explanation: "Safety: 'Follow full lockout/tagout procedures for any maintenance work.'",
         difficulty: "easy"
+    },
+
+    // ---- Fixed Bed Reactors — practical set, approved 2026-11-06 (10 Qs) ----
+    {
+        id: "FB-Q01",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "On your round, the gap between the inlet and outlet pressure gauges keeps growing. What does this warn of?",
+        options: [
+            "The catalyst is working better than it usually does",
+            "A blocked bed",
+            "The feed has stopped flowing into the reactor",
+            "The product outlet valve has been opened fully"
+        ],
+        correct: 1,
+        explanation: "How It Works: 'Rising pressure drop warns of a blocked bed.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FB-Q02",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "You want to know the pressure drop across the bed. How do you work it out from the two gauges?",
+        options: [
+            "Read the outlet gauge only, as it shows the bed",
+            "Add the inlet and outlet pressures together",
+            "Inlet pressure minus outlet pressure",
+            "Average the inlet and the outlet pressure readings"
+        ],
+        correct: 2,
+        explanation: "How It Works: 'Pressure drop is the inlet pressure minus the outlet pressure.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FB-Q03",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "A trainee asks what moves inside a fixed bed reactor during normal running. What do you tell them?",
+        options: [
+            "Only the fluid moves",
+            "The catalyst pellets circulate slowly with the feed",
+            "The inert balls roll down towards the support grid",
+            "The support grid turns to spread the feed evenly"
+        ],
+        correct: 0,
+        explanation: "How It Works: 'The catalyst stays still. Only the fluid moves.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FB-Q04",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "On your round, the middle temperature point starts rising fast. What should you do?",
+        options: [
+            "Open the catalyst unloading nozzle to let the heat out",
+            "Wait until all three points show the same rise",
+            "Raise the feed rate to carry the heat away faster",
+            "Follow the emergency procedure"
+        ],
+        correct: 3,
+        explanation: "Safety: 'Hot spots can overheat and weaken the shell. Follow the emergency procedure if a temperature rises fast.'",
+        difficulty: "medium"
+    },
+    {
+        id: "FB-Q05",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "Which part, just below the feed inlet, spreads the feed evenly across the bed?",
+        options: [
+            "Outlet Collector",
+            "Inlet Distributor",
+            "Support Grid",
+            "Catalyst Loading Manway"
+        ],
+        correct: 1,
+        explanation: "Main Parts: 'Inlet Distributor: a perforated plate that spreads the feed evenly across the bed.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FB-Q06",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "The reactor is shut down to replace the spent catalyst. Through which nozzle is the catalyst drained out?",
+        options: [
+            "The Catalyst Loading Manway on the top head",
+            "The Product Outlet at the bottom of the skirt",
+            "The Catalyst Unloading Nozzle",
+            "The Feed Inlet at the top of the reactor"
+        ],
+        correct: 2,
+        explanation: "Labels: 'Catalyst Unloading Nozzle: a nozzle low on the shell, closed with a blind flange. Spent catalyst is drained out through it.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FB-Q07",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "During catalyst loading, larger ceramic balls go in first, under the catalyst. Why?",
+        options: [
+            "To stop the pellets falling through the grid",
+            "To speed up the reaction at the bottom of the bed",
+            "To raise the bed temperature before the product leaves",
+            "To measure the pressure drop across the whole bed"
+        ],
+        correct: 0,
+        explanation: "Main Parts: 'Bottom Inert Balls: larger ceramic balls under the catalyst. They stop the pellets falling through the grid.'",
+        difficulty: "medium"
+    },
+    {
+        id: "FB-Q08",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "A colleague must enter the reactor to inspect the grid. It was purged with nitrogen. What must be in place first?",
+        options: [
+            "A quick look inside to see that the reactor is empty",
+            "Only a torch and a helmet, since the reactor is shut down",
+            "Nothing extra, because nitrogen is not a poisonous gas",
+            "A permit, a gas test and a standby person"
+        ],
+        correct: 3,
+        explanation: "Safety: 'It may be full of nitrogen, which leaves no oxygen to breathe. Never enter without a permit, a gas test and a standby person.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FB-Q09",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "You are helping to unload spent catalyst. Which point from the lesson must you keep in mind?",
+        options: [
+            "Spent catalyst is harmless once the reactor is cold",
+            "Some catalysts catch fire on contact with air",
+            "Spent catalyst can go straight into the general waste",
+            "Protective equipment is only needed for fresh catalyst"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Spent catalyst can be toxic. Some catalysts catch fire on contact with air. Follow the unloading procedure and wear the right protective equipment.'",
+        difficulty: "medium"
+    },
+    {
+        id: "FB-Q10",
+        equipmentId: "fixed-bed",
+        category: "Reactors",
+        subcategory: "Fixed Bed Reactors",
+        question: "After a catalyst change, the feed takes an easy path through part of the bed. What is this, and a likely cause?",
+        options: [
+            "Fouling, caused by jacket fluid leaking into the shell",
+            "Hot spots, caused by leaving the davit in the open position",
+            "Channelling, caused by uneven catalyst loading",
+            "Low pressure drop, caused by the outlet gauge reading high"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Channelling: feed takes an easy path. Cause: uneven loading, damaged distributor.'",
+        difficulty: "medium"
     }
 ];
 

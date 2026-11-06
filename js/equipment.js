@@ -168,6 +168,20 @@ var Equipment = (function () {
                 alt: 'One CSTR at steady state, with feed entering, agitator mixing, jacket holding temperature and product overflowing'
             }
         },
+        'fixed-bed': {
+            overview: {
+                src: 'images/equipment/reactors/fixed-bed/fixed-bed-isometric.png',
+                alt: 'Isometric view of a fixed bed reactor with feed inlet, catalyst loading manway, pressure gauges, temperature points and support skirt'
+            },
+            components: {
+                src: 'images/equipment/reactors/fixed-bed/fixed-bed-cutaway.png',
+                alt: 'Cutaway view of a fixed bed reactor showing the inlet distributor, inert balls, catalyst bed, thermowells, support grid and outlet collector'
+            },
+            working: {
+                src: 'images/equipment/reactors/fixed-bed/fixed-bed-flow-path.png',
+                alt: 'Fixed bed reactor at steady state, with feed spreading, flowing down through the catalyst bed and leaving at the bottom'
+            }
+        },
         'cabin-heater': {
             overview: {
                 src: 'images/equipment/fired-heaters/cabin-heater/cabin-heater-isometric.png',

@@ -1186,13 +1186,79 @@ const equipmentDB = {
     'fixed-bed': {
         name: 'Fixed Bed Reactors',
         category: 'Reactors',
-        description: 'Reactors with catalyst in a stationary packed bed through which reactants flow. Dominant reactor type for catalytic processes in refining and petrochemicals.',
-        principles: 'Reactant gas or liquid flows through a bed of solid catalyst particles. Reaction occurs on catalyst surfaces. Adiabatic or with heat exchange. Multiple beds with interstage cooling for exothermic reactions.',
-        specs: [{t:'Catalyst',v:'Fixed in bed'},{t:'Flow',v:'Downflow or upflow'},{t:'Heat',v:'Adiabatic or isothermal'},{t:'Applications',v:'Refining, petrochemicals'}],
-        components: ['Vessel - pressure containment','Catalyst Bed - packed particles','Distributors - flow spreading','Support Grid - holds catalyst','Thermowells - bed temperatures','Quench System - temperature control','Catalyst Dump - removal system','Inert Balls - top/bottom layers'],
-        troubles: [{p:'Channeling',c:'Poor distribution, voids',a:'Improve distributor, dense load'},{p:'Hot spots',c:'Maldistribution, deactivation',a:'Balance flow, check catalyst'},{p:'Catalyst deactivation',c:'Poisons, coking, sintering',a:'Treat feed, regenerate'},{p:'High pressure drop',c:'Fines, fouling, crushing',a:'Screen feed, reload'}],
-        observations: ['Monitor bed temperature profile','Track pressure drop','Check conversion levels','Verify flow distribution','Watch for hot spots'],
-        safety: ['Catalyst loading and unloading involves handling materials at elevated temperatures that can cause severe burns. Some spent catalysts may contain toxic metals or residual hazardous chemicals. Full thermal and chemical PPE is required, including heat-resistant suits and respiratory protection. Follow proper disposal procedures.','The reactor vessel operates under significant pressure and high temperature. Strictly follow pressure vessel codes. Regularly inspect walls, nozzles, and welds. Maintain all safety relief devices to prevent catastrophic pressure vessel failure.','Highly exothermic catalytic reactions can experience thermal runaway if temperature control is lost. Causes include feed maldistribution, catalyst deactivation patterns, or cooling failure. Reliable temperature monitoring is needed throughout the bed. Automatic emergency quench and feed shutoff systems are also necessary.','Catalyst dust from loading, unloading, and handling is often toxic. It can cause respiratory damage, skin irritation, and systemic poisoning. Use enclosed handling systems, dust collection, and respiratory protection. Follow proper hygiene practices to minimize worker exposure.','Some catalysts, such as those containing nickel, cobalt, or iron sulfide, are pyrophoric. They will spontaneously ignite upon contact with air. Use nitrogen blanketing during handling and follow wetting procedures. Have specialized fire response protocols to prevent fires during catalyst changeout operations.'],
+        intro: 'In this lesson you will get to know the fixed bed reactor. Its catalyst stays still, and the feed flows through it. You will see it from outside, then look inside at its 12 main parts. Next you will follow the flow through the bed, in 6 steps. You will finish with common problems and how to work safely.',
+        description: 'A fixed bed reactor holds solid catalyst in a packed bed that does not move. Gas or liquid flows through the bed, and the reaction happens on the catalyst. It is the most common reactor for catalytic processes in refineries and petrochemical plants. The one shown is a single-bed reactor with downward flow, standing on a support skirt. Large plant reactors are often much taller and narrower than this one. The isometric overview shows what you see from outside.',
+        labels: [
+            'Feed Inlet — lets the feed into the top of the reactor.',
+            'Catalyst Loading Manway — the large bolted cover on the top head. Catalyst is loaded through it.',
+            'Davit — a small lifting arm. It swings the heavy manway cover aside.',
+            'Top Head — the dished top of the vessel.',
+            'Inlet Pressure Gauge — shows the pressure of the feed going in.',
+            'Shell — the main steel wall of the vessel. It holds the catalyst bed.',
+            'Temperature Points — three points on the shell. They show the temperature at the top, middle and bottom of the bed.',
+            'Catalyst Unloading Nozzle — a nozzle low on the shell, closed with a blind flange. Spent catalyst is drained out through it.',
+            'Product Outlet — the pipe at the bottom where the product leaves.',
+            'Outlet Pressure Gauge — shows the pressure of the product coming out.',
+            'Support Skirt — the blue steel cylinder that carries the whole reactor.'
+        ],
+        principles: 'The working diagram shows the reactor running at steady state. The feed enters at the top, flows down through the bed, and leaves at the bottom.',
+        steps: [
+            'Feed — gas or liquid enters at the top.',
+            'Spread — the distributor spreads the feed across the bed.',
+            'Flow — the feed flows down through the packed layers.',
+            'React — the reaction happens on the catalyst pellets.',
+            'Collect — the grid holds the bed. Product leaves at the bottom.',
+            'Monitor — bed temperatures and pressure drop show bed health.'
+        ],
+        principlesNote: 'The catalyst stays still. Only the fluid moves. Even flow through the bed is essential. Rising pressure drop warns of a blocked bed. Pressure drop is the inlet pressure minus the outlet pressure.',
+        recap: [
+            'What a fixed bed reactor is, and where it is used',
+            'The outside: feed inlet, manway, davit, gauges, temperature points, unloading nozzle and skirt',
+            'The 12 main parts, including the distributor, inert balls, catalyst bed and support grid inside',
+            'The 6 steps of flow through the bed, from feed to product',
+            'Why bed temperatures and pressure drop matter',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Catalyst', v: 'Solid, stays still in the bed' },
+            { t: 'Flow', v: 'Downward, in the one shown' },
+            { t: 'Watched', v: 'Bed temperatures and pressure drop' },
+            { t: 'Used In', v: 'Refineries and petrochemical plants' }
+        ],
+        components: [
+            '1. Feed Inlet — lets the feed into the top of the reactor.',
+            '2. Inlet Distributor — a perforated plate that spreads the feed evenly across the bed.',
+            '3. Catalyst Loading Manway — the opening on the top head for loading catalyst.',
+            '4. Top Inert Balls — a layer of ceramic balls on top of the catalyst. They help spread the flow and protect the catalyst.',
+            '5. Catalyst Bed — the packed catalyst pellets, where the reaction happens.',
+            '6. Thermowell — a thin tube reaching into the bed. It holds the temperature sensor.',
+            '7. Bottom Inert Balls — larger ceramic balls under the catalyst. They stop the pellets falling through the grid.',
+            '8. Support Grid — a steel grid with a fine mesh. It holds up all the layers.',
+            '9. Catalyst Unloading Nozzle — lets the spent catalyst out when the reactor is shut down.',
+            '10. Outlet Collector — a perforated pipe that gathers the product. It keeps the balls out of the outlet.',
+            '11. Product Outlet — takes the product out of the reactor.',
+            '12. Support Skirt — carries the reactor. The outlet pipe runs inside it.'
+        ],
+        troubles: [
+            { p: 'High pressure drop', c: 'Catalyst dust, crushed pellets, fouling', a: 'Filter the feed, skim or reload the catalyst' },
+            { p: 'Channelling: feed takes an easy path', c: 'Uneven loading, damaged distributor', a: 'Load the catalyst evenly, repair the distributor' },
+            { p: 'Hot spots', c: 'Uneven flow, too much reaction in one place', a: 'Even out the flow, lower the feed rate' },
+            { p: 'Catalyst losing activity', c: 'Poisons in the feed, coke on the pellets', a: 'Clean up the feed, regenerate or replace the catalyst' }
+        ],
+        observations: [
+            'Compare the inlet and outlet pressure gauges',
+            'Check the bed temperatures at all three points',
+            'Watch for a sudden temperature rise at any point',
+            'Check that the feed flow is steady',
+            'Check the product quality at the outlet'
+        ],
+        safety: [
+            'Many fixed bed reactors run at high pressure and temperature. A leaking flange can release hot, flammable gas. Inspect joints as per the maintenance plan.',
+            'Hot spots can overheat and weaken the shell. Watch the bed temperatures closely. Follow the emergency procedure if a temperature rises fast.',
+            'Spent catalyst can be toxic. Some catalysts catch fire on contact with air. Follow the unloading procedure and wear the right protective equipment.',
+            'The inside of a reactor is a confined space. It may be full of nitrogen, which leaves no oxygen to breathe. Never enter without a permit, a gas test and a standby person.',
+            'Pressure relief devices protect the reactor from overpressure. Keep them in service and test them as scheduled.'
+        ]
     },
     'fluidized-bed-rx': {
         name: 'Fluidized Bed Reactors',
