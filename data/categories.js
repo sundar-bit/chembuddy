@@ -15,7 +15,7 @@ const categories = [
     {id:'evaporators', name:'Evaporators', icon:'\u{1F4A7}', desc:'Concentration'},
     {id:'dryers', name:'Dryers', icon:'\u{2600}\u{FE0F}', desc:'Drying Equipment'},
     {id:'reactors', name:'Reactors', icon:'\u{2697}\u{FE0F}', desc:'Chemical Reactors'},
-    {id:'columns', name:'Columns', icon:'\u{1F5FC}', desc:'Distillation, Absorption'},
+    {id:'columns', name:'Columns', icon:'\u{1F5FC}', desc:'Tray and packed columns'},
     {id:'mixing', name:'Mixing Equipment', icon:'\u{1F32A}\u{FE0F}', desc:'Agitators, Mixers'},
     {id:'solid-liquid', name:'Solid-Liquid Separation', icon:'\u{1F52C}', desc:'Filters, Centrifuges'},
     {id:'gas-solid', name:'Gas-Solid Separation', icon:'\u{1F32B}\u{FE0F}', desc:'Cyclones, ESPs'},

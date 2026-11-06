@@ -101,7 +101,7 @@ const learningPath = {
             categoryId: 'columns',
             description: 'Separating mixtures by vapour–liquid contact on trays and packing.',
             equipment: [
-                { id: 'distillation', name: 'Distillation Columns' },
+                { id: 'tray-column', name: 'Tray Columns' },
                 { id: 'packed-column', name: 'Packed Columns' }
             ]
         },

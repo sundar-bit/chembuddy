@@ -3326,12 +3326,12 @@ const questionBank = [
         explanation: "Common Problems: 'Channelling: feed takes an easy path. Cause: uneven loading, damaged distributor.'",
         difficulty: "medium"
     },
-    // ---- Distillation Columns — practical set, approved 2026-11-06 (10 Qs) ----
+    // ---- Tray Columns — practical set, approved 2026-11-06 (10 Qs) ----
     {
-        id: "DC-Q01",
-        equipmentId: "distillation",
+        id: "TC-Q01",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "At low boiling rate, liquid drips through the sieve holes instead of staying on the trays. What is this called?",
         options: [
             "Flooding",
@@ -3344,10 +3344,10 @@ const questionBank = [
         difficulty: "easy"
     },
     {
-        id: "DC-Q02",
-        equipmentId: "distillation",
+        id: "TC-Q02",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "On your round, the pressure drop across the column rises sharply. What does this warn of?",
         options: [
             "The feed has stopped flowing into the column",
@@ -3360,10 +3360,10 @@ const questionBank = [
         difficulty: "easy"
     },
     {
-        id: "DC-Q03",
-        equipmentId: "distillation",
+        id: "TC-Q03",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "A trainee asks where the light parts of the feed end up. What do you tell them?",
         options: [
             "They rise as vapour and leave at the top",
@@ -3376,10 +3376,10 @@ const questionBank = [
         difficulty: "easy"
     },
     {
-        id: "DC-Q04",
-        equipmentId: "distillation",
+        id: "TC-Q04",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "The level gauge shows the sump level rising towards the reboiler return. Below what must you keep it?",
         options: [
             "The feed inlet in the middle of the column",
@@ -3392,10 +3392,10 @@ const questionBank = [
         difficulty: "medium"
     },
     {
-        id: "DC-Q05",
-        equipmentId: "distillation",
+        id: "TC-Q05",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "Which part carries the liquid down from one tray to the tray below?",
         options: [
             "Sieve Holes",
@@ -3408,10 +3408,10 @@ const questionBank = [
         difficulty: "easy"
     },
     {
-        id: "DC-Q06",
-        equipmentId: "distillation",
+        id: "TC-Q06",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "The lab says the top product is not pure enough. The feed has not changed. What should be raised?",
         options: [
             "The sump level",
@@ -3424,10 +3424,10 @@ const questionBank = [
         difficulty: "medium"
     },
     {
-        id: "DC-Q07",
-        equipmentId: "distillation",
+        id: "TC-Q07",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "The cooling water to the condenser has failed. What can happen to the column, and what do you do?",
         options: [
             "The pressure can rise fast; watch it and follow the emergency procedure",
@@ -3440,10 +3440,10 @@ const questionBank = [
         difficulty: "medium"
     },
     {
-        id: "DC-Q08",
-        equipmentId: "distillation",
+        id: "TC-Q08",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "A fitter must enter the column through a manway to repair a tray. What must be in place first?",
         options: [
             "Only a torch and a helmet, since the column is shut down",
@@ -3456,10 +3456,10 @@ const questionBank = [
         difficulty: "easy"
     },
     {
-        id: "DC-Q09",
-        equipmentId: "distillation",
+        id: "TC-Q09",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "Which part, at the edge of each tray, keeps a layer of liquid on the tray?",
         options: [
             "Downcomer",
@@ -3472,10 +3472,10 @@ const questionBank = [
         difficulty: "easy"
     },
     {
-        id: "DC-Q10",
-        equipmentId: "distillation",
+        id: "TC-Q10",
+        equipmentId: "tray-column",
         category: "Columns",
-        subcategory: "Distillation Columns",
+        subcategory: "Tray Columns",
         question: "What comes back into the column through the reboiler return nozzle?",
         options: [
             "Cooled liquid from the reflux drum",

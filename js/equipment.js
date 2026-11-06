@@ -182,18 +182,18 @@ var Equipment = (function () {
                 alt: 'Fixed bed reactor at steady state, with feed spreading, flowing down through the catalyst bed and leaving at the bottom'
             }
         },
-        'distillation': {
+        'tray-column': {
             overview: {
-                src: 'images/equipment/columns/distillation/distillation-isometric.png',
-                alt: 'Isometric view of a distillation column with vapour outlet, reflux and feed inlets, manways, level gauge, platforms, caged ladder and support skirt'
+                src: 'images/equipment/columns/tray-column/tray-column-isometric.png',
+                alt: 'Isometric view of a tray column with vapour outlet, reflux and feed inlets, manways, level gauge, platforms, caged ladder and support skirt'
             },
             components: {
-                src: 'images/equipment/columns/distillation/distillation-cutaway.png',
-                alt: 'Cutaway view of a distillation column showing the trays, sieve holes, weirs, downcomers and bottom sump'
+                src: 'images/equipment/columns/tray-column/tray-column-cutaway.png',
+                alt: 'Cutaway view of a tray column showing the trays, sieve holes, weirs, downcomers and bottom sump'
             },
             working: {
-                src: 'images/equipment/columns/distillation/distillation-flow-path.png',
-                alt: 'Complete distillation system with condenser, reflux drum, reflux pump and reboiler, showing vapour rising and liquid flowing down'
+                src: 'images/equipment/columns/tray-column/tray-column-flow-path.png',
+                alt: 'Complete tray column distillation system with condenser, reflux drum, reflux pump and reboiler, showing vapour rising and liquid flowing down'
             }
         },
         'cabin-heater': {

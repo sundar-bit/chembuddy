@@ -1329,11 +1329,11 @@ const equipmentDB = {
     // ============================================================================
     // CATEGORY 9: COLUMNS (8 items)
     // ============================================================================
-    'distillation': {
-        name: 'Distillation Columns',
+    'tray-column': {
+        name: 'Tray Columns',
         category: 'Columns',
-        intro: 'In this lesson you will get to know the distillation column. It separates a liquid mixture into a light part and a heavy part. You will see it from outside, then look inside at its 13 main parts. Next you will follow the complete system, in 7 steps. You will finish with common problems and how to work safely.',
-        description: 'A distillation column separates a liquid mixture by boiling. The light parts boil more easily and rise as vapour. The heavy parts stay liquid and flow down. It is the most common separation equipment in refineries and chemical plants. The one shown is a tray column, standing on a support skirt. Platforms and a caged ladder give access up the side. The isometric overview shows what you see from outside.',
+        intro: 'In this lesson you will get to know the tray column. Trays inside it bring rising vapour and falling liquid into contact. You will see it from outside, then look inside at its 13 main parts. Next you will follow the complete system, in 7 steps. You will finish with common problems and how to work safely.',
+        description: 'A tray column is a tall vessel with flat trays stacked inside. Vapour rises through the trays, and liquid flows down across them. Tray columns are used for distillation and stripping. Packed columns are often used for absorption. The one shown is used for distillation. It separates a liquid mixture by boiling. The light parts boil more easily and rise as vapour. The heavy parts stay liquid and flow down. Trays come in three main types. Sieve trays, as shown, have plain holes. Valve trays have small caps that lift over the holes. Bubble cap trays have caps fixed over short pipes called risers. The column stands on a support skirt. Platforms and a caged ladder give access up the side. The isometric overview shows what you see from outside.',
         labels: [
             'Overhead Vapour Outlet — the pipe at the top. Vapour leaves here for the condenser.',
             'Davit — a small lifting arm at the top. It lifts tools and parts up the column.',
@@ -1361,7 +1361,8 @@ const equipmentDB = {
         ],
         principlesNote: 'Vapour goes up. Liquid comes down. Light parts go up. Heavy parts go down. More reflux gives a purer top product. The rest of the top liquid leaves as distillate.',
         recap: [
-            'What a distillation column is, and where it is used',
+            'What a tray column is, and where it is used',
+            'The three tray types: sieve, valve and bubble cap',
             'The outside: vapour outlet, davit, gauges, inlets, manway, platform, ladder, outlets and skirt',
             'The 13 main parts, including the trays, sieve holes, weirs and downcomers inside',
             'The 7 steps of the complete system, from feed to products',
@@ -1369,7 +1370,8 @@ const equipmentDB = {
             'Common problems and their fixes, and how to work safely'
         ],
         specs: [
-            { t: 'Separates By', v: 'Boiling' },
+            { t: 'Used For', v: 'Distillation and stripping' },
+            { t: 'Tray Types', v: 'Sieve (shown), valve, bubble cap' },
             { t: 'Contact', v: 'Vapour and liquid meet on each tray' },
             { t: 'Heat In', v: 'Reboiler at the bottom' },
             { t: 'Heat Out', v: 'Condenser at the top' }
