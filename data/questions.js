@@ -3486,6 +3486,167 @@ const questionBank = [
         correct: 2,
         explanation: "Labels: 'Reboiler Return: the nozzle where vapour from the reboiler comes back in.'",
         difficulty: "easy"
+    },
+    // ---- Packed Columns — practical set, approved 2026-11-06 (10 Qs) ----
+    {
+        id: "PC-Q01",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "On your round you read both pressure gauges. How do you work out the pressure drop across the packing?",
+        options: [
+            "Read the top gauge only, as it shows the packing",
+            "Add the top and bottom pressures together",
+            "Bottom pressure minus top pressure",
+            "Read the level gauge at the bottom of the column"
+        ],
+        correct: 2,
+        explanation: "What to check on a round: 'Read both pressure gauges. Bottom pressure minus top pressure is the pressure drop.'",
+        difficulty: "easy"
+    },
+    {
+        id: "PC-Q02",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "The pressure drop across the packing rises sharply. What does this warn of?",
+        options: [
+            "Flooding",
+            "The solvent pump has stopped",
+            "The sump level has fallen too low",
+            "The gas outlet valve has been opened"
+        ],
+        correct: 0,
+        explanation: "What to check on a round: 'Watch the pressure drop. A sharp rise warns of flooding.'",
+        difficulty: "easy"
+    },
+    {
+        id: "PC-Q03",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "An inspection shows the solvent running down one side of the packing. What is the likely cause?",
+        options: [
+            "Too much gas entering at the bottom",
+            "A blocked or damaged distributor",
+            "A sump level that is too low",
+            "A hold-down grid that is too heavy"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Poor distribution: solvent runs down one side. Cause: blocked or damaged distributor.'",
+        difficulty: "medium"
+    },
+    {
+        id: "PC-Q04",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "The gas at the outlet is not clean enough, and the solvent flow is low. What should you do?",
+        options: [
+            "Lower the solvent rate to give it more time",
+            "Raise the sump level above the gas inlet",
+            "Open the unloading manway to let gas escape",
+            "Raise the solvent rate"
+        ],
+        correct: 3,
+        explanation: "Common Problems: 'Gas at the outlet not clean enough. Cause: too little solvent. Action: raise the solvent rate.'",
+        difficulty: "medium"
+    },
+    {
+        id: "PC-Q05",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "Which part on top of the packing stops the gas lifting the packing?",
+        options: [
+            "Hold-Down Grid",
+            "Support Plate",
+            "Mist Eliminator",
+            "Liquid Distributor"
+        ],
+        correct: 0,
+        explanation: "Main Parts: 'Hold-Down Grid: a light grid on top of the packing. It stops the gas lifting the packing.'",
+        difficulty: "easy"
+    },
+    {
+        id: "PC-Q06",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "Solvent drops are being carried out with the clean gas. Which part should stop this?",
+        options: [
+            "Support Plate",
+            "Hold-Down Grid",
+            "Mist Eliminator",
+            "Loading Manway"
+        ],
+        correct: 2,
+        explanation: "Main Parts: 'Mist Eliminator: a mesh pad below the gas outlet. It catches solvent drops so they do not leave with the gas.'",
+        difficulty: "easy"
+    },
+    {
+        id: "PC-Q07",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "Where does the gas inlet bring the gas into the column?",
+        options: [
+            "Straight into the middle of the packing",
+            "Into the sump liquid at the bottom",
+            "Just below the liquid distributor at the top",
+            "Into the open space below the support plate"
+        ],
+        correct: 3,
+        explanation: "Main Parts: 'Gas Inlet: brings the gas into the open space below the support plate.'",
+        difficulty: "easy"
+    },
+    {
+        id: "PC-Q08",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "You are helping to unload old packing. Which point from the lesson must you keep in mind?",
+        options: [
+            "Old packing is harmless once the column is cold",
+            "Deposits on it can catch fire in air, so keep it wet",
+            "It should be dried in the sun before it is moved",
+            "It can go straight into the general waste"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Deposits on old packing can catch fire in air. Keep the packing wet while it is unloaded.'",
+        difficulty: "medium"
+    },
+    {
+        id: "PC-Q09",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "The level gauge shows the sump level rising towards the gas inlet. Below what must you keep it?",
+        options: [
+            "The unloading manway",
+            "The support skirt",
+            "The gas inlet",
+            "The solvent outlet"
+        ],
+        correct: 2,
+        explanation: "What to check on a round: 'Watch the sump level. Keep it below the gas inlet.'",
+        difficulty: "easy"
+    },
+    {
+        id: "PC-Q10",
+        equipmentId: "packed-column",
+        category: "Columns",
+        subcategory: "Packed Columns",
+        question: "The solvent pump has stopped. What happens to the gas, and what do you do?",
+        options: [
+            "It leaves without being cleaned; follow the emergency procedure",
+            "It is cleaned by the packing alone; no action is needed",
+            "It stops flowing; restart the gas supply by hand",
+            "It goes to the stripper; open the solvent outlet fully"
+        ],
+        correct: 0,
+        explanation: "Safety: 'If the solvent pump stops, the gas leaves without being cleaned. Follow the emergency procedure.'",
+        difficulty: "medium"
     }
 ];
 

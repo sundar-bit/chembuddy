@@ -196,6 +196,20 @@ var Equipment = (function () {
                 alt: 'Complete tray column distillation system with condenser, reflux drum, reflux pump and reboiler, showing vapour rising and liquid flowing down'
             }
         },
+        'packed-column': {
+            overview: {
+                src: 'images/equipment/columns/packed-column/packed-column-isometric.png',
+                alt: 'Isometric view of a packed column absorber with gas and solvent nozzles, pressure gauges, manways, level gauge, platform, caged ladder and support skirt'
+            },
+            components: {
+                src: 'images/equipment/columns/packed-column/packed-column-cutaway.png',
+                alt: 'Cutaway view of a packed column showing the mist eliminator, liquid distributor, hold-down grid, packing, support plate and bottom sump'
+            },
+            working: {
+                src: 'images/equipment/columns/packed-column/packed-column-flow-path.png',
+                alt: 'Complete absorber system with solvent pump, gas rising through the packing, solvent trickling down, clean gas out at the top and rich solvent to a stripper'
+            }
+        },
         'cabin-heater': {
             overview: {
                 src: 'images/equipment/fired-heaters/cabin-heater/cabin-heater-isometric.png',

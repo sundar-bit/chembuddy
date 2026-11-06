@@ -1415,13 +1415,88 @@ const equipmentDB = {
     'packed-column': {
         name: 'Packed Columns',
         category: 'Columns',
-        description: 'Columns using random or structured packing instead of trays for vapor-liquid contact. Lower pressure drop and higher efficiency for many services, especially vacuum distillation.',
-        principles: 'Packing provides surface area for vapor-liquid contact. Liquid trickles down over packing surfaces while vapor rises through voids. Structured packing gives higher efficiency; random packing costs less.',
-        specs: [{t:'Packing',v:'Random or structured'},{t:'HETP',v:'Lower than trays'},{t:'Pressure Drop',v:'Lower than trays'},{t:'Capacity',v:'Higher than trays'}],
-        components: ['Packing - random or structured','Support Plate - holds packing','Liquid Distributor - spreads liquid','Redistributor - mid-column spreading','Holddown Grid - prevents flotation','Bed Limiter - contains packing','Shell - column vessel','Nozzles - feed and product'],
-        troubles: [{p:'Maldistribution',c:'Poor distributor, wall flow',a:'Fix distributor, add wipers'},{p:'Channeling',c:'Damaged packing, voids',a:'Repack carefully, inspect'},{p:'Fouling',c:'Deposits on packing',a:'Clean, select right packing'},{p:'Packing damage',c:'Pressure surge, flooding',a:'Control carefully, replace'}],
-        observations: ['Monitor pressure drop','Check liquid distribution','Track separation quality','Verify proper loading','Watch for hot spots'],
-        safety: ['Entering packed columns for maintenance or repacking is extremely hazardous. The hazards are confined space conditions, residual chemical vapors, and oxygen deficiency. Packing material underfoot is also unstable. Entry requires full confined space entry procedures, continuous atmosphere monitoring, and rescue standby.','Packing elements, whether random or structured, can be heavy, sharp-edged, and difficult to handle. Lifting large quantities of packing into or out of the column at height needs proper rigging. Use material handling equipment and PPE including cut-resistant gloves. This prevents injuries during installation or removal.','All inspection, maintenance, and packing replacement work on packed columns requires working at significant heights. This work is done on platforms and ladders. It mandates fall protection systems and properly constructed scaffolding. Follow working-at-height regulations to prevent potentially fatal falls.','Packed columns are pressure vessels subject to internal operating pressures or vacuum conditions. Regularly inspect and maintain the column shell, flanges, and nozzles. This prevents failures that could release large quantities of hazardous process fluids.','Chemical cleaning of fouled packing often involves corrosive acids, caustic solutions, or organic solvents. These can cause severe chemical burns and toxic vapor exposure. Follow proper chemical handling procedures and keep neutralization capabilities ready. Use appropriate PPE and environmental containment measures.'],
+        intro: 'In this lesson you will get to know the packed column. It is filled with packing instead of trays. You will see it from outside, then look inside at its 14 main parts. Next you will follow the complete system, in 7 steps. You will finish with common problems and how to work safely.',
+        description: 'A packed column is a tall vessel filled with packing instead of trays. Packing is a deep bed of small pieces, such as rings. Liquid trickles down over the packing, and gas rises through the gaps. The wet surface of the packing is where the two meet. Packed columns are often used for absorption. Tray columns are used for distillation and stripping. The one shown is a gas absorber. A liquid called a solvent takes up an unwanted gas from a gas stream. The cleaned gas leaves at the top. Packing comes in two main types. Random packing, as shown, is small rings poured into the column. Structured packing is shaped metal sheets stacked in blocks. The column stands on a support skirt. A platform and a caged ladder give access. The isometric overview shows what you see from outside.',
+        labels: [
+            'Gas Outlet — the pipe at the top. The cleaned gas leaves here.',
+            'Davit — a small lifting arm at the top. It lifts tools and parts up the column.',
+            'Top Pressure Gauge — shows the pressure at the top of the column.',
+            'Solvent Inlet — lets the solvent into the top of the column.',
+            'Loading Manway — a bolted cover near the top. Packing is loaded through it.',
+            'Shell — the tall steel wall of the column. It holds the packing inside.',
+            'Platform — a working floor high on the column. It gives access to the top nozzles and manway.',
+            'Caged Ladder — the ladder up to the platform. Its cage protects you from falling backwards.',
+            'Unloading Manway — a bolted cover low on the shell. Packing is taken out through it.',
+            'Bottom Pressure Gauge — sits on the gas inlet. It shows the pressure of the gas going in.',
+            'Gas Inlet — lets the gas in, low on the column.',
+            'Level Gauge — shows the liquid level in the bottom of the column.',
+            'Solvent Outlet — the pipe at the bottom where the used solvent leaves.',
+            'Support Skirt — the blue steel cylinder that carries the whole column.'
+        ],
+        principles: 'The working diagram shows the complete system. A pump sends clean solvent to the top. Used solvent leaves at the bottom for a stripper.',
+        steps: [
+            'Gas In — the gas enters near the bottom.',
+            'Rise — the gas rises up through the packing.',
+            'Solvent In — the pump sends solvent to the top.',
+            'Spread — the distributor spreads it over the packing.',
+            'Contact — solvent trickles down over the packing surface.',
+            'Absorb — the solvent takes up the unwanted gas.',
+            'Products — clean gas leaves at the top. Rich solvent leaves at the bottom.'
+        ],
+        principlesNote: 'Gas goes up. Solvent comes down. The packing gives a large wet surface. Lean solvent is clean solvent. Rich solvent carries the absorbed gas. Rich solvent goes to a stripper to be cleaned, then comes back as lean solvent.',
+        recap: [
+            'What a packed column is, and where it is used',
+            'The two packing types: random and structured',
+            'The outside: gas and solvent nozzles, gauges, manways, platform, ladder and skirt',
+            'The 14 main parts, including the distributor, hold-down grid, packing and support plate inside',
+            'The 7 steps of the complete system, from gas in to clean gas out',
+            'Lean and rich solvent, and why the solvent goes to a stripper',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Used For', v: 'Absorption (cleaning a gas)' },
+            { t: 'Contact', v: 'On the wet packing surface' },
+            { t: 'Packing Types', v: 'Random (shown), structured' },
+            { t: 'Solvent', v: 'Lean in at the top, rich out at the bottom' }
+        ],
+        components: [
+            '1. Gas Outlet — takes the cleaned gas out at the top.',
+            '2. Mist Eliminator — a mesh pad below the gas outlet. It catches solvent drops so they do not leave with the gas.',
+            '3. Loading Manway — the opening above the packing. It is used to load packing and reach the distributor.',
+            '4. Solvent Inlet — brings the solvent in to the distributor.',
+            '5. Liquid Distributor — a pipe with spray nozzles. It spreads the solvent evenly over the packing.',
+            '6. Hold-Down Grid — a light grid on top of the packing. It stops the gas lifting the packing.',
+            '7. Packing — a deep bed of small rings. Their wet surface is where the gas and solvent meet.',
+            '8. Unloading Manway — the opening low on the bed. It is used to take the packing out.',
+            '9. Support Plate — a steel grid that holds up the packing. Gas passes up through its openings.',
+            '10. Gas Inlet — brings the gas into the open space below the support plate.',
+            '11. Bottom Sump — the space at the bottom where the used solvent collects.',
+            '12. Level Gauge — shows the liquid level in the sump.',
+            '13. Solvent Outlet — takes the used solvent out of the sump.',
+            '14. Support Skirt — carries the column. The solvent outlet pipe runs out through it.'
+        ],
+        troubles: [
+            { p: 'Flooding: solvent backs up in the packing', c: 'Too much gas or solvent flow, fouled packing', a: 'Lower the gas or solvent rate, clean the packing' },
+            { p: 'Poor distribution: solvent runs down one side', c: 'Blocked or damaged distributor', a: 'Clean or repair the distributor' },
+            { p: 'Gas at the outlet not clean enough', c: 'Too little solvent, solvent not lean enough', a: 'Raise the solvent rate, check the stripper' },
+            { p: 'Foaming', c: 'Dirt or chemicals in the solvent', a: 'Filter the solvent, add antifoam' }
+        ],
+        observations: [
+            'Read both pressure gauges. Bottom pressure minus top pressure is the pressure drop.',
+            'Watch the pressure drop. A sharp rise warns of flooding.',
+            'Watch the sump level. Keep it below the gas inlet.',
+            'Check that the gas and solvent flows are steady',
+            'Check that the solvent pump is running normally',
+            'Check that the gas at the outlet is clean'
+        ],
+        safety: [
+            'The gas may be toxic or flammable. Know which gas your column handles. Carry a gas detector on your rounds.',
+            'Some solvents harm the skin and eyes. Wear goggles and gloves when you take a sample.',
+            'If the solvent pump stops, the gas leaves without being cleaned. Follow the emergency procedure.',
+            'The column is tall. Use the caged ladder and platform. Keep your hands free on the ladder. Lift tools with the davit or carry them in a bag.',
+            'Deposits on old packing can catch fire in air. Keep the packing wet while it is unloaded.',
+            'The inside of the column is a confined space. It may hold toxic gas or too little oxygen. Never enter without a permit, a gas test and a standby person.'
+        ]
     },
     'absorption': {
         name: 'Absorption Columns',
