@@ -3325,6 +3325,167 @@ const questionBank = [
         correct: 2,
         explanation: "Common Problems: 'Channelling: feed takes an easy path. Cause: uneven loading, damaged distributor.'",
         difficulty: "medium"
+    },
+    // ---- Distillation Columns — practical set, approved 2026-11-06 (10 Qs) ----
+    {
+        id: "DC-Q01",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "At low boiling rate, liquid drips through the sieve holes instead of staying on the trays. What is this called?",
+        options: [
+            "Flooding",
+            "Weeping",
+            "Foaming",
+            "Reflux"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Weeping: liquid drips through the sieve holes. Cause: too little vapour flow, damaged trays.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q02",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "On your round, the pressure drop across the column rises sharply. What does this warn of?",
+        options: [
+            "The feed has stopped flowing into the column",
+            "The sump level has fallen below the level gauge",
+            "Flooding",
+            "The reflux pump has stopped running"
+        ],
+        correct: 2,
+        explanation: "What to check on a round: 'Watch the pressure drop across the column. A sharp rise warns of flooding.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q03",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "A trainee asks where the light parts of the feed end up. What do you tell them?",
+        options: [
+            "They rise as vapour and leave at the top",
+            "They collect in the bottom sump and leave at the bottom",
+            "They stay on the feed tray in the middle of the column",
+            "They leave with the steam through the reboiler"
+        ],
+        correct: 0,
+        explanation: "How It Works: 'Light parts go up. Heavy parts go down.' Step 7: 'Light product leaves at the top.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q04",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "The level gauge shows the sump level rising towards the reboiler return. Below what must you keep it?",
+        options: [
+            "The feed inlet in the middle of the column",
+            "The bottoms outlet at the bottom of the sump",
+            "The lowest manway on the shell",
+            "The reboiler return"
+        ],
+        correct: 3,
+        explanation: "What to check on a round: 'Watch the sump level. Keep it below the reboiler return.'",
+        difficulty: "medium"
+    },
+    {
+        id: "DC-Q05",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "Which part carries the liquid down from one tray to the tray below?",
+        options: [
+            "Sieve Holes",
+            "Downcomer",
+            "Weir",
+            "Reflux Inlet"
+        ],
+        correct: 1,
+        explanation: "Main Parts: 'Downcomer: a channel at the side of the tray. It carries liquid down to the tray below.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q06",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "The lab says the top product is not pure enough. The feed has not changed. What should be raised?",
+        options: [
+            "The sump level",
+            "The feed rate",
+            "The reflux",
+            "The column pressure"
+        ],
+        correct: 2,
+        explanation: "How It Works: 'More reflux gives a purer top product.' Common Problems: 'Top product not pure enough. Cause: too little reflux. Action: raise the reflux.'",
+        difficulty: "medium"
+    },
+    {
+        id: "DC-Q07",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "The cooling water to the condenser has failed. What can happen to the column, and what do you do?",
+        options: [
+            "The pressure can rise fast; watch it and follow the emergency procedure",
+            "The sump level can fall fast; open the bottoms outlet fully",
+            "The trays can weep; raise the boiling rate in the reboiler",
+            "The feed can stop; restart the reflux pump to replace it"
+        ],
+        correct: 0,
+        explanation: "Safety: 'If the condenser loses cooling water, the pressure can rise fast. Watch the pressure gauge. Follow the emergency procedure.'",
+        difficulty: "medium"
+    },
+    {
+        id: "DC-Q08",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "A fitter must enter the column through a manway to repair a tray. What must be in place first?",
+        options: [
+            "Only a torch and a helmet, since the column is shut down",
+            "A quick look through the manway to see that it is empty",
+            "Nothing extra, if the column has cooled down overnight",
+            "A permit, a gas test and a standby person"
+        ],
+        correct: 3,
+        explanation: "Safety: 'The inside of the column is a confined space. It may hold toxic vapour or too little oxygen. Never enter without a permit, a gas test and a standby person.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q09",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "Which part, at the edge of each tray, keeps a layer of liquid on the tray?",
+        options: [
+            "Downcomer",
+            "Weir",
+            "Sieve Holes",
+            "Bottom Sump"
+        ],
+        correct: 1,
+        explanation: "Main Parts: 'Weir: a low wall at the edge of the tray. It keeps a layer of liquid on the tray.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q10",
+        equipmentId: "distillation",
+        category: "Columns",
+        subcategory: "Distillation Columns",
+        question: "What comes back into the column through the reboiler return nozzle?",
+        options: [
+            "Cooled liquid from the reflux drum",
+            "Fresh feed from the feed pump",
+            "Vapour from the reboiler",
+            "Steam from the reboiler steam supply"
+        ],
+        correct: 2,
+        explanation: "Labels: 'Reboiler Return: the nozzle where vapour from the reboiler comes back in.'",
+        difficulty: "easy"
     }
 ];
 

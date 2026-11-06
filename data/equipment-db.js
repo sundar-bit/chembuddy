@@ -1332,13 +1332,83 @@ const equipmentDB = {
     'distillation': {
         name: 'Distillation Columns',
         category: 'Columns',
-        description: 'Columns separating liquid mixtures based on differences in volatility. The core separation technology in petroleum refining, petrochemicals, and chemical processing worldwide.',
-        principles: 'Liquid and vapor contact on trays or packing. More volatile components concentrate in rising vapor; less volatile in descending liquid. Reboiler provides vapor; condenser provides reflux. Multiple stages achieve sharp separations.',
-        specs: [{t:'Separation',v:'Based on volatility'},{t:'Stages',v:'5-100+ theoretical'},{t:'Internals',v:'Trays or packing'},{t:'Efficiency',v:'50-80% Murphree'}],
-        components: ['Column Shell - pressure vessel','Trays - vapor-liquid contact stages','Packing - structured or random','Reboiler - vapor generation','Condenser - overhead cooling','Reflux Drum - liquid accumulator','Feed Nozzle - column entry','Distributors - liquid spreading'],
-        troubles: [{p:'Flooding',c:'High vapor/liquid, fouling',a:'Reduce rates, clean internals'},{p:'Weeping',c:'Low vapor rate, tray damage',a:'Increase vapor, fix trays'},{p:'Off-spec product',c:'Wrong reflux, feed change',a:'Adjust reflux, check feed'},{p:'Foaming',c:'Surface active compounds',a:'Add antifoam, reduce rates'}],
-        observations: ['Monitor column DP','Check temperature profile','Track reflux ratio','Verify product quality','Watch for flooding signs'],
-        safety: ['Distillation columns are pressure vessels operating under internal pressure or vacuum. Structural failure from corrosion, fatigue, or overpressure can cause a catastrophic release of process fluids. This requires regular vessel inspection and thickness monitoring. Pressure relief devices must also be properly maintained.','The reboiler, column shell, and associated piping operate at elevated temperatures, often exceeding 200°C. Direct contact with these surfaces will cause severe burns. Provide comprehensive insulation and thermal barriers. Personnel doing inspections or maintenance nearby need thermal protective PPE.','Distillation columns processing hydrocarbons or organic solvents contain large inventories of flammable materials. Any leak from flanges, instrument connections, or relief devices can create explosive vapor clouds. This calls for continuous flammable gas detection and elimination of ignition sources. Emergency shutdown capability is also necessary.','Distillation columns are tall structures, often exceeding 30 meters in height. All work on platforms, ladders, and at elevation requires fall protection systems. It also needs proper scaffold construction and compliance with working-at-height regulations. These measures prevent fatal fall injuries.','The interior of a distillation column is a confined space. It may contain oxygen-depleted atmospheres, residual toxic vapors, and pyrophoric scale. Follow full confined space entry procedures for any internal inspection or maintenance. These include atmospheric monitoring, forced ventilation, standby rescue, and proper PPE.'],
+        intro: 'In this lesson you will get to know the distillation column. It separates a liquid mixture into a light part and a heavy part. You will see it from outside, then look inside at its 13 main parts. Next you will follow the complete system, in 7 steps. You will finish with common problems and how to work safely.',
+        description: 'A distillation column separates a liquid mixture by boiling. The light parts boil more easily and rise as vapour. The heavy parts stay liquid and flow down. It is the most common separation equipment in refineries and chemical plants. The one shown is a tray column, standing on a support skirt. Platforms and a caged ladder give access up the side. The isometric overview shows what you see from outside.',
+        labels: [
+            'Overhead Vapour Outlet — the pipe at the top. Vapour leaves here for the condenser.',
+            'Davit — a small lifting arm at the top. It lifts tools and parts up the column.',
+            'Pressure Gauge — shows the pressure at the top of the column.',
+            'Reflux Inlet — lets the reflux liquid back into the top of the column.',
+            'Manway — a bolted cover on the shell. It gives access to the trays for inspection.',
+            'Feed Inlet — lets the feed into the middle of the column.',
+            'Shell — the tall steel wall of the column. It holds the trays inside.',
+            'Platform — a working floor high on the column. It gives access to nozzles and manways.',
+            'Caged Ladder — the ladder up the column. Its cage protects you from falling backwards.',
+            'Level Gauge — shows the liquid level in the bottom of the column.',
+            'Reboiler Return — the nozzle where vapour from the reboiler comes back in.',
+            'Bottoms Outlet — the pipe at the bottom where the heavy product leaves.',
+            'Support Skirt — the blue steel cylinder that carries the whole column.'
+        ],
+        principles: 'The working diagram shows the complete system. A condenser and reflux drum sit at the top. A reboiler sits at the bottom.',
+        steps: [
+            'Feed — the feed enters the column at the middle.',
+            'Boil — the reboiler boils liquid from the bottom. The vapour goes back into the column.',
+            'Rise — vapour rises up through the trays.',
+            'Contact — vapour bubbles through the liquid on each tray.',
+            'Condense — the condenser turns the top vapour into liquid.',
+            'Reflux — part of this liquid returns to the top tray.',
+            'Products — light product leaves at the top. Heavy product leaves at the bottom.'
+        ],
+        principlesNote: 'Vapour goes up. Liquid comes down. Light parts go up. Heavy parts go down. More reflux gives a purer top product. The rest of the top liquid leaves as distillate.',
+        recap: [
+            'What a distillation column is, and where it is used',
+            'The outside: vapour outlet, davit, gauges, inlets, manway, platform, ladder, outlets and skirt',
+            'The 13 main parts, including the trays, sieve holes, weirs and downcomers inside',
+            'The 7 steps of the complete system, from feed to products',
+            'Why more reflux gives a purer top product',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Separates By', v: 'Boiling' },
+            { t: 'Contact', v: 'Vapour and liquid meet on each tray' },
+            { t: 'Heat In', v: 'Reboiler at the bottom' },
+            { t: 'Heat Out', v: 'Condenser at the top' }
+        ],
+        components: [
+            '1. Overhead Vapour Outlet — takes the vapour from the top to the condenser.',
+            '2. Reflux Inlet — brings the reflux liquid in, above the top tray.',
+            '3. Tray — a flat steel plate across the column. Liquid sits on it, and vapour passes through it.',
+            '4. Sieve Holes — small holes in the tray. Vapour rises through them and bubbles through the liquid.',
+            '5. Weir — a low wall at the edge of the tray. It keeps a layer of liquid on the tray.',
+            '6. Downcomer — a channel at the side of the tray. It carries liquid down to the tray below.',
+            '7. Feed Inlet — brings the feed in at the middle of the column.',
+            '8. Manway — the opening used to inspect and repair the trays.',
+            '9. Reboiler Return — brings the vapour from the reboiler back in, above the liquid.',
+            '10. Bottom Sump — the space at the bottom where the liquid collects.',
+            '11. Level Gauge — shows the liquid level in the sump.',
+            '12. Bottoms Outlet — takes the heavy liquid out of the sump.',
+            '13. Support Skirt — carries the column. The bottoms pipe runs out through it.'
+        ],
+        troubles: [
+            { p: 'Flooding: liquid fills the trays and backs up', c: 'Too much vapour or liquid flow, fouled trays', a: 'Lower the feed or the boiling rate, clean the trays' },
+            { p: 'Weeping: liquid drips through the sieve holes', c: 'Too little vapour flow, damaged trays', a: 'Raise the boiling rate, repair the trays' },
+            { p: 'Top product not pure enough', c: 'Too little reflux, feed change', a: 'Raise the reflux, check the feed' },
+            { p: 'Foaming', c: 'Dirt or chemicals in the feed', a: 'Lower the rates, add antifoam' }
+        ],
+        observations: [
+            'Check the pressure gauge at the top',
+            'Watch the pressure drop across the column. A sharp rise warns of flooding.',
+            'Watch the sump level. Keep it below the reboiler return.',
+            'Check that the feed and reflux flows are steady',
+            'Check the product quality at the top and the bottom'
+        ],
+        safety: [
+            'The column holds a large amount of flammable liquid and vapour. A leak can form a vapour cloud. Report any leak at once.',
+            'The column, reboiler and pipes are hot. Keep the insulation in place. Wear protective equipment near hot surfaces.',
+            'If the condenser loses cooling water, the pressure can rise fast. Watch the pressure gauge. Follow the emergency procedure.',
+            'The column is tall. Use the caged ladder and platforms. Keep your hands free on the ladder. Lift tools with the davit or carry them in a bag.',
+            'The inside of the column is a confined space. It may hold toxic vapour or too little oxygen. Never enter without a permit, a gas test and a standby person.'
+        ]
     },
     'packed-column': {
         name: 'Packed Columns',
