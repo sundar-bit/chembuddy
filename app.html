@@ -64,23 +64,23 @@
 
     <!-- Config & Utilities -->
     <script src="js/firebase-config.js?v=8"></script>
-    <script src="js/utils.js?v=8"></script>
+    <script src="js/utils.js?v=9"></script>
     <script src="js/router.js?v=7"></script>
 
     <!-- Data -->
     <script src="data/categories.js?v=8"></script>
     <script src="data/equipment-db.js?v=28"></script>
-    <script src="data/learning-path.js?v=15"></script>
+    <script src="data/learning-path.js?v=16"></script>
     <script src="data/questions.js?v=25"></script>
 
     <!-- Modules -->
     <script src="js/equipment.js?v=30"></script>
     <script src="js/speech-text.js?v=2"></script>
     <script src="js/voice.js?v=10"></script>
-    <script src="js/learn.js?v=13"></script>
+    <script src="js/learn.js?v=14"></script>
     <script src="js/quiz-engine.js?v=11"></script>
     <script src="js/leaderboard.js?v=8"></script>
-    <script src="js/certificate.js?v=1"></script>
+    <script src="js/certificate.js?v=2"></script>
     <script src="js/profile.js?v=8"></script>
 
     <!-- App Init -->
@@ -342,11 +342,11 @@
             var dates = new Set();
             var studied = progress.studied || {};
             for (var k in studied) {
-                if (studied[k].completedAt) dates.add(new Date(studied[k].completedAt).toISOString().slice(0, 10));
+                if (studied[k].completedAt) dates.add(Utils.istDateStr(studied[k].completedAt));
             }
             var quizzes = progress.quizzes || {};
             for (var k in quizzes) {
-                if (quizzes[k].completedAt) dates.add(new Date(quizzes[k].completedAt).toISOString().slice(0, 10));
+                if (quizzes[k].completedAt) dates.add(Utils.istDateStr(quizzes[k].completedAt));
             }
             return Utils.calculateStreak(Array.from(dates));
         }

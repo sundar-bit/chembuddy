@@ -174,13 +174,17 @@ learningPath.allEquipment = function () {
 
 // --- Weekly release -------------------------------------------------------
 
-function parseLocalDate(ymd) {
+// Release days are midnight Indian Standard Time (UTC+5:30, no daylight
+// saving), whatever time zone the student's device is set to.
+var IST_OFFSET_MS = 330 * 60 * 1000;
+
+function istMidnight(ymd) {
     var p = ymd.split('-');
-    return new Date(+p[0], +p[1] - 1, +p[2]);
+    return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]) - IST_OFFSET_MS);
 }
 
-function localDateStr(d) {
-    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+function istDateStrOf(d) {
+    return new Date(d.getTime() + IST_OFFSET_MS).toISOString().slice(0, 10);
 }
 
 learningPath.hasSchedule = function () {
@@ -199,15 +203,16 @@ learningPath.releaseWeeks = function () {
     var needed = this.modules.length;
     var pauses = s.pauseWeeks || [];
     var weeks = [];
-    var d = parseLocalDate(s.startDate);
+    var t = istMidnight(s.startDate).getTime();
     while (weeks.length < needed) {
-        if (pauses.indexOf(localDateStr(d)) === -1) weeks.push(new Date(d));
-        d.setDate(d.getDate() + 7);
+        var d = new Date(t);
+        if (pauses.indexOf(istDateStrOf(d)) === -1) weeks.push(d);
+        t += 7 * 24 * 60 * 60 * 1000;
     }
     return weeks;
 };
 
-// The day an equipment's module opens (local midnight), or null when there is
+// The day an equipment's module opens (midnight IST), or null when there is
 // no schedule.
 learningPath.releaseDate = function (equipId) {
     if (!this.hasSchedule()) return null;

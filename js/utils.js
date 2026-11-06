@@ -1,18 +1,31 @@
 // ChemBuddy - Shared Utilities
 
+// All dates and times are shown and recorded in Indian Standard Time
+// (Asia/Kolkata), whatever time zone the device is set to. Stored timestamps
+// stay as milliseconds (Date.now()), which are the same everywhere.
+const IST_TZ = 'Asia/Kolkata';
+
 const Utils = {
-    // Format timestamp to readable date
+    // Format timestamp to readable date (IST)
     formatDate(ts) {
         if (!ts) return '-';
         const d = new Date(ts);
-        return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        return d.toLocaleDateString('en-IN', { timeZone: IST_TZ, day: 'numeric', month: 'short', year: 'numeric' });
     },
 
-    // Format timestamp to date + time
+    // Format timestamp to date + time (IST)
     formatDateTime(ts) {
         if (!ts) return '-';
         const d = new Date(ts);
-        return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        return d.toLocaleString('en-IN', { timeZone: IST_TZ, day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) + ' IST';
+    },
+
+    // IST calendar date of a timestamp, 'YYYY-MM-DD'
+    istDateStr(ts) {
+        const p = {};
+        new Intl.DateTimeFormat('en-GB', { timeZone: IST_TZ, year: 'numeric', month: '2-digit', day: '2-digit' })
+            .formatToParts(new Date(ts)).forEach(x => { p[x.type] = x.value; });
+        return p.year + '-' + p.month + '-' + p.day;
     },
 
     // Format seconds to mm:ss
@@ -37,9 +50,9 @@ const Utils = {
         return Utils._scripts[src];
     },
 
-    // Get today's date string YYYY-MM-DD
+    // Today's IST date string YYYY-MM-DD
     todayStr() {
-        return new Date().toISOString().slice(0, 10);
+        return this.istDateStr(Date.now());
     },
 
     // Sanitize HTML to prevent XSS
@@ -120,7 +133,7 @@ const Utils = {
         if (!dateStrings || dateStrings.length === 0) return 0;
         const sorted = dateStrings.sort().reverse();
         const today = this.todayStr();
-        const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+        const yesterday = this.istDateStr(Date.now() - 86400000);
 
         if (sorted[0] !== today && sorted[0] !== yesterday) return 0;
 

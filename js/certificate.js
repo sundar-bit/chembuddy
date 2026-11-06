@@ -34,7 +34,7 @@ var Certificate = (function () {
         return ref.transaction(function (cur) {
             if (cur) return; // already issued — keep it
             var now = Date.now();
-            return { issuedAt: now, certId: 'CB-L1-' + new Date(now).getFullYear() + '-' + uid.slice(0, 6).toUpperCase() };
+            return { issuedAt: now, certId: 'CB-L1-' + Utils.istDateStr(now).slice(0, 4) + '-' + uid.slice(0, 6).toUpperCase() };
         }).then(function () {
             return ref.once('value');
         }).then(function (snap) {

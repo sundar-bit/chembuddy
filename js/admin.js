@@ -158,11 +158,9 @@
 
     function renderEngagementChart(dailyActive) {
         var dates = [];
-        var today = new Date();
+        var now = Date.now();
         for (var i = 13; i >= 0; i--) {
-            var d = new Date(today);
-            d.setDate(d.getDate() - i);
-            dates.push(d.toISOString().slice(0, 10));
+            dates.push(Utils.istDateStr(now - i * 86400000)); // IST days
         }
 
         var maxCount = 1;
@@ -563,7 +561,7 @@
             });
             addSheet(wb, 'Quiz Analytics', stats);
 
-            XLSX.writeFile(wb, 'chembuddy-report-' + localDateStr(new Date()) + '.xlsx');
+            XLSX.writeFile(wb, 'chembuddy-report-' + Utils.todayStr() + '.xlsx');
             Utils.toast('Excel report downloaded', 'success');
         });
     }
@@ -645,7 +643,7 @@
                 doc.text('Page ' + i + ' of ' + pages, 283, 203, { align: 'right' });
             }
 
-            doc.save('chembuddy-report-' + localDateStr(new Date()) + '.pdf');
+            doc.save('chembuddy-report-' + Utils.todayStr() + '.pdf');
             Utils.toast('PDF report downloaded', 'success');
         });
     }

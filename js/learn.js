@@ -87,7 +87,7 @@ var Learn = (function () {
     // "Sat, 14 Nov"
     function opensLabel(equipId) {
         var date = learningPath.releaseDate(equipId);
-        return date ? date.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }) : '';
+        return date ? date.toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'short', day: 'numeric', month: 'short' }) : '';
     }
 
     function lockedMessage(mod, index, studied, quizzes) {
