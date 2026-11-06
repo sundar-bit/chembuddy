@@ -1,11 +1,14 @@
 // ChemBuddy - Learning Path (Somaiya University, Chemical Engineering)
 //
 // Level 1 — Basic Equipment: 10 modules, 24 equipment found in most chemical
-// plants and refineries, 2–3 equipment per module (one a week for 24 weeks). Everything else in
+// plants and refineries, 2–3 equipment per module (one module a week). Everything else in
 // equipmentDB is Level 2 (shown in Browse, not part of the path yet).
 //
-// Weekly release (see `schedule` below): one equipment opens each Monday, in
-// path order, and stays open — a student who misses a week can catch up.
+// Weekly release (see `schedule` below): one module (category) opens each
+// Saturday morning, in path order, and stays open — a student who misses a
+// week can catch up. A module's lessons are done in order: the next lesson
+// opens once the previous one is studied and its quiz taken. A module only
+// opens for a student who has finished every earlier module.
 // Until a start date is set, the path is self-paced: every module is open and,
 // inside a module, the next equipment unlocks once the previous one is studied.
 //
@@ -22,14 +25,20 @@ const learningPath = {
     quizLength: 10,
 
     // Change the pace here — no other code changes needed.
-    //   startDate:  the first Monday, 'YYYY-MM-DD'; null = self-paced (no schedule)
-    //   perWeek:    how many equipment open each week (1, 2, 3 …)
-    //   pauseWeeks: Mondays of weeks when nothing new opens (exams, holidays),
-    //               e.g. ['2026-12-07', '2026-12-14']
+    //   startDate:  the first opening day (a Saturday), 'YYYY-MM-DD';
+    //               null = self-paced (no schedule)
+    //   pauseWeeks: opening days when nothing new opens (exams, holidays),
+    //               e.g. ['2026-12-26'] pushes that module and all later ones
+    //               back a week
+    //   previewEmails: demo/test accounts that see every finished lesson,
+    //               ignoring dates and order (lower case)
     schedule: {
-        startDate: null,
-        perWeek: 1,
-        pauseWeeks: []
+        startDate: '2026-11-14',
+        pauseWeeks: [],
+        previewEmails: [
+            'chembuddy.test.sundar@example.com',
+            'chembuddy.test.richa@example.com'
+        ]
     },
 
     modules: [
@@ -178,12 +187,16 @@ learningPath.hasSchedule = function () {
     return !!(this.schedule && this.schedule.startDate);
 };
 
-// Opening day of each release week, skipping pause weeks: [Date, Date, …]
+// Demo/test accounts that skip the dates and the order.
+learningPath.isPreview = function (email) {
+    var list = (this.schedule && this.schedule.previewEmails) || [];
+    return !!email && list.indexOf(String(email).toLowerCase()) !== -1;
+};
+
+// Opening day of each module, skipping pause weeks: [Date, Date, …]
 learningPath.releaseWeeks = function () {
     var s = this.schedule;
-    var total = this.allEquipment().length;
-    var perWeek = Math.max(1, s.perWeek || 1);
-    var needed = Math.ceil(total / perWeek);
+    var needed = this.modules.length;
     var pauses = s.pauseWeeks || [];
     var weeks = [];
     var d = parseLocalDate(s.startDate);
@@ -194,16 +207,13 @@ learningPath.releaseWeeks = function () {
     return weeks;
 };
 
-// The day an equipment opens (local midnight), or null when there is no schedule.
+// The day an equipment's module opens (local midnight), or null when there is
+// no schedule.
 learningPath.releaseDate = function (equipId) {
     if (!this.hasSchedule()) return null;
-    var all = this.allEquipment();
-    for (var i = 0; i < all.length; i++) {
-        if (all[i].id === equipId) {
-            return this.releaseWeeks()[Math.floor(i / Math.max(1, this.schedule.perWeek || 1))];
-        }
-    }
-    return null;
+    var found = this.findEquipment(equipId);
+    if (!found) return null;
+    return this.releaseWeeks()[this.modules.indexOf(found.module)];
 };
 
 learningPath.isReleased = function (equipId, now) {

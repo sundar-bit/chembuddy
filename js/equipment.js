@@ -521,6 +521,12 @@ var Equipment = (function () {
             return;
         }
 
+        // Level 1 lessons follow the learning path: weekly release and order
+        if (typeof Learn !== 'undefined' && Learn.isOpenForStudent && !Learn.isOpenForStudent(id)) {
+            detail.innerHTML = '<div class="equip-welcome"><h2>🔒 Locked</h2><p>' + Utils.sanitize(Learn.lockedMessageFor(id)) + '.</p><a href="#/learn" class="btn btn-primary mt-2">Go to Learning Path</a></div>';
+            return;
+        }
+
         var studied = ((window.ChemBuddy.progress || {}).studied || {})[id];
 
         var html = '<div class="equip-detail">';

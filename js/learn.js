@@ -20,26 +20,78 @@ var Learn = (function () {
         return null;
     }
 
-    // An unfinished lesson never opens. Otherwise, with a weekly schedule,
-    // equipment opens on its release day. Without one, equipment inside a module
-    // unlocks once the previous completed lesson is studied.
-    function isEquipmentAvailable(mod, index, studied) {
-        if (!Equipment.isLessonComplete(mod.equipment[index].id)) return false;
-        if (learningPath.hasSchedule()) return learningPath.isReleased(mod.equipment[index].id);
-        var previous = previousLesson(mod, index);
-        return !previous || !!studied[previous.id];
+    function isPreviewUser() {
+        var user = window.ChemBuddy && window.ChemBuddy.user;
+        return !!(user && learningPath.isPreview(user.email));
     }
 
-    // "Mon, 17 Nov"
+    // The first earlier module with a finished lesson the student has not
+    // completed (studied + quiz), or null when all earlier modules are done.
+    function unfinishedEarlierModule(mod, studied, quizzes) {
+        for (var m = 0; m < learningPath.modules.length; m++) {
+            var earlier = learningPath.modules[m];
+            if (earlier === mod) return null;
+            for (var i = 0; i < earlier.equipment.length; i++) {
+                var id = earlier.equipment[i].id;
+                if (Equipment.isLessonComplete(id) && !isEquipmentComplete(id, studied, quizzes)) return earlier;
+            }
+        }
+        return null;
+    }
+
+    // Why a lesson is locked, or null when it is open.
+    //   - An unfinished lesson never opens.
+    //   - Preview (demo/test) accounts see every finished lesson.
+    //   - Self-paced (no start date): the next lesson in a module opens once
+    //     the previous one is studied.
+    //   - Weekly release: the module opens on its Saturday; every earlier module
+    //     must be complete; inside the module, the previous lesson must be
+    //     studied and its quiz taken.
+    function blockReason(mod, index, studied, quizzes) {
+        var id = mod.equipment[index].id;
+        if (!Equipment.isLessonComplete(id)) return 'This lesson is coming soon';
+        if (isPreviewUser()) return null;
+        var previous = previousLesson(mod, index);
+        if (!learningPath.hasSchedule()) {
+            return (!previous || studied[previous.id]) ? null : 'Study ' + previous.name + ' first';
+        }
+        if (!learningPath.isReleased(id)) return 'Opens on ' + opensLabel(id);
+        var earlier = unfinishedEarlierModule(mod, studied, quizzes);
+        if (earlier) return 'Finish Module ' + earlier.id + ': ' + earlier.title + ' first';
+        if (previous && !isEquipmentComplete(previous.id, studied, quizzes)) {
+            return 'Finish ' + previous.name + ' and its quiz first';
+        }
+        return null;
+    }
+
+    function isEquipmentAvailable(mod, index, studied, quizzes) {
+        return !blockReason(mod, index, studied || {}, quizzes || {});
+    }
+
+    // For Browse: is this Level 1 lesson open to the signed-in student?
+    // Equipment outside Level 1 is not covered by the path.
+    function isOpenForStudent(equipId) {
+        var found = learningPath.findEquipment(equipId);
+        if (!found) return true;
+        var progress = (window.ChemBuddy && window.ChemBuddy.progress) || {};
+        return isEquipmentAvailable(found.module, found.index, progress.studied, progress.quizzes);
+    }
+
+    function lockedMessageFor(equipId) {
+        var found = learningPath.findEquipment(equipId);
+        if (!found) return '';
+        var progress = (window.ChemBuddy && window.ChemBuddy.progress) || {};
+        return blockReason(found.module, found.index, progress.studied || {}, progress.quizzes || {}) || '';
+    }
+
+    // "Sat, 14 Nov"
     function opensLabel(equipId) {
         var date = learningPath.releaseDate(equipId);
         return date ? date.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }) : '';
     }
 
-    function lockedMessage(mod, index) {
-        if (!Equipment.isLessonComplete(mod.equipment[index].id)) return 'This lesson is coming soon';
-        if (learningPath.hasSchedule()) return 'Opens on ' + opensLabel(mod.equipment[index].id);
-        return 'Study ' + previousLesson(mod, index).name + ' first';
+    function lockedMessage(mod, index, studied, quizzes) {
+        return blockReason(mod, index, studied || {}, quizzes || {}) || '';
     }
 
     // Next thing to do: the first incomplete equipment that is open. When all
@@ -63,8 +115,8 @@ var Learn = (function () {
                     position: (i + 1) + ' of ' + mod.equipment.length,
                     quizAvailable: !!studied[eq.id] && !quizzes[eq.id] && QuizEngine.isQuizReady(eq.id)
                 };
-                if (isEquipmentAvailable(mod, i, studied)) return info;
-                if (!upcoming && learningPath.hasSchedule()) {
+                if (isEquipmentAvailable(mod, i, studied, quizzes)) return info;
+                if (!upcoming && learningPath.hasSchedule() && !learningPath.isReleased(eq.id)) {
                     info.upcoming = true;
                     info.opensOn = opensLabel(eq.id);
                     upcoming = info;
@@ -111,11 +163,12 @@ var Learn = (function () {
             mod.equipment.forEach(function (eq, idx) {
                 var quizDone = quizzes[eq.id];
                 var isComplete = isEquipmentComplete(eq.id, studied, quizzes);
-                var isAvailable = isEquipmentAvailable(mod, idx, studied);
+                var isAvailable = isEquipmentAvailable(mod, idx, studied, quizzes);
                 var lessonReady = Equipment.isLessonComplete(eq.id);
+                var dateLocked = learningPath.hasSchedule() && !learningPath.isReleased(eq.id) && !isPreviewUser();
 
                 var statusClass = !lessonReady ? 'locked' : (isComplete ? 'completed' : (isAvailable ? 'available' : 'locked'));
-                var statusText = !lessonReady ? 'Coming soon' : (isComplete ? '✓ Done' : (isAvailable ? 'Start →' : (learningPath.hasSchedule() ? '🔒 ' + opensLabel(eq.id) : '🔒 Locked')));
+                var statusText = !lessonReady ? 'Coming soon' : (isComplete ? '✓ Done' : (isAvailable ? 'Start →' : (dateLocked ? '🔒 ' + opensLabel(eq.id) : '🔒 Locked')));
 
                 var meta;
                 if (quizDone) meta = 'Quiz: ' + quizDone.score + '/' + quizDone.maxScore;
@@ -123,7 +176,7 @@ var Learn = (function () {
                 else if (!QuizEngine.isQuizReady(eq.id)) meta = 'Quiz coming soon';
                 else meta = learningPath.quizLength + '-question quiz';
 
-                html += '<div class="day-row" data-equip="' + eq.id + '" data-available="' + isAvailable + '" data-locked-msg="' + (isAvailable ? '' : Utils.sanitize(lockedMessage(mod, idx))) + '">';
+                html += '<div class="day-row" data-equip="' + eq.id + '" data-available="' + isAvailable + '" data-locked-msg="' + (isAvailable ? '' : Utils.sanitize(lockedMessage(mod, idx, studied, quizzes))) + '">';
                 html += '<div class="day-number ' + statusClass + '">' + (idx + 1) + '</div>';
                 html += '<div class="day-info"><h4>' + Utils.sanitize(eq.name) + '</h4>';
                 html += '<p>' + meta + '</p></div>';
@@ -163,9 +216,9 @@ var Learn = (function () {
         var studied = progress.studied || {};
         var quizzes = progress.quizzes || {};
 
-        if (!isEquipmentAvailable(mod, found.index, studied)) {
+        if (!isEquipmentAvailable(mod, found.index, studied, quizzes)) {
             var heading = Equipment.isLessonComplete(equipId) ? 'Locked' : 'Coming Soon';
-            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔒</div><h3>' + heading + '</h3><p>' + Utils.sanitize(lockedMessage(mod, found.index)) + '.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning Path</a></div>';
+            container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔒</div><h3>' + heading + '</h3><p>' + Utils.sanitize(lockedMessage(mod, found.index, studied, quizzes)) + '.</p><a href="#/learn" class="btn btn-primary mt-2">Back to Learning Path</a></div>';
             return;
         }
 
@@ -433,6 +486,8 @@ var Learn = (function () {
         renderOverview: renderOverview,
         renderLesson: renderLesson,
         getTodayInfo: getTodayInfo,
+        isOpenForStudent: isOpenForStudent,
+        lockedMessageFor: lockedMessageFor,
         updateLeaderboardPoints: updateLeaderboardPoints
     };
 })();

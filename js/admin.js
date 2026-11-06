@@ -105,14 +105,14 @@
 
         var week = learningPath.currentWeek();
         if (week) {
-            var thisWeek = week.week > 0 ? learningPath.allEquipment().filter(function (eq) {
-                var d = learningPath.releaseDate(eq.id);
-                return d && d.getTime() === learningPath.releaseWeeks()[week.week - 1].getTime();
-            }).map(function (eq) { return eq.name; }).join(', ') : '';
+            var weeks = learningPath.releaseWeeks();
+            var thisMod = week.week > 0 ? learningPath.modules[week.week - 1] : null;
+            var nextMod = learningPath.modules[week.week];
             html += '<div class="card mb-3"><div class="card-body">';
             html += week.week === 0
-                ? '<strong>Weekly release starts ' + Utils.formatDate(learningPath.releaseWeeks()[0]) + '</strong>'
-                : '<strong>Week ' + week.week + ' of ' + week.total + '</strong> — open this week: ' + Utils.sanitize(thisWeek);
+                ? '<strong>Weekly release starts ' + Utils.formatDate(weeks[0]) + '</strong> with Module 1: ' + Utils.sanitize(learningPath.modules[0].title)
+                : '<strong>Week ' + week.week + ' of ' + week.total + '</strong> — newest: Module ' + thisMod.id + ': ' + Utils.sanitize(thisMod.title) +
+                  (nextMod ? '. Next: Module ' + nextMod.id + ': ' + Utils.sanitize(nextMod.title) + ' on ' + Utils.formatDate(weeks[week.week]) : '. All modules open');
             html += '</div></div>';
         }
 
