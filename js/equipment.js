@@ -210,6 +210,20 @@ var Equipment = (function () {
                 alt: 'Complete absorber system with solvent pump, gas rising through the packing, solvent trickling down, clean gas out at the top and rich solvent to a stripper'
             }
         },
+        'cyclone-separator': {
+            overview: {
+                src: 'images/equipment/separators/cyclone-separator/cyclone-separator-isometric.png',
+                alt: 'Isometric view of a cyclone separator with side gas inlet, top gas outlet, cylinder, cone, rotary valve and dust bin on a steel frame'
+            },
+            components: {
+                src: 'images/equipment/separators/cyclone-separator/cyclone-separator-cutaway.png',
+                alt: 'Cutaway view of a cyclone separator showing the vortex finder, outer vortex, inner vortex, dust layer on the cone and the rotary valve'
+            },
+            working: {
+                src: 'images/equipment/separators/cyclone-separator/cyclone-separator-flow-path.png',
+                alt: 'Working principle of a cyclone: dusty gas spins down near the wall, clean gas spins up the centre, and dust slides down to the bin'
+            }
+        },
         'filter-press': {
             overview: {
                 src: 'images/equipment/separators/filter-press/filter-press-isometric.png',

@@ -3808,6 +3808,167 @@ const questionBank = [
         correct: 2,
         explanation: "Main Parts: 'Drainage Surface: small raised pips on each plate face, behind the cloth. They let the filtrate run down to the port.'",
         difficulty: "medium"
+    },
+    // ---- Cyclone Separators — practical set, approved 2026-11-08 (10 Qs) ----
+    {
+        id: "CL-Q01",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "The rotary valve has jammed and you are asked to clear it. What must you do first?",
+        options: [
+            "Open the inspection door to let the dust out",
+            "Lock out the rotary valve motor",
+            "Empty the dust bin completely",
+            "Reach in and turn the vanes by hand"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Rotary valve stopped. Lock out the motor, then clear the jam.' Safety: 'Never put a hand in a running valve.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CL-Q02",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "The differential pressure gauge reads above normal. What is a likely cause?",
+        options: [
+            "Gas flow too high, or build-up inside",
+            "The dust bin has just been emptied",
+            "Gas flow too low, so there is less spin",
+            "The rotary valve is turning normally"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Pressure drop above normal. Cause: gas flow too high, or build-up inside.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CL-Q03",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "The rotary valve is turning, but no dust is reaching the bin. What is the likely cause?",
+        options: [
+            "A worn hole in the vortex finder",
+            "Gas flow higher than normal",
+            "Cone blocked by damp or sticky dust",
+            "The inspection door bolts are too tight"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Dust not reaching the bin. Cause: cone blocked by damp or sticky dust.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CL-Q04",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "The pressure drop is below normal and the cyclone is separating poorly. What should you do?",
+        options: [
+            "Open the inspection door to look inside",
+            "Stop the rotary valve for a while",
+            "Empty the dust bin more often",
+            "Restore the normal gas flow"
+        ],
+        correct: 3,
+        explanation: "Common Problems: 'Pressure drop below normal. Cause: gas flow too low, so less spin and poor separation. Action: restore the normal gas flow.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CL-Q05",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "The dust bin has been left to fill right up. What will happen next?",
+        options: [
+            "The rotary valve will speed up",
+            "Dust backs up and leaves with the clean gas",
+            "The gas flow will stop by itself",
+            "The inner vortex will start going down"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Bin full, dust backing up. Backed-up dust leaves with the clean gas.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CL-Q06",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "Dust is seen at the gas outlet. On your round, which of these should you look for?",
+        options: [
+            "A dust bin that was recently emptied",
+            "A pressure gauge that reads normal",
+            "Air leaking in at the valve or door",
+            "A support frame that needs painting"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Dust seen at the gas outlet. Cause: hole in the vortex finder, or air leaking in at the valve or door.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CL-Q07",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "A hole in which part lets dusty gas go straight to the outlet?",
+        options: [
+            "Vortex Finder",
+            "Dust Bin",
+            "Support Frame",
+            "Rotary Valve"
+        ],
+        correct: 0,
+        explanation: "Main Parts: 'Vortex Finder. A hole in it lets dusty gas go straight to the outlet.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CL-Q08",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "Very fine dust is getting past the cyclone. What equipment often follows a cyclone for this reason?",
+        options: [
+            "A second rotary valve",
+            "A larger dust bin",
+            "A longer support frame",
+            "A bag filter"
+        ],
+        correct: 3,
+        explanation: "What It Is: 'Very fine dust can escape, so a bag filter often follows it.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CL-Q09",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "Someone must enter the cone during a shutdown. What does this entry need?",
+        options: [
+            "Only a dust mask and a torch",
+            "Only the supervisor's spoken approval",
+            "A permit, gas testing, ventilation and a standby person",
+            "The rotary valve running to clear the dust"
+        ],
+        correct: 2,
+        explanation: "Safety: 'The cone is a confined space. Entry needs a permit, gas testing, ventilation and a standby person.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CL-Q10",
+        equipmentId: "cyclone-separator",
+        category: "Separators",
+        subcategory: "Cyclone Separators",
+        question: "You see fine dust lying on the floors and ledges around the cyclone. Why is this a safety concern?",
+        options: [
+            "It makes the pressure gauge read high",
+            "Fine dust can explode",
+            "It stops the rotary valve from turning",
+            "It makes the gas spin the wrong way"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Fine dust can explode. Never let dust collect on floors and ledges around the cyclone.'",
+        difficulty: "easy"
     }
 ];
 
