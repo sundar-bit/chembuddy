@@ -138,7 +138,7 @@ const learningPath = {
         },
         {
             id: 10,
-            title: 'Relief Devices',
+            title: 'Safety Equipment',
             categoryId: 'safety',
             description: 'Protecting people and plant from overpressure and runaway events.',
             equipment: [
