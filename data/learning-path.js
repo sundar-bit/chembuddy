@@ -116,12 +116,12 @@ const learningPath = {
         },
         {
             id: 8,
-            title: 'Separation',
+            title: 'Separators',
             categoryId: 'solid-liquid',
             description: 'Removing solids from gases and liquids.',
             equipment: [
-                { id: 'cyclone-separator', name: 'Cyclone Separators' },
                 { id: 'filter-press', name: 'Filter Presses' },
+                { id: 'cyclone-separator', name: 'Cyclone Separators' },
                 { id: 'centrifuge-decanter', name: 'Decanter Centrifuges' }
             ]
         },
@@ -129,16 +129,16 @@ const learningPath = {
             id: 9,
             title: 'Storage Tanks',
             categoryId: 'storage',
-            description: 'Holding liquids and gases safely — atmospheric, floating roof and pressurised.',
+            description: 'Holding liquids and gases safely — fixed roof, floating roof and pressurised.',
             equipment: [
-                { id: 'atmospheric-tank', name: 'Atmospheric Storage Tanks' },
+                { id: 'atmospheric-tank', name: 'Fixed Roof Tanks' },
                 { id: 'floating-roof-tank', name: 'Floating Roof Tanks' },
-                { id: 'pressure-vessel', name: 'Pressure Storage Vessels' }
+                { id: 'pressure-vessel', name: 'Pressurised Storage: Spheres and Bullets' }
             ]
         },
         {
             id: 10,
-            title: 'Safety',
+            title: 'Relief Devices',
             categoryId: 'safety',
             description: 'Protecting people and plant from overpressure and runaway events.',
             equipment: [

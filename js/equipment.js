@@ -210,6 +210,20 @@ var Equipment = (function () {
                 alt: 'Complete absorber system with solvent pump, gas rising through the packing, solvent trickling down, clean gas out at the top and rich solvent to a stripper'
             }
         },
+        'filter-press': {
+            overview: {
+                src: 'images/equipment/separators/filter-press/filter-press-isometric.png',
+                alt: 'Isometric view of a recessed-plate filter press with fixed and moving heads, filter plates, side bars, hydraulic cylinder, filtrate taps, trough and cake hopper'
+            },
+            components: {
+                src: 'images/equipment/separators/filter-press/filter-press-cutaway.png',
+                alt: 'Cutaway view of a filter press showing the feed channel, filter chambers, cloth, cake, drainage surface, filtrate ports and taps'
+            },
+            working: {
+                src: 'images/equipment/separators/filter-press/filter-press-flow-path.png',
+                alt: 'Filter press batch in four stages: close and fill, filter, cake full, open and discharge'
+            }
+        },
         'cabin-heater': {
             overview: {
                 src: 'images/equipment/fired-heaters/cabin-heater/cabin-heater-isometric.png',

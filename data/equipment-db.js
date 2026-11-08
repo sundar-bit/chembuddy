@@ -1759,14 +1759,85 @@ const equipmentDB = {
     },
     'filter-press': {
         name: 'Filter Presses',
-        category: 'Solid-Liquid Separation',
-        description: 'Batch pressure filters with multiple plates creating chambers for cake formation. Produces dry cake at high capacity. Standard for sludge dewatering and chemical processing.',
-        principles: 'Plates pressed together form sealed chambers. Slurry pumped in under pressure. Liquid passes through filter cloth, solids accumulate as cake. Plates separated to discharge cake.',
-        specs: [{t:'Pressure',v:'Up to 16 bar'},{t:'Plates',v:'20-200 typical'},{t:'Cake',v:'20-50 mm thick'},{t:'Operation',v:'Batch'}],
-        components: ['Filter Plates - cake chambers','Filter Cloths - separation media','Head Plate - fixed end','Follower Plate - movable end','Hydraulic System - plate closure','Feed Manifold - slurry inlet','Filtrate Ports - liquid exit','Plate Shifter - cake discharge'],
-        troubles: [{p:'Cloth blinding',c:'Fine particles, oil',a:'Change cloth type, precoat'},{p:'Poor cake release',c:'Sticky material, worn cloth',a:'Treat cloth, replace'},{p:'Leaking',c:'Damaged cloth, low pressure',a:'Replace cloth, increase pressure'},{p:'Uneven filling',c:'Blocked ports, viscosity',a:'Clear ports, dilute feed'}],
-        observations: ['Monitor feed pressure','Check filtrate clarity','Verify cake dryness','Watch for leaks','Track cycle time'],
-        safety: ['Filter presses operate under pressures up to 16 bar. A hydraulic closure failure, plate cracking, or cloth blowout can cause high-pressure spray of chemical slurry. Regular hydraulic system inspection and plate integrity checks are required. Protective shields must surround the press during operation.','The heavy filter plates each weigh up to several hundred kilograms. They move during the plate shifting sequence. They can crush hands, arms, or bodies caught between plates. Interlocked guards are required. These guards stop the plate shifter from operating when personnel are in the plate opening zone.','During plate opening, accumulated filter cake falls from the chambers by gravity. It can weigh several hundred kilograms per plate. This creates a struck-by hazard for anyone standing below. Keep clear exclusion zones beneath the press during cake discharge. Proper cake collection systems are also required.','Slurry, filtrate, and filter cake may contain toxic, corrosive, or irritating hazardous chemicals. Personnel must wear full chemical-resistant PPE. This includes face shields, chemical gloves, and waterproof clothing. Wear it when working near the press during operation, cloth changing, or cake handling.','The narrow spaces between filter plates create confined space conditions during cloth replacement or inspection. Personnel can become trapped there. The hydraulic system must be fully locked out to prevent plate movement. This applies while anyone is working between the plates. Plate closure would cause fatal crushing injuries.'],
+        category: 'Separators',
+        intro: 'In this lesson you will get to know the filter press. It separates solids from a liquid by pushing the mixture through cloth. You will see it from outside, then look inside at its 14 main parts. Next you will follow one full batch, in 6 steps. You will finish with common problems and how to work safely.',
+        description: 'A filter press separates solids from a liquid. The mixture of liquid and solids is called slurry. A pump pushes the slurry into chambers between plates. Cloth on the plates lets the liquid through and holds back the solids. The solids build up as a firm cake. The clear liquid that comes out is called filtrate. A filter press works in batches. It fills, filters, then opens to drop the cake. It is used in chemical, pharmaceutical and mineral plants, and in effluent treatment. The one shown is a recessed-plate press. Side bars carry the plates, and a hydraulic cylinder clamps them shut. The isometric overview shows what you see from outside.',
+        labels: [
+            'Fixed Head â€” the heavy steel end block on the left. The feed enters through it. It does not move.',
+            'Feed Inlet â€” the pipe where the slurry enters the press.',
+            'Pressure Gauge â€” shows the feed pressure.',
+            'Filter Plates â€” the grey plates standing side by side. Each pair forms a chamber.',
+            'Filter Cloth â€” the cloth covering each plate. It lets liquid through and holds back solids.',
+            'Side Bar â€” the long steel bar along each side. It carries the plates.',
+            'Moving Head â€” the steel end block on the right. It moves to clamp or to open the plates.',
+            'Hydraulic Cylinder â€” pushes the moving head to clamp the plates tight.',
+            'Hydraulic Power Pack â€” the motor, pump and oil tank that drive the cylinder.',
+            'Filtrate Taps â€” one small tap at the bottom of each plate. A cloudy tap shows which plate has a torn cloth.',
+            'Filtrate Trough â€” the channel along the front. It collects the filtrate from all the taps.',
+            'Cake Hopper â€” the funnel under the plates. The cake drops into it when the press is opened.',
+            'Support Frame â€” the steel frame and legs that hold the press.'
+        ],
+        principles: 'The working diagram shows one full batch, in four stages. Close and fill, filter, cake full, then open and discharge.',
+        steps: [
+            'Close â€” the cylinder clamps the plates together.',
+            'Fill â€” the pump fills the chambers with slurry.',
+            'Filter â€” liquid passes through the cloth and leaves at the taps.',
+            'Cake Full â€” filtrate slows and the feed pressure rises.',
+            'Open â€” feed stops and the moving head moves back.',
+            'Discharge â€” the plates are parted and the cake drops out.'
+        ],
+        principlesNote: 'Solids stay as cake. Clear liquid leaves as filtrate. Filtrate slows as the cake grows. Never open the press while it is under pressure.',
+        recap: [
+            'What a filter press is, and where it is used',
+            'The outside: heads, plates, cloth, side bars, hydraulics, taps, trough and hopper',
+            'The 14 main parts, including the feed channel, chambers, cloth, cake and drainage surface',
+            'The 6 steps of one batch, from close to discharge',
+            'Why the filtrate slows as the cake grows',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Separates', v: 'Solids from a liquid' },
+            { t: 'Works In', v: 'Batches' },
+            { t: 'Driving Force', v: 'Pump pressure' },
+            { t: 'Products', v: 'Firm cake and clear filtrate' }
+        ],
+        components: [
+            '1. Feed Inlet â€” brings the slurry into the fixed head.',
+            '2. Fixed Head â€” the end block the feed passes through.',
+            '3. Feed Channel â€” a hole through the centre of every plate. The slurry flows along it to each chamber.',
+            '4. Filter Chamber â€” the hollow space between two plates. The cake forms here.',
+            '5. Filter Cloth â€” lines both faces of each chamber. Liquid passes through. Solids stay behind.',
+            '6. Filter Cake â€” the solids that build up on the cloth.',
+            '7. Drainage Surface â€” small raised pips on each plate face, behind the cloth. They let the filtrate run down to the port.',
+            '8. Filtrate Port â€” the outlet at the bottom of each plate, joined to its tap.',
+            '9. Filtrate Tap â€” lets the filtrate out of each plate.',
+            '10. Filtrate Trough â€” collects the filtrate and carries it away.',
+            '11. Cake Hopper â€” catches the cake when the press is opened.',
+            '12. Side Bar â€” carries the plates along the press.',
+            '13. Moving Head â€” presses the plates together from the right.',
+            '14. Hydraulic Cylinder â€” pushes the moving head to clamp the plates.'
+        ],
+        troubles: [
+            { p: 'Cloudy filtrate from one tap', c: 'Torn cloth or damaged plate', a: 'Close that tap, replace the cloth after the batch' },
+            { p: 'Slurry leaking between plates', c: 'Low clamping pressure, dirty sealing faces, folded cloth', a: 'Check clamping pressure, clean the faces, fit the cloth flat' },
+            { p: 'Wet, soft cake', c: 'Batch stopped too early, blocked cloth', a: 'Filter longer, wash or replace the cloth' },
+            { p: 'Slow filtration', c: 'Cloth blocked by fine solids', a: 'Wash or replace the cloth' }
+        ],
+        observations: [
+            'Watch the feed pressure gauge. A steady rise means the cake is building.',
+            'Check every tap. Each one should run clear.',
+            'Look for leaks between the plates',
+            'Check the hydraulic clamping pressure',
+            'Keep the trough and hopper clear'
+        ],
+        safety: [
+            'The press works under pressure. Never open it until the feed pump is stopped and the pressure reads zero.',
+            'Slurry can spray from a leak between plates. Wear a face shield and gloves near a running press.',
+            'Hands can be crushed between moving plates. Keep your hands clear while the head moves and the plates shift.',
+            'Lock out the hydraulic power pack before you work between the plates.',
+            'The cake may be hot, toxic or corrosive. Know what you are handling. Wear the right protective equipment.',
+            'Never stand under the plates while the cake is dropping.'
+        ]
     },
     'belt-filter': {
         name: 'Belt Filter Presses',

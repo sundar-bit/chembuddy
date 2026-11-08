@@ -3647,6 +3647,167 @@ const questionBank = [
         correct: 0,
         explanation: "Safety: 'If the solvent pump stops, the gas leaves without being cleaned. Follow the emergency procedure.'",
         difficulty: "medium"
+    },
+    // ---- Filter Presses — practical set, approved 2026-11-08 (10 Qs) ----
+    {
+        id: "FP-Q01",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "On your round, one filtrate tap runs cloudy while all the others run clear. What is the likely cause?",
+        options: [
+            "The feed pressure is too low for the whole press",
+            "A torn cloth or damaged plate at that tap",
+            "The cake hopper is full and needs emptying",
+            "The hydraulic oil level is low in the power pack"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Cloudy filtrate from one tap. Cause: torn cloth or damaged plate.' Labels: 'A cloudy tap shows which plate has a torn cloth.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FP-Q02",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "The feed pressure has risen to its limit and the taps only drip. Which stage of the batch has the press reached?",
+        options: [
+            "Close",
+            "Fill",
+            "Cake Full",
+            "Discharge"
+        ],
+        correct: 2,
+        explanation: "How It Works: 'Cake Full: filtrate slows and the feed pressure rises.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FP-Q03",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "The batch is finished and the cake must come out. What must be true before the press is opened?",
+        options: [
+            "The feed pump is stopped and the pressure reads zero",
+            "The filtrate taps are all closed tightly",
+            "The hydraulic cylinder is clamping at full pressure",
+            "The cake hopper has been washed with water"
+        ],
+        correct: 0,
+        explanation: "Safety: 'Never open it until the feed pump is stopped and the pressure reads zero.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FP-Q04",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "Which part runs along each side of the press and carries the plates?",
+        options: [
+            "Support Frame",
+            "Filtrate Trough",
+            "Moving Head",
+            "Side Bar"
+        ],
+        correct: 3,
+        explanation: "Labels: 'Side Bar: the long steel bar along each side. It carries the plates.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FP-Q05",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "Which part lets the liquid through but holds back the solids?",
+        options: [
+            "Filter Cloth",
+            "Feed Channel",
+            "Drainage Surface",
+            "Filtrate Port"
+        ],
+        correct: 0,
+        explanation: "Main Parts: 'Filter Cloth: lines both faces of each chamber. Liquid passes through. Solids stay behind.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FP-Q06",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "Slurry is leaking out between two plates during filtering. What should you check?",
+        options: [
+            "The level of filtrate in the trough",
+            "The size of the cake hopper",
+            "The clamping pressure and the plate sealing faces",
+            "The speed of the hydraulic power pack motor"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Slurry leaking between plates. Cause: low clamping pressure, dirty sealing faces, folded cloth. Action: check clamping pressure, clean the faces, fit the cloth flat.'",
+        difficulty: "medium"
+    },
+    {
+        id: "FP-Q07",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "The cake that drops out is wet and soft. What is a likely cause?",
+        options: [
+            "The plates were clamped too tightly",
+            "The batch was stopped too early",
+            "The filtrate trough was too small",
+            "The pressure gauge was reading zero"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Wet, soft cake. Cause: batch stopped too early, blocked cloth.'",
+        difficulty: "medium"
+    },
+    {
+        id: "FP-Q08",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "On your round, the feed pressure gauge shows a steady rise. What does this tell you?",
+        options: [
+            "A cloth has torn somewhere in the press",
+            "The hydraulic cylinder is losing its grip",
+            "The press is ready to be opened at once",
+            "The cake is building up in the chambers"
+        ],
+        correct: 3,
+        explanation: "What to check on a round: 'Watch the feed pressure gauge. A steady rise means the cake is building.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FP-Q09",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "A colleague wants to free a stuck cake by hand while the plates are being shifted. What do you tell them?",
+        options: [
+            "Keep hands clear while the plates move; lock out first",
+            "It is safe if they wear gloves and a face shield",
+            "It is safe once the feed pump has been stopped",
+            "Work quickly before the next plate moves across"
+        ],
+        correct: 0,
+        explanation: "Safety: 'Hands can be crushed between moving plates. Keep your hands clear while the head moves and the plates shift. Lock out the hydraulic power pack before you work between the plates.'",
+        difficulty: "medium"
+    },
+    {
+        id: "FP-Q10",
+        equipmentId: "filter-press",
+        category: "Separators",
+        subcategory: "Filter Presses",
+        question: "What is the job of the small raised pips on each plate face, behind the cloth?",
+        options: [
+            "To hold the cloth tight against the next plate",
+            "To break up the cake when the press opens",
+            "To let the filtrate run down to the port",
+            "To spread the slurry evenly across the chamber"
+        ],
+        correct: 2,
+        explanation: "Main Parts: 'Drainage Surface: small raised pips on each plate face, behind the cloth. They let the filtrate run down to the port.'",
+        difficulty: "medium"
     }
 ];
 
