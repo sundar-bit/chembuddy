@@ -294,6 +294,34 @@ var Equipment = (function () {
                 alt: 'Working principle of a sphere: while filling the vapour space gets smaller, and while emptying some liquid boils to refill it'
             }
         },
+        'relief-valve': {
+            overview: {
+                src: 'images/equipment/safety-equipment/relief-valve/relief-valve-isometric.png',
+                alt: 'Isometric view of a flanged spring-loaded pressure relief valve with inlet and outlet flanges, body, bonnet, cap, lifting lever and nameplate'
+            },
+            components: {
+                src: 'images/equipment/safety-equipment/relief-valve/relief-valve-cutaway.png',
+                alt: 'Cutaway view of a pressure relief valve showing the adjusting screw, spring, spindle, guide, disc, seat, nozzle and blowdown ring'
+            },
+            working: {
+                src: 'images/equipment/safety-equipment/relief-valve/relief-valve-flow-path.png',
+                alt: 'Working principle of a relief valve: closed with the spring holding the disc on the seat, and open with fluid escaping through the outlet'
+            }
+        },
+        'rupture-disc': {
+            overview: {
+                src: 'images/equipment/safety-equipment/rupture-disc/rupture-disc-isometric.png',
+                alt: 'Isometric view of a rupture disc assembly clamped between two flanges on a vertical pipe, with tag and burst sensor'
+            },
+            components: {
+                src: 'images/equipment/safety-equipment/rupture-disc/rupture-disc-cutaway.png',
+                alt: 'Cutaway view of a rupture disc assembly showing the thin domed disc gripped between two holder rings, with process fluid below'
+            },
+            working: {
+                src: 'images/equipment/safety-equipment/rupture-disc/rupture-disc-flow-path.png',
+                alt: 'Working principle of a rupture disc: intact and sealing the line, then burst open with fluid escaping up the outlet'
+            }
+        },
         'filter-press': {
             overview: {
                 src: 'images/equipment/separators/filter-press/filter-press-isometric.png',

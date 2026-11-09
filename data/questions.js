@@ -4774,6 +4774,328 @@ const questionBank = [
         correct: 2,
         explanation: "Common Problems: 'Pressure rising. Cause: hot weather, or fire nearby. Action: report it. Start the water spray.'",
         difficulty: "medium"
+    },
+    // ---- Pressure Relief Valves — practical set, approved 2026-11-09 (10 Qs) ----
+    {
+        id: "RV-Q01",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "What holds a relief valve shut in normal running?",
+        options: [
+            "A motor on the bonnet",
+            "The spring",
+            "The operator at the lifting lever",
+            "Air pressure from an instrument line"
+        ],
+        correct: 1,
+        explanation: "Working Principle: 'Closed: the spring holds the disc on the seat.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RV-Q02",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "During a shutdown you find an isolation valve closed under a relief valve. Why does this matter?",
+        options: [
+            "The valve will discharge too early",
+            "The nameplate will be wrong",
+            "The relief valve can no longer protect the equipment",
+            "The spring will weaken"
+        ],
+        correct: 2,
+        explanation: "Safety: 'Never block, isolate or gag a relief valve.' Round: 'Check that any isolation valve is locked open.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RV-Q03",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "The seal on a relief valve cap is broken. What should you do?",
+        options: [
+            "Report it and have the valve retested",
+            "Reseal it yourself",
+            "Tighten the adjusting screw",
+            "Ignore it if there is no leak"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Seal on the cap broken. Action: report it. Have the valve retested.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RV-Q04",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "Which part changes the spring force and so sets the opening pressure?",
+        options: [
+            "Drain Plug",
+            "Blowdown Ring",
+            "Guide",
+            "Adjusting Screw"
+        ],
+        correct: 3,
+        explanation: "Main Parts: 'Adjusting Screw: changes the spring force. This sets the opening pressure.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RV-Q05",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "A relief valve opens and closes rapidly, again and again. What is a likely cause?",
+        options: [
+            "The nameplate is missing",
+            "Valve too large, or long inlet line",
+            "The cap is too tight",
+            "The drain plug is closed"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Valve chattering. Cause: valve too large, or long inlet line.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RV-Q06",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "A relief valve is leaking slightly below its set pressure. What is this called, and what is a likely cause?",
+        options: [
+            "Chattering, from a weak flange",
+            "Blowdown, from a loose cap",
+            "Passing, from dirt or damage on the seat",
+            "Lifting, from a tight spring"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Valve passing. Cause: dirt or damage on the seat.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RV-Q07",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "Someone suggests changing the set pressure on the plant to stop a valve lifting. What is the rule?",
+        options: [
+            "The setting must never be changed on the plant",
+            "It may be changed if the shift in-charge agrees",
+            "It may be changed by half a turn",
+            "It may be changed if the cap is sealed again"
+        ],
+        correct: 0,
+        explanation: "Safety: 'Never change the setting on the plant. It is set in the workshop.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RV-Q08",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "Where should you never stand near a relief valve?",
+        options: [
+            "Beside the nameplate",
+            "On the access platform",
+            "Near the inlet flange",
+            "In line with a discharge outlet"
+        ],
+        correct: 3,
+        explanation: "Safety: 'Never stand in line with a discharge outlet.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RV-Q09",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "A relief valve does not open at its set pressure during a test. What is a likely cause?",
+        options: [
+            "The nameplate is faded",
+            "Stuck by corrosion or fouling",
+            "The outlet is too large",
+            "The cap is sealed"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Does not open at set pressure. Cause: stuck by corrosion or fouling.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RV-Q10",
+        equipmentId: "relief-valve",
+        category: "Safety Equipment",
+        subcategory: "Pressure Relief Valves",
+        question: "What must be done before removing a relief valve for testing?",
+        options: [
+            "Open the lifting lever",
+            "Loosen the adjusting screw",
+            "Isolate and depressurise the equipment",
+            "Break the cap seal"
+        ],
+        correct: 2,
+        explanation: "Safety: 'Remove the valve only when the equipment is isolated and depressurised.'",
+        difficulty: "easy"
+    },
+    // ---- Rupture Discs — practical set, approved 2026-11-09 (10 Qs) ----
+    {
+        id: "RD-Q01",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "What must be done after a rupture disc has burst?",
+        options: [
+            "Reset it with the lifting lever",
+            "Wait for it to reseal",
+            "Shut down and fit a new disc",
+            "Tighten the flange bolts"
+        ],
+        correct: 2,
+        explanation: "Working Principle: 'Stays Open: the disc cannot close again.' 'Replace: the line is shut down and a new disc fitted.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RD-Q02",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "The burst sensor gives an alarm. What does it most likely mean?",
+        options: [
+            "The disc has burst",
+            "The gasket is loose",
+            "The tag has fallen off",
+            "The bolts need tightening"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Burst sensor alarm. Cause: disc has burst.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RD-Q03",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "Before fitting a new disc, what must you check on its tag?",
+        options: [
+            "The colour of the disc",
+            "The burst pressure and direction",
+            "The weight of the disc",
+            "The length of the bolts"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Check the tag before fitting. Burst pressure and direction must be correct.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RD-Q04",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "A disc was fitted the wrong way up. Why must it be replaced?",
+        options: [
+            "The tag will not be visible",
+            "The burst sensor will not fit",
+            "The flanges will leak",
+            "It will not burst at the rated pressure"
+        ],
+        correct: 3,
+        explanation: "Common Problems: 'Disc fitted the wrong way up. Action: replace it. It will not burst at the rated pressure.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RD-Q05",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "How should a new rupture disc be handled?",
+        options: [
+            "By its centre, to check the dome",
+            "By its edges, as a dent changes its burst pressure",
+            "With a hammer, to seat it",
+            "Folded, to fit the holder"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Handle the disc by its edges. A small dent changes its burst pressure.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RD-Q06",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "A disc burst well below its rated pressure. What is a likely cause?",
+        options: [
+            "Corrosion or fatigue of the disc",
+            "A burst sensor fault",
+            "Too many flange bolts",
+            "A long outlet pipe"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Burst below its rated pressure. Cause: corrosion or fatigue of the disc.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RD-Q07",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "The gauge between a rupture disc and its relief valve shows pressure. What does it suggest?",
+        options: [
+            "Normal running",
+            "The relief valve has been tested",
+            "The burst sensor is healthy",
+            "A small leak in the disc"
+        ],
+        correct: 3,
+        explanation: "Common Problems: 'Pressure seen between disc and relief valve. Cause: small leak in the disc.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RD-Q08",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "Which is a key difference between a rupture disc and a relief valve?",
+        options: [
+            "A disc closes again by itself",
+            "A disc needs electric power",
+            "A disc bursts once and must be replaced",
+            "A disc has a spring"
+        ],
+        correct: 2,
+        explanation: "Remember: 'A disc bursts once and must be replaced.'",
+        difficulty: "easy"
+    },
+    {
+        id: "RD-Q09",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "Why is a rupture disc often fitted before a relief valve?",
+        options: [
+            "To protect the valve from the process fluid",
+            "To make the valve open sooner",
+            "To replace the valve spring",
+            "To reduce the outlet size"
+        ],
+        correct: 0,
+        explanation: "What It Is: 'A disc is also often fitted before a relief valve, to protect the valve from the process fluid.'",
+        difficulty: "medium"
+    },
+    {
+        id: "RD-Q10",
+        equipmentId: "rupture-disc",
+        category: "Safety Equipment",
+        subcategory: "Rupture Discs",
+        question: "A used disc looks undamaged after removal. What is the rule?",
+        options: [
+            "Refit it if the tag is clean",
+            "Refit it after polishing",
+            "Refit it once more only",
+            "Never reuse it; fit a new one"
+        ],
+        correct: 3,
+        explanation: "Safety: 'Never reuse a disc. Fit a new one each time.'",
+        difficulty: "easy"
     }
 ];
 

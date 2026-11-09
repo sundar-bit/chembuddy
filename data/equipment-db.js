@@ -2997,14 +2997,88 @@ const equipmentDB = {
     },
     'relief-valve': {
         name: 'Pressure Relief Valves',
-        category: 'Piping & Valves',
-        description: 'Safety devices opening automatically at set pressure to prevent overpressure. Critical for equipment and personnel protection. Conventional and balanced designs.',
-        principles: 'Spring-loaded disc held closed by spring force. Overpressure lifts disc allowing flow to relieve pressure. Closes when pressure drops below set point. Must be properly sized.',
-        specs: [{t:'Function',v:'Overpressure protection'},{t:'Set Pressure',v:'Design specific'},{t:'Capacity',v:'Sized for scenario'},{t:'Types',v:'Conventional, balanced, pilot'}],
-        components: ['Body - pressure containment','Disc - closure element','Seat - sealing surface','Spring - set pressure','Bonnet - spring housing','Adjusting Screw - set pressure','Lifting Lever - manual test','Bellows - if balanced design'],
-        troubles: [{p:'Leakage',c:'Seat damage, low set',a:'Lap seat, adjust set'},{p:'Chatter',c:'Oversized, piping effects',a:'Size correctly, fix piping'},{p:'Fail to open',c:'Corrosion, paint over',a:'Test regularly, maintain'},{p:'Simmer',c:'Set too low, seat damage',a:'Adjust, repair seat'}],
-        observations: ['Test set pressure regularly','Check for leakage','Verify discharge path clear','Monitor process pressure','Inspect seat condition'],
-        safety: ['Pressure relief valves are critical last-line safety devices. They prevent catastrophic overpressure failure of vessels and piping. Tampering, blocking, or improper maintenance can cause equipment rupture, explosions, and loss of life. Treat these devices with the highest level of care and regulatory compliance.','Never block, plug, or restrict the discharge piping from pressure relief valves. Never install any valve that could prevent free flow to the safe discharge location. Blocking the outlet renders the relief device non-functional. The protected equipment is then exposed to catastrophic overpressure failure.','No person should adjust the set pressure of a relief valve without proper authorization. Authorization must come from engineering and management. Improper set pressure adjustment can cause the valve to open prematurely during normal operation. It can also make the valve fail to open during an overpressure event. Both create serious safety hazards.','When removing a relief valve for testing or maintenance, follow proper isolation procedures. The protected equipment must not be left unprotected. This typically requires installing a spare relief valve before removing the active one. Otherwise, implement documented temporary safety measures. These must be approved by qualified engineering personnel.','Document all relief valve installations, tests, set pressures, maintenance activities, and changes thoroughly. ASME, API, and local regulatory codes require this documentation. It is essential for regulatory compliance and incident investigation. It also ensures the ongoing safety integrity of pressure protection systems.'],
+        category: 'Safety Equipment',
+        intro: 'In this lesson you will get to know the pressure relief valve. It protects equipment from too much pressure. You will see it from outside, then look inside at its 15 main parts. Next you will follow how it opens and closes, in 7 steps. You will finish with common problems and how to work safely.',
+        description: 'A pressure relief valve opens by itself when the pressure gets too high. It needs no power and no operator. A spring holds the valve shut. When the pressure reaches the set value, it overcomes the spring and the valve opens. Fluid escapes to a safe place, such as a flare. When the pressure falls, the valve closes again. It is the last line of protection for vessels, pipes and pumps. The isometric overview shows what you see from outside.',
+        labels: [
+            'Inlet Flange — joins the valve to the equipment it protects.',
+            'Outlet Flange — joins the valve to the discharge line. It is larger than the inlet.',
+            'Valve Body — joins the inlet to the outlet.',
+            'Body Studs — the bolts that hold the bonnet to the body.',
+            'Bonnet — the housing that holds the spring.',
+            'Cap — covers the adjusting screw. It is sealed after setting.',
+            'Lifting Lever — lets the valve be lifted by hand for testing.',
+            'Nameplate — shows the set pressure and tag number.',
+            'Drain Plug — drains liquid from the body.'
+        ],
+        principles: 'The working diagram shows the valve closed and open, in 7 steps.',
+        steps: [
+            'Closed — the spring holds the disc on the seat.',
+            'Pressure Rises — process pressure pushes up on the disc.',
+            'Lift — at set pressure, the disc lifts off the seat.',
+            'Discharge — fluid escapes through the outlet.',
+            'Pressure Falls — the system pressure comes down.',
+            'Reseat — the spring pushes the disc back down.',
+            'Closed Again — the valve seals and is ready again.'
+        ],
+        principlesNote: 'The spring holds it shut. Pressure opens it. It opens by itself, with no power needed. Never block or isolate a relief valve.',
+        recap: [
+            'What a pressure relief valve does',
+            'The outside: flanges, body, bonnet, cap, lever and nameplate',
+            'The 15 main parts, including the spring, spindle, disc and seat',
+            'The 7 steps, from closed to closed again',
+            'Why it must never be blocked',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Protects Against', v: 'Too much pressure' },
+            { t: 'Opens By', v: 'Process pressure against a spring' },
+            { t: 'Power Needed', v: 'None' },
+            { t: 'Discharges To', v: 'A safe place, such as a flare' },
+            { t: 'Closes Again', v: 'Yes, when the pressure falls' },
+            { t: 'Setting', v: 'Fixed in the workshop, then sealed' }
+        ],
+        components: [
+            '1. Cap — covers the adjusting screw.',
+            '2. Adjusting Screw — changes the spring force. This sets the opening pressure.',
+            '3. Lifting Lever — lifts the disc by hand for testing.',
+            '4. Bonnet — holds the spring.',
+            '5. Spring Washer — the plate at each end of the spring.',
+            '6. Spring — pushes the disc down onto the seat.',
+            '7. Spindle — joins the spring to the disc.',
+            '8. Guide — keeps the spindle moving straight.',
+            '9. Disc — seals the top of the nozzle.',
+            '10. Seat — the top rim of the nozzle. The disc presses on it.',
+            '11. Blowdown Ring — adjusts the pressure at which the valve closes again.',
+            '12. Nozzle — carries the process fluid up to the disc.',
+            '13. Valve Body — holds the discharge chamber around the nozzle.',
+            '14. Inlet Flange — joins the valve to the process.',
+            '15. Outlet Flange — carries the discharge away.'
+        ],
+        troubles: [
+            { p: 'Valve passing', c: 'Dirt or damage on the seat', a: 'Report it. Have the valve overhauled' },
+            { p: 'Valve chattering', c: 'Valve too large, or long inlet line', a: 'Report it. Have the installation checked' },
+            { p: 'Opens below set pressure', c: 'Weak spring, or wrong setting', a: 'Remove and test in the workshop' },
+            { p: 'Does not open at set pressure', c: 'Stuck by corrosion or fouling', a: 'Remove and overhaul. Test before refitting' },
+            { p: 'Discharge line hot or noisy', c: 'Valve has lifted or is passing', a: 'Check the pressure. Report it' },
+            { p: 'Seal on the cap broken', c: 'Setting may have been changed', a: 'Report it. Have the valve retested' }
+        ],
+        observations: [
+            'Check that any isolation valve is locked open.',
+            'Check that the seal on the cap is intact.',
+            'Check the discharge line temperature reading, if there is one.',
+            'Listen for hissing at the outlet.',
+            'Check that the test date has not passed.',
+            'Look for leaks at the flanges.'
+        ],
+        safety: [
+            'Never block, isolate or gag a relief valve.',
+            'Never change the setting on the plant. It is set in the workshop.',
+            'Never stand in line with a discharge outlet.',
+            'Discharge can be hot, toxic or flammable. It must go to a safe place.',
+            'A relief valve must be tested on schedule.',
+            'Remove the valve only when the equipment is isolated and depressurised.'
+        ]
     },
     'control-valve': {
         name: 'Control Valves',
@@ -3085,14 +3159,79 @@ const equipmentDB = {
     },
     'rupture-disc': {
         name: 'Rupture Discs',
-        category: 'Piping & Valves',
-        description: 'Non-reclosing pressure relief devices bursting at predetermined pressure. Faster response than relief valves. Used alone or backing relief valves.',
-        principles: 'Thin metal disc designed to rupture at specific pressure. Provides instant full opening. Cannot reseal after activation. Burst pressure affected by temperature.',
-        specs: [{t:'Function',v:'Non-reclosing relief'},{t:'Response',v:'Milliseconds'},{t:'Burst Pressure',v:'Design specific'},{t:'Temperature',v:'Affects burst pressure'}],
-        components: ['Disc - rupturing element','Holder - disc mounting','Inlet - process side','Outlet - to safe location','Tell-tale - burst indicator','Vacuum Support - if needed','Burst Indicator - remote signal','Companion Flange - bolting'],
-        troubles: [{p:'Premature burst',c:'Fatigue, corrosion, wrong disc',a:'Check operating conditions'},{p:'No burst',c:'Wrong pressure, coating',a:'Verify rating, install correctly'},{p:'Fragmentation',c:'Disc type, corrosion',a:'Non-fragmenting type'},{p:'Vacuum failure',c:'Reverse pressure',a:'Vacuum support disc'}],
-        observations: ['Monitor process pressure','Check tell-tale','Verify temperature rating','Inspect for corrosion','Track service life'],
-        safety: ['Rupture discs are non-reclosing pressure relief devices that cannot reseal after activation. Once a disc bursts, the protected equipment is open to the discharge system. It stays open until the disc is replaced. Take immediate action to control the process. Replace the burst disc before resuming normal operation.','When a rupture disc bursts, it releases the full flow of pressurized fluid instantaneously. The flow through the discharge piping reaches extreme velocity. Conditions at the outlet can be hazardous. Discharge piping must be properly sized and routed to a safe location. It must be secured against reaction forces. Keep personnel clear of discharge areas.','After a rupture disc has burst, replace it with a new disc. The new disc must have the correct specification and burst pressure. Do this before returning the protected equipment to service. Operating without a replacement disc leaves the equipment unprotected from future overpressure events. It may also violate safety codes and regulations.','Rupture discs must be installed in the correct direction. Follow the markings on the disc and holder. A disc installed backwards will burst at an incorrect pressure or fail to burst at all. Either scenario can lead to catastrophic overpressure failure of the protected equipment.','The burst pressure of a rupture disc changes with temperature. Failing to account for the actual operating temperature causes problems. The disc may burst prematurely during normal operation. It may also fail to burst during an overpressure event. Select the burst pressure based on the coincident temperature per the manufacturer derating curves.'],
+        category: 'Safety Equipment',
+        intro: 'In this lesson you will get to know the rupture disc. It protects equipment by bursting when the pressure gets too high. You will see it from outside, then look inside at its 10 main parts. Next you will follow how it seals and bursts, in 7 steps. You will finish with common problems and how to work safely.',
+        description: 'A rupture disc is a thin metal sheet that seals a line. It is made to burst at a set pressure. It acts almost instantly and does not leak. A disc bursts once, and must then be replaced. Relief valves are far more common in refineries. Rupture discs are used mainly in chemical and pharmaceutical plants, for fast pressure rises and for corrosive or sticky fluids. A disc is also often fitted before a relief valve, to protect the valve from the process fluid. The isometric overview shows what you see from outside.',
+        labels: [
+            'Inlet Pipe — brings the process pressure to the disc.',
+            'Lower Flange — clamps the holder from below.',
+            'Disc Holder — the ring that holds the disc. The disc cannot be seen from outside.',
+            'Tag — shows the burst pressure and direction of the disc.',
+            'Upper Flange — clamps the holder from above.',
+            'Flange Bolts — pull the flanges tight around the holder.',
+            'Outlet Pipe — carries the discharge away when the disc bursts.',
+            'Burst Sensor — gives an alarm when the disc has burst.'
+        ],
+        principles: 'The working diagram shows the disc intact and burst, in 7 steps.',
+        steps: [
+            'Sealed — the thin disc seals the line completely.',
+            'Pressure Rises — process pressure pushes up on the disc.',
+            'Burst — at burst pressure, the disc tears open.',
+            'Discharge — fluid escapes through the full opening.',
+            'Pressure Falls — the system pressure comes down.',
+            'Stays Open — the disc cannot close again.',
+            'Replace — the line is shut down and a new disc fitted.'
+        ],
+        principlesNote: 'A disc bursts once and must be replaced. It acts almost instantly and does not leak. Often used to protect a relief valve.',
+        recap: [
+            'What a rupture disc does, and where it is used',
+            'The outside: pipes, flanges, holder, tag and burst sensor',
+            'The 10 main parts, including the disc and holder rings',
+            'The 7 steps, from sealed to replaced',
+            'How a disc differs from a relief valve',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Protects Against', v: 'Too much pressure' },
+            { t: 'Acts', v: 'Almost instantly' },
+            { t: 'Closes Again', v: 'No' },
+            { t: 'Leakage In Normal Running', v: 'None' },
+            { t: 'Used Mainly In', v: 'Chemical and pharmaceutical plants' },
+            { t: 'Also Used', v: 'Before a relief valve' }
+        ],
+        components: [
+            '1. Outlet Pipe — is empty in normal running.',
+            '2. Upper Flange — clamps the assembly from above.',
+            '3. Upper Holder Ring — grips the disc from above.',
+            '4. Rupture Disc — the thin metal dome that seals the bore.',
+            '5. Burst Sensor — a thin wire that breaks when the disc bursts.',
+            '6. Lower Holder Ring — grips the disc from below.',
+            '7. Gasket — seals between the flange and the holder.',
+            '8. Lower Flange — clamps the assembly from below.',
+            '9. Flange Bolts — hold the stack tightly together.',
+            '10. Inlet Pipe — is full of process fluid up to the disc.'
+        ],
+        troubles: [
+            { p: 'Burst sensor alarm', c: 'Disc has burst', a: 'Check the pressure. Report it. Shut down and replace the disc' },
+            { p: 'Burst below its rated pressure', c: 'Corrosion or fatigue of the disc', a: 'Report it. Find the cause before replacing' },
+            { p: 'Disc fitted the wrong way up', c: 'Tag direction not checked', a: 'Replace it. It will not burst at the rated pressure' },
+            { p: 'Leak at the flange', c: 'Bolts uneven, or damaged gasket', a: 'Isolate. Tighten evenly, or replace the gasket' },
+            { p: 'Pressure seen between disc and relief valve', c: 'Small leak in the disc', a: 'Report it. The disc will not burst at its rating' }
+        ],
+        observations: [
+            'Check that the burst sensor shows healthy.',
+            'Look for leaks at the flanges.',
+            'Check the replacement date on the tag.',
+            'Read the gauge between the disc and any relief valve.'
+        ],
+        safety: [
+            'Never reuse a disc. Fit a new one each time.',
+            'Check the tag before fitting. Burst pressure and direction must be correct.',
+            'Handle the disc by its edges. A small dent changes its burst pressure.',
+            'Tighten the flange bolts evenly.',
+            'Remove a disc only when the line is isolated and depressurised.',
+            'Never stand in line with the discharge. A disc gives no warning.'
+        ]
     },
     'y-strainer': {
         name: 'Y-Strainers',
