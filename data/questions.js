@@ -4130,6 +4130,167 @@ const questionBank = [
         correct: 1,
         explanation: "Safety: 'Never put a hand or tool into the solids chute while the machine is running.'",
         difficulty: "easy"
+    },
+    // ---- Cone Roof Tanks — practical set, approved 2026-11-09 (10 Qs) ----
+    {
+        id: "CR-Q01",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "After a tank was emptied, the shell is found dented. What is the likely cause?",
+        options: [
+            "The drain valve was left closed",
+            "The foam chamber was empty",
+            "The breather valve was blocked, so a vacuum formed",
+            "The level indicator was stuck"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Shell or roof dented after emptying. Cause: breather valve blocked, so a vacuum formed.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CR-Q02",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "The tank is being filled. What does the breather valve do?",
+        options: [
+            "It lets vapour out",
+            "It lets liquid out",
+            "It draws air in",
+            "It stays fully sealed"
+        ],
+        correct: 0,
+        explanation: "Working Principle: 'Vapour Out: the breather valve lets vapour out.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CR-Q03",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "Water is found in the stored product. How is it removed?",
+        options: [
+            "Through the gauging hatch",
+            "Through the foam chamber",
+            "Through the breather valve",
+            "From the sump, through the drain valve"
+        ],
+        correct: 3,
+        explanation: "Common Problems: 'Water in the product. Action: drain the sump through the drain valve.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CR-Q04",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "The level reading does not change while the tank is being filled. What should you do?",
+        options: [
+            "Open the roof manway",
+            "Check the level by hand at the gauging hatch",
+            "Close the breather valve",
+            "Keep filling and check later"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Level reading does not change. Action: check by hand at the gauging hatch. Repair the indicator.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CR-Q05",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "You are about to open the gauging hatch. Where should you stand?",
+        options: [
+            "Directly over the hatch",
+            "On the shell manway",
+            "Upwind of the hatch",
+            "Downwind of the hatch"
+        ],
+        correct: 2,
+        explanation: "Safety: 'Stand upwind when you open the gauging hatch. Vapour comes out.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CR-Q06",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "Someone must enter the tank during a shutdown. What does this entry need?",
+        options: [
+            "Only a torch and gloves",
+            "A permit, gas testing, ventilation and a standby person",
+            "Only the supervisor's spoken approval",
+            "The breather valve blocked first"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Inside the tank is a confined space. Entry needs a permit, gas testing, ventilation and a standby person.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CR-Q07",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "On your round you smell vapour near the roof. What is a likely cause?",
+        options: [
+            "The gauging hatch was left open",
+            "The drain valve is closed",
+            "The foundation is cracked",
+            "The stairway handrail is loose"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Vapour smell near the roof. Cause: gauging hatch left open.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CR-Q08",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "When does the foam chamber deliver foam onto the liquid?",
+        options: [
+            "Every time the tank is filled",
+            "Every time the tank is emptied",
+            "When water collects in the sump",
+            "Only during a fire"
+        ],
+        correct: 3,
+        explanation: "Main Parts: 'Foam Chamber: sits above the liquid. Foam flows from it only during a fire.'",
+        difficulty: "easy"
+    },
+    {
+        id: "CR-Q09",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "Why should filling be slow until the inlet is covered with liquid?",
+        options: [
+            "To keep the roof rafters cool",
+            "To limit static electricity",
+            "To open the drain valve",
+            "To keep the sump dry"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Fill slowly until the inlet is covered with liquid. This limits static electricity.'",
+        difficulty: "medium"
+    },
+    {
+        id: "CR-Q10",
+        equipmentId: "cone-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Cone Roof Tanks",
+        question: "The high level alarm sounds while the tank is being filled. What is the first action?",
+        options: [
+            "Open the gauging hatch",
+            "Drain the sump",
+            "Stop the inlet at once",
+            "Close the breather valve"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'High level alarm. Tank close to overfilling. Action: stop the inlet at once.'",
+        difficulty: "easy"
     }
 ];
 

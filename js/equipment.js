@@ -238,6 +238,20 @@ var Equipment = (function () {
                 alt: 'Working principle of a decanter: slurry enters at the middle, solids are pushed to the narrow end, and clear liquid flows out over the weir plate at the wide end'
             }
         },
+        'cone-roof-tank': {
+            overview: {
+                src: 'images/equipment/atmospheric-tanks/cone-roof-tank/cone-roof-tank-isometric.png',
+                alt: 'Isometric view of a cone roof storage tank with breather valve, gauging hatch, roof manway, stairway fixed to the shell, foam chamber, nozzles and foundation'
+            },
+            components: {
+                src: 'images/equipment/atmospheric-tanks/cone-roof-tank/cone-roof-tank-cutaway.png',
+                alt: 'Cutaway view of a cone roof tank showing the roof rafters, centre column, vapour space, liquid, bottom plate and sump'
+            },
+            working: {
+                src: 'images/equipment/atmospheric-tanks/cone-roof-tank/cone-roof-tank-flow-path.png',
+                alt: 'Working principle of a cone roof tank: while filling, vapour leaves through the breather valve; while emptying, air enters through it'
+            }
+        },
         'filter-press': {
             overview: {
                 src: 'images/equipment/separators/filter-press/filter-press-isometric.png',

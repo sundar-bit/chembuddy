@@ -2359,6 +2359,97 @@ const equipmentDB = {
     // ============================================================================
     // CATEGORY 15: STORAGE TANKS (10 items)
     // ============================================================================
+    'cone-roof-tank': {
+        name: 'Cone Roof Tanks',
+        category: 'Atmospheric Tanks',
+        intro: 'In this lesson you will get to know the cone roof tank. It stores liquids at about atmospheric pressure. You will see it from outside, then look inside at its 15 main parts. Next you will follow how the tank fills and empties, in 7 steps. You will finish with common problems and how to work safely.',
+        description: 'A cone roof tank stores liquids at about atmospheric pressure. Its roof is fixed to the top of the shell. It is the most common type of fixed roof tank. It suits liquids that give off little vapour. Examples are diesel, kerosene, fuel oil, water and many chemicals. Vapour fills the space above the liquid. The tank must breathe as the level changes. A breather valve on the roof lets it do this. The isometric overview shows what you see from outside.',
+        labels: [
+            'Cone Roof — the fixed roof, with a gentle slope.',
+            'Shell — the wall of the tank, made of welded steel plates.',
+            'Breather Valve — lets vapour out when filling and air in when emptying.',
+            'Gauging Hatch — a small lid on the roof, for measuring the level by hand.',
+            'Roof Manway — a bolted cover for access from the roof, during a shutdown.',
+            'Spiral Stairway — the stairs fixed to the shell, leading to the roof.',
+            'Foam Chamber — delivers fire-fighting foam onto the liquid during a fire. It is not for filling.',
+            'Level Indicator — shows the level from the ground.',
+            'Shell Manway — a bolted cover low on the shell, for entry during a shutdown.',
+            'Inlet Nozzle — where the liquid enters.',
+            'Outlet Nozzle — where the liquid leaves.',
+            'Drain Valve — drains water from the bottom of the tank.',
+            'Foundation — the raised concrete ring that carries the tank.'
+        ],
+        principles: 'The working diagram shows the tank filling and emptying, in 7 steps.',
+        steps: [
+            'Fill — liquid enters through the inlet nozzle.',
+            'Level Rises — the rising liquid pushes the vapour up.',
+            'Vapour Out — the breather valve lets vapour out.',
+            'Hold — the tank stores the liquid at low pressure.',
+            'Empty — liquid leaves through the outlet nozzle.',
+            'Level Falls — the vapour space gets larger.',
+            'Air In — the breather valve lets air in.'
+        ],
+        principlesNote: 'Filling pushes vapour out. Emptying draws air in. A blocked breather valve can damage the tank. Water settles in the sump and is drained out.',
+        recap: [
+            'What a cone roof tank is, and where it is used',
+            'The outside: roof, shell, breather valve, hatch, stairs, nozzles and foundation',
+            'The 15 main parts, including the rafters, centre column and sump',
+            'The 7 steps of filling and emptying',
+            'Why the tank must breathe',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Stores', v: 'Liquids that give off little vapour' },
+            { t: 'Pressure', v: 'About atmospheric' },
+            { t: 'Roof', v: 'Fixed' },
+            { t: 'Breathes Through', v: 'The breather valve' },
+            { t: 'Common Design Standard', v: 'API 650' },
+            { t: 'Typical Liquids', v: 'Diesel, kerosene, fuel oil, water' }
+        ],
+        components: [
+            '1. Breather Valve — keeps the pressure in the tank close to atmospheric.',
+            '2. Gauging Hatch — opens to the vapour space.',
+            '3. Cone Roof — closes the top of the tank.',
+            '4. Roof Rafters — steel beams that carry the roof.',
+            '5. Centre Column — the vertical column that supports the middle of the roof.',
+            '6. Foam Chamber — sits above the liquid. Foam flows from it only during a fire.',
+            '7. Vapour Space — the space between the liquid and the roof.',
+            '8. Liquid — the stored product. Its level rises and falls.',
+            '9. Shell — holds the liquid. It carries most of the load at the bottom.',
+            '10. Inlet Nozzle — passes through the shell, below the liquid.',
+            '11. Outlet Nozzle — passes through the shell, below the liquid.',
+            '12. Bottom Plate — the steel floor, sloping gently to the sump.',
+            '13. Sump — a small pit at the lowest point. Water collects here.',
+            '14. Drain Valve — lets the water out of the sump.',
+            '15. Foundation — a concrete ring with compacted sand under the bottom plate.'
+        ],
+        troubles: [
+            { p: 'Shell or roof dented after emptying', c: 'Breather valve blocked, so a vacuum formed', a: 'Stop pumping. Inspect and clean the valve' },
+            { p: 'Vapour smell near the roof', c: 'Gauging hatch left open', a: 'Close the hatch' },
+            { p: 'Water in the product', c: 'Water collected in the sump', a: 'Drain the sump through the drain valve' },
+            { p: 'Level reading does not change', c: 'Level indicator stuck', a: 'Check by hand at the gauging hatch. Repair the indicator' },
+            { p: 'High level alarm', c: 'Tank close to overfilling', a: 'Stop the inlet at once. Find the cause' },
+            { p: 'Liquid seen at the foundation', c: 'Leak in the bottom plate', a: 'Report it. Empty the tank and inspect' }
+        ],
+        observations: [
+            'Check that the breather valve is clear.',
+            'Check that the gauging hatch is closed.',
+            'Compare the level with the expected level.',
+            'Look for leaks at the nozzles and the foundation.',
+            'Check that the drain valve is closed.',
+            'Check that the stairs and handrails are sound.'
+        ],
+        safety: [
+            'The vapour can burn. Keep all sources of ignition away. Hot work needs a permit.',
+            'Never block or isolate the breather valve.',
+            'Stand upwind when you open the gauging hatch. Vapour comes out.',
+            'Fill slowly until the inlet is covered with liquid. This limits static electricity.',
+            'Never overfill. Watch the level while filling.',
+            'Inside the tank is a confined space. Entry needs a permit, gas testing, ventilation and a standby person.',
+            'Walk only on the marked safe path on the roof.',
+            'Keep the foam chamber and its pipe in good condition. They are needed in a fire.'
+        ]
+    },
     'atmospheric-tank': {
         name: 'Atmospheric Storage Tanks',
         category: 'Storage Tanks',
