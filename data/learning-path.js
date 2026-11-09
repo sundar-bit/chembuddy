@@ -129,7 +129,7 @@ const learningPath = {
         },
         {
             id: 9,
-            title: 'Storage Tanks',
+            title: 'Atmospheric Tanks',
             categoryId: 'storage',
             description: 'Holding liquids at atmospheric pressure — cone roof and floating roof.',
             equipment: [
