@@ -1726,14 +1726,94 @@ const equipmentDB = {
     },
     'centrifuge-decanter': {
         name: 'Decanter Centrifuges',
-        category: 'Solid-Liquid Separation',
-        description: 'Horizontal scroll centrifuges continuously separating solids from liquids. Bowl and scroll rotate at differential speed to convey settled solids. Handles high solids feeds.',
-        principles: 'Horizontal bowl spins at high speed. Solids settle against bowl wall. Internal scroll rotates slightly slower, conveying solids to discharge. Liquid overflows weirs at opposite end.',
-        specs: [{t:'G-Force',v:'2000-4000 G'},{t:'Differential',v:'2-40 RPM scroll-bowl'},{t:'Solids',v:'1-60% feed typical'},{t:'Continuous',v:'Yes'}],
-        components: ['Rotating Bowl - separation zone','Scroll Conveyor - solids transport','Gearbox - differential drive','Main Drive - bowl rotation','Feed Tube - slurry entry','Solids Discharge - cake exit','Liquid Discharge - centrate exit','Casing - containment'],
-        troubles: [{p:'Wet cake',c:'High feed rate, low G',a:'Reduce feed, increase speed'},{p:'Vibration',c:'Imbalance, wear',a:'Balance, replace worn parts'},{p:'Gearbox failure',c:'Overload, lubrication',a:'Reduce torque, check oil'},{p:'Poor clarity',c:'Overflow rate, fines',a:'Adjust weirs, add polymer'}],
-        observations: ['Monitor vibration','Check cake dryness','Verify centrate clarity','Track power draw','Listen for abnormal sounds'],
-        safety: ['The bowl rotates at speeds generating 2000-4000 G-force. It stores enormous rotational kinetic energy. Catastrophic bowl failure can project heavy metal fragments with lethal force. Operate only within rated speed limits. Inspect the bowl regularly for cracks. Keep exclusion zones around the centrifuge during operation.','Excessive vibration can come from unbalanced loading, worn bearings, or scroll wear. It can cause structural failure of the rotating assembly. It can also severely damage surrounding equipment. Continuous vibration monitoring with automatic shutdown at preset alarm levels is required. Investigate any vibration increase immediately.','The interior of the centrifuge bowl is a confined space. It may contain residual process chemicals and oxygen-depleted atmospheres. Follow full confined space entry procedures for any internal inspection or maintenance. These include lockout/tagout of all rotating components. Atmospheric testing and ventilation are also required.','Decanter centrifuge components are extremely heavy, often several tons. These include the bowl, scroll conveyor, and gearbox. All lifting, rigging, and disassembly operations require proper crane capacity. Certified lifting equipment and trained personnel are also required. This prevents crushing injuries from dropped or shifted components.','Process slurry and separated phases may be corrosive, toxic, or biologically hazardous. Personnel must wear appropriate chemical-resistant PPE. This includes splash goggles, face shields, and chemical suits. Wear it when opening the centrifuge, handling cake, or working on process connections. This prevents skin contact and inhalation exposure.'],
+        category: 'Separators',
+        intro: 'In this lesson you will get to know the decanter centrifuge. It separates solids from a liquid by spinning the mixture. You will see it from outside, then look inside at its 18 main parts. Next you will follow the slurry through the machine, in 7 steps. You will finish with common problems and how to work safely.',
+        description: 'A decanter centrifuge separates solids from a liquid. The mixture of liquid and solids is called slurry. The slurry enters a long bowl that spins at high speed. The spin presses the heavy solids against the bowl wall. A screw called the scroll pushes the solids to the narrow end. Clear liquid flows to the wide end and leaves there. A decanter works continuously. It does not stop for each batch, as a filter press does. It is used in chemical, oil, food and mineral plants, and in effluent treatment. The isometric overview shows what you see from outside.',
+        labels: [
+            'Casing — the long steel cover. It encloses the spinning bowl. Its top half is hinged.',
+            'Main Bearing — one at each end. These carry the spinning bowl.',
+            'Gearbox — sits on the shaft at the wide end. It makes the scroll turn a little slower than the bowl.',
+            'Belt Guard — covers the drive belts. It must stay in place while running.',
+            'Main Motor — drives the bowl through the belts.',
+            'Feed Pipe — brings the slurry in, along the centre line.',
+            'Solids Chute — carries the solids down and out.',
+            'Liquid Outlet — carries the clear liquid down and out.',
+            'Base Frame — the heavy steel frame under the machine.',
+            'Vibration Mount — rubber mounts under the frame. They stop vibration reaching the floor.'
+        ],
+        principles: 'The working diagram shows the slurry going in, and the solids and liquid leaving at opposite ends, in 7 steps.',
+        steps: [
+            'Feed — slurry enters through the feed pipe.',
+            'Spin — the fast-spinning bowl throws it to the wall.',
+            'Settle — heavy solids press against the bowl wall.',
+            'Convey — the scroll pushes the solids to the cone.',
+            'Drain — solids leave the liquid and drain on the beach.',
+            'Solids Out — solids drop into the solids chute.',
+            'Liquid Out — clear liquid flows out over the weir plate.'
+        ],
+        principlesNote: 'Solids go one way. Liquid goes the other. The scroll turns a little slower than the bowl. The weir plate sets the liquid depth.',
+        recap: [
+            'What a decanter centrifuge is, and where it is used',
+            'The outside: casing, bearings, gearbox, drive, pipes and frame',
+            'The 18 main parts, including the bowl, scroll, pool, beach and weir plate',
+            'The 7 steps, from feed to liquid out',
+            'Why the solids and the liquid leave at opposite ends',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Separates', v: 'Solids from a liquid' },
+            { t: 'Works', v: 'Continuously' },
+            { t: 'Driving Force', v: 'The spin of the bowl' },
+            { t: 'Typical Spin Force', v: '2000 to 4000 G' },
+            { t: 'Scroll Speed Difference', v: '2 to 40 RPM slower than the bowl' },
+            { t: 'Products', v: 'Damp solids and clear liquid' }
+        ],
+        components: [
+            '1. Feed Pipe — runs inside the hollow hub of the scroll, up to the middle of the machine.',
+            '2. Feed Port — openings in the hub. The slurry leaves through them into the bowl.',
+            '3. Rotating Bowl — the long spinning shell. It is wide on one side and narrows to a cone.',
+            '4. Scroll Conveyor — a screw inside the bowl. It pushes the solids along the wall.',
+            '5. Liquid Pool — the ring of liquid held against the bowl by the spin.',
+            '6. Solids Layer — the solids pressed against the bowl wall, under the liquid.',
+            '7. Beach — the narrow part of the cone, above the liquid. The solids drain here.',
+            '8. Solids Port — openings at the narrow end. The solids leave through them.',
+            '9. Solids Chute — carries the solids out of the casing.',
+            '10. Weir Plate — the ring plate at the wide end. Liquid flows out over it. It sets the liquid depth.',
+            '11. Liquid Outlet — carries the clear liquid out of the casing.',
+            '12. Casing — the fixed cover around the bowl. It does not spin.',
+            '13. Main Bearing — carries the bowl at each end.',
+            '14. Gearbox — makes the scroll turn a little slower than the bowl.',
+            '15. Belt Guard — covers the drive belts.',
+            '16. Main Motor — drives the bowl.',
+            '17. Base Frame — carries the whole machine.',
+            '18. Vibration Mount — isolates the machine from the floor.'
+        ],
+        troubles: [
+            { p: 'Vibration rising', c: 'Uneven solids in the bowl, or worn parts', a: 'Stop the machine. Inspect before restarting' },
+            { p: 'Cloudy liquid', c: 'Feed rate too high, or liquid depth too shallow', a: 'Reduce the feed. Check the weir plate setting' },
+            { p: 'Wet solids', c: 'Feed rate too high, or liquid depth too deep', a: 'Reduce the feed. Check the weir plate setting' },
+            { p: 'Machine trips on high torque', c: 'Too many solids in the bowl', a: 'Stop the feed. Flush the bowl before restarting' },
+            { p: 'Gearbox running hot', c: 'Overload, or low oil', a: 'Reduce the load. Check the oil' },
+            { p: 'Bearing running hot', c: 'Too little grease, or a worn bearing', a: 'Grease it. Replace it if worn' }
+        ],
+        observations: [
+            'Check the vibration. Compare it with normal.',
+            'Check the bearing temperature reading. Compare it with normal.',
+            'Look at the clear liquid. It should not be cloudy.',
+            'Look at the solids. They should be damp, not wet.',
+            'Listen for unusual sounds.',
+            'Look for leaks at the casing and chute.'
+        ],
+        safety: [
+            'The bowl stores huge energy when spinning. Never open the casing until it has fully stopped.',
+            'Lock out the main motor before opening the casing.',
+            'Never keep running with high vibration. Stop the machine.',
+            'Keep the belt guard in place while the machine runs.',
+            'If the feed is flammable, keep the machine purged as per the procedure.',
+            'The slurry may be hot, toxic or corrosive. Wear the right protective equipment.',
+            'A running decanter is loud. Wear hearing protection.',
+            'Never put a hand or tool into the solids chute while the machine is running.'
+        ]
     },
     'centrifuge-disc': {
         name: 'Disc Stack Centrifuges',

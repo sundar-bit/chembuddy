@@ -3969,6 +3969,167 @@ const questionBank = [
         correct: 1,
         explanation: "Safety: 'Fine dust can explode. Never let dust collect on floors and ledges around the cyclone.'",
         difficulty: "easy"
+    },
+    // ---- Decanter Centrifuges — practical set, approved 2026-11-09 (10 Qs) ----
+    {
+        id: "DC-Q01",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "On your round, the vibration of the decanter keeps rising. What should be done?",
+        options: [
+            "Keep it running and check again next round",
+            "Stop the machine and inspect before restarting",
+            "Open the casing while it runs down",
+            "Raise the feed rate to steady the bowl"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Vibration rising. Stop the machine. Inspect before restarting.' Safety: 'Never keep running with high vibration.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q02",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "The clear liquid leaving the decanter has turned cloudy. What is a likely cause?",
+        options: [
+            "The belt guard has come loose",
+            "The vibration mounts are worn",
+            "The solids chute is too wide",
+            "Feed rate too high, or liquid depth too shallow"
+        ],
+        correct: 3,
+        explanation: "Common Problems: 'Cloudy liquid. Cause: feed rate too high, or liquid depth too shallow.'",
+        difficulty: "medium"
+    },
+    {
+        id: "DC-Q03",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "The solids coming out are wetter than normal. Which action fits this problem?",
+        options: [
+            "Reduce the feed and check the weir plate setting",
+            "Grease the main bearings",
+            "Tighten the belt guard",
+            "Empty the liquid outlet"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Wet solids. Action: reduce the feed. Check the weir plate setting.'",
+        difficulty: "medium"
+    },
+    {
+        id: "DC-Q04",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "A fitter needs to open the casing. What must be true first?",
+        options: [
+            "The bowl is running at low speed",
+            "The feed is stopped, but the bowl may still turn",
+            "The bowl has fully stopped and the motor is locked out",
+            "The belt guard has been removed"
+        ],
+        correct: 2,
+        explanation: "Safety: 'Never open the casing until it has fully stopped. Lock out the main motor before opening the casing.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q05",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "Which part sets the depth of the liquid inside the bowl?",
+        options: [
+            "Feed Port",
+            "Weir Plate",
+            "Solids Port",
+            "Main Bearing"
+        ],
+        correct: 1,
+        explanation: "Main Parts: 'Weir Plate: Liquid flows out over it. It sets the liquid depth.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q06",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "Which part makes the scroll turn a little slower than the bowl?",
+        options: [
+            "Gearbox",
+            "Vibration Mount",
+            "Weir Plate",
+            "Feed Pipe"
+        ],
+        correct: 0,
+        explanation: "Main Parts: 'Gearbox: makes the scroll turn a little slower than the bowl.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q07",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "The decanter has tripped on high torque. What should be done before restarting?",
+        options: [
+            "Raise the feed rate to clear the bowl",
+            "Remove the belt guard",
+            "Adjust the vibration mounts",
+            "Stop the feed and flush the bowl"
+        ],
+        correct: 3,
+        explanation: "Common Problems: 'Machine trips on high torque. Cause: too many solids in the bowl. Action: stop the feed. Flush the bowl before restarting.'",
+        difficulty: "medium"
+    },
+    {
+        id: "DC-Q08",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "Where inside the bowl do the solids drain, above the liquid?",
+        options: [
+            "At the weir plate",
+            "At the feed port",
+            "On the beach",
+            "In the liquid pool"
+        ],
+        correct: 2,
+        explanation: "Main Parts: 'Beach: the narrow part of the cone, above the liquid. The solids drain here.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q09",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "A main bearing is reading hotter than normal on your round. What is a likely cause?",
+        options: [
+            "Too little grease, or a worn bearing",
+            "The liquid depth is too deep",
+            "The solids chute is empty",
+            "The feed pipe is too long"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Bearing running hot. Cause: too little grease, or a worn bearing.'",
+        difficulty: "easy"
+    },
+    {
+        id: "DC-Q10",
+        equipmentId: "centrifuge-decanter",
+        category: "Separators",
+        subcategory: "Decanter Centrifuges",
+        question: "Solids seem to be sticking in the chute of a running decanter. What must you never do?",
+        options: [
+            "Report it to the shift in-charge",
+            "Put a hand or tool into the chute",
+            "Check the solids on your next round",
+            "Follow the plant procedure to stop it"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Never put a hand or tool into the solids chute while the machine is running.'",
+        difficulty: "easy"
     }
 ];
 

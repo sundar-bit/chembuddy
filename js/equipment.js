@@ -224,6 +224,20 @@ var Equipment = (function () {
                 alt: 'Working principle of a cyclone: dusty gas spins down near the wall, clean gas spins up the centre, and dust slides down to the bin'
             }
         },
+        'centrifuge-decanter': {
+            overview: {
+                src: 'images/equipment/separators/centrifuge-decanter/centrifuge-decanter-isometric.png',
+                alt: 'Isometric view of a horizontal decanter centrifuge with casing, main bearings, gearbox, belt guard, motor, feed pipe, solids chute and liquid outlet on a base frame'
+            },
+            components: {
+                src: 'images/equipment/separators/centrifuge-decanter/centrifuge-decanter-cutaway.png',
+                alt: 'Cutaway view of a decanter centrifuge showing the rotating bowl, scroll conveyor, feed port, liquid pool, solids layer, beach, solids port and weir plate'
+            },
+            working: {
+                src: 'images/equipment/separators/centrifuge-decanter/centrifuge-decanter-flow-path.png',
+                alt: 'Working principle of a decanter: slurry enters at the middle, solids are pushed to the narrow end, and clear liquid flows out over the weir plate at the wide end'
+            }
+        },
         'filter-press': {
             overview: {
                 src: 'images/equipment/separators/filter-press/filter-press-isometric.png',
