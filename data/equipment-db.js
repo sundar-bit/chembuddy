@@ -2450,6 +2450,193 @@ const equipmentDB = {
             'Keep the foam chamber and its pipe in good condition. They are needed in a fire.'
         ]
     },
+    'bullet-storage': {
+        name: 'Bullets',
+        category: 'Pressurised Storage',
+        intro: 'In this lesson you will get to know the bullet. It stores liquefied gas under pressure. You will see it from outside, then look inside at its 14 main parts. Next you will follow how it fills and empties, in 7 steps. You will finish with common problems and how to work safely.',
+        description: 'A bullet is a long horizontal pressure vessel. It stores gases that have been turned into liquid by pressure. Examples are LPG, propylene and butane. Keeping the gas as a liquid takes far less space. Its walls are thick, and both ends are curved, because curved shapes resist pressure well. It rests on two saddles. The isometric overview shows what you see from outside.',
+        labels: [
+            'Shell — the long cylinder of thick steel plate.',
+            'Dished End — the curved end that closes each side of the shell.',
+            'Saddle Support — one of the two steel cradles that carry the vessel.',
+            'Foundation — the concrete block under each saddle.',
+            'Access Platform — the walkway on top, reached by the ladder.',
+            'Relief Valve — opens by itself if the pressure gets too high.',
+            'Manway — a bolted cover for entry during a shutdown.',
+            'Vapour Line — connects to the vapour space at the top.',
+            'Level Gauge — shows the liquid level from outside.',
+            'Pressure Gauge — shows the pressure in the vessel.',
+            'Water Spray Line — sprays water over the vessel to cool it in a fire.',
+            'Liquid Inlet — where the liquid enters, at the bottom.',
+            'Liquid Outlet — where the liquid leaves, at the bottom.',
+            'Drain Valve — two valves, one after the other, for draining water.'
+        ],
+        principles: 'The working diagram shows the bullet filling and emptying, in 7 steps.',
+        steps: [
+            'Fill — liquefied gas enters at the bottom.',
+            'Hold Pressure — pressure keeps the gas in liquid form.',
+            'Level Rises — the vapour space gets smaller.',
+            'Stop Filling — filling stops at the safe limit.',
+            'Store — the vapour space lets the liquid expand.',
+            'Empty — liquid leaves at the bottom.',
+            'Vaporise — some liquid boils to refill the vapour space.'
+        ],
+        principlesNote: 'Never fill a bullet completely. Relief valves protect against overpressure. Water spray keeps the vessel cool in a fire.',
+        recap: [
+            'What a bullet is, and what it stores',
+            'The outside: shell, dished ends, saddles, valves and gauges',
+            'The 14 main parts, including the vapour space and bottom connections',
+            'The 7 steps of filling and emptying',
+            'Why a bullet is never filled completely',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Stores', v: 'Liquefied gases under pressure' },
+            { t: 'Shape', v: 'Horizontal cylinder with curved ends' },
+            { t: 'Supported On', v: 'Two saddles' },
+            { t: 'Typical Liquids', v: 'LPG, propylene, butane' },
+            { t: 'Typical Maximum Fill', v: 'About 85 percent' },
+            { t: 'Protected By', v: 'Relief valves and water spray' }
+        ],
+        components: [
+            '1. Relief Valve — connects to the vapour space. It protects the vessel from too much pressure.',
+            '2. Vapour Line — connects to the vapour space.',
+            '3. Manway — gives entry during a shutdown.',
+            '4. Access Platform — lets people reach the top fittings.',
+            '5. Water Spray Line — cools the vessel in a fire.',
+            '6. Vapour Space — the space above the liquid. It is always left in the vessel.',
+            '7. Liquefied Gas — the stored product, kept liquid by pressure.',
+            '8. Shell — the thick wall that holds the pressure.',
+            '9. Dished End — the curved end, which resists pressure well.',
+            '10. Level Gauge — joined to both the liquid and the vapour space.',
+            '11. Liquid Inlet — enters through the bottom of the vessel.',
+            '12. Liquid Outlet — leaves through the bottom of the vessel.',
+            '13. Drain Valve — at the lowest point of the vessel.',
+            '14. Saddle Support — carries the weight of the vessel.'
+        ],
+        troubles: [
+            { p: 'Level too high', c: 'Overfilling', a: 'Stop the inlet at once. Report it' },
+            { p: 'Pressure rising', c: 'Hot weather, or fire nearby', a: 'Report it. Start the water spray' },
+            { p: 'Relief valve lifting or passing', c: 'High pressure, or a faulty valve', a: 'Report it. Check the pressure. Have the valve tested' },
+            { p: 'Gas leak at a bottom flange', c: 'Failed joint', a: 'Raise the alarm. Isolate. Keep away ignition sources' },
+            { p: 'Drain valve frozen open', c: 'Liquid boiling and chilling the valve', a: 'Close the second valve. Never force the frozen one' },
+            { p: 'Level gauge reading doubtful', c: 'Gauge fault', a: 'Compare with another reading. Have it repaired' }
+        ],
+        observations: [
+            'Read the level. Compare it with the safe limit.',
+            'Read the pressure. Compare it with normal.',
+            'Look for leaks at the flanges and valves.',
+            'Check that the drain valves are closed.',
+            'Check that the water spray line is not damaged.',
+            'Check the saddles for damage or corrosion.'
+        ],
+        safety: [
+            'The gas is heavier than air. It collects in low places.',
+            'Keep all sources of ignition away. Hot work needs a permit.',
+            'Never isolate a relief valve.',
+            'Never fill the vessel completely. Liquid expands when warm.',
+            'A fire near the vessel can make it burst. Start the water spray and move people away.',
+            'Never leave a drain valve unattended while it is open.',
+            'Liquefied gas can freeze skin. Wear gloves and a face shield when draining.',
+            'Inside the vessel is a confined space. It must be gas-free. Entry needs a permit, ventilation and a standby person.'
+        ]
+    },
+    'sphere-storage': {
+        name: 'Spheres',
+        category: 'Pressurised Storage',
+        intro: 'In this lesson you will get to know the sphere. It stores large amounts of liquefied gas under pressure. You will see it from outside, then look inside at its 17 main parts. Next you will follow how it fills and empties, in 7 steps. You will finish with common problems and how to work safely.',
+        description: 'A sphere is a large round pressure vessel. It stores gases that have been turned into liquid by pressure. Examples are LPG, propylene and butane. The round shape shares the pressure evenly over the whole wall. So a sphere holds a large volume with less steel than a long vessel. It is used when large amounts must be stored. It stands on legs fixed at its widest line. The isometric overview shows what you see from outside.',
+        labels: [
+            'Sphere — the round vessel of thick steel plates.',
+            'Support Leg — one of the columns that carry the sphere.',
+            'Cross Bracing — the diagonal rods that stiffen the legs.',
+            'Foundation — the concrete pad under each leg.',
+            'Top Platform — the platform on top, for reaching the fittings.',
+            'Stairway — leads from the ground to the top platform.',
+            'Relief Valve — opens by itself if the pressure gets too high.',
+            'Manway — a bolted cover for entry during a shutdown.',
+            'Vapour Line — connects to the vapour space at the top.',
+            'Level Gauge — shows the liquid level from outside.',
+            'Pressure Gauge — shows the pressure in the sphere.',
+            'Water Spray Line — sprays water over the sphere to cool it in a fire.',
+            'Liquid Inlet — where the liquid enters.',
+            'Liquid Outlet — where the liquid leaves.',
+            'Drain Valve — for draining water from the bottom.'
+        ],
+        principles: 'The working diagram shows the sphere filling and emptying, in 7 steps.',
+        steps: [
+            'Fill — liquefied gas enters at the bottom.',
+            'Hold Pressure — pressure keeps the gas in liquid form.',
+            'Level Rises — the vapour space gets smaller.',
+            'Stop Filling — filling stops at the safe limit.',
+            'Store — the vapour space lets the liquid expand.',
+            'Empty — liquid leaves at the bottom.',
+            'Vaporise — some liquid boils to refill the vapour space.'
+        ],
+        principlesNote: 'The round shape shares the pressure evenly. Never fill a sphere completely. Water spray keeps the vessel cool in a fire.',
+        recap: [
+            'What a sphere is, and when it is used',
+            'The outside: legs, bracing, platform, stairway, valves and gauges',
+            'The 17 main parts, including the bottom nozzle and vapour space',
+            'The 7 steps of filling and emptying',
+            'Why the round shape shares the pressure evenly',
+            'Common problems and their fixes, and how to work safely'
+        ],
+        specs: [
+            { t: 'Stores', v: 'Large amounts of liquefied gas under pressure' },
+            { t: 'Shape', v: 'A round ball' },
+            { t: 'Supported On', v: 'Legs at its widest line' },
+            { t: 'Typical Liquids', v: 'LPG, propylene, butane' },
+            { t: 'Typical Maximum Fill', v: 'About 85 percent' },
+            { t: 'Protected By', v: 'Relief valves and water spray' }
+        ],
+        components: [
+            '1. Relief Valve — connects to the vapour space. It protects the sphere from too much pressure.',
+            '2. Pressure Gauge — shows the pressure in the sphere.',
+            '3. Manway — gives entry during a shutdown.',
+            '4. Top Platform — lets people reach the top fittings.',
+            '5. Vapour Line — connects to the vapour space.',
+            '6. Vapour Space — the space above the liquid. It is always left in the sphere.',
+            '7. Liquefied Gas — the stored product, kept liquid by pressure.',
+            '8. Shell — the thick wall that holds the pressure.',
+            '9. Level Gauge — joined to both the liquid and the vapour space.',
+            '10. Stairway — leads to the top platform.',
+            '11. Support Leg — carries the weight of the sphere.',
+            '12. Cross Bracing — stiffens the legs.',
+            '13. Foundation — the concrete pad under each leg.',
+            '14. Bottom Nozzle — the single opening at the very bottom. The liquid pipes and drain join it.',
+            '15. Liquid Inlet — joins the bottom nozzle.',
+            '16. Liquid Outlet — joins the bottom nozzle.',
+            '17. Drain Valve — at the lowest point of the sphere.'
+        ],
+        troubles: [
+            { p: 'Level too high', c: 'Overfilling', a: 'Stop the inlet at once. Report it' },
+            { p: 'Pressure rising', c: 'Hot weather, or fire nearby', a: 'Report it. Start the water spray' },
+            { p: 'Relief valve lifting or passing', c: 'High pressure, or a faulty valve', a: 'Report it. Check the pressure. Have the valve tested' },
+            { p: 'Gas leak at the bottom nozzle', c: 'Failed joint', a: 'Raise the alarm. Isolate. Keep away ignition sources' },
+            { p: 'Corrosion on a leg or bracing', c: 'Paint damage, or water trapped', a: 'Report it. Have it inspected and repaired' },
+            { p: 'Foundation cracked or sinking', c: 'Ground settling', a: 'Report it. Have it inspected at once' }
+        ],
+        observations: [
+            'Read the level. Compare it with the safe limit.',
+            'Read the pressure. Compare it with normal.',
+            'Look for leaks at the bottom nozzle and valves.',
+            'Check the legs and bracing for corrosion.',
+            'Look for cracks at the foundations.',
+            'Check that the water spray line is not damaged.',
+            'Check that the drain valve is closed.'
+        ],
+        safety: [
+            'The gas is heavier than air. It collects in low places.',
+            'Keep all sources of ignition away. Hot work needs a permit.',
+            'Never isolate a relief valve.',
+            'Never fill the sphere completely. Liquid expands when warm.',
+            'A leak at the bottom can release the whole contents. Raise the alarm at once.',
+            'A fire near the sphere can make it burst. Start the water spray and move people away.',
+            'Use the handrail on the stairway. A fall from the top can be fatal.',
+            'Inside the sphere is a confined space. It must be gas-free. Entry needs a permit, ventilation and a standby person.'
+        ]
+    },
     'atmospheric-tank': {
         name: 'Atmospheric Storage Tanks',
         category: 'Storage Tanks',

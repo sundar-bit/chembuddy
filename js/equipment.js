@@ -266,6 +266,34 @@ var Equipment = (function () {
                 alt: 'Working principle of a floating roof tank: the roof rises as the tank fills and falls as it empties, staying on the liquid'
             }
         },
+        'bullet-storage': {
+            overview: {
+                src: 'images/equipment/pressurised-storage/bullet-storage/bullet-storage-isometric.png',
+                alt: 'Isometric view of a horizontal bullet on two saddles, with dished ends, relief valves, manway, vapour line, level gauge, water spray line and bottom liquid connections'
+            },
+            components: {
+                src: 'images/equipment/pressurised-storage/bullet-storage/bullet-storage-cutaway.png',
+                alt: 'Cutaway view of a bullet showing liquefied gas with a vapour space above it, thick walls and connections at top and bottom'
+            },
+            working: {
+                src: 'images/equipment/pressurised-storage/bullet-storage/bullet-storage-flow-path.png',
+                alt: 'Working principle of a bullet: while filling the vapour space gets smaller, and while emptying some liquid boils to refill it'
+            }
+        },
+        'sphere-storage': {
+            overview: {
+                src: 'images/equipment/pressurised-storage/sphere-storage/sphere-storage-isometric.png',
+                alt: 'Isometric view of a round storage sphere on support legs with cross bracing, top platform, stairway, relief valves, level gauge, water spray line and bottom liquid connections'
+            },
+            components: {
+                src: 'images/equipment/pressurised-storage/sphere-storage/sphere-storage-cutaway.png',
+                alt: 'Cutaway view of a sphere showing liquefied gas with a vapour space above it, the thick shell and the single bottom nozzle'
+            },
+            working: {
+                src: 'images/equipment/pressurised-storage/sphere-storage/sphere-storage-flow-path.png',
+                alt: 'Working principle of a sphere: while filling the vapour space gets smaller, and while emptying some liquid boils to refill it'
+            }
+        },
         'filter-press': {
             overview: {
                 src: 'images/equipment/separators/filter-press/filter-press-isometric.png',

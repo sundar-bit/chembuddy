@@ -4452,6 +4452,328 @@ const questionBank = [
         correct: 0,
         explanation: "Safety: 'Never go on the deck during a thunderstorm.'",
         difficulty: "easy"
+    },
+    // ---- Bullets — practical set, approved 2026-11-09 (10 Qs) ----
+    {
+        id: "BU-Q01",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "Why is a bullet never filled completely?",
+        options: [
+            "The level gauge cannot read a full vessel",
+            "The liquid expands when it gets warm",
+            "The saddles cannot carry the weight",
+            "The manway would leak"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Never fill the vessel completely. Liquid expands when warm.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BU-Q02",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "On your round the level is above the safe limit and still rising. What should be done?",
+        options: [
+            "Open the drain valves",
+            "Isolate the relief valves",
+            "Stop the inlet at once and report it",
+            "Open the manway to check"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Level too high. Action: stop the inlet at once. Report it.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BU-Q03",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "Where does the gas collect if it leaks from a bullet?",
+        options: [
+            "In low places, as it is heavier than air",
+            "High up, as it is lighter than air",
+            "Only around the relief valves",
+            "Only on the access platform"
+        ],
+        correct: 0,
+        explanation: "Safety: 'The gas is heavier than air. It collects in low places.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BU-Q04",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "The drain valve has frozen open while draining. What should you do?",
+        options: [
+            "Force the frozen valve shut",
+            "Heat the valve with a torch",
+            "Leave it and come back later",
+            "Close the second valve, and never force the frozen one"
+        ],
+        correct: 3,
+        explanation: "Common Problems: 'Drain valve frozen open. Action: close the second valve. Never force the frozen one.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BU-Q05",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "A fire breaks out near the bullet. What is the right response?",
+        options: [
+            "Open the manway to release the gas",
+            "Start the water spray and move people away",
+            "Close the relief valves",
+            "Fill the vessel to cool it"
+        ],
+        correct: 1,
+        explanation: "Safety: 'A fire near the vessel can make it burst. Start the water spray and move people away.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BU-Q06",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "The pressure is rising on a very hot day. What should be done?",
+        options: [
+            "Report it and start the water spray",
+            "Isolate the relief valves",
+            "Open the drain valves fully",
+            "Fill more liquid into the vessel"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Pressure rising. Cause: hot weather, or fire nearby. Action: report it. Start the water spray.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BU-Q07",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "What must never be done to a relief valve on a bullet?",
+        options: [
+            "Inspect it on a round",
+            "Have it tested",
+            "Isolate it",
+            "Report it if it lifts"
+        ],
+        correct: 2,
+        explanation: "Safety: 'Never isolate a relief valve.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BU-Q08",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "What should you wear when draining a bullet?",
+        options: [
+            "A dust mask only",
+            "Hearing protection only",
+            "No special protection",
+            "Gloves and a face shield"
+        ],
+        correct: 3,
+        explanation: "Safety: 'Liquefied gas can freeze skin. Wear gloves and a face shield when draining.'",
+        difficulty: "easy"
+    },
+    {
+        id: "BU-Q09",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "Which part keeps the vessel from becoming completely full of liquid, by leaving room above it?",
+        options: [
+            "The Saddle Support",
+            "The Vapour Space",
+            "The Dished End",
+            "The Manway"
+        ],
+        correct: 1,
+        explanation: "Main Parts: 'Vapour Space: the space above the liquid. It is always left in the vessel.'",
+        difficulty: "medium"
+    },
+    {
+        id: "BU-Q10",
+        equipmentId: "bullet-storage",
+        category: "Pressurised Storage",
+        subcategory: "Bullets",
+        question: "A drain valve on the bullet is open. What is the rule?",
+        options: [
+            "It may be left while you finish your round",
+            "It may be left open overnight",
+            "It must never be left unattended",
+            "It must be left until the pressure falls"
+        ],
+        correct: 2,
+        explanation: "Safety: 'Never leave a drain valve unattended while it is open.'",
+        difficulty: "easy"
+    },
+    // ---- Spheres — practical set, approved 2026-11-09 (10 Qs) ----
+    {
+        id: "SP-Q01",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "Why is a sphere built round?",
+        options: [
+            "It is easier to paint",
+            "The stairway is shorter",
+            "The round shape shares the pressure evenly",
+            "It needs no relief valves"
+        ],
+        correct: 2,
+        explanation: "What It Is: 'The round shape shares the pressure evenly over the whole wall.'",
+        difficulty: "easy"
+    },
+    {
+        id: "SP-Q02",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "On your round you see a crack at one of the foundations. What should you do?",
+        options: [
+            "Report it and have it inspected at once",
+            "Paint over it",
+            "Check it again next month",
+            "Fill the sphere to steady it"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Foundation cracked or sinking. Action: report it. Have it inspected at once.'",
+        difficulty: "easy"
+    },
+    {
+        id: "SP-Q03",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "What joins the very bottom of the sphere to the liquid pipes and drain?",
+        options: [
+            "The Manway",
+            "The Vapour Line",
+            "The Cross Bracing",
+            "The Bottom Nozzle"
+        ],
+        correct: 3,
+        explanation: "Main Parts: 'Bottom Nozzle: the single opening at the very bottom. The liquid pipes and drain join it.'",
+        difficulty: "easy"
+    },
+    {
+        id: "SP-Q04",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "You find gas leaking at the bottom nozzle. What is the first response?",
+        options: [
+            "Finish the round, then report it",
+            "Raise the alarm",
+            "Tighten the flange while it leaks",
+            "Open the manway"
+        ],
+        correct: 1,
+        explanation: "Safety: 'A leak at the bottom can release the whole contents. Raise the alarm at once.'",
+        difficulty: "medium"
+    },
+    {
+        id: "SP-Q05",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "A sphere is being emptied. What happens in the vapour space?",
+        options: [
+            "Some liquid boils to refill it",
+            "It fills with water",
+            "It disappears completely",
+            "Air enters through the relief valves"
+        ],
+        correct: 0,
+        explanation: "Working Principle: 'Vaporise: some liquid boils to refill the vapour space.'",
+        difficulty: "medium"
+    },
+    {
+        id: "SP-Q06",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "On your round you see rust on a support leg. What should you do?",
+        options: [
+            "Ignore it, as the leg is thick",
+            "Lower the level in the sphere",
+            "Report it and have it inspected and repaired",
+            "Remove the cross bracing"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Corrosion on a leg or bracing. Action: report it. Have it inspected and repaired.'",
+        difficulty: "easy"
+    },
+    {
+        id: "SP-Q07",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "What is the job of the cross bracing?",
+        options: [
+            "To carry the liquid pipes",
+            "To cool the sphere in a fire",
+            "To hold the top platform",
+            "To stiffen the legs"
+        ],
+        correct: 3,
+        explanation: "Main Parts: 'Cross Bracing: stiffens the legs.'",
+        difficulty: "easy"
+    },
+    {
+        id: "SP-Q08",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "A fire breaks out near the sphere. What is the right response?",
+        options: [
+            "Close the relief valves",
+            "Start the water spray and move people away",
+            "Fill the sphere to cool it",
+            "Open the manway"
+        ],
+        correct: 1,
+        explanation: "Safety: 'A fire near the sphere can make it burst. Start the water spray and move people away.'",
+        difficulty: "easy"
+    },
+    {
+        id: "SP-Q09",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "Someone must enter the sphere during a shutdown. What is needed?",
+        options: [
+            "It must be gas-free, with a permit, ventilation and a standby person",
+            "Only the supervisor's spoken approval",
+            "Only a torch and gloves",
+            "The relief valves opened first"
+        ],
+        correct: 0,
+        explanation: "Safety: 'It must be gas-free. Entry needs a permit, ventilation and a standby person.'",
+        difficulty: "easy"
+    },
+    {
+        id: "SP-Q10",
+        equipmentId: "sphere-storage",
+        category: "Pressurised Storage",
+        subcategory: "Spheres",
+        question: "The pressure gauge shows the pressure rising on a very hot day. What should be done?",
+        options: [
+            "Open the manway",
+            "Isolate the relief valves",
+            "Report it and start the water spray",
+            "Fill more liquid into the sphere"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Pressure rising. Cause: hot weather, or fire nearby. Action: report it. Start the water spray.'",
+        difficulty: "medium"
     }
 ];
 
