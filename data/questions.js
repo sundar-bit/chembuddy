@@ -4291,6 +4291,167 @@ const questionBank = [
         correct: 2,
         explanation: "Common Problems: 'High level alarm. Tank close to overfilling. Action: stop the inlet at once.'",
         difficulty: "easy"
+    },
+    // ---- Floating Roof Tanks — practical set, approved 2026-11-09 (10 Qs) ----
+    {
+        id: "FR-Q01",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "After heavy rain, water is lying on the deck. What is the likely cause?",
+        options: [
+            "The rim seal is too tight",
+            "The roof drain is blocked",
+            "The foam dam is too low",
+            "The gauge column is closed"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Water lying on the deck. Cause: roof drain blocked.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FR-Q02",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "Why does a floating roof tank lose far less vapour?",
+        options: [
+            "The shell is open at the top",
+            "The foam dam traps the vapour",
+            "The roof rests directly on the liquid",
+            "The ladder closes the rim"
+        ],
+        correct: 2,
+        explanation: "What It Is: 'A steel roof floats directly on the liquid. There is almost no vapour space, so far less vapour is lost.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FR-Q03",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "You notice the roof looks tilted. What should be done?",
+        options: [
+            "Stop moving liquid, then report and inspect",
+            "Pump out faster to free it",
+            "Walk on the deck to level it",
+            "Open the shell manway"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Roof tilted or stuck. Action: stop moving liquid. Report and inspect.'",
+        difficulty: "medium"
+    },
+    {
+        id: "FR-Q04",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "From where is the level dipped by hand on this tank?",
+        options: [
+            "Through the shell manway",
+            "Through the drain valve",
+            "Through the pontoon",
+            "Through the gauge column, from the gauging platform"
+        ],
+        correct: 3,
+        explanation: "Labels: 'Gauge Column: The level is dipped through it.' 'Gauging Platform: Dipping is done from here.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FR-Q05",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "You need to go down onto the deck while the roof is low. What must be done first?",
+        options: [
+            "Open the drain valve",
+            "Test the gas",
+            "Start pumping out",
+            "Close the foam chamber"
+        ],
+        correct: 1,
+        explanation: "Safety: 'Vapour collects on the deck when the roof is low. Test the gas before going down.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FR-Q06",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "Oil is coming out through the roof drain. What should be done?",
+        options: [
+            "Close the drain valve and repair the leak",
+            "Open the drain valve fully",
+            "Add water to the deck",
+            "Keep draining until it clears"
+        ],
+        correct: 0,
+        explanation: "Common Problems: 'Oil coming out of the roof drain. Action: close the drain valve. Repair the leak.'",
+        difficulty: "medium"
+    },
+    {
+        id: "FR-Q07",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "The roof has landed on its legs because the level went too low. How should the tank be refilled?",
+        options: [
+            "As fast as possible",
+            "Only through the drain valve",
+            "Slowly, until the roof floats again",
+            "Only after removing the legs"
+        ],
+        correct: 2,
+        explanation: "Common Problems: 'Roof resting on its legs. Action: stop pumping out. Refill slowly until the roof floats.'",
+        difficulty: "medium"
+    },
+    {
+        id: "FR-Q08",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "What is the job of the foam dam on the deck?",
+        options: [
+            "To carry rainwater away",
+            "To support the rolling ladder",
+            "To keep the roof afloat",
+            "To hold foam at the seal, where fires usually start"
+        ],
+        correct: 3,
+        explanation: "Main Parts: 'Foam Dam: It holds foam at the seal, where fires usually start.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FR-Q09",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "On your round you smell vapour at the rim of the roof. What is a likely cause?",
+        options: [
+            "The rolling ladder is off its rails",
+            "The rim seal is worn or damaged",
+            "The sump is full of water",
+            "The wind girder is loose"
+        ],
+        correct: 1,
+        explanation: "Common Problems: 'Vapour smell at the rim. Cause: rim seal worn or damaged.'",
+        difficulty: "easy"
+    },
+    {
+        id: "FR-Q10",
+        equipmentId: "floating-roof-tank",
+        category: "Atmospheric Tanks",
+        subcategory: "Floating Roof Tanks",
+        question: "A thunderstorm is approaching. What is the rule for the deck?",
+        options: [
+            "Never go on the deck during the storm",
+            "Go on the deck to clear the drain",
+            "Stay on the deck near the pontoon",
+            "Wait on the deck by the gauge column"
+        ],
+        correct: 0,
+        explanation: "Safety: 'Never go on the deck during a thunderstorm.'",
+        difficulty: "easy"
     }
 ];
 

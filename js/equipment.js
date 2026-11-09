@@ -252,6 +252,20 @@ var Equipment = (function () {
                 alt: 'Working principle of a cone roof tank: while filling, vapour leaves through the breather valve; while emptying, air enters through it'
             }
         },
+        'floating-roof-tank': {
+            overview: {
+                src: 'images/equipment/atmospheric-tanks/floating-roof-tank/floating-roof-tank-isometric.png',
+                alt: 'Isometric view of an open-top floating roof tank with the deck inside the shell, rolling ladder, gauging platform, gauge column, wind girder, stairway, nozzles and foundation'
+            },
+            components: {
+                src: 'images/equipment/atmospheric-tanks/floating-roof-tank/floating-roof-tank-cutaway.png',
+                alt: 'Cutaway view of a floating roof tank with the roof lying directly on the liquid, showing the rim seal, foam dam, roof legs, roof drain, bottom plate and sump'
+            },
+            working: {
+                src: 'images/equipment/atmospheric-tanks/floating-roof-tank/floating-roof-tank-flow-path.png',
+                alt: 'Working principle of a floating roof tank: the roof rises as the tank fills and falls as it empties, staying on the liquid'
+            }
+        },
         'filter-press': {
             overview: {
                 src: 'images/equipment/separators/filter-press/filter-press-isometric.png',
