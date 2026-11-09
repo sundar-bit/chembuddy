@@ -5,7 +5,7 @@
 // equipmentDB is Level 2 (shown in Browse, not part of the path yet).
 //
 // Weekly release (see `schedule` below): one module (category) opens each
-// Saturday morning, in path order, and stays open — a student who misses a
+// Friday at 10 am IST, in path order, and stays open — a student who misses a
 // week can catch up. A module's lessons are done in order: the next lesson
 // opens once the previous one is studied and its quiz taken. A module only
 // opens for a student who has finished every earlier module.
@@ -25,15 +25,17 @@ const learningPath = {
     quizLength: 10,
 
     // Change the pace here — no other code changes needed.
-    //   startDate:  the first opening day (a Saturday), 'YYYY-MM-DD';
+    //   startDate:  the first opening day (a Friday), 'YYYY-MM-DD';
     //               null = self-paced (no schedule)
+    //   openTime:   time each module opens, 'HH:MM', 24-hour, IST
     //   pauseWeeks: opening days when nothing new opens (exams, holidays),
     //               e.g. ['2026-12-26'] pushes that module and all later ones
     //               back a week
     //   previewEmails: demo/test accounts that see every finished lesson,
     //               ignoring dates and order (lower case)
     schedule: {
-        startDate: '2026-11-14',
+        startDate: '2026-11-13',
+        openTime: '10:00',
         pauseWeeks: [],
         previewEmails: [
             'chembuddy.test.sundar@example.com',
@@ -174,7 +176,7 @@ learningPath.allEquipment = function () {
 
 // --- Weekly release -------------------------------------------------------
 
-// Release days are midnight Indian Standard Time (UTC+5:30, no daylight
+// Release times are Indian Standard Time (UTC+5:30, no daylight
 // saving), whatever time zone the student's device is set to.
 var IST_OFFSET_MS = 330 * 60 * 1000;
 
@@ -203,7 +205,8 @@ learningPath.releaseWeeks = function () {
     var needed = this.modules.length;
     var pauses = s.pauseWeeks || [];
     var weeks = [];
-    var t = istMidnight(s.startDate).getTime();
+    var hm = (s.openTime || '00:00').split(':');
+    var t = istMidnight(s.startDate).getTime() + (+hm[0] * 60 + +hm[1]) * 60 * 1000;
     while (weeks.length < needed) {
         var d = new Date(t);
         if (pauses.indexOf(istDateStrOf(d)) === -1) weeks.push(d);
@@ -212,13 +215,21 @@ learningPath.releaseWeeks = function () {
     return weeks;
 };
 
-// The day an equipment's module opens (midnight IST), or null when there is
+// The moment an equipment's module opens (openTime IST), or null when there is
 // no schedule.
 learningPath.releaseDate = function (equipId) {
     if (!this.hasSchedule()) return null;
     var found = this.findEquipment(equipId);
     if (!found) return null;
     return this.releaseWeeks()[this.modules.indexOf(found.module)];
+};
+
+// The opening time for messages: '10 am', '2:30 pm'; '' for midnight or unset.
+learningPath.openTimeLabel = function () {
+    var v = this.schedule && this.schedule.openTime;
+    if (!v || v === '00:00') return '';
+    var p = v.split(':'), h = +p[0], m = +p[1];
+    return (h % 12 || 12) + (m ? ':' + (m < 10 ? '0' : '') + m : '') + (h < 12 ? ' am' : ' pm');
 };
 
 learningPath.isReleased = function (equipId, now) {

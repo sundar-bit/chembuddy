@@ -44,7 +44,7 @@ var Learn = (function () {
     //   - Preview (demo/test) accounts see every finished lesson.
     //   - Self-paced (no start date): the next lesson in a module opens once
     //     the previous one is studied.
-    //   - Weekly release: the module opens on its Saturday; every earlier module
+    //   - Weekly release: the module opens on its Friday at 10 am IST; every earlier module
     //     must be complete; inside the module, the previous lesson must be
     //     studied and its quiz taken.
     function blockReason(mod, index, studied, quizzes) {
@@ -84,10 +84,12 @@ var Learn = (function () {
         return blockReason(found.module, found.index, progress.studied || {}, progress.quizzes || {}) || '';
     }
 
-    // "Sat, 14 Nov"
+    // "Fri, 13 Nov, 10 am"
     function opensLabel(equipId) {
         var date = learningPath.releaseDate(equipId);
-        return date ? date.toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'short', day: 'numeric', month: 'short' }) : '';
+        if (!date) return '';
+        var time = learningPath.openTimeLabel();
+        return date.toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'short', day: 'numeric', month: 'short' }) + (time ? ', ' + time : '');
     }
 
     function lockedMessage(mod, index, studied, quizzes) {
