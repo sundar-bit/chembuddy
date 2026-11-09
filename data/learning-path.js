@@ -1,6 +1,6 @@
 // ChemBuddy - Learning Path (Somaiya University, Chemical Engineering)
 //
-// Level 1 — Basic Equipment: 10 modules, 24 equipment found in most chemical
+// Level 1 — Basic Equipment: 11 modules, 25 equipment found in most chemical
 // plants and refineries, 2–3 equipment per module (one module a week). Everything else in
 // equipmentDB is Level 2 (shown in Browse, not part of the path yet).
 //
@@ -131,15 +131,24 @@ const learningPath = {
             id: 9,
             title: 'Storage Tanks',
             categoryId: 'storage',
-            description: 'Holding liquids and gases safely — fixed roof, floating roof and pressurised.',
+            description: 'Holding liquids at atmospheric pressure — cone roof and floating roof.',
             equipment: [
-                { id: 'atmospheric-tank', name: 'Fixed Roof Tanks' },
-                { id: 'floating-roof-tank', name: 'Floating Roof Tanks' },
-                { id: 'pressure-vessel', name: 'Pressurised Storage: Spheres and Bullets' }
+                { id: 'atmospheric-tank', name: 'Cone Roof Tanks' },
+                { id: 'floating-roof-tank', name: 'Floating Roof Tanks' }
             ]
         },
         {
             id: 10,
+            title: 'Pressurised Storage',
+            categoryId: 'storage',
+            description: 'Holding liquefied gases under pressure — bullets and spheres.',
+            equipment: [
+                { id: 'bullet-storage', name: 'Bullets' },
+                { id: 'sphere-storage', name: 'Spheres' }
+            ]
+        },
+        {
+            id: 11,
             title: 'Safety Equipment',
             categoryId: 'safety',
             description: 'Protecting people and plant from overpressure and runaway events.',
