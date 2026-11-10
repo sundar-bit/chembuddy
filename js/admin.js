@@ -71,6 +71,7 @@
             case 'overview': renderOverview(container); break;
             case 'students': renderStudents(container); break;
             case 'quizzes': renderQuizAnalytics(container); break;
+            case 'feedback': renderFeedback(container); break;
             case 'access': renderAccess(container); break;
             case 'export': renderExport(container); break;
         }
@@ -453,6 +454,67 @@
     var AUTOTABLE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js';
     var REPORT_FOOTER = '© ChemBuddy by Suraja Technologies and Jignyashika Consulting';
 
+    // === Lesson feedback (progress/<uid>/feedback/<equipId>) ===
+    function feedbackRows() {
+        var rows = [];
+        for (var uid in allProgress) {
+            var u = allUsers[uid] || {};
+            if (ADMIN_EMAILS.includes(u.email)) continue;
+            var fb = (allProgress[uid] || {}).feedback || {};
+            for (var id in fb) {
+                var f = fb[id] || {};
+                rows.push({
+                    name: u.name || '-', email: u.email || '-', equipId: id,
+                    stars: f.skipped ? null : (+f.stars || null),
+                    comment: f.comment || '', at: f.at || 0, skipped: !!f.skipped
+                });
+            }
+        }
+        rows.sort(function (a, b) { return b.at - a.at; });
+        return rows;
+    }
+
+    function starText(n) {
+        return n ? '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n) : '';
+    }
+
+    function renderFeedback(container) {
+        var rows = feedbackRows();
+        var html = '<div class="admin-table-container">';
+        html += '<div class="admin-table-header"><h2>Lesson Feedback</h2><span class="badge badge-primary">' + rows.filter(function (r) { return !r.skipped; }).length + ' ratings</span></div>';
+        html += '<div class="admin-table-scroll"><table class="admin-table"><thead><tr><th>Module</th><th>Lesson</th><th>Ratings</th><th>Average</th><th>Skipped</th><th>Comments</th></tr></thead><tbody>';
+        learningPath.allEquipment().forEach(function (eq) {
+            var mine = rows.filter(function (r) { return r.equipId === eq.id; });
+            var rated = mine.filter(function (r) { return r.stars; });
+            var avg = rated.length ? rated.reduce(function (s, r) { return s + r.stars; }, 0) / rated.length : null;
+            html += '<tr><td>' + eq.moduleId + '. ' + Utils.sanitize(eq.moduleTitle) + '</td>';
+            html += '<td>' + Utils.sanitize(eq.name) + '</td>';
+            html += '<td>' + rated.length + '</td>';
+            html += '<td>' + (avg === null ? '-' : avg.toFixed(1) + ' <span style="color:#f59e0b">' + starText(Math.round(avg)) + '</span>') + '</td>';
+            html += '<td>' + mine.filter(function (r) { return r.skipped; }).length + '</td>';
+            html += '<td>' + mine.filter(function (r) { return r.comment; }).length + '</td></tr>';
+        });
+        html += '</tbody></table></div></div>';
+
+        var comments = rows.filter(function (r) { return r.comment; });
+        html += '<div class="admin-table-container"><div class="admin-table-header"><h2>Comments</h2><span class="badge badge-primary">' + comments.length + '</span></div>';
+        if (!comments.length) {
+            html += '<p class="text-muted" style="padding:1rem">No comments yet. They appear here as students finish their quizzes.</p>';
+        } else {
+            html += '<div class="admin-table-scroll"><table class="admin-table"><thead><tr><th>Date</th><th>Lesson</th><th>Stars</th><th>Comment</th><th>Student</th></tr></thead><tbody>';
+            comments.forEach(function (r) {
+                var f = learningPath.findEquipment(r.equipId);
+                var lesson = f ? f.module.equipment[f.index].name : r.equipId;
+                html += '<tr><td>' + Utils.formatDate(r.at) + '</td><td>' + Utils.sanitize(lesson) + '</td>';
+                html += '<td style="color:#f59e0b;white-space:nowrap">' + starText(r.stars) + '</td>';
+                html += '<td>' + Utils.sanitize(r.comment) + '</td><td>' + Utils.sanitize(r.name) + '</td></tr>';
+            });
+            html += '</tbody></table></div>';
+        }
+        html += '</div>';
+        container.innerHTML = html;
+    }
+
     function renderExport(container) {
         var count = studentRows().length;
         var html = '<div class="export-section">';
@@ -460,7 +522,7 @@
         html += '<p>Every quiz score is the student\'s first attempt — practice attempts never change it.</p>';
         html += '<button class="btn btn-primary btn-lg" id="export-xlsx-btn">📊 Excel Report</button> ';
         html += '<button class="btn btn-primary btn-lg" id="export-pdf-btn">📄 PDF Report</button>';
-        html += '<p class="text-muted mt-2">' + count + ' students • Excel: summary, quiz scores, practice and quiz analytics sheets • PDF: class summary for sharing</p>';
+        html += '<p class="text-muted mt-2">' + count + ' students • Excel: summary, quiz scores, practice, quiz analytics and feedback sheets • PDF: class summary for sharing</p>';
         html += '</div>';
 
         container.innerHTML = html;
@@ -563,6 +625,16 @@
                 stats.push([s.module, s.name, s.attempts, s.avg === null ? '' : s.avg, s.max === null ? '' : s.max, s.min === null ? '' : s.min]);
             });
             addSheet(wb, 'Quiz Analytics', stats);
+
+            var fbSheet = [['Date', 'Name', 'Email', 'Module', 'Lesson', 'Stars', 'Comment']];
+            feedbackRows().forEach(function (r) {
+                if (r.skipped) return;
+                var f = learningPath.findEquipment(r.equipId);
+                fbSheet.push([Utils.formatDate(r.at), r.name, r.email,
+                    f ? 'Module ' + f.module.id + ': ' + f.module.title : '',
+                    f ? f.module.equipment[f.index].name : r.equipId, r.stars || '', r.comment]);
+            });
+            addSheet(wb, 'Feedback', fbSheet);
 
             XLSX.writeFile(wb, 'chembuddy-report-' + Utils.todayStr() + '.xlsx');
             Utils.toast('Excel report downloaded', 'success');

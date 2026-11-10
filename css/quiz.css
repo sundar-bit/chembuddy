@@ -329,3 +329,21 @@
     .results-score-circle { width: 110px; height: 110px; }
     .results-score-num { font-size: 2rem; }
 }
+
+/* === Lesson feedback (after the quiz) === */
+.feedback-card {
+    margin: 1.5rem auto 0; max-width: 460px; padding: 1rem 1.25rem;
+    border: 1px solid var(--border, #e2e8f0); border-radius: var(--radius-lg, 12px);
+    background: var(--white, #fff); text-align: center;
+}
+.feedback-q { font-weight: 600; margin-bottom: 0.5rem; }
+.feedback-stars { display: flex; justify-content: center; gap: 0.15rem; margin-bottom: 0.75rem; }
+.feedback-star {
+    font-size: 2rem; line-height: 1; background: none; border: 0; cursor: pointer;
+    color: #cbd5e1; min-width: 44px; min-height: 44px; padding: 0;
+}
+.feedback-star.on { color: #f59e0b; }
+.feedback-star:focus-visible { outline: 2px solid var(--primary, #1a6b8a); border-radius: 6px; }
+.feedback-text { width: 100%; resize: vertical; margin-bottom: 0.75rem; font: inherit; box-sizing: border-box; }
+.feedback-actions { display: flex; justify-content: center; gap: 0.5rem; }
+.feedback-thanks { font-weight: 600; color: var(--success, #16a34a); padding: 0.5rem 0; }

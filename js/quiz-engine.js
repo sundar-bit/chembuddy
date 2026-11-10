@@ -440,6 +440,9 @@ var QuizEngine = (function () {
         });
         html += '</div>';
 
+        // Lesson feedback: asked once per equipment, after the official attempt
+        if (!state.practice) html += feedbackCardHTML(state.quizId);
+
         // Actions
         html += '<div class="results-actions">';
         html += '<a href="#/learn" class="btn btn-primary">Back to Learning</a>';
@@ -456,6 +459,7 @@ var QuizEngine = (function () {
         html += '</div></div>';
         container.innerHTML = html;
         currentQuiz = null;
+        if (!state.practice) bindFeedback(state.quizId);
 
         var again = document.getElementById('practice-again');
         if (again) {
@@ -487,6 +491,9 @@ var QuizEngine = (function () {
             html += '<p class="text-muted mt-2">Retakes: ' + Math.min(practice.attempts, MAX_RETAKES) + ' of ' + MAX_RETAKES + ' used, best ' + practice.best + '/' + data.maxScore + '</p>';
         }
 
+        // Feedback not yet given (or skipped) for this lesson: offer it here too
+        html += feedbackCardHTML(quizId);
+
         html += '<div class="results-actions mt-3">';
         if (retakesLeft(quizId) > 0) {
             html += '<a href="#/quiz/' + quizId + '/practice" class="btn btn-primary">Practice Again (' + retakesLeft(quizId) + ' left)</a>';
@@ -496,6 +503,68 @@ var QuizEngine = (function () {
 
         html += '</div></div>';
         container.innerHTML = html;
+        bindFeedback(quizId);
+    }
+
+    // === Lesson feedback ===
+    // Stored at progress/<uid>/feedback/<equipId> as { stars, comment, at }
+    // or { skipped: true, at }. Asked only until answered or skipped.
+    function feedbackGiven(quizId) {
+        return !!((window.ChemBuddy.progress.feedback || {})[quizId]);
+    }
+
+    function feedbackCardHTML(quizId) {
+        if (feedbackGiven(quizId)) return '';
+        var h = '<div class="feedback-card" id="feedback-card">';
+        h += '<div class="feedback-q">How clear and useful was this lesson?</div>';
+        h += '<div class="feedback-stars" role="group" aria-label="Rate this lesson from 1 to 5 stars">';
+        for (var i = 1; i <= 5; i++) {
+            h += '<button type="button" class="feedback-star" data-v="' + i + '" aria-label="' + i + ' star' + (i > 1 ? 's' : '') + '">★</button>';
+        }
+        h += '</div>';
+        h += '<textarea id="feedback-text" class="form-input feedback-text" maxlength="200" rows="2" placeholder="One thing you liked or would improve (optional)"></textarea>';
+        h += '<div class="feedback-actions">';
+        h += '<button type="button" class="btn btn-primary btn-sm" id="feedback-send" disabled>Send</button>';
+        h += '<button type="button" class="btn btn-outline btn-sm" id="feedback-skip">Skip</button>';
+        h += '</div></div>';
+        return h;
+    }
+
+    function bindFeedback(quizId) {
+        var card = document.getElementById('feedback-card');
+        if (!card) return;
+        var stars = 0;
+        var btns = card.querySelectorAll('.feedback-star');
+        var send = document.getElementById('feedback-send');
+        var skip = document.getElementById('feedback-skip');
+        var text = document.getElementById('feedback-text');
+        Array.prototype.forEach.call(btns, function (b) {
+            b.addEventListener('click', function () {
+                stars = +b.dataset.v;
+                Array.prototype.forEach.call(btns, function (x) { x.classList.toggle('on', +x.dataset.v <= stars); });
+                send.disabled = false;
+            });
+        });
+        function save(data, thanks) {
+            var progress = window.ChemBuddy.progress;
+            progress.feedback = progress.feedback || {};
+            progress.feedback[quizId] = data;
+            send.disabled = true; skip.disabled = true;
+            db.ref('progress/' + window.ChemBuddy.user.uid + '/feedback/' + quizId).set(data).then(function () {
+                card.innerHTML = '<div class="feedback-thanks">' + thanks + '</div>';
+            }).catch(function (err) {
+                delete progress.feedback[quizId];
+                send.disabled = !stars; skip.disabled = false;
+                Utils.toast('Could not send your feedback: ' + err.message, 'error');
+            });
+        }
+        send.addEventListener('click', function () {
+            if (!stars) return;
+            save({ stars: stars, comment: text.value.trim().slice(0, 200), at: Date.now() }, 'Thank you for your feedback!');
+        });
+        skip.addEventListener('click', function () {
+            save({ skipped: true, at: Date.now() }, 'No problem. Carry on learning!');
+        });
     }
 
     function savePractice(uid, state) {
