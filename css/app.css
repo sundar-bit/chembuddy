@@ -698,3 +698,22 @@
     font-size: 1.1rem;
     cursor: pointer;
 }
+
+/* ===== Help page ===== */
+.help-page { max-width: 780px; margin: 0 auto; }
+.help-header { margin-bottom: 1.25rem; }
+.help-header p { color: var(--text-light); margin: 0.25rem 0 0.75rem; }
+.help-search { width: 100%; padding: 0.7rem 0.9rem; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; box-sizing: border-box; }
+.help-group { margin-bottom: 1.25rem; }
+.help-group h2 { font-size: 1.1rem; margin: 0 0 0.5rem; color: var(--primary-dark); }
+.help-group-icon { margin-right: 0.25rem; }
+.help-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.4rem; }
+.help-item summary { cursor: pointer; padding: 0.75rem 0.9rem; font-weight: 600; list-style: none; position: relative; padding-right: 2.2rem; }
+.help-item summary::-webkit-details-marker { display: none; }
+.help-item summary::after { content: '+'; position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); color: var(--primary); font-size: 1.2rem; }
+.help-item[open] summary::after { content: '\2013'; }
+.help-item[open] summary { border-bottom: 1px solid var(--border); }
+.help-answer { padding: 0.75rem 0.9rem; line-height: 1.55; }
+.help-answer a, .help-empty a { overflow-wrap: anywhere; }
+.help-group[hidden], .help-item[hidden], .help-empty[hidden] { display: none; }
+.help-empty { color: var(--text-light); }
