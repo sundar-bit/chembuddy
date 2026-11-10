@@ -306,6 +306,32 @@
     margin-bottom: 1.5rem;
 }
 .profile-header h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+.profile-top { display: flex; align-items: center; gap: 1rem; }
+.profile-top-text { min-width: 0; }
+.profile-avatar-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; flex: 0 0 auto; }
+.profile-avatar {
+    width: 76px; height: 76px; border-radius: 50%; object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.85); background: rgba(255, 255, 255, 0.2);
+}
+.profile-avatar-initials {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; font-weight: 700; color: var(--white);
+}
+.profile-photo-btn {
+    font: inherit; font-size: 0.78rem; color: var(--white); cursor: pointer;
+    background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px; padding: 0.3rem 0.75rem; min-height: 32px; line-height: 1.4;
+}
+.profile-photo-btn:hover { background: rgba(255, 255, 255, 0.3); }
+.profile-photo-remove { background: transparent; }
+.profile-photo-note { font-size: 0.75rem; opacity: 0.8; margin-top: 0.35rem; }
+.profile-meta span { overflow-wrap: anywhere; }
+@media (max-width: 520px) {
+    .profile-top { flex-direction: column; text-align: center; }
+    .profile-avatar-wrap { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .profile-avatar-wrap .profile-avatar { flex-basis: 100%; max-width: 76px; margin: 0 auto 0.25rem; }
+    .profile-meta span { display: block; margin-right: 0; }
+}
 .profile-meta { font-size: 0.85rem; opacity: 0.85; }
 .profile-meta span { margin-right: 1rem; }
 

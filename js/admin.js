@@ -219,7 +219,10 @@
             var points = calcPoints(p);
 
             html += '<tr class="expandable" data-uid="' + u.uid + '">';
-            html += '<td><strong>' + Utils.sanitize(u.data.name || '-') + '</strong></td>';
+            var ph = u.data.photo;
+            var phOk = typeof ph === 'string' && ph.indexOf('data:image/jpeg;base64,') === 0 && ph.length < 120000;
+            html += '<td>' + (phOk ? '<img src="' + ph + '" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px">' : '') +
+                '<strong>' + Utils.sanitize(u.data.name || '-') + '</strong></td>';
             html += '<td>' + Utils.sanitize(u.data.email || '-') + '</td>';
             html += '<td>' + Utils.sanitize(u.data.college || '-') + '</td>';
             html += '<td>' + Utils.sanitize(u.data.branch || '-') + '</td>';
