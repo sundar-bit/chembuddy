@@ -7,7 +7,8 @@
 var Help = (function () {
     'use strict';
 
-    var CONTACT = 'sundar@sundarspeaks.com';
+    var CONTACT = 'richa@somaiya.edu';
+    var MAIL = '<a href="mailto:' + CONTACT + '">' + CONTACT + '</a>';
 
     var GROUPS = [
         { icon: '🚀', title: 'Getting Started', items: [
@@ -62,7 +63,7 @@ var Help = (function () {
             ['Can I practise again?',
              'Yes. After the first attempt, you can retake each quiz up to 3 times for practice. Practice has no time limit and gives no points. Your first score stays.'],
             ['What if my internet drops during a quiz?',
-             'Reconnect and open the quiz again. If it fails again, write to us. Tell us the equipment name and the time.']
+             'Reconnect and open the quiz again. If it fails again, write to Richa at ' + MAIL + '. Give the equipment name and the time.']
         ]},
         { icon: '🏆', title: 'Points and Leaderboard', items: [
             ['How do I earn points?',
@@ -78,7 +79,7 @@ var Help = (function () {
             ['Can I add my photo?',
              'Yes, if you wish. Tap <b>Add photo</b> on your Profile. You can change it or remove it any time. Only you and the course team can see it.'],
             ['My name is wrong. How do I fix it?',
-             'Write to us with the correct spelling. Your name also appears on your certificate.']
+             'Write to Richa at ' + MAIL + ' with the correct spelling. Your name also appears on your certificate.']
         ]},
         { icon: '⭐', title: 'Feedback', items: [
             ['Why am I asked for stars after a quiz?',
@@ -94,7 +95,7 @@ var Help = (function () {
         ]},
         { icon: '✉️', title: 'Getting Help', items: [
             ['Something is not working. Whom do I contact?',
-             'Write to <a href="mailto:' + CONTACT + '">' + CONTACT + '</a>. Tell us your name, what you were doing and what you saw. A screenshot helps.'],
+             'Write to Richa, your course coordinator, at ' + MAIL + '. Give your name, what you were doing and what you saw. A screenshot helps.'],
             ['The app looks old or broken after an update.',
              'Refresh the page. On a phone, close the browser tab and open the link again.']
         ]}
@@ -123,7 +124,7 @@ var Help = (function () {
             html += '</section>';
         });
 
-        html += '<p class="help-empty" id="help-empty" hidden>No answer matches. Try another word, or write to <a href="mailto:' + CONTACT + '">' + CONTACT + '</a>.</p>';
+        html += '<p class="help-empty" id="help-empty" hidden>No answer matches. Try another word, or write to Richa at ' + MAIL + '.</p>';
         html += '</div>';
         container.innerHTML = html;
 
