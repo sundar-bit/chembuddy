@@ -52,16 +52,54 @@ var Voice = (function () {
         return html + '</div></div>';
     }
 
-    function pickVoice() {
-        var voices = synth.getVoices();
-        return voices.find(function (v) {
-            return v.lang.startsWith('en') && v.name.toLowerCase().includes('google');
-        }) || voices.find(function (v) {
-            return v.lang.startsWith('en-') && !v.localService;
-        }) || voices.find(function (v) {
-            return v.lang.startsWith('en');
-        });
+    // One voice for the whole visit: Indian English, female, where the
+    // device has one. The browser loads its voice list late, so the choice
+    // is made once the list is ready and then kept. A voice that fails
+    // (online voices can drop out) is skipped, and the next best is used.
+    var FEMALE = /neerja|heera|veena|isha|kajal|swara|aria|jenny|zira|samantha|sonia|libby|female|google us english/;
+    var MALE = /prabhat|ravi|rishi|hemant|david|mark|guy|ryan|daniel|male/;
+    var chosenVoice = null;
+    var badVoices = {};
+
+    function voiceScore(v) {
+        var lang = String(v.lang || '').toLowerCase().replace('_', '-');
+        var name = String(v.name || '').toLowerCase();
+        if (lang.indexOf('en') !== 0 || badVoices[v.name]) return -1;
+        // Female first, then Indian accent: en-IN female > any English female >
+        // en-IN of unknown gender (Android) > other English > male voices.
+        var score = 1;
+        var female = FEMALE.test(name) && !/(^|[^e])male/.test(name.replace(/female/g, ''));
+        if (female) score += 100;
+        else if (MALE.test(name)) score -= 100;
+        if (lang === 'en-in') score += 50;
+        if (/natural|online/.test(name)) score += 5; // clearer, more human
+        return score;
     }
+
+    function pickVoice() {
+        if (chosenVoice && !badVoices[chosenVoice.name]) return chosenVoice;
+        var best = null, bestScore = -1;
+        synth.getVoices().forEach(function (v) {
+            var sc = voiceScore(v);
+            if (sc > bestScore) { best = v; bestScore = sc; }
+        });
+        if (best) chosenVoice = best;
+        return best;
+    }
+
+    // Wait briefly for the voice list on the first Play of a visit.
+    function whenVoicesReady(cb) {
+        if (synth.getVoices().length) return cb();
+        var tries = 0;
+        var timer = setInterval(function () {
+            if (synth.getVoices().length || ++tries > 20) { clearInterval(timer); cb(); }
+        }, 100);
+    }
+
+    if (synth && 'onvoiceschanged' in synth) {
+        synth.addEventListener('voiceschanged', function () { if (!chosenVoice) pickVoice(); });
+    }
+    if (synth) pickVoice();
 
     function textOf(el) {
         var text = el.getAttribute('data-say-text') || el.textContent.replace(/🔊|⏹/g, '').trim();
@@ -117,7 +155,7 @@ var Voice = (function () {
         setButton(activeBtn, true);
         var myRun = run;
         // A short pause after cancel() — some browsers drop speech queued immediately after it
-        setTimeout(function () { next(myRun); }, 60);
+        setTimeout(function () { whenVoicesReady(function () { next(myRun); }); }, 60);
     }
 
     function setSpeed(value) {
@@ -146,7 +184,7 @@ var Voice = (function () {
         if (activeSection) activeSection.classList.add('lesson-section-active');
         var myRun = run;
         // A short pause after cancel() — some browsers drop speech queued immediately after it
-        setTimeout(function () { next(myRun); }, 60);
+        setTimeout(function () { whenVoicesReady(function () { next(myRun); }); }, 60);
     }
 
     function next(myRun) {
@@ -164,7 +202,7 @@ var Voice = (function () {
         u.rate = RATES[speed];
         u.pitch = 1.0;
         var voice = pickVoice();
-        if (voice) u.voice = voice;
+        if (voice) { u.voice = voice; u.lang = voice.lang; }
         u.onend = function () {
             if (myRun !== run) return;
             index++;
@@ -172,7 +210,15 @@ var Voice = (function () {
         };
         u.onerror = function (e) {
             if (myRun !== run) return;
-            if (e.error !== 'canceled' && e.error !== 'interrupted') console.warn('Voice error:', e.error);
+            if (e.error !== 'canceled' && e.error !== 'interrupted') {
+                console.warn('Voice error:', e.error);
+                // Voice dropped out: skip it for this visit and repeat the piece with the next best
+                if (voice && (e.error === 'network' || e.error === 'synthesis-failed' || e.error === 'synthesis-unavailable' || e.error === 'voice-unavailable') && !badVoices[voice.name]) {
+                    badVoices[voice.name] = true;
+                    next(myRun);
+                    return;
+                }
+            }
             index++;
             next(myRun);
         };
@@ -213,6 +259,7 @@ var Voice = (function () {
     return {
         attach: attach,
         controlsHTML: controlsHTML,
-        stop: stop
+        stop: stop,
+        currentVoice: pickVoice // for checks: the voice narration will use
     };
 })();
