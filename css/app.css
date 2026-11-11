@@ -717,3 +717,8 @@
 .help-answer a, .help-empty a { overflow-wrap: anywhere; }
 .help-group[hidden], .help-item[hidden], .help-empty[hidden] { display: none; }
 .help-empty { color: var(--text-light); }
+
+/* ===== Objective and Uses (top of each lesson) ===== */
+.lesson-purpose { border-left: 4px solid var(--primary); }
+.lesson-purpose p { margin: 0.35rem 0; }
+.purpose-label { color: var(--primary-dark); }

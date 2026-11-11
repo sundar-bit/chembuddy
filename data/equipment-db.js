@@ -261,6 +261,8 @@ const equipmentDB = {
     'centrifugal-pump': {
         name: 'Centrifugal Pumps',
         category: 'Pumps',
+        objective: "To move liquid from one place to another. The pump gives the liquid the pressure it needs to flow through pipes, valves and equipment.",
+        uses: "Transfer from tank to tank. Feed to columns, reactors and heaters. Internal circulation, such as column reflux and cooling water. Product dispatch to tank trucks, rail wagons and pipelines. It is found in almost every chemical, petrochemical and refinery unit.",
         intro: 'In this lesson you will get to know the centrifugal pump. First you will see it from outside and learn what each visible part does. Then you will look inside at its 9 main parts. You will follow the liquid through the 4 stages of how it works. You will finish with common problems and how to work safely.',
         description: 'The centrifugal pump is the most common pump type in process industries. It uses a rotating impeller to convert mechanical energy into fluid velocity and pressure. It suits low-viscosity liquids across capacities from small to very large flows. The isometric overview shows what you see from outside.',
         labels: ['Suction Nozzle — on the pump face; the process fluid enters here','Discharge Nozzle — at the top of the casing; the fluid leaves here under pressure','Electric Motor — drives the pump','Coupling Guard — encloses the coupling that joins the pump to the motor, protecting people from the rotating parts','Baseplate — a rigid common base that carries the pump and the motor together. It is bolted to the foundation so the two stay aligned and steady.'],
@@ -337,6 +339,8 @@ const equipmentDB = {
     'reciprocating-pump': {
         name: 'Reciprocating Pumps',
         category: 'Pumps',
+        objective: "To deliver a fixed, accurate flow at high pressure. The flow stays nearly the same even when the discharge pressure changes.",
+        uses: "Dosing chemicals into process and cooling water, such as inhibitors and additives. High-pressure feed and injection. Pumping thick, viscous liquids. Pressure testing of pipes and vessels.",
         intro: 'In this lesson you will get to know the reciprocating pump. You will see it from outside, then look inside at its 10 main parts. Next you will follow one full working cycle in 4 stages: suction stroke, discharge stroke, smoothing and protection. You will finish with common problems and how to work safely.',
         description: 'The reciprocating pump is a positive displacement pump. A plunger moving back and forth in a cylinder pushes out a fixed amount of fluid on every stroke. Reciprocating pumps deliver nearly constant flow regardless of discharge pressure. So they are used for high-pressure duties and accurate dosing. The isometric overview shows what you see from outside.',
         labels: ['Electric Motor — drives the pump','Coupling Guard — encloses the coupling between the motor and the pump, protecting people from the rotating parts','Power End (Crankcase) — turns the rotation of the motor into back-and-forth motion','Fluid End (Cylinders) — where the liquid is actually pumped','Suction Connection — at the bottom of the fluid end; fluid enters here','Discharge Connection — at the top of the fluid end; fluid leaves here','Pulsation Dampener — on the discharge line; smooths the pulsing flow','Pressure Relief Valve — on the discharge line; protects the pump and piping','Baseplate — the common base the whole unit sits on'],
@@ -417,6 +421,8 @@ const equipmentDB = {
     'centrifugal-compressor': {
         name: 'Centrifugal Compressors',
         category: 'Compressors & Blowers',
+        objective: "To raise the pressure of large volumes of gas, continuously and smoothly.",
+        uses: "Process gas compression in crackers and refinery units. Recycle gas around reactors. Refrigeration systems, such as propylene and ethylene. Plant air in large plants. Natural gas pipelines.",
         intro: 'In this lesson you will get to know the centrifugal compressor. You will see it from outside, then lift off the upper casing to meet its 15 main parts. Next you will follow the gas through the 5 steps in which it is compressed. You will finish with common problems and how to work safely.',
         description: 'The centrifugal compressor is a dynamic compressor. Rotating impellers throw the gas outward at high speed. Stationary passages then turn that speed into pressure. It is the workhorse for compressing large volumes of gas. It is used in refineries, petrochemical plants, fertilizer plants and gas processing. The isometric overview shows what you see from outside.',
         labels: ['Electric Motor — drives the compressor','Coupling Guard — encloses the coupling between the motor and the compressor, protecting people from the rotating parts','Base Frame — the common base the whole unit sits on','Horizontally Split Casing — a bolted flange runs along its full length at the shaft centreline. So the upper half can be lifted off to reach the rotor.','Suction Nozzle — on top at the left (non-drive) end; gas enters here','Discharge Nozzle — on top at the right (drive) end; gas leaves here','Journal & Thrust Bearing Housing — at the non-drive end; carries the shaft','Journal Bearing Housing — at the drive end; carries the shaft','Lube Oil Lines — feed oil to the bearings'],
@@ -444,6 +450,8 @@ const equipmentDB = {
     'reciprocating-compressor': {
         name: 'Reciprocating Compressors',
         category: 'Compressors & Blowers',
+        objective: "To raise gas to a high pressure when the flow is small or moderate.",
+        uses: "Hydrogen make-up in refinery hydrotreaters. Instrument and plant air. High-pressure gases and cylinder filling. Small refrigeration units.",
         intro: 'In this lesson you will get to know the reciprocating compressor. You will see it from outside. Then you will open a cylinder, its distance piece and the crankcase to meet its 15 main parts. Next you will follow the gas through the 4 panels of a double-acting cycle. You will finish with common problems and how to work safely.',
         description: 'The reciprocating compressor is a positive displacement compressor. A piston moving back and forth in a cylinder traps a fixed volume of gas. It squeezes the gas to a higher pressure. It is chosen where high pressures are needed. Examples are hydrogen and process gas service in refineries and petrochemical plants. The isometric overview shows what you see from outside.',
         labels: ['Crankcase (Frame) — sits at the centre of the base frame and houses the crankshaft','Electric Motor — in front; drives the crankshaft inside the crankcase','Coupling Guard — encloses the coupling between the motor and the crankshaft, protecting people from the rotating parts','Compressor Cylinders — two, mounted on opposite sides of the crankcase','Distance Pieces — join each cylinder to the crankcase','Suction Pulsation Dampener — on top; the gas enters here and is fed to the suction valves','Suction Valve Covers — on top of each cylinder, over the suction valves','Discharge Valve Covers — at the bottom of each cylinder, over the discharge valves','Discharge Pulsation Dampener — at skid level; the compressed gas flows here and then goes out to the process','Base Frame — the common base the whole unit sits on'],
@@ -540,6 +548,8 @@ const equipmentDB = {
     'shell-tube': {
         name: 'Shell and Tube Heat Exchangers',
         category: 'Heat Exchangers',
+        objective: "To pass heat from one fluid to another without mixing them.",
+        uses: "Heating and cooling of process streams. Condensers on column overheads. Reboilers at column bottoms. Feed–effluent exchangers that recover heat and save fuel. It is the most common exchanger in process plants.",
         intro: 'In this lesson you will get to know the shell and tube heat exchanger. You will see it from outside, then open it up to meet its 16 main parts. Next you will follow both fluids through the 6 steps of how heat moves from one to the other. You will finish with common problems and how to work safely.',
         description: 'The shell and tube heat exchanger is the most widely used heat exchanger in refineries, petrochemical plants and power stations. It transfers heat from one fluid to another without letting them mix. One fluid flows inside a bundle of tubes. The other flows around the tubes inside a cylindrical shell. The isometric overview shows what you see from outside.',
         labels: ['Front Channel — on the left end; receives the cooling water and sends it into the tubes','Channel Cover — bolted onto the front channel; can be removed to inspect and clean the tubes','Tube-side Inlet (Cooling Water In) — at the bottom of the channel','Tube-side Outlet (Cooling Water Out) — at the top of the channel','Shell — the long body in the middle that holds the hot fluid around the tubes','Tubesheet Flanges — where the shell is bolted to the channel and to the rear head','Shell-side Inlet (Hot Fluid In) — on top near the right end','Shell-side Outlet (Cooled Fluid Out) — at the bottom near the left end; the fluid leaves here cooled','Rear Head (Bonnet) — closes the right end of the exchanger','Vent — on top of the shell; releases trapped air or gas','Drain — at the bottom of the shell; empties the shell','Saddle Supports — two; carry the horizontal exchanger on its foundation'],
@@ -589,6 +599,8 @@ const equipmentDB = {
     'air-cooled': {
         name: 'Air Cooled Heat Exchangers',
         category: 'Heat Exchangers',
+        objective: "To cool or condense a process stream using outside air instead of water.",
+        uses: "Column overhead condensers in refineries. Product coolers before storage. Cooling after compressors. Sites where cooling water is scarce or costly.",
         intro: 'In this lesson you will get to know the air cooled heat exchanger. You will see it from outside, then open it up to meet its 16 main parts. Next you will follow the hot fluid and the cooling air through 6 steps. You will finish with common problems and how to work safely.',
         description: 'The air cooled heat exchanger cools a hot process fluid using ambient air instead of cooling water. It is common in refineries, gas plants and power stations. It is often called a fin-fan cooler. The one shown is forced draft: the fan sits below the tube bundle and pushes air up. The isometric overview shows what you see from outside.',
         labels: ['Finned Tube Bundle — many parallel tubes with thin fins. The hot fluid flows inside them.','Inlet/Outlet Header — the tall box at the left end. It sends fluid into the tubes and collects it back.','Process Inlet Nozzle — on top of the left header. The hot process fluid enters here.','Process Outlet Nozzle — at the bottom of the left header. The cooled fluid leaves here.','Header Plugs — round plugs on the header face, one opposite each tube. They are removed to clean the tubes.','Return Header — the box at the right end. It turns the fluid back.','Plenum Chamber — the sloping sheet-metal hood. It spreads the air from the fan under the bundle.','Fan Ring — the round housing around the fan blades.','Axial Fan — pushes cool air up through the bundle.','Electric Motor — drives the fan.','V-Belt Drive — carries power from the motor to the fan.','Support Structure — steel columns that raise the unit so air can reach the fan.','Cool Air In / Warm Air Out — cool air enters below the fan. Warm air leaves from the top of the bundle.'],
@@ -663,6 +675,8 @@ const equipmentDB = {
     'cabin-heater': {
         name: 'Cabin/Box Heaters',
         category: 'Fired Heaters',
+        objective: "To heat a process fluid to a high temperature by burning fuel. It handles large heat duties.",
+        uses: "Crude oil heaters before the distillation column. Vacuum unit heaters. Reboiler heaters. Large heating duties in refineries and petrochemical plants.",
         intro: 'In this lesson you will get to know the cabin heater, also called a box heater. You will see it from outside, then open it up to meet its 16 main parts. Next you will follow the process fluid and the flue gas through 7 steps. You will finish with common problems and how to work safely.',
         description: 'The cabin heater is the most common fired heater in process plants. It burns fuel to heat a process fluid flowing inside tubes, as in crude oil heating and reboilers. The process fluid never touches the flame. The one shown is floor-fired, with the burners under the firebox. The isometric overview shows what you see from outside.',
         labels: ['Radiant Section (Firebox) — the wide cabin-shaped chamber where the fuel burns.','Convection Section — the narrower box above the firebox. It recovers heat from the rising flue gas.','Stack — the tall round chimney on top. It carries the flue gas up and away.','Stack Damper — low down on the stack, with an outside handle. It adjusts the draft through the heater.','Process Inlet (Cold Feed In) — enters the upper part of the convection section.','Process Outlet (Hot Product Out) — leaves low on the firebox wall.','Burners — under the firebox floor. They burn fuel with air inside the firebox.','Air Register — on each burner. It adjusts the combustion air.','Fuel Gas Line — the pipe under the burners, with one valve for each burner.','Peep Door — a small round window in the wall. Operators use it to check inside.','Access Door — the bolted door on the end wall, for entry during shutdowns.','Support Columns — raise the firebox so people can reach the burners.','Flue Gas Out — the cooled combustion gas leaves from the top of the stack.'],
@@ -679,6 +693,8 @@ const equipmentDB = {
     'cylindrical-heater': {
         name: 'Cylindrical Heaters',
         category: 'Fired Heaters',
+        objective: "To heat a process fluid by burning fuel, for small and medium duties, on a small plot of land.",
+        uses: "Charge heaters in hydrotreaters. Hot oil heaters. Reboiler heaters. Small and medium heating duties where space is limited.",
         intro: 'In this lesson you will get to know the cylindrical heater. You will see it from outside, then open it up to meet its 16 main parts. Next you will follow the process fluid and the flue gas through 7 steps. You will finish with common problems and how to work safely.',
         description: 'The cylindrical heater is a tall, round fired heater with vertical tubes around its wall. It takes less ground space than a cabin heater. This makes it ideal for offshore platforms and plants where space is limited. The burners fire upward from the floor. The isometric overview shows what you see from outside.',
         labels: ['Radiant Section (Firebox) — the tall round chamber where the fuel burns.','Convection Section — the box above the firebox. It recovers heat from the rising flue gas.','Stack — the tall slender chimney on top. It carries the flue gas up and away.','Stack Damper — low down on the stack, with an outside handle. It adjusts the draft through the heater.','Process Inlet (Cold Feed In) — enters the upper part of the convection section.','Process Outlet (Hot Product Out) — leaves low on the firebox shell.','Burners — arranged in a circle under the firebox floor. They burn fuel with air inside the firebox.','Air Register — on each burner. It adjusts the combustion air.','Fuel Gas Ring (Fuel Gas In) — the round pipe under the burners, with one valve for each burner.','Peep Door — a small round window in the shell. Operators use it to check inside.','Access Door — the bolted door low on the shell, for entry during shutdowns.','Support Columns — raise the firebox so people can reach the burners.','Combustion Air In — air enters at the burners under the floor.','Flue Gas Out — the cooled combustion gas leaves from the top of the stack.'],
@@ -1023,6 +1039,8 @@ const equipmentDB = {
     'batch-reactor': {
         name: 'Batch Reactors',
         category: 'Reactors',
+        objective: "To carry out a reaction one batch at a time, with close control of temperature, pressure and mixing.",
+        uses: "Pharmaceuticals, dyes, resins and speciality chemicals. Products made in small quantities or in many grades. Plants where the same vessel makes different products.",
         intro: 'In this lesson you will get to know the batch reactor. You will see it from outside, then look inside at its 16 main parts. Next you will follow one batch through charging, heating and reacting, cooling and discharging, in 6 steps. You will finish with common problems and how to work safely.',
         description: 'The batch reactor is a stirred vessel where a fixed amount of material reacts. The whole batch is loaded, reacted, then emptied. It suits varied products and recipes, such as specialty chemicals and pharmaceuticals. The one shown is a steel vessel with an agitator and a heating and cooling jacket. The isometric overview shows what you see from outside.',
         labels: [
@@ -1100,6 +1118,8 @@ const equipmentDB = {
     'cstr': {
         name: 'CSTR (Continuous Stirred Tank Reactor)',
         category: 'Reactors',
+        objective: "To carry out a reaction continuously, with well-mixed contents at steady conditions.",
+        uses: "Continuous liquid-phase reactions. Polymerisation. Neutralisation. Effluent treatment.",
         intro: 'In this lesson you will get to know the CSTR, a reactor that runs continuously. You will see it from outside, then look inside at its 14 main parts. Next you will follow the flow through the reactor, in 6 steps. You will finish with common problems and how to work safely.',
         description: 'CSTR stands for Continuous Stirred Tank Reactor. It is a stirred vessel where feed flows in and product flows out all the time. It suits large-scale production at constant quality. The one shown is a steel vessel with an agitator, a jacket and an overflow outlet. The isometric overview shows what you see from outside.',
         labels: [
@@ -1186,6 +1206,8 @@ const equipmentDB = {
     'fixed-bed': {
         name: 'Fixed Bed Reactors',
         category: 'Reactors',
+        objective: "To carry out a reaction by passing gas or liquid through a bed of solid catalyst.",
+        uses: "Hydrotreaters and reformers in refineries. Ammonia and methanol synthesis. Many petrochemical units.",
         intro: 'In this lesson you will get to know the fixed bed reactor. Its catalyst stays still, and the feed flows through it. You will see it from outside, then look inside at its 12 main parts. Next you will follow the flow through the bed, in 6 steps. You will finish with common problems and how to work safely.',
         description: 'A fixed bed reactor holds solid catalyst in a packed bed that does not move. Gas or liquid flows through the bed, and the reaction happens on the catalyst. It is the most common reactor for catalytic processes in refineries and petrochemical plants. The one shown is a single-bed reactor with downward flow, standing on a support skirt. Large plant reactors are often much taller and narrower than this one. The isometric overview shows what you see from outside.',
         labels: [
@@ -1332,6 +1354,8 @@ const equipmentDB = {
     'tray-column': {
         name: 'Tray Columns',
         category: 'Columns',
+        objective: "To separate a mixture into its parts. Vapour and liquid meet on trays, again and again, as they pass each other.",
+        uses: "Crude distillation. Depropanizers and debutanizers. Solvent recovery. Absorbers and strippers.",
         intro: 'In this lesson you will get to know the tray column. Trays inside it bring rising vapour and falling liquid into contact. You will see it from outside, then look inside at its 13 main parts. Next you will follow the complete system, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A tray column is a tall vessel with flat trays stacked inside. Vapour rises through the trays, and liquid flows down across them. Tray columns are used for distillation and stripping. Packed columns are often used for absorption. The one shown is used for distillation. It separates a liquid mixture by boiling. The light parts boil more easily and rise as vapour. The heavy parts stay liquid and flow down. Trays come in three main types. Sieve trays, as shown, have plain holes. Valve trays have small caps that lift over the holes. Bubble cap trays have caps fixed over short pipes called risers. The column stands on a support skirt. Platforms and a caged ladder give access up the side. The isometric overview shows what you see from outside.',
         labels: [
@@ -1415,6 +1439,8 @@ const equipmentDB = {
     'packed-column': {
         name: 'Packed Columns',
         category: 'Columns',
+        objective: "To separate a mixture or absorb a gas, using packing in place of trays. It gives a low pressure drop.",
+        uses: "Vacuum distillation. Gas scrubbing and absorption, such as removing acid gases. Solvent recovery. Corrosive services. Small-diameter columns.",
         intro: 'In this lesson you will get to know the packed column. It is filled with packing instead of trays. You will see it from outside, then look inside at its 14 main parts. Next you will follow the complete system, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A packed column is a tall vessel filled with packing instead of trays. Packing is a deep bed of small pieces, such as rings. Liquid trickles down over the packing, and gas rises through the gaps. The wet surface of the packing is where the two meet. Packed columns are often used for absorption. Tray columns are used for distillation and stripping. The one shown is a gas absorber. A liquid called a solvent takes up an unwanted gas from a gas stream. The cleaned gas leaves at the top. Packing comes in two main types. Random packing, as shown, is small rings poured into the column. Structured packing is shaped metal sheets stacked in blocks. The column stands on a support skirt. A platform and a caged ladder give access. The isometric overview shows what you see from outside.',
         labels: [
@@ -1727,6 +1753,8 @@ const equipmentDB = {
     'centrifuge-decanter': {
         name: 'Decanter Centrifuges',
         category: 'Separators',
+        objective: "To separate solids from a liquid continuously, using strong spinning force.",
+        uses: "Dewatering effluent sludge. Polymer slurries, such as PVC. Separating oil, water and solids from refinery slop. Recovering solid products.",
         intro: 'In this lesson you will get to know the decanter centrifuge. It separates solids from a liquid by spinning the mixture. You will see it from outside, then look inside at its 18 main parts. Next you will follow the slurry through the machine, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A decanter centrifuge separates solids from a liquid. The mixture of liquid and solids is called slurry. The slurry enters a long bowl that spins at high speed. The spin presses the heavy solids against the bowl wall. A screw called the scroll pushes the solids to the narrow end. Clear liquid flows to the wide end and leaves there. A decanter works continuously. It does not stop for each batch, as a filter press does. It is used in chemical, oil, food and mineral plants, and in effluent treatment. The isometric overview shows what you see from outside.',
         labels: [
@@ -1840,6 +1868,8 @@ const equipmentDB = {
     'filter-press': {
         name: 'Filter Presses',
         category: 'Separators',
+        objective: "To separate solids from a liquid by pressing a slurry through filter cloths.",
+        uses: "Dewatering sludge in effluent treatment. Recovering pigments, dyes and chemical products. Mineral slurries.",
         intro: 'In this lesson you will get to know the filter press. It separates solids from a liquid by pushing the mixture through cloth. You will see it from outside, then look inside at its 14 main parts. Next you will follow one full batch, in 6 steps. You will finish with common problems and how to work safely.',
         description: 'A filter press separates solids from a liquid. The mixture of liquid and solids is called slurry. A pump pushes the slurry into chambers between plates. Cloth on the plates lets the liquid through and holds back the solids. The solids build up as a firm cake. The clear liquid that comes out is called filtrate. A filter press works in batches. It fills, filters, then opens to drop the cake. It is used in chemical, pharmaceutical and mineral plants, and in effluent treatment. The one shown is a recessed-plate press. Side bars carry the plates, and a hydraulic cylinder clamps them shut. The isometric overview shows what you see from outside.',
         labels: [
@@ -2002,6 +2032,8 @@ const equipmentDB = {
     'cyclone-separator': {
         name: 'Cyclone Separators',
         category: 'Separators',
+        objective: "To remove dust or droplets from a gas by spinning it. It has no moving parts.",
+        uses: "Catalyst recovery in fluid catalytic cracking units. Dryer exhausts. Powder and dust handling. As a first stage before bag filters.",
         intro: 'In this lesson you will get to know the cyclone separator. It removes dust from a gas by spinning the gas. You will see it from outside, then look inside at its 14 main parts. Next you will follow the gas and the dust, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A cyclone separator removes dust from a gas. Dusty gas enters at high speed through a side inlet. The gas spins inside the cylinder. Spinning throws the dust to the wall. The dust slides down the cone and drops into a bin. Clean gas leaves from the top. The cyclone body has no moving parts. It works continuously. It is used in cement, mineral, food and chemical plants. It catches coarse dust well. Very fine dust can escape, so a bag filter often follows it. The isometric overview shows what you see from outside.',
         labels: [
@@ -2362,6 +2394,8 @@ const equipmentDB = {
     'cone-roof-tank': {
         name: 'Cone Roof Tanks',
         category: 'Atmospheric Tanks',
+        objective: "To store liquids that give off little vapour, at about atmospheric pressure.",
+        uses: "Storage of diesel, kerosene, fuel oil, water and many chemicals. Feed and product storage. Intermediate storage between units.",
         intro: 'In this lesson you will get to know the cone roof tank. It stores liquids at about atmospheric pressure. You will see it from outside, then look inside at its 15 main parts. Next you will follow how the tank fills and empties, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A cone roof tank stores liquids at about atmospheric pressure. Its roof is fixed to the top of the shell. It is the most common type of fixed roof tank. It suits liquids that give off little vapour. Examples are diesel, kerosene, fuel oil, water and many chemicals. Vapour fills the space above the liquid. The tank must breathe as the level changes. A breather valve on the roof lets it do this. The isometric overview shows what you see from outside.',
         labels: [
@@ -2453,6 +2487,8 @@ const equipmentDB = {
     'bullet-storage': {
         name: 'Bullets',
         category: 'Pressurised Storage',
+        objective: "To store liquefied gases under pressure, in moderate quantities.",
+        uses: "LPG, propylene, butane and ammonia storage. LPG bottling plants. Refineries and petrochemical units.",
         intro: 'In this lesson you will get to know the bullet. It stores liquefied gas under pressure. You will see it from outside, then look inside at its 14 main parts. Next you will follow how it fills and empties, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A bullet is a long horizontal pressure vessel. It stores gases that have been turned into liquid by pressure. Examples are LPG, propylene and butane. Keeping the gas as a liquid takes far less space. Its walls are thick, and both ends are curved, because curved shapes resist pressure well. It rests on two saddles. The isometric overview shows what you see from outside.',
         labels: [
@@ -2544,6 +2580,8 @@ const equipmentDB = {
     'sphere-storage': {
         name: 'Spheres',
         category: 'Pressurised Storage',
+        objective: "To store large quantities of liquefied gas under pressure.",
+        uses: "LPG, propylene and butane storage in refineries, petrochemical complexes and terminals.",
         intro: 'In this lesson you will get to know the sphere. It stores large amounts of liquefied gas under pressure. You will see it from outside, then look inside at its 17 main parts. Next you will follow how it fills and empties, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A sphere is a large round pressure vessel. It stores gases that have been turned into liquid by pressure. Examples are LPG, propylene and butane. The round shape shares the pressure evenly over the whole wall. So a sphere holds a large volume with less steel than a long vessel. It is used when large amounts must be stored. It stands on legs fixed at its widest line. The isometric overview shows what you see from outside.',
         labels: [
@@ -2662,6 +2700,8 @@ const equipmentDB = {
     'floating-roof-tank': {
         name: 'Floating Roof Tanks',
         category: 'Atmospheric Tanks',
+        objective: "To store volatile liquids while keeping vapour loss and fire risk low.",
+        uses: "Crude oil, naphtha and petrol storage. Large tanks in refineries and marketing terminals.",
         intro: 'In this lesson you will get to know the floating roof tank. Its roof rests on the liquid and moves up and down with it. You will see it from outside, then look inside at its 21 main parts. Next you will follow how the tank fills and empties, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A floating roof tank stores liquids that give off a lot of vapour. Examples are crude oil, naphtha and petrol. The shell is open at the top. A steel roof floats directly on the liquid. There is almost no vapour space, so far less vapour is lost. The roof rises when the tank fills and falls when it empties. A rolling ladder lets people reach the deck at any level. The isometric overview shows what you see from outside.',
         labels: [
@@ -2840,6 +2880,8 @@ const equipmentDB = {
     'gate-valve': {
         name: 'Gate Valves',
         category: 'Piping & Valves',
+        objective: "To isolate. A gate valve either stops the flow fully or lets it pass fully. When open, it adds almost no pressure loss.",
+        uses: "On main process and utility lines as block valves. At tank inlets and outlets. On both sides of pumps, exchangers and control valves, so they can be isolated for maintenance. At the battery limits of a unit.",
         intro: 'In this lesson you will get to know the gate valve. You will see it from outside, then look inside at its 15 main parts. Next you will see the valve closed, partly open and fully open, and learn how it works in 6 steps. You will finish with common problems and how to work safely.',
         description: 'The gate valve is the standard isolation valve in process plants worldwide. A wedge-shaped gate slides across the flow to stop it. When open, the gate is clear of the bore, so pressure drop is very low. It is used fully open or fully closed, never for throttling. The one shown has a rising stem and a bolted bonnet. The isometric overview shows what you see from outside.',
         labels: ['Handwheel — on top of the yoke. It is turned by hand to open or close the valve.','Rising Stem — the threaded rod that moves up and down. Its height above the handwheel shows the valve position.','Yoke — the open two-arm frame above the bonnet. It holds the handwheel.','Gland Flange — sits around the stem and presses on the packing below it.','Gland Bolts — hold the gland flange down. They are tightened to keep the packing tight.','Bonnet — the dome that covers the top of the body.','Bonnet Bolts — hold the bonnet tightly on the body.','Valve Body — the main casing that holds the pressure.','Inlet Flange — bolts the valve to the upstream pipe.','Outlet Flange — bolts the valve to the downstream pipe.','Flow In / Flow Out — flow passes straight through the valve.'],
@@ -2856,6 +2898,8 @@ const equipmentDB = {
     'globe-valve': {
         name: 'Globe Valves',
         category: 'Piping & Valves',
+        objective: "To regulate flow. A globe valve can hold the flow steady at any opening. It also closes tightly.",
+        uses: "As bypass valves around control valves. On steam, cooling water and fuel lines where flow is set by hand. On drains, vents and sample points. Many control valves are built on a globe body.",
         intro: 'In this lesson you will get to know the globe valve. You will see it from outside, then look inside at its 16 main parts. Next you will see the valve closed, throttling and fully open, and learn how it works in 6 steps. You will finish with common problems and how to work safely.',
         description: 'The globe valve is used to throttle and control flow, and also for shut-off. A disc moves straight up and down above a round seat. The fluid changes direction inside the body, so pressure drop is higher than a gate valve. The one shown has a rising stem and a bolted bonnet. The isometric overview shows what you see from outside.',
         labels: ['Handwheel — on top of the yoke. It is turned by hand to open or close the valve.','Rising Stem — the threaded rod that moves up and down. Its height above the handwheel shows the valve position.','Yoke — the open two-arm frame above the bonnet. It holds the handwheel.','Gland Flange — sits around the stem and presses on the packing below it.','Gland Bolts — hold the gland flange down. They are tightened to keep the packing tight.','Bonnet — the dome that covers the top of the body.','Bonnet Bolts — hold the bonnet tightly on the body.','Valve Body — the round casing that holds the pressure. Its shape gives the valve its name.','Flow Direction Arrow — cast on the body. It shows which way the fluid must flow.','Inlet Flange — bolts the valve to the upstream pipe.','Outlet Flange — bolts the valve to the downstream pipe.'],
@@ -2883,6 +2927,8 @@ const equipmentDB = {
     'butterfly-valve': {
         name: 'Butterfly Valves',
         category: 'Piping & Valves',
+        objective: "To isolate or regulate flow in large lines with a light, compact valve.",
+        uses: "On large cooling water, raw water and fire water lines. On low-pressure air and gas ducts. Where a big gate valve would be too heavy or too costly.",
         intro: 'In this lesson you will get to know the butterfly valve. You will see it from outside, then look inside at its 14 main parts. Next you will see the valve closed, throttling and fully open, and learn how it works in 6 steps. You will finish with common problems and how to work safely.',
         description: 'The butterfly valve is a quarter-turn valve used for isolation and flow control. A round disc turns on a shaft inside the bore. It is compact and light for its size. It is common in large pipe sizes and utility services. The one shown is a lug type with a lever. The isometric overview shows what you see from outside.',
         labels: [
@@ -2998,6 +3044,8 @@ const equipmentDB = {
     'relief-valve': {
         name: 'Pressure Relief Valves',
         category: 'Safety Equipment',
+        objective: "To protect equipment from overpressure. The valve opens by itself, releases fluid, and closes again when pressure falls.",
+        uses: "On vessels, columns, heat exchangers, compressors, boilers and pipelines. On the discharge of positive displacement pumps. Released gas usually goes to the flare.",
         intro: 'In this lesson you will get to know the pressure relief valve. It protects equipment from too much pressure. You will see it from outside, then look inside at its 15 main parts. Next you will follow how it opens and closes, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A pressure relief valve opens by itself when the pressure gets too high. It needs no power and no operator. A spring holds the valve shut. When the pressure reaches the set value, it overcomes the spring and the valve opens. Fluid escapes to a safe place, such as a flare. When the pressure falls, the valve closes again. It is the last line of protection for vessels, pipes and pumps. The isometric overview shows what you see from outside.',
         labels: [
@@ -3160,6 +3208,8 @@ const equipmentDB = {
     'rupture-disc': {
         name: 'Rupture Discs',
         category: 'Safety Equipment',
+        objective: "To protect equipment from overpressure by bursting at a set pressure. It is a one-time device.",
+        uses: "Corrosive or sticky services. Very fast pressure rise, such as a runaway reaction. Under a relief valve, to protect it from the process fluid. Reactors in chemical plants.",
         intro: 'In this lesson you will get to know the rupture disc. It protects equipment by bursting when the pressure gets too high. You will see it from outside, then look inside at its 10 main parts. Next you will follow how it seals and bursts, in 7 steps. You will finish with common problems and how to work safely.',
         description: 'A rupture disc is a thin metal sheet that seals a line. It is made to burst at a set pressure. It acts almost instantly and does not leak. A disc bursts once, and must then be replaced. Relief valves are far more common in refineries. Rupture discs are used mainly in chemical and pharmaceutical plants, for fast pressure rises and for corrosive or sticky fluids. A disc is also often fitted before a relief valve, to protect the valve from the process fluid. The isometric overview shows what you see from outside.',
         labels: [

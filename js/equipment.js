@@ -846,9 +846,17 @@ var Equipment = (function () {
         var html = '';
         html += getImageHTML(id);
 
+        // Why the equipment exists and where it is found in a plant
+        if (equip.objective || equip.uses) {
+            var purpose = '';
+            if (equip.objective) purpose += '<p><strong class="purpose-label"><span class="say" data-say>Objective:</span></strong> ' + sayText(equip.objective) + '</p>';
+            if (equip.uses) purpose += '<p><strong class="purpose-label"><span class="say" data-say>Where it is used:</span></strong> ' + sayText(equip.uses) + '</p>';
+            html += sectionHTML('purpose', '🎯 Objective and Uses', null, id, purpose, 'lesson-box lesson-purpose');
+        }
+
         // What this lesson covers (written for each equipment)
         if (equip.intro) {
-            html += sectionHTML('intro', '🎯 In This Lesson', null, id, sayPara(equip.intro), 'lesson-box');
+            html += sectionHTML('intro', '📋 In This Lesson', null, id, sayPara(equip.intro), 'lesson-box');
         }
 
         // Overview — isometric image beside the outside parts and what each does
