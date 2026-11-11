@@ -357,3 +357,4 @@
 .results-cheer-good { background: #eef4fb; border: 1px solid #b5cde8; }
 .results-cheer-focus { background: #fff1ec; border: 1px solid #f3b9a3; }
 .celebrate-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 2000; }
+.cheer-sound-btn { margin-top: 0.5rem; background: transparent; border: 1px solid rgba(0,0,0,0.15); border-radius: 999px; padding: 0.2rem 0.7rem; font-size: 0.8rem; color: #555; cursor: pointer; }

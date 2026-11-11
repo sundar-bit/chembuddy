@@ -423,6 +423,7 @@ var QuizEngine = (function () {
         html += '<div class="results-cheer results-cheer-' + cheer.band + '">';
         html += '<div class="results-message">' + cheer.title + '</div>';
         html += '<p class="results-cheer-text">' + cheer.text + '</p>';
+        if (cheer.burst) html += Celebrate.toggleHTML();
         html += '</div>';
         if (state.practice) {
             var official = window.ChemBuddy.progress.quizzes[state.quizId];
@@ -464,6 +465,7 @@ var QuizEngine = (function () {
         currentQuiz = null;
         if (!state.practice) bindFeedback(state.quizId);
         Celebrate.run(cheer.burst);
+        Celebrate.bindToggle();
 
         var again = document.getElementById('practice-again');
         if (again) {

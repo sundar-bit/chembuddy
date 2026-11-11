@@ -40,11 +40,93 @@ var Celebrate = (function () {
         };
     }
 
+
+    // ----- Sound (Web Audio, generated in the browser; no files) -----
+    var SOUND_KEY = 'chembuddy.cheerSound';
+    var audioCtx = null;
+
+    function soundOn() {
+        try { return localStorage.getItem(SOUND_KEY) !== 'off'; } catch (e) { return true; }
+    }
+
+    function setSound(on) {
+        try { localStorage.setItem(SOUND_KEY, on ? 'on' : 'off'); } catch (e) { /* this visit only */ }
+    }
+
+    function audio() {
+        var C = window.AudioContext || window.webkitAudioContext;
+        if (!C) return null;
+        if (!audioCtx) audioCtx = new C();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        return audioCtx;
+    }
+
+    function tone(ac, out, freq, at, dur, type, vol) {
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.type = type || 'triangle';
+        o.frequency.setValueAtTime(freq, at);
+        g.gain.setValueAtTime(0.0001, at);
+        g.gain.exponentialRampToValueAtTime(vol || 0.5, at + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+        o.connect(g); g.connect(out);
+        o.start(at); o.stop(at + dur + 0.05);
+    }
+
+    function pop(ac, out, at) {
+        var len = Math.floor(ac.sampleRate * 0.25);
+        var buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+        for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3);
+        var src = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain();
+        src.buffer = buf; f.type = 'bandpass'; f.frequency.value = 900 + Math.random() * 1400; f.Q.value = 0.8;
+        g.gain.setValueAtTime(0.7, at);
+        src.connect(f); f.connect(g); g.connect(out);
+        src.start(at);
+    }
+
+    function playSound(kind) {
+        if (!kind || !soundOn()) return;
+        var ac = audio();
+        if (!ac) return;
+        var out = ac.createGain();
+        out.gain.value = 0.22; // moderate: students may be in class or a library
+        out.connect(ac.destination);
+        var t = ac.currentTime + 0.05;
+        if (kind === 'fireworks') {
+            // Rising fanfare, then pops in step with the bursts on screen
+            [523.25, 659.25, 783.99].forEach(function (f, i) { tone(ac, out, f, t + i * 0.13, 0.22, 'triangle', 0.55); });
+            tone(ac, out, 1046.5, t + 0.39, 0.7, 'triangle', 0.6);
+            tone(ac, out, 1318.5, t + 0.39, 0.7, 'sine', 0.3);
+            for (var k = 0; k < 7; k++) pop(ac, out, t + 0.15 + k * 0.38);
+        } else {
+            // A cheerful "ta-da"
+            tone(ac, out, 783.99, t, 0.16, 'triangle', 0.5);
+            [1046.5, 1318.5, 1567.98].forEach(function (f) { tone(ac, out, f, t + 0.17, 0.6, 'triangle', 0.35); });
+        }
+    }
+
+    function toggleHTML() {
+        var on = soundOn();
+        return '<button type="button" class="cheer-sound-btn" id="cheer-sound" aria-pressed="' + on + '">' +
+               (on ? '🔊 Sound on' : '🔇 Sound off') + '</button>';
+    }
+
+    function bindToggle() {
+        var btn = document.getElementById('cheer-sound');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+            var on = !soundOn();
+            setSound(on);
+            btn.setAttribute('aria-pressed', on);
+            btn.textContent = on ? '🔊 Sound on' : '🔇 Sound off';
+        });
+    }
+
     function reducedMotion() {
         return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
 
     function run(kind) {
+        playSound(kind);
         if (!kind || reducedMotion()) return;
         var canvas = document.createElement('canvas');
         canvas.className = 'celebrate-canvas';
@@ -117,5 +199,5 @@ var Celebrate = (function () {
         requestAnimationFrame(frame);
     }
 
-    return { message: message, run: run };
+    return { message: message, run: run, toggleHTML: toggleHTML, bindToggle: bindToggle };
 })();
