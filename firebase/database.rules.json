@@ -1,14 +1,14 @@
 {
     "rules": {
         "users": {
-            ".read": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
+            ".read": "auth != null && (auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
             "$uid": {
                 ".read": "auth != null && auth.uid === $uid",
                 ".write": "auth != null && auth.uid === $uid && (root.child('settings').child('inviteOnly').val() !== true || root.child('allowedEmails').child(auth.token.email.toLowerCase().replace('.', ',')).exists())"
             }
         },
         "progress": {
-            ".read": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
+            ".read": "auth != null && (auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
             "$uid": {
                 ".read": "auth != null && auth.uid === $uid",
                 ".write": "auth != null && auth.uid === $uid && (root.child('settings').child('inviteOnly').val() !== true || root.child('allowedEmails').child(auth.token.email.toLowerCase().replace('.', ',')).exists())"
@@ -23,7 +23,7 @@
             }
         },
         "analytics": {
-            ".read": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
+            ".read": "auth != null && (auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
             "dailyActive": {
                 "$date": {
                     "$uid": {
@@ -34,11 +34,11 @@
         },
         "settings": {
             ".read": "auth != null",
-            ".write": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')"
+            ".write": "auth != null && (auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')"
         },
         "allowedEmails": {
-            ".read": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
-            ".write": "auth != null && (auth.token.email === 'sundararaman.chintamani@gmail.com' || auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'pradnya.jadhav1@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
+            ".read": "auth != null && (auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
+            ".write": "auth != null && (auth.token.email === 'sundar@sundarspeaks.com' || auth.token.email === 'richa@somaiya.edu' || auth.token.email === 'chitra.b@somaiya.edu')",
             "$key": {
                 ".read": "auth != null && $key === auth.token.email.toLowerCase().replace('.', ',')"
             }
