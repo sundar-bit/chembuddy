@@ -8,6 +8,7 @@
     var allUsers = {};
     var allProgress = {};
     var allAnalytics = {};
+    var rawUsers = {}, rawProgress = {}, rawAnalytics = {}; // before the tester filter
     var allowedEmails = {};
     var inviteOnly = false;
     var accessError = '';
@@ -37,19 +38,46 @@
         auth.signOut().then(function () { window.location.href = 'index.html'; });
     });
 
+    // Tester accounts (learningPath.schedule.previewEmails) keep full access
+    // to the app but are left out of every admin count, report and export.
+    function applyTesterFilter() {
+        var testers = {};
+        allUsers = {};
+        for (var uid in rawUsers) {
+            if (learningPath.isPreview((rawUsers[uid] || {}).email)) testers[uid] = true;
+            else allUsers[uid] = rawUsers[uid];
+        }
+        allProgress = {};
+        for (var pid in rawProgress) {
+            if (!testers[pid]) allProgress[pid] = rawProgress[pid];
+        }
+        allAnalytics = {};
+        for (var key in rawAnalytics) allAnalytics[key] = rawAnalytics[key];
+        var daily = rawAnalytics.dailyActive || {};
+        allAnalytics.dailyActive = {};
+        for (var date in daily) {
+            var day = {};
+            for (var d in daily[date]) if (!testers[d]) day[d] = daily[date][d];
+            allAnalytics.dailyActive[date] = day;
+        }
+    }
+
     function loadAllData() {
         db.ref('users').on('value', function (snap) {
-            allUsers = snap.val() || {};
+            rawUsers = snap.val() || {};
+            applyTesterFilter();
             renderTab();
         });
 
         db.ref('progress').on('value', function (snap) {
-            allProgress = snap.val() || {};
+            rawProgress = snap.val() || {};
+            applyTesterFilter();
             renderTab();
         });
 
         db.ref('analytics').on('value', function (snap) {
-            allAnalytics = snap.val() || {};
+            rawAnalytics = snap.val() || {};
+            applyTesterFilter();
             renderTab();
         });
 
@@ -355,8 +383,9 @@
         var pendingText = pending ? pending.value : '';
 
         var registered = {};
-        for (var uid in allUsers) {
-            if (allUsers[uid].email) registered[emailKey(allUsers[uid].email)] = allUsers[uid];
+        // Testers are included here: they must stay on the list to sign in
+        for (var uid in rawUsers) {
+            if (rawUsers[uid].email) registered[emailKey(rawUsers[uid].email)] = rawUsers[uid];
         }
         var keys = Object.keys(allowedEmails).sort();
 
@@ -408,7 +437,9 @@
             var email = entry.email || k.replace(/,/g, '.');
             var user = registered[k];
             html += '<tr><td>' + Utils.sanitize(email) + '</td>';
-            html += '<td>' + (user ? '<span class="badge badge-success">Registered — ' + Utils.sanitize(user.name || '') + '</span>' : '<span class="text-muted">Not registered yet</span>') + '</td>';
+            var tester = learningPath.isPreview(email);
+            html += '<td>' + (user ? '<span class="badge badge-success">Registered — ' + Utils.sanitize(user.name || '') + '</span>' : '<span class="text-muted">Not registered yet</span>') +
+                (tester ? ' <span class="badge badge-warning">Tester — not counted in reports</span>' : '') + '</td>';
             html += '<td><button class="btn btn-outline btn-sm invite-remove" data-key="' + Utils.sanitize(k) + '">Remove</button></td></tr>';
         });
         html += '</tbody></table></div></div>';

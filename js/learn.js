@@ -453,6 +453,8 @@ var Learn = (function () {
     }
 
     function updateLeaderboardPoints(uid, addPoints) {
+        // Testers (preview accounts) stay off the leaderboard students see
+        if (isPreviewUser()) { db.ref('leaderboard/cumulative/' + uid).remove(); return; }
         var progress = window.ChemBuddy.progress || {};
 
         var totalPoints = window.ChemBuddy.calculateTotalPoints(progress) + addPoints;

@@ -80,7 +80,7 @@
     <script src="js/equipment.js?v=37"></script>
     <script src="js/speech-text.js?v=2"></script>
     <script src="js/voice.js?v=10"></script>
-    <script src="js/learn.js?v=15"></script>
+    <script src="js/learn.js?v=16"></script>
     <script src="js/celebrate.js?v=2"></script>
     <script src="js/quiz-engine.js?v=14"></script>
     <script src="js/leaderboard.js?v=8"></script>
@@ -130,6 +130,9 @@
             // Track daily active
             var today = Utils.todayStr();
             db.ref('analytics/dailyActive/' + today + '/' + user.uid).set(true);
+
+            // Testers are kept off the leaderboard (rows written before this rule)
+            if (learningPath.isPreview(user.email)) db.ref('leaderboard/cumulative/' + user.uid).remove();
 
             // Load user profile and progress
             loadUserData(user.uid);
