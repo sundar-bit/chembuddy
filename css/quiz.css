@@ -347,3 +347,13 @@
 .feedback-text { width: 100%; resize: vertical; margin-bottom: 0.75rem; font: inherit; box-sizing: border-box; }
 .feedback-actions { display: flex; justify-content: center; gap: 0.5rem; }
 .feedback-thanks { font-weight: 600; color: var(--success, #16a34a); padding: 0.5rem 0; }
+
+/* ===== Result cheer (message by score) ===== */
+.results-cheer { margin: 0.25rem auto 0.75rem; max-width: 460px; padding: 0.75rem 1rem; border-radius: 10px; }
+.results-cheer .results-message { margin-bottom: 0.25rem; }
+.results-cheer-text { margin: 0; font-size: 1rem; line-height: 1.45; }
+.results-cheer-perfect { background: #fff4d6; border: 1px solid #f2c94c; }
+.results-cheer-great { background: #e9f7ef; border: 1px solid #8fd3a8; }
+.results-cheer-good { background: #eef4fb; border: 1px solid #b5cde8; }
+.results-cheer-focus { background: #fff1ec; border: 1px solid #f3b9a3; }
+.celebrate-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 2000; }

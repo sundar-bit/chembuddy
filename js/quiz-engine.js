@@ -409,7 +409,7 @@ var QuizEngine = (function () {
     function showResults(container, state, points, totalTime) {
         var pct = state.questions.length > 0 ? Math.round((state.score / state.questions.length) * 100) : 0;
         var gradeClass = pct >= 80 ? 'great' : (pct >= 60 ? 'good' : (pct >= 40 ? 'needs-work' : 'poor'));
-        var message = pct >= 80 ? 'Excellent!' : (pct >= 60 ? 'Good job!' : (pct >= 40 ? 'Keep practicing!' : 'Review the material'));
+        var cheer = Celebrate.message(state.score, state.questions.length, state.practice);
 
         var html = '<div class="quiz-body" style="min-height:calc(100vh - 56px)">';
         html += '<div class="quiz-results">';
@@ -420,7 +420,10 @@ var QuizEngine = (function () {
         html += '<div class="results-score-label">' + pct + '%</div>';
         html += '</div>';
 
-        html += '<div class="results-message">' + message + '</div>';
+        html += '<div class="results-cheer results-cheer-' + cheer.band + '">';
+        html += '<div class="results-message">' + cheer.title + '</div>';
+        html += '<p class="results-cheer-text">' + cheer.text + '</p>';
+        html += '</div>';
         if (state.practice) {
             var official = window.ChemBuddy.progress.quizzes[state.quizId];
             html += '<div class="results-points">Practice — your official score stays ' + official.score + '/' + official.maxScore + '</div>';
@@ -460,6 +463,7 @@ var QuizEngine = (function () {
         container.innerHTML = html;
         currentQuiz = null;
         if (!state.practice) bindFeedback(state.quizId);
+        Celebrate.run(cheer.burst);
 
         var again = document.getElementById('practice-again');
         if (again) {
