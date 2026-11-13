@@ -722,3 +722,8 @@
 .lesson-purpose { border-left: 4px solid var(--primary); }
 .lesson-purpose p { margin: 0.35rem 0; }
 .purpose-label { color: var(--primary-dark); }
+
+/* ===== Brand logo (frozen 13 Nov 2026, images/brand) ===== */
+.nav-logo-img { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: block; }
+.brand-chem { color: #0d3d4d; }
+.brand-buddy { color: #2a9d8f; }

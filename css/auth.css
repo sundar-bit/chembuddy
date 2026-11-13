@@ -159,3 +159,8 @@
     .auth-logo h1 { font-size: 1.6rem; }
     .auth-form { padding: 1.25rem; }
 }
+
+/* Brand logo on the login page (dark gradient background) */
+.auth-logo-img { width: 72px; height: 72px; border-radius: 16px; display: block; margin: 0 auto 0.6rem; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+.auth-logo .brand-chem { color: #ffffff; }
+.auth-logo .brand-buddy { color: #bfe9e2; }

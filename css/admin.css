@@ -260,3 +260,9 @@
     .admin-table { min-width: 600px; }
     .quiz-analytics-grid { grid-template-columns: 1fr; }
 }
+
+/* Brand logo on the dark admin bar */
+.admin-nav .nav-logo-img { width: 32px; height: 32px; border-radius: 8px; display: block; }
+.admin-nav .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
+.admin-nav .brand-chem { color: #ffffff; }
+.admin-nav .brand-buddy { color: #bfe9e2; }
