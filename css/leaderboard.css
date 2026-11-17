@@ -223,11 +223,11 @@
     margin: 0 auto 0.5rem;
     color: var(--white);
 }
-.podium-item:nth-child(2) .podium-avatar { width: 72px; height: 72px; font-size: 1.75rem; }
+.podium-rank-1 .podium-avatar { width: 72px; height: 72px; font-size: 1.75rem; }
 
-.podium-item:nth-child(1) .podium-avatar { background: var(--silver); }
-.podium-item:nth-child(2) .podium-avatar { background: var(--gold); }
-.podium-item:nth-child(3) .podium-avatar { background: var(--bronze); }
+.podium-rank-2 .podium-avatar { background: var(--silver); }
+.podium-rank-1 .podium-avatar { background: var(--gold); }
+.podium-rank-3 .podium-avatar { background: var(--bronze); }
 
 .podium-name {
     font-weight: 600;
@@ -245,9 +245,9 @@
     border-radius: 8px 8px 0 0;
     margin-top: 0.5rem;
 }
-.podium-item:nth-child(1) .podium-bar { height: 60px; background: linear-gradient(180deg, #bdc3c7, #95a5a6); }
-.podium-item:nth-child(2) .podium-bar { height: 80px; background: linear-gradient(180deg, #f9e547, #f1c40f); }
-.podium-item:nth-child(3) .podium-bar { height: 45px; background: linear-gradient(180deg, #e67e22, #cd6133); }
+.podium-rank-2 .podium-bar { height: 60px; background: linear-gradient(180deg, #bdc3c7, #95a5a6); }
+.podium-rank-1 .podium-bar { height: 80px; background: linear-gradient(180deg, #f9e547, #f1c40f); }
+.podium-rank-3 .podium-bar { height: 45px; background: linear-gradient(180deg, #e67e22, #cd6133); }
 
 /* Table */
 .lb-table {

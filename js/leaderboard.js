@@ -68,8 +68,8 @@ var Leaderboard = (function () {
             return;
         }
 
-        var medals = ['🥈', '🥇', '🥉'];
-        var order = [1, 0, 2]; // Silver, Gold, Bronze display order
+        var medals = ['🥇', '🥈', '🥉'];   // by rank: 1st, 2nd, 3rd
+        var order = [1, 0, 2];              // shown left to right: 2nd, 1st, 3rd
         var currentUid = window.ChemBuddy.user ? window.ChemBuddy.user.uid : '';
 
         var html = '';
@@ -78,7 +78,7 @@ var Leaderboard = (function () {
             var e = entries[idx];
             var initial = e.name.charAt(0).toUpperCase();
 
-            html += '<div class="podium-item">';
+            html += '<div class="podium-item podium-rank-' + (idx + 1) + '">';
             html += '<div class="podium-medal">' + medals[idx] + '</div>';
             html += '<div class="podium-avatar">' + initial + '</div>';
             html += '<div class="podium-name" title="' + Utils.sanitize(e.name) + '">' + Utils.sanitize(e.name) + '</div>';
